@@ -1,0 +1,105 @@
+nav {
+  position: fixed;
+  z-index: 100;
+  height: 100%;
+  top: 0;
+  background: $mainTheme;
+  overflow: hidden;
+
+  a {
+    color: white;
+    text-decoration: none;
+
+    &:hover {
+      color: white;
+      text-decoration: underline;
+    }
+  }
+
+  @include breakpoint(big-phone) {
+    width: 100%;
+    height: auto;
+    @include clearfix;
+  }
+}
+
+.name {
+  font-weight: normal;
+  font-size: 2em;
+  margin: 35px 0 30px;
+  padding: 0 50px;
+  @include breakpoint(big-phone) {
+    margin: 5px 20px;
+    float: left;
+  }
+}
+
+.menu {
+  float: right;
+  display: none;
+  a:hover {
+    text-decoration: none;
+    color: $offBlack;
+  }
+}
+
+.menu-in {
+  @include breakpoint(big-phone) {
+    display: block;
+  }
+}
+
+#nav:target {
+  overflow: visible;
+
+  .menu-in{
+    display:none;
+  }
+
+  .menu-out{
+    display: block;
+  }
+}
+
+.nav-links {
+  background: $mainTheme;
+  padding: 0 50px;
+  font-size: 1.4em;
+
+  li {
+    margin-bottom: 18px;
+  }
+
+  @include breakpoint(big-phone) {
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    right: 0;
+    li {
+      margin: .55em .9em;
+    }
+  }
+}
+
+
+.social-media {
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  font-size: 1.8em;
+  line-height: 2em;
+
+  a {
+    margin: 0 10px;
+
+    &:hover {
+      text-decoration: none;
+      color: $offBlack;
+    }
+  }
+
+  @include breakpoint(big-phone) {
+    display: none;
+  }
+}

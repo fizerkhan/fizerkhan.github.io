@@ -1,0 +1,23 @@
+#Ignore temp and swp files
+*~
+*.swp
+*.tmp
+
+# Ignore bower components and npm modules
+war/app/components
+node_modules
+
+# Ignore temp directory and file
+temp
+dist
+.sass-cache
+npm-debug.log
+
+# OSX Ignore
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Ignore java class files
+war/WEB-INF/classes/com
+war/WEB-INF/appengine-generated/local_db.bin

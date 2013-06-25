@@ -1,0 +1,73 @@
+@import 'compass/css3/transition';
+@import 'compass/css3/border-radius';
+@import 'http://fonts.googleapis.com/css?family=Merriweather|Open+Sans';
+
+@import 'normalize.css';
+@import 'solarized-dark.css';
+@import 'icons';
+@import 'base';
+@import 'nav';
+@import 'post';
+@import 'variables';
+
+// body {
+//     font-family: $base-font-family;
+// }
+
+nav,
+.nav-links {
+    background: #16a085;
+}
+
+.about {
+    h1 {
+        text-align: center;
+    }
+
+    .json {
+        display: table;
+        margin: 0 auto;
+
+        .tag {
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        .field {
+            margin-left: 3em;
+            font-size: 1.22em;
+            color: #2980b9;
+        }
+    }
+}
+
+.img-me {
+    display: block;
+    margin: 0 auto;
+    width: 100px;
+    height: 100px;
+}
+
+.img-circle {
+  -webkit-border-radius: 500px;
+     -moz-border-radius: 500px;
+          border-radius: 500px;
+}
+
+hr.style-eight {
+    padding: 0;
+    margin: 2em 0;
+    border: none;
+    border-top: medium double #333;
+    color: #333;
+    text-align: center;
+}
+hr.style-eight:after {
+    content: "§";
+    display: inline-block;
+    position: relative;
+    top: -0.7em;
+    font-size: 1.5em;
+    padding: 0 0.25em;
+    background: white;
+}

@@ -1,0 +1,81 @@
+$green: hsl(151, 65%, 60%);
+$offBlack: hsl(10, 1%, 22%);
+
+$codeFont: Monaco, Consolas, monospace;
+$postFont: 'Merriweather', serif;
+$headerFont: 'Open Sans', sans-serif;
+
+$mainTheme: $green;
+
+@mixin breakpoint($point) {
+  @if $point == big-phone {
+    @media (max-width: 1250px) { @content; }
+  }
+  @else if $point == small-phone {
+    @media (max-width: 630px)  { @content; }
+  }
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+body {
+  margin: 0;
+  color: $offBlack;
+  -webkit-font-smoothing: antialiased;
+  font-family: $headerFont;
+  font-size: 17px;
+
+  @include breakpoint(big-phone) {
+    font-size: 16px;
+  }
+  @include breakpoint(small-phone) {
+    font-size: 12px;
+  }
+}
+
+.content {
+  margin: 0 auto;
+  max-width: 680px;
+  width: 55%;
+
+  a {
+    color: $offBlack;
+    @include transition(color 0.2s);
+
+    &:hover {
+      color: darken($mainTheme, 10);
+    }
+  }
+
+  @include breakpoint(big-phone) {
+    margin: 45px auto;
+    width: 86%;
+  }
+}
+
+.cabin {
+  position: fixed;
+  right: .5em;
+  bottom: .5em;
+  width: 1.6em;
+  opacity: .2;
+  &:hover {
+    opacity: .6;
+  }
+}
+
+@mixin clearfix {
+  &:after {
+  content: "";
+  display: table;
+  clear: both;
+  }
+}
+
+.group {
+  @include clearfix;
+}
