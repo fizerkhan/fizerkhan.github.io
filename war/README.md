@@ -1,19 +1,27 @@
 # My Blog
 
 This is my personal blog which is hosted in **fizerkhan.com**.
-I like to share to the people who i know and do not know what i know little bit.
+I like to share what i know little bit to the people who i know and do not know.
 Hope it is useful to human kind.
 
 # How
 
 To run
-    $ grunt server
+
+    $ cd war && grunt server
 
 To build
-    $ grunt build
+
+    $ cd war && grunt build
 
 To Deploy
-    $
+
+    $ gaed
+
+Notes: During deploy, Google app engine throws JSP compilation error.
+       So move the `node_modules` folder to main folder, then deploy.
+       After deploy, move back the `node_modules` to `war` folder.
+
 
 # Tools
 
