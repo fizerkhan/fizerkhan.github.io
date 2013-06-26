@@ -83,7 +83,8 @@ module.exports = function (grunt) {
             'images/**',
             'styles/**.css',
             'styles/fonts/**',
-            'scripts/**'
+            'scripts/**',
+            'googleb770c1ae2228297c.html'
           ]
         }]
       }
