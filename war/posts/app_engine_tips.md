@@ -40,7 +40,7 @@ Let's assume, you want to access the version `1` of your `sample.appspot.com`, t
 
 But keep in mind that all your application will use same database. If any changes in the database schema might break the older versions.
 
-You can also use it vice-versa. Just deploy the new version, access the new version by above version URL and test it. Once you confidence that you can make it live, then go and set the new version ad Default.
+You can also use it vice-versa. Just deploy the new version, access the new version by above version URL and test it. Once you confidence that you can make it live, then go and set the new version as Default.
 
 Happy deployment and Have a nice day.
 
