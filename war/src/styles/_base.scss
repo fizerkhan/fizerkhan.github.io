@@ -57,6 +57,25 @@ body {
   }
 }
 
+.pagination {
+  padding: 20px 0;
+
+  li {
+    float: left;
+  }
+
+  a {
+    padding: 10px;
+    text-decoration: none;
+    font-size: 1.7em;
+    font-family: "Open Sans", sans-serif;
+  }
+
+  .active-page {
+    color: $mainTheme;
+  }
+}
+
 .cabin {
   position: fixed;
   right: .5em;
