@@ -88,6 +88,16 @@ module.exports = function (grunt) {
           ]
         }]
       }
+    },
+    // Minify the css files
+    cssmin: {
+        dist: {
+          expand: true,
+          cwd: 'dist/styles/',
+          src: ['*.css', '!*.min.css'],
+          dest: 'dist/styles/',
+          ext: '.css'
+        }
     }
   });
 
@@ -95,7 +105,8 @@ module.exports = function (grunt) {
     'clean',
     'compass',
     'pages',
-    'copy'
+    'copy',
+    'cssmin'
   ]);
 
   grunt.registerTask('server', [
