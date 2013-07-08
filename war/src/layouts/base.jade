@@ -23,13 +23,10 @@ html
       h1.name
         a(href="/") Fizer Khan
       ul.nav-links
-        li.menu-in.menu
-          a(href="#nav").icon-menu
-        li.menu-out.menu
-          a(href="#").icon-menu
-        li
+        li.menu.icon-menu
+        li.text-link
           a(href="/about.html") About
-        li
+        li.text-link
           a(href="/archives.html") Archives
 
       .social-media
@@ -41,4 +38,6 @@ html
       block content
     a(href="http://fizerkhan.com/")
       img.cabin(src="/images/cabin.png")
+    script(src="/scripts/jquery.js")
+    script(src="/scripts/main.js")
     include analytics
