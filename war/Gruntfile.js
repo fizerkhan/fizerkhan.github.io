@@ -45,8 +45,8 @@ module.exports = function (grunt) {
     connect: {
       dist: {
         options: {
-        port: 5455,
-        hostname: 'localhost',
+          port: 9000,
+          hostname: '0.0.0.0',
           middleware: function (connect) {
             return [
               mountFolder(connect, 'dist'),
@@ -58,7 +58,7 @@ module.exports = function (grunt) {
     },
     open: {
       dist: {
-        path: 'http://localhost:5455'
+        path: 'http://localhost:9000'
       }
     },
     clean: {
