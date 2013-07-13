@@ -1,4 +1,8 @@
+// Choose one of these to be your mainTheme color
 $green: hsl(151, 65%, 60%);
+$blue: hsl(216, 65%, 60%);
+$orange: hsl(6, 90%, 70%);
+$purple: hsl(260, 38%, 56%);
 $offBlack: hsl(10, 1%, 22%);
 
 $codeFont: Monaco, Consolas, monospace;
@@ -6,6 +10,7 @@ $postFont: 'Lucida Grande', 'Helvetica Neue', Helvetica, sans-serif;
 $headerFont: 'Open Sans', sans-serif;
 
 $mainTheme: $green;
+$baseTextColor: $offBlack;
 
 @mixin breakpoint($point) {
   @if $point == big-phone {
@@ -24,7 +29,7 @@ ul {
 
 body {
   margin: 0;
-  color: $offBlack;
+  color: $baseTextColor;
   -webkit-font-smoothing: antialiased;
   font-family: $headerFont;
   font-size: 17px;
@@ -32,6 +37,7 @@ body {
   @include breakpoint(big-phone) {
     font-size: 16px;
   }
+
   @include breakpoint(small-phone) {
     font-size: 12px;
   }
@@ -43,7 +49,7 @@ body {
   width: 55%;
 
   a {
-    color: $offBlack;
+    color: $baseTextColor;
     @include transition(color 0.2s);
 
     &:hover {
@@ -82,8 +88,13 @@ body {
   bottom: .5em;
   width: 1.6em;
   opacity: .2;
+
   &:hover {
     opacity: .6;
+  }
+
+  @include breakpoint(big-phone) {
+    display: none;
   }
 }
 
