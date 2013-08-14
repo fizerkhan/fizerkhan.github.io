@@ -148,13 +148,13 @@ input=$(sed 's/[^0-9]*//g' <<< $input)
 ```bash
 
 # To find base directory
-APP_ROOT=`dirname $0`
+APP_ROOT=`dirname "$0"`
 
 # To find the file name
-filename=`basename $filepath`
+filename=`basename "$filepath"`
 
 # To find the file name without extension
-filename=`basename $filepath .html`
+filename=`basename "$filepath" .html`
 
 ```
 
