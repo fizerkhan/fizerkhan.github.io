@@ -65,7 +65,7 @@ OK=0
 FAIL=1
 
 function require_curl() {
-    which curl 2>&1 > /dev/null
+    which curl &>/dev/null
     if [ $? -eq 0 ]
     then
       return $OK
