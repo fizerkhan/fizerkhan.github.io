@@ -58,6 +58,14 @@ debug "Trying to find config file"
 
 ```
 
+Some Cool geeks give one line debug function
+
+```bash
+# From cool geeks at hacker news
+function debug() { ((DEBUG)) && echo ">>> $*"; }
+function debug() { [ "$DEBUG" ] && echo ">>> $*"; }
+ ```
+
 ### To check specific executable exists or not
 
 ```
@@ -75,7 +83,16 @@ function require_curl() {
 }
 ```
 
-It uses `which` command to find path the `curl` executable. If it succeeds, then the executable exists, Otherwise not. The `2>&1 > /dev/null` puts both output stream and error stream to `/dev/null` (which means nothing printed on console).
+It uses `which` command to find the path of `curl` executable. If it succeeds, then the executable exists, Otherwise not. The `&>/dev/null` puts both output stream and error stream to `/dev/null` (which means nothing printed on console).
+
+Some Cool geeks suggest me that we can directly returns the `which` return code
+
+```bash
+# From cool geeks at hacker news
+function require_curl() { which "curl" &>/dev/null; }
+function require_curl() { which -s "curl"; }
+ ```
+
 
 ### To print usage of scripts
 
