@@ -1,5 +1,5 @@
 ----
-title: Things you consider for MongoDB in production
+title: Things you should consider for MongoDB in production
 date:   2013-11-4
 ----
 
