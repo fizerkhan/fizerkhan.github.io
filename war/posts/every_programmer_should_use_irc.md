@@ -78,7 +78,7 @@ Regarding IRC client, apart from web, there are other IRC client application ava
 You can checkout [here](http://en.wikipedia.org/wiki/Comparison_of_Internet_Relay_Chat_clients)
 
 
-IRC thought me a lot. I hope, you will feel the same after using it.
+IRC taught me a lot. I hope, you will feel the same after using it.
 Have a nice day.
 
 
