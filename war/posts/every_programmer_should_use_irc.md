@@ -19,6 +19,7 @@ Internet Relay Chat (IRC) is a protocol for live interactive Internet text messa
 IRC consists of channels. Channel is something like a chat room, but it will be dedicated for some technology or language, ex: #html, #css, #javascript, #go-lang. You can go to any channel and ask questions or just listen and learn from other's discussion.
 
 I am using [Freenode](http://webchat.freenode.net/) which is a widely used open IRC server.
+Lets see how you can get started with IRC on `Freenode`.
 
 ### Register your nickname
 
