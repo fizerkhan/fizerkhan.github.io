@@ -35,7 +35,7 @@ You have to create an application folder which has static files and configuratio
 The structure of the folder may be as follows
 
     application_folder/
-      - app.yaml              # configuration file for Google App engine. we will see in next section
+      - app.yaml              # configuration file. we will see in next section
       - public/               # public folder will contain static files
         - index.html
         - js/
@@ -84,7 +84,7 @@ The structure of the folder may be as follows
 
 ### Test static pages
 
-You can also run development server locally and check your static pages by following command
+You can run development server locally and check your static pages by following command
 
      dev_appserver.py ./
 
