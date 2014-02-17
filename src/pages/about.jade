@@ -1,0 +1,21 @@
+extends ../layouts/base
+
+block content
+  div.about
+    h1
+      img.img-circle.img-me(src='/images/me.jpg')
+      span
+        | Fizer Khan
+    .post-body
+      div.json
+        p.tag {
+        p.field    name : "Fizer Khan",
+        p.field    job  : "Web developer",
+        p.field    location :  "Chennai, India",
+        p.field    twitter :  "@fizerkhan",
+        p.field    likes : [ "Node.js", "Angularjs"]
+        //-p.field    philosophy :  "Steal, Improve, GiveBack"
+        p.tag }
+
+
+

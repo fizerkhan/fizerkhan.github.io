@@ -1,0 +1,48 @@
+//- Social sharing icons
+.social
+  a(href="http://news.ycombinator.com/submit", class="hn-share-button") Vote on HN
+  a(href="https://twitter.com/share", class="twitter-share-button", data-via="fizerkhan", data-lang="en") Tweet
+  div.g-plus(data-action="share", data-annotation="bubble")
+
+//- Horizontal line
+hr.style-eight
+
+//- Disqus comments
+#comments
+  #disqus_thread
+script(type='text/javascript')
+  /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  var disqus_shortname = 'fizerkhan'; // required: replace example with your forum shortname
+  /* * * DON'T EDIT BELOW THIS LINE * * */
+  (function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+noscript
+  | Please enable JavaScript to view the
+  a(href='http://disqus.com/?ref_noscript') comments powered by Disqus.
+a.dsq-brlink(href='http://disqus.com')
+  | comments powered by
+  span.logo-disqus Disqus
+
+//- Support scripts for social share icons
+//- Hacker News
+script.
+  (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.src = '//hnbutton.appspot.com/static/hn.min.js';
+    s.parentNode.insertBefore(g, s);
+  }(document, 'script'));
+//- Twitter
+script.
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+//- Google plus
+script.
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+
