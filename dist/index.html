@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/png" href="/images/cabin.png">
+    <link href="/styles/main.css" rel="stylesheet">
+    <title>Fizer Khan Blog</title>
+  </head>
+  <body>
+    <nav id="nav">
+      <h1 class="name"><a href="/">Fizer Khan</a></h1>
+      <ul class="nav-links">
+        <li class="menu icon-menu"></li>
+        <li class="text-link"><a href="/about.html">About</a></li>
+        <li class="text-link"><a href="/archives.html">Archives</a></li>
+      </ul>
+      <div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div>
+    </nav>
+    <div class="content">
+      <div class="post-head group"><a href="/blog/posts/Free-Static-Page-Hosting-on-Google-App-Engine-in-a-5-minutes.html">
+          <h1 class="post-title">Free Static Page Hosting on Google App Engine in a 5 minutes</h1></a>
+        <h2 class="post-date">2014 &#183; 2 &#183; 17</h2>
+      </div>
+      <div class="post-body"><p>Now-a-days we have a lot of options to deploy our applications. Some of them are
+Google App Engine, Google Compute Cloud, Amazon EC2, Heroku, Nodejitsu and much more.
+All the services has its advantages and disadvantages over other. Generally,
+we do not prefer much complex infrastructure or steps to deploy our static pages.
+Recently, I found that Google App engine has been a best platform for hosting our
+static web pages with decent free plan over other services. In this article,
+we will discuss a steps to host your static pages which can be personal blog, company site or even your client sites.</p>
+<a name="create-an-application-in-google-app-engine" class="anchor" href="#create-an-application-in-google-app-engine"><h3>Create an application in Google App Engine</h3>
+</a><p>Visit <a href="http://appengine.google.com">Google App Engine</a> and then create an application.
+When creating App engine application, the application id is very important. Because
+it acts as subdomain for your site. Lets say, application id is <code>coolmoon</code>, the site
+will be in <code>coolmoon.appspot.com</code>.</p>
+<a name="install-app-engine-sdk-for-python" class="anchor" href="#install-app-engine-sdk-for-python"><h3>Install App Engine SDK for python</h3>
+</a><p>Since <code>python</code> has been a best supported language in App Engine, Download and Install
+<a href="https://developers.google.com/appengine/downloads#Google_App_Engine_SDK_for_Python">App Engine SDK for python</a>. <code>Are you not a python developer(like me)?</code> Do not worry, you do not need to write a single piece of python code.</p>
+<p>You will use two commands from the SDK:</p>
+<pre><code><div class="highlight"><pre><span class="nx">dev_appserver</span><span class="p">.</span><span class="nx">py</span>  <span class="o">-</span>  <span class="nx">the</span> <span class="nx">development</span> <span class="nx">web</span> <span class="nx">server</span>
+<span class="nx">appcfg</span><span class="p">.</span><span class="nx">py</span>  <span class="o">-</span>  <span class="k">for</span> <span class="nx">uploading</span> <span class="nx">your</span> <span class="nx">app</span> <span class="nx">to</span> <span class="nx">App</span> <span class="nx">Engine</span>
+</pre></div>
+</code></pre>
+<a name="create-an-application-folder" class="anchor" href="#create-an-application-folder"><h3>Create an application folder</h3>
+</a><p>You have to create an application folder which has static files and configuration file to be deployed.
+The structure of the folder may be as follows</p>
+<pre><code><div class="highlight"><pre><span class="nx">application_folder</span><span class="o">/</span>
+  <span class="o">-</span> <span class="nx">app</span><span class="p">.</span><span class="nx">yaml</span>              <span class="err">#</span> <span class="nx">configuration</span> <span class="nx">file</span><span class="p">.</span> <span class="nx">we</span> <span class="nx">will</span> <span class="nx">see</span> <span class="k">in</span> <span class="nx">next</span> <span class="nx">section</span>
+  <span class="o">-</span> <span class="kr">public</span><span class="o">/</span>               <span class="err">#</span> <span class="kr">public</span> <span class="nx">folder</span> <span class="nx">will</span> <span class="nx">contain</span> <span class="kr">static</span> <span class="nx">files</span>
+    <span class="o">-</span> <span class="nx">index</span><span class="p">.</span><span class="nx">html</span>
+    <span class="o">-</span> <span class="nx">js</span><span class="o">/</span>
+    <span class="o">-</span> <span class="nx">css</span><span class="o">/</span>
+    <span class="o">-</span> <span class="nx">img</span><span class="o">/</span>
+</pre></div>
+</code></pre>
+<a name="content-of-app-engine-configuration-app.yaml-" class="anchor" href="#content-of-app-engine-configuration-app.yaml-"><h3>Content of App Engine configuration(app.yaml)</h3>
+</a><pre><code><div class="highlight"><pre>  <span class="nx">application</span><span class="o">:</span> <span class="nx">coolmoon</span>
+  <span class="nx">version</span><span class="o">:</span> <span class="mi">1</span>
+  <span class="nx">runtime</span><span class="o">:</span> <span class="nx">python27</span>
+  <span class="nx">api_version</span><span class="o">:</span> <span class="mi">1</span>
+  <span class="nx">threadsafe</span><span class="o">:</span> <span class="nx">yes</span>
+
+  <span class="nx">handlers</span><span class="o">:</span>
+
+  <span class="o">-</span> <span class="nx">url</span><span class="o">:</span> <span class="err">/(.+)</span>
+    <span class="nx">static_files</span><span class="o">:</span> <span class="kr">public</span><span class="o">/</span><span class="err">\</span><span class="mi">1</span>
+    <span class="nx">upload</span><span class="o">:</span> <span class="kr">public</span><span class="o">/</span><span class="p">(.</span><span class="o">*</span><span class="p">)</span>
+
+  <span class="o">-</span> <span class="nx">url</span><span class="o">:</span> <span class="err">/</span>
+    <span class="nx">static_files</span><span class="o">:</span> <span class="kr">public</span><span class="o">/</span><span class="nx">index</span><span class="p">.</span><span class="nx">html</span>
+    <span class="nx">upload</span><span class="o">:</span> <span class="kr">public</span><span class="o">/</span><span class="nx">index</span><span class="p">.</span><span class="nx">html</span>
+
+  <span class="nx">skip_files</span><span class="o">:</span>
+  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?app\.yaml</span>
+  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?app\.yml</span>
+  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?#.*#</span>
+  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?.*~</span>
+  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?.*\.py[co]</span>
+  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?.*/RCS/.*</span>
+  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?\..*</span>
+  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?tests$</span>
+  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?test$</span>
+  <span class="o">-</span> <span class="o">^</span><span class="nx">test</span><span class="o">/</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?</span>
+  <span class="o">-</span> <span class="o">^</span><span class="nx">COPYING</span><span class="p">.</span><span class="nx">LESSER</span>
+  <span class="o">-</span> <span class="o">^</span><span class="nx">README</span><span class="err">\</span><span class="p">..</span><span class="o">*</span>
+  <span class="o">-</span> <span class="err">\</span><span class="p">.</span><span class="nx">gitignore</span>
+  <span class="o">-</span> <span class="o">^</span><span class="err">\</span><span class="p">.</span><span class="nx">git</span><span class="o">/</span><span class="p">.</span><span class="o">*</span>
+  <span class="o">-</span> <span class="err">\</span><span class="p">.</span><span class="o">*</span><span class="err">\</span><span class="p">.</span><span class="nx">lint$</span>
+  <span class="o">-</span> <span class="o">^</span><span class="nx">fabfile</span><span class="err">\</span><span class="p">.</span><span class="nx">py</span>
+  <span class="o">-</span> <span class="o">^</span><span class="nx">testrunner</span><span class="err">\</span><span class="p">.</span><span class="nx">py</span>
+  <span class="o">-</span> <span class="o">^</span><span class="nx">grunt</span><span class="err">\</span><span class="p">.</span><span class="nx">js</span>
+  <span class="o">-</span> <span class="o">^</span><span class="nx">node_modules</span><span class="o">/</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?</span>
+</pre></div>
+</code></pre>
+<a name="test-static-pages" class="anchor" href="#test-static-pages"><h3>Test static pages</h3>
+</a><p>You can run development server locally and check your static pages by following command</p>
+<pre><code><div class="highlight"><pre> <span class="nx">dev_appserver</span><span class="p">.</span><span class="nx">py</span> <span class="p">.</span><span class="o">/</span>
+</pre></div>
+</code></pre>
+<p>Visit <code>http://localhost:8080</code> to test your pages.</p>
+<a name="deploy" class="anchor" href="#deploy"><h3>Deploy</h3>
+</a><p>Everything is perfect and deploy the static pages. The command <code>appcfg.py</code> is used for deploy the application to Google App engine</p>
+<pre><code><div class="highlight"><pre><span class="nx">appcfg</span><span class="p">.</span><span class="nx">py</span> <span class="nx">update</span> <span class="p">.</span>
+</pre></div>
+</code></pre>
+<p>It will ask for <code>email</code> and <code>password</code> of your Google account. The password must be
+application specific password. To know how to generate application specific password,
+please refer <a href="https://support.google.com/accounts/answer/185833?hl=en">Application specific password</a>.</p>
+<a name="you-ve-made-it" class="anchor" href="#you-ve-made-it"><h3>You&#39;ve made it</h3>
+</a><p>Finally you got your site hosted in <code>&lt;application-id&gt;.appspot.com</code>.
+Static hosting is super easy with App Engine. Moreover it is faster than other static
+hosting services. Because it runs on Google infrastructure.</p>
+<p>Happy static hosting and Have a nice day.</p>
+</div>
+      <h4><a href="/blog/posts/Free-Static-Page-Hosting-on-Google-App-Engine-in-a-5-minutes.html#comments">View comments</a></h4>
+      <div class="post-head group"><a href="/blog/posts/Things-you-should-consider-for-MongoDB-in-production.html">
+          <h1 class="post-title">Things you should consider for MongoDB in production</h1></a>
+        <h2 class="post-date">2013 &#183; 11 &#183; 4</h2>
+      </div>
+      <div class="post-body"><p>We are using MongoDB for few of our products. We like to share some of the
+recommendations for MongoDB in production.</p>
+<a name="handle-connection-errors" class="anchor" href="#handle-connection-errors"><h3>Handle Connection Errors</h3>
+</a><p>Few weeks before, we faced one weird problem in our NodeJS  application.
+Our customer can view our site and not able to login into the application.
+We tried to figure out the issue and found that MongoDB database connection is
+broken during mid night. After that, our application is not crashed,
+but it is failed to connect MongoDB. We assume that it should auto reconnect if it is failed.
+But it does not happen. Finally we found that we did not handle error of MongoDB
+connection in our code.</p>
+<p>You must handle error of MongoDB connection in you code. It can be even simple console log.</p>
+<pre><code><div class="highlight"><pre> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">connection</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">console</span><span class="p">,</span> <span class="s1">&#39;MongoDB connection error:&#39;</span><span class="p">));</span>
+</pre></div>
+</code></pre>
+<p>If you are using NodeJS, you must handle <code>error</code> and <code>exception</code> in all places.
+It is a best practice.</p>
+<a name="setting-timeout" class="anchor" href="#setting-timeout"><h3>Setting Timeout</h3>
+</a><p>You have to properly set your timeouts. The driver&#39;s default timeouts are very aggressive ranges anywhere from 1 second (e.g. the Node.JS driver in some cases) to 30 seconds (e.g  the Ruby driver), so you really need to think about what the optimal setting is for your use case.</p>
+<p>For connections made through a Platform-as-a-Serivce (PaaS) such as Heroku, you might consider an even higher timeout (e.g. 30 seconds) since your application is likely running in a container that can be “idled” or “passivated” during periods of low activity</p>
+<p>If you use Mongoose and NodeJS, then you can set connection timeout by</p>
+<pre><code><div class="highlight"><pre><span class="c1">// Database connect options</span>
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">replset</span><span class="o">:</span> <span class="p">{</span> <span class="nx">socketOptions</span><span class="o">:</span> <span class="p">{</span> <span class="nx">connectTimeoutMS</span> <span class="o">:</span> <span class="nx">conf</span><span class="p">.</span><span class="nx">dbTimeout</span> <span class="p">}}};</span>
+
+<span class="c1">// Establish Database connection</span>
+<span class="kd">var</span> <span class="nx">conn</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">conf</span><span class="p">.</span><span class="nx">dbURL</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+</pre></div>
+</code></pre>
+<p><a href="https://mongolab.com/">MongoLab</a> has written very good article on <a href="http://blog.mongolab.com/2013/10/do-you-want-a-timeout/">MongoDB Timeout</a></p>
+<a name="connection-polling" class="anchor" href="#connection-polling"><h3>Connection Polling</h3>
+</a><p>You should consider using connection pooling. It will make for a much faster and
+more stable application. You won&#39;t spend the time on each request to create connections (can be noticeable to the end user) and you aren&#39;t subject to connect errors either.</p>
+<p>The <code>mongoose</code> package for NodeJS handles connection pooling by default. If you use your own
+MongoDB driver, make sure you have implemented connection pooling.</p>
+<p>Thanks to <a href="https://mongolab.com/">MongoLab</a> for sharing amazing tips of MongoDB with us.
+The support of MongoLab is awesome and respond for questions very quickly. I highly recommending for MongoDB database.</p>
+<p>Have a nice day.</p>
+</div>
+      <h4><a href="/blog/posts/Things-you-should-consider-for-MongoDB-in-production.html#comments">View comments</a></h4>
+      <div class="post-head group"><a href="/blog/posts/Dropbox-will-save-your-head.html">
+          <h1 class="post-title">Dropbox will save your head</h1></a>
+        <h2 class="post-date">2013 &#183; 11 &#183; 4</h2>
+      </div>
+      <div class="post-body"><p>Recently My Mac OSX has been crashed and somehow i cannot retrieve some of my data from hard drive.
+But i am fortunate that i have already synced important folder to the <code>Dropbox</code> that saves my head.</p>
+<p>Few days ago, i got a tweet from my favorite Github contributor <a href="https://twitter.com/tjholowaychuk">tj</a> (Creator of ExpressJs, Jade, Mocha)</p>
+<p><blockquote class="twitter-tweet"><p>haha dammit.. just rm -fr a project that isn&#39;t on github yet :( <a href="https://twitter.com/search?q=%23fail&amp;src=hash">#fail</a></p>&mdash; TJ Holowaychuk (@tjholowaychuk) <a href="https://twitter.com/tjholowaychuk/statuses/391262571350593536">October 18, 2013</a></blockquote></p>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>I am really sad about it. It can happen to anyone. So, whenever you started working on project(Pre-Github), You should consider sync to the <code>Dropbox</code>. Moreover it is always better and safer to sync important folder and files. It can be simply done by creating symbolic link to the folder in the <code>Dropbox</code>.</p>
+<p>Open <code>terminal</code> and do the following</p>
+<pre><code><div class="highlight"><pre><span class="err">##</span> <span class="nx">Go</span> <span class="nx">to</span> <span class="nx">dropbox</span> <span class="nx">folder</span><span class="p">.</span> <span class="nx">It</span> <span class="nx">can</span> <span class="nx">be</span> <span class="nx">any</span> <span class="nx">dropbox</span> <span class="nx">folder</span>
+<span class="nx">cd</span> <span class="o">~</span><span class="err">/Dropbox/MacOSX</span>
+
+<span class="err">#</span> <span class="nx">Create</span> <span class="nx">symbolic</span> <span class="nx">link</span> <span class="nx">to</span> <span class="nx">Stickies</span> <span class="nx">database</span>
+<span class="nx">ln</span> <span class="o">-</span><span class="nx">sf</span> <span class="o">~</span><span class="err">/Library/StickiesDatabase .</span>
+
+<span class="err">#</span> <span class="nx">Create</span> <span class="nx">symbolic</span> <span class="nx">link</span> <span class="nx">to</span> <span class="nx">Sublime</span> <span class="nx">text</span> <span class="nx">User</span> <span class="nx">data</span>
+<span class="nx">ln</span> <span class="o">-</span><span class="nx">sf</span> <span class="o">~</span><span class="err">/Library/Application\ Support/Sublime\ Text\ 3/Packages/User Sublime3-User</span>
+</pre></div>
+</code></pre>
+<p>In symbolic link creation, you can use .(dot) in the last argument to use same folder or file name as original. Otherwise you can specify the name that you wanted to have in your <code>Dropbox</code>.</p>
+<p>Have a nice day.</p>
+</div>
+      <h4><a href="/blog/posts/Dropbox-will-save-your-head.html#comments">View comments</a></h4>
+      <ul class="pagination group">
+        <li><a href="/" class="active-page">1</a>
+        </li>
+        <li><a href="/page/1/">2</a>
+        </li>
+        <li><a href="/page/2/">3</a>
+        </li>
+      </ul>
+    </div><a href="http://fizerkhan.com/"><img src="/images/cabin.png" class="cabin"></a>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="/scripts/main.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      
+      ga('create', 'UA-41972683-1', 'fizerkhan.com');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>
