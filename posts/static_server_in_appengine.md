@@ -5,7 +5,7 @@ date:   2014-2-17
 
 Now-a-days we have a lot of options to deploy our applications. Some of them are
 Google App Engine, Google Compute Cloud, Amazon EC2, Heroku, Nodejitsu and much more.
-All the services has its advantages and disadvantages over other. Generally,
+All the services have their advantages and disadvantages over others. Generally,
 we do not prefer much complex infrastructure or steps to deploy our static pages.
 Recently, I found that Google App engine has been a best platform for hosting our
 static web pages with decent free plan over other services. In this article,

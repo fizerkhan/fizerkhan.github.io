@@ -6,10 +6,52 @@ threadsafe: yes
 
 handlers:
 
-- url: /(.+)
+- url: /(.*\.css)
+  mime_type: text/css
   static_files: dist/\1
-  upload: dist/(.*)
+  upload: dist/(.*\.css)
 
+- url: /(.*\.html)
+  mime_type: text/html
+  static_files: dist/\1
+  upload: dist/(.*\.html)
+
+- url: /(.*\.js)
+  mime_type: text/javascript
+  static_files: dist/\1
+  upload: dist/(.*\.js)
+
+- url: /(.*\.txt)
+  mime_type: text/plain
+  static_files: dist/\1
+  upload: dist/(.*\.txt)
+
+- url: /(.*\.xml)
+  mime_type: application/xml
+  static_files: dist/\1
+  upload: dist/(.*\.xml)
+
+# image files
+- url: /(.*\.(bmp|gif|ico|jpeg|jpg|png))
+  static_files: dist/\1
+  upload: dist/(.*\.(bmp|gif|ico|jpeg|jpg|png))
+
+# image files
+- url: /(.*\.(eot|svg|ttf|woff))
+  static_files: dist/\1
+  upload: dist/(.*\.(bmp|gif|ico|jpeg|jpg|png))
+
+# index files
+- url: /(.+)/
+  static_files: dist/\1/index.html
+  upload: dist/(.+)/index.html
+
+# redirect to 'url + /index.html' url.
+- url: /(.+)
+  static_files: dist/redirector.html
+  upload: dist/redirector.html
+
+# site root
 - url: /
   static_files: dist/index.html
   upload: dist/index.html
