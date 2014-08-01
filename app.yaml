@@ -39,7 +39,7 @@ handlers:
 # image files
 - url: /(.*\.(eot|svg|ttf|woff))
   static_files: dist/\1
-  upload: dist/(.*\.(bmp|gif|ico|jpeg|jpg|png))
+  upload: dist/(.*\.(eot|svg|ttf|woff))
 
 # index files
 - url: /(.+)/

@@ -8,15 +8,17 @@ Hope it is useful to human kind.
 
 To run
 
-    $ cd war && grunt server
+    $ grunt server
 
 To build
 
-    $ cd war && grunt build
+    $ grunt build
 
 To Deploy
 
-    $ gaed
+    $ cd fizerkhan-production/
+    $ ./build.sh
+    $ git push
 
 Notes: During deploy, Google app engine throws JSP compilation error.
        So move the `node_modules` folder to main folder, then deploy.
