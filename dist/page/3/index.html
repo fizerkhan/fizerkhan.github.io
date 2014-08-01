@@ -18,6 +18,33 @@
       <div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div>
     </nav>
     <div class="content">
+      <div class="post-head group"><a href="/blog/posts/Use-your-browser-as-Notepad.html">
+          <h1 class="post-title">Use your browser as Notepad</h1></a>
+        <h2 class="post-date">2013 &#183; 7 &#183; 8</h2>
+      </div>
+      <div class="post-body"><p>We all uses notepad or sticky note or some editor to take immediate notes on something like code snippet, ideas, blog content, todo. Recently i came to know that we can use our browser just like notepad. The trick hacks around <a href="http://en.wikipedia.org/wiki/Data_URI_scheme">Data URI scheme</a> and html <a href="http://www.w3schools.com/tags/att_global_contenteditable.asp">contenteditable</a> attribute.</p>
+<p>All you need to do is type the following code into the browser&#39;s URL bar:</p>
+<pre><code><div class="highlight"><pre><span class="nx">data</span><span class="o">:</span><span class="nx">text</span><span class="o">/</span><span class="nx">html</span><span class="p">,</span> <span class="o">&lt;</span><span class="nx">html</span> <span class="nx">contenteditable</span><span class="o">&gt;</span>
+</pre></div>
+</code></pre>
+<p>It will make your page as editable just like notepad. If you want to save your content, do the usual browser save(<strong>CMD+S</strong> for OSX). It will save your content as html file. You can also bookmark above data url to make it easier.</p>
+<p>After i share this post in <a href="https://news.ycombinator.com/item?id=6005295">Hacker News</a>, i got cool new things from cool guys.</p>
+<p>Editor with little bit styles by <a href="https://news.ycombinator.com/user?id=bichiliad">bichiliad</a></p>
+<pre><code><div class="highlight"><pre><span class="nx">data</span><span class="o">:</span><span class="nx">text</span><span class="o">/</span><span class="nx">html</span><span class="p">,</span> <span class="o">&lt;</span><span class="nx">html</span> <span class="nx">contenteditable</span><span class="o">&gt;&lt;</span><span class="nx">style</span><span class="o">&gt;</span><span class="nx">body</span> <span class="p">{</span><span class="nx">color</span><span class="o">:</span> <span class="err">#</span><span class="mi">333</span><span class="p">;</span> <span class="nx">width</span><span class="o">:</span> <span class="mi">960</span><span class="nx">px</span><span class="p">;</span> <span class="nx">margin</span><span class="o">:</span> <span class="mi">0</span> <span class="nx">auto</span><span class="p">;</span> <span class="nx">display</span><span class="o">:</span> <span class="nx">block</span><span class="p">;</span> <span class="nx">height</span><span class="o">:</span> <span class="mi">100</span><span class="o">%</span><span class="p">;</span> <span class="nx">font</span><span class="o">-</span><span class="nx">size</span><span class="o">:</span> <span class="mi">36</span><span class="nx">px</span><span class="p">;</span> <span class="nx">padding</span><span class="o">:</span> <span class="mi">20</span><span class="nx">px</span><span class="p">;}</span><span class="o">&lt;</span><span class="err">/style&gt;&lt;/html&gt;</span>
+<span class="nx">reply</span>
+</pre></div>
+</code></pre>
+<p>Theme that changes the background color as you type by <a href="https://coderwall.com/bgrins">bgrins</a></p>
+<pre><code><div class="highlight"><pre><span class="nx">data</span><span class="o">:</span><span class="nx">text</span><span class="o">/</span><span class="nx">html</span><span class="p">,</span> <span class="o">&lt;</span><span class="nx">html</span><span class="o">&gt;&lt;</span><span class="nx">head</span><span class="o">&gt;&lt;</span><span class="nx">link</span> <span class="nx">href</span><span class="o">=</span><span class="s1">&#39;http://fonts.googleapis.com/css?family=Open+Sans&#39;</span> <span class="nx">rel</span><span class="o">=</span><span class="s1">&#39;stylesheet&#39;</span> <span class="nx">type</span><span class="o">=</span><span class="s1">&#39;text/css&#39;</span><span class="o">&gt;&lt;</span><span class="nx">style</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/css&quot;</span><span class="o">&gt;</span> <span class="nx">html</span> <span class="p">{</span> <span class="nx">font</span><span class="o">-</span><span class="nx">family</span><span class="o">:</span> <span class="s2">&quot;Open Sans&quot;</span> <span class="p">}</span> <span class="o">*</span> <span class="p">{</span> <span class="o">-</span><span class="nx">webkit</span><span class="o">-</span><span class="nx">transition</span><span class="o">:</span> <span class="nx">all</span> <span class="nx">linear</span> <span class="mi">1</span><span class="nx">s</span><span class="p">;</span> <span class="p">}</span><span class="o">&lt;</span><span class="err">/style&gt;&lt;script&gt;window.onload=function(){var e=false;var t=0;setInterval(function(){if(!e){t=Math.round(Math.max(0,t-Math.max(t/3,1)))}var n=(255-t*2).toString(16);document.body.style.backgroundColor=&quot;#ff&quot;+n+&quot;&quot;+n},1e3);var n=null;document.onkeydown=function(){t=Math.min(128,t+2);e=true;clearTimeout(n);n=setTimeout(function(){e=false},1500)}}&lt;/script&gt;&lt;/head&gt;&lt;body contenteditable style=&quot;font-size:2rem;line-height:1.4;max-width:60rem;margin:0 auto;padding:4rem;&quot;&gt;</span>
+</pre></div>
+</code></pre>
+<p>I love this. Sublime Text Flavor with Ace by <a href="https://news.ycombinator.com/user?id=thinkxl">thinkxl</a></p>
+<pre><code><div class="highlight"><pre><span class="nx">data</span><span class="o">:</span><span class="nx">text</span><span class="o">/</span><span class="nx">html</span><span class="p">,</span><span class="o">&lt;</span><span class="nx">title</span><span class="o">&gt;</span><span class="nx">DoJS</span><span class="o">&lt;</span><span class="err">/title&gt;&lt;style type=&quot;text/css&quot;&gt;#e{font-size: 16px; position:absolute;top:0;right:0;bottom:0;left:0;}&lt;/style&gt;&lt;div id=&quot;e&quot;&gt;&lt;/div&gt;&lt;script src=&quot;http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js&quot; type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;&lt;script&gt;var e=ace.edit(&quot;e&quot;);e.setTheme(&quot;ace/theme/monokai&quot;);e.getSession().setMode(&quot;ace/mode/javascript&quot;);&lt;/script&gt;</span>
+</pre></div>
+</code></pre>
+<p>Web is awesome. Have a nice day.</p>
+</div>
+      <h4><a href="/blog/posts/Use-your-browser-as-Notepad.html#comments">View comments</a></h4>
       <div class="post-head group"><a href="/blog/posts/MongoDB-tips.html">
           <h1 class="post-title">MongoDB tips</h1></a>
         <h2 class="post-date">2013 &#183; 7 &#183; 2</h2>
@@ -494,88 +521,6 @@ And the <code>livereload</code> task refreshes the pages if any changes in the f
 <p>Happy Coding and Have a nice day.</p>
 </div>
       <h4><a href="/blog/posts/Grunt-Live-reloading-with-external-server.html#comments">View comments</a></h4>
-      <div class="post-head group"><a href="/blog/posts/Social-sharing-buttons.html">
-          <h1 class="post-title">Social sharing buttons</h1></a>
-        <h2 class="post-date">2013 &#183; 6 &#183; 27</h2>
-      </div>
-      <div class="post-body"><p>Social sharing buttons becomes essential to all pages available on the web.
-If you write blog, then you cannot avoid social buttons on your blog. I like to share the social sharing button snippets which i collected from web. I believe, anything is taken from web must be given back to web.</p>
-<a name="twitter" class="anchor" href="#twitter"><h3>Twitter</h3>
-</a><pre><code class="lang-html"><div class="highlight"><pre><span class="c">&lt;!-- Place this tag where you want the share button to render. --&gt;</span>
-<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;https://twitter.com/share&quot;</span> <span class="na">class=</span><span class="s">&quot;twitter-share-button&quot;</span><span class="nt">&gt;</span>Tweet<span class="nt">&lt;/a&gt;</span>
-
-<span class="c">&lt;!-- Place this tag after the last share tag --&gt;</span>
-<span class="nt">&lt;script&gt;</span><span class="o">!</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span><span class="nx">s</span><span class="p">,</span><span class="nx">id</span><span class="p">){</span><span class="kd">var</span> <span class="nx">js</span><span class="p">,</span><span class="nx">fjs</span><span class="o">=</span><span class="nx">d</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="nx">s</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span><span class="nx">p</span><span class="o">=</span><span class="sr">/^http:/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">location</span><span class="p">)</span><span class="o">?</span><span class="s1">&#39;http&#39;</span><span class="o">:</span><span class="s1">&#39;https&#39;</span><span class="p">;</span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">d</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">id</span><span class="p">)){</span><span class="nx">js</span><span class="o">=</span><span class="nx">d</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span><span class="nx">js</span><span class="p">.</span><span class="nx">id</span><span class="o">=</span><span class="nx">id</span><span class="p">;</span><span class="nx">js</span><span class="p">.</span><span class="nx">src</span><span class="o">=</span><span class="nx">p</span><span class="o">+</span><span class="s1">&#39;://platform.twitter.com/widgets.js&#39;</span><span class="p">;</span><span class="nx">fjs</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">js</span><span class="p">,</span><span class="nx">fjs</span><span class="p">);}}(</span><span class="nb">document</span><span class="p">,</span> <span class="s1">&#39;script&#39;</span><span class="p">,</span> <span class="s1">&#39;twitter-wjs&#39;</span><span class="p">);</span><span class="nt">&lt;/script&gt;</span>
-</pre></div>
-</code></pre>
-<a name="google-plus" class="anchor" href="#google-plus"><h3>Google Plus</h3>
-</a><pre><code class="lang-html"><div class="highlight"><pre><span class="c">&lt;!-- Place this tag where you want the share button to render. --&gt;</span>
-<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;g-plus&quot;</span> <span class="na">data-action=</span><span class="s">&quot;share&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
-
-<span class="c">&lt;!-- Place this tag after the last share tag. --&gt;</span>
-<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
-  <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">po</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;script&#39;</span><span class="p">);</span> <span class="nx">po</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">&#39;text/javascript&#39;</span><span class="p">;</span> <span class="nx">po</span><span class="p">.</span><span class="nx">async</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-    <span class="nx">po</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">&#39;https://apis.google.com/js/plusone.js&#39;</span><span class="p">;</span>
-    <span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">&#39;script&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span> <span class="nx">s</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">po</span><span class="p">,</span> <span class="nx">s</span><span class="p">);</span>
-  <span class="p">})();</span>
-<span class="nt">&lt;/script&gt;</span>
-</pre></div>
-</code></pre>
-<a name="facebook-like" class="anchor" href="#facebook-like"><h3>Facebook Like</h3>
-</a><pre><code class="lang-html"><div class="highlight"><pre><span class="c">&lt;!--Place the code for your plugin wherever you want the plugin to appear on your page. --&gt;</span>
-<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;fb-like&quot;</span> <span class="na">data-href=</span><span class="s">&quot;http://developers.facebook.com/docs/reference/plugins/like&quot;</span> <span class="na">data-send=</span><span class="s">&quot;true&quot;</span> <span class="na">data-width=</span><span class="s">&quot;450&quot;</span> <span class="na">data-show-faces=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
-
-<span class="c">&lt;!-- Include the JavaScript SDK on your page once, ideally right after the opening &lt;body&gt; tag. --&gt;</span>
-<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;fb-root&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
-<span class="nt">&lt;script&gt;</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span> <span class="nx">s</span><span class="p">,</span> <span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">var</span> <span class="nx">js</span><span class="p">,</span> <span class="nx">fjs</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="nx">s</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">id</span><span class="p">))</span> <span class="k">return</span><span class="p">;</span>
-  <span class="nx">js</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span> <span class="nx">js</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="nx">id</span><span class="p">;</span>
-  <span class="nx">js</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s2">&quot;//connect.facebook.net/en_US/all.js#xfbml=1&quot;</span><span class="p">;</span>
-  <span class="nx">fjs</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">js</span><span class="p">,</span> <span class="nx">fjs</span><span class="p">);</span>
-<span class="p">}(</span><span class="nb">document</span><span class="p">,</span> <span class="s1">&#39;script&#39;</span><span class="p">,</span> <span class="s1">&#39;facebook-jssdk&#39;</span><span class="p">));</span><span class="nt">&lt;/script&gt;</span>
-</pre></div>
-</code></pre>
-<a name="hacker-news" class="anchor" href="#hacker-news"><h3>Hacker News</h3>
-</a><pre><code class="lang-html"><div class="highlight"><pre><span class="c">&lt;!-- Place this tag where you want the share button to render. --&gt;</span>
-<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://news.ycombinator.com/submit&quot;</span> <span class="na">class=</span><span class="s">&quot;hn-share-button&quot;</span><span class="nt">&gt;</span>Vote on HN<span class="nt">&lt;/a&gt;</span>
-
-<span class="c">&lt;!-- Place this tag after the last share tag --&gt;</span>
-<span class="nt">&lt;script&gt;</span>
-    <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span> <span class="nx">t</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">g</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">t</span><span class="p">),</span>
-            <span class="nx">s</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="nx">t</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
-        <span class="nx">g</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">&#39;//hnbutton.appspot.com/static/hn.min.js&#39;</span><span class="p">;</span>
-        <span class="nx">s</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">g</span><span class="p">,</span> <span class="nx">s</span><span class="p">);</span>
-    <span class="p">}(</span><span class="nb">document</span><span class="p">,</span> <span class="s1">&#39;script&#39;</span><span class="p">));</span>
-<span class="nt">&lt;/script&gt;</span>
-</pre></div>
-</code></pre>
-<a name="reddit" class="anchor" href="#reddit"><h3>Reddit</h3>
-</a><pre><code class="lang-html"><div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://www.reddit.com/submit&quot;</span> <span class="na">onclick=</span><span class="s">&quot;window.location = &#39;http://www.reddit.com/submit?url=&#39; + encodeURIComponent(window.location); return false&quot;</span><span class="nt">&gt;</span> <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;http://www.reddit.com/static/spreddit7.gif&quot;</span> <span class="na">alt=</span><span class="s">&quot;submit to reddit&quot;</span> <span class="na">border=</span><span class="s">&quot;0&quot;</span> <span class="nt">/&gt;</span> <span class="nt">&lt;/a&gt;</span>
-</pre></div>
-</code></pre>
-<p>If you want Reddit button with points, then</p>
-<pre><code class="lang-html"><div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;http://www.reddit.com/buttonlite.js?i=1&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</pre></div>
-</code></pre>
-<a name="kippt" class="anchor" href="#kippt"><h3>Kippt</h3>
-</a><p>I love to have all my favorites site in Kippt. Those who love kippt, this is for you.</p>
-<pre><code class="lang-html"><div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;https://kippt.com/save&quot;</span> <span class="na">class=</span><span class="s">&quot;kippt-save-button&quot;</span> <span class="na">data-url=</span><span class="s">&quot;https://kippt.com/karrisaarinen/&quot;</span> <span class="na">data-title=</span><span class="s">&quot;Karri Saarinen on Kippt&quot;</span> <span class="na">data-source=</span><span class="s">&quot;example.com&quot;</span><span class="nt">&gt;</span>Save to Kippt<span class="nt">&lt;/a&gt;</span>
-
-<span class="nt">&lt;script&gt;</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span><span class="nx">s</span><span class="p">,</span><span class="nx">id</span><span class="p">){</span><span class="kd">var</span> <span class="nx">js</span><span class="p">,</span><span class="nx">fjs</span><span class="o">=</span><span class="nx">d</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="nx">s</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">d</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">id</span><span class="p">)){</span><span class="nx">js</span><span class="o">=</span><span class="nx">d</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span><span class="nx">js</span><span class="p">.</span><span class="nx">id</span><span class="o">=</span><span class="nx">id</span><span class="p">;</span><span class="nx">js</span><span class="p">.</span><span class="nx">src</span><span class="o">=</span><span class="s2">&quot;http://addons.kippt.com/widgets.js&quot;</span><span class="p">;</span><span class="nx">fjs</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">js</span><span class="p">,</span><span class="nx">fjs</span><span class="p">);}}(</span><span class="nb">document</span><span class="p">,</span><span class="s2">&quot;script&quot;</span><span class="p">,</span><span class="s2">&quot;kippt-wjs&quot;</span><span class="p">));</span><span class="nt">&lt;/script&gt;</span>
-</pre></div>
-</code></pre>
-<a name="linkedin" class="anchor" href="#linkedin"><h3>Linkedin</h3>
-</a><pre><code class="lang-html"><div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//platform.linkedin.com/in.js&quot;</span> <span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
- <span class="nx">lang</span><span class="o">:</span> <span class="nx">en_US</span>
-<span class="nt">&lt;/script&gt;</span>
-<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;IN/Share&quot;</span> <span class="na">data-counter=</span><span class="s">&quot;right&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</pre></div>
-</code></pre>
-</div>
-      <h4><a href="/blog/posts/Social-sharing-buttons.html#comments">View comments</a></h4>
       <ul class="pagination group">
         <li><a href="/">1</a>
         </li>

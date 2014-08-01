@@ -18,6 +18,48 @@
       <div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div>
     </nav>
     <div class="content">
+      <div class="post-head group"><a href="/blog/posts/Things-you-should-consider-for-MongoDB-in-production.html">
+          <h1 class="post-title">Things you should consider for MongoDB in production</h1></a>
+        <h2 class="post-date">2013 &#183; 11 &#183; 4</h2>
+      </div>
+      <div class="post-body"><p>We are using MongoDB for few of our products. We like to share some of the
+recommendations for MongoDB in production.</p>
+<a name="handle-connection-errors" class="anchor" href="#handle-connection-errors"><h3>Handle Connection Errors</h3>
+</a><p>Few weeks before, we faced one weird problem in our NodeJS  application.
+Our customer can view our site and not able to login into the application.
+We tried to figure out the issue and found that MongoDB database connection is
+broken during mid night. After that, our application is not crashed,
+but it is failed to connect MongoDB. We assume that it should auto reconnect if it is failed.
+But it does not happen. Finally we found that we did not handle error of MongoDB
+connection in our code.</p>
+<p>You must handle error of MongoDB connection in you code. It can be even simple console log.</p>
+<pre><code><div class="highlight"><pre> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">connection</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">console</span><span class="p">,</span> <span class="s1">&#39;MongoDB connection error:&#39;</span><span class="p">));</span>
+</pre></div>
+</code></pre>
+<p>If you are using NodeJS, you must handle <code>error</code> and <code>exception</code> in all places.
+It is a best practice.</p>
+<a name="setting-timeout" class="anchor" href="#setting-timeout"><h3>Setting Timeout</h3>
+</a><p>You have to properly set your timeouts. The driver&#39;s default timeouts are very aggressive ranges anywhere from 1 second (e.g. the Node.JS driver in some cases) to 30 seconds (e.g  the Ruby driver), so you really need to think about what the optimal setting is for your use case.</p>
+<p>For connections made through a Platform-as-a-Serivce (PaaS) such as Heroku, you might consider an even higher timeout (e.g. 30 seconds) since your application is likely running in a container that can be “idled” or “passivated” during periods of low activity</p>
+<p>If you use Mongoose and NodeJS, then you can set connection timeout by</p>
+<pre><code><div class="highlight"><pre><span class="c1">// Database connect options</span>
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">replset</span><span class="o">:</span> <span class="p">{</span> <span class="nx">socketOptions</span><span class="o">:</span> <span class="p">{</span> <span class="nx">connectTimeoutMS</span> <span class="o">:</span> <span class="nx">conf</span><span class="p">.</span><span class="nx">dbTimeout</span> <span class="p">}}};</span>
+
+<span class="c1">// Establish Database connection</span>
+<span class="kd">var</span> <span class="nx">conn</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">conf</span><span class="p">.</span><span class="nx">dbURL</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+</pre></div>
+</code></pre>
+<p><a href="https://mongolab.com/">MongoLab</a> has written very good article on <a href="http://blog.mongolab.com/2013/10/do-you-want-a-timeout/">MongoDB Timeout</a></p>
+<a name="connection-polling" class="anchor" href="#connection-polling"><h3>Connection Polling</h3>
+</a><p>You should consider using connection pooling. It will make for a much faster and
+more stable application. You won&#39;t spend the time on each request to create connections (can be noticeable to the end user) and you aren&#39;t subject to connect errors either.</p>
+<p>The <code>mongoose</code> package for NodeJS handles connection pooling by default. If you use your own
+MongoDB driver, make sure you have implemented connection pooling.</p>
+<p>Thanks to <a href="https://mongolab.com/">MongoLab</a> for sharing amazing tips of MongoDB with us.
+The support of MongoLab is awesome and respond for questions very quickly. I highly recommending for MongoDB database.</p>
+<p>Have a nice day.</p>
+</div>
+      <h4><a href="/blog/posts/Things-you-should-consider-for-MongoDB-in-production.html#comments">View comments</a></h4>
       <div class="post-head group"><a href="/blog/posts/Every-Programmer-should-use-IRC.html">
           <h1 class="post-title">Every Programmer should use IRC</h1></a>
         <h2 class="post-date">2013 &#183; 11 &#183; 3</h2>
@@ -153,93 +195,6 @@ is still clickable, It will not be user friendly.</p>
 Happy coding and have a nice day.</p>
 </div>
       <h4><a href="/blog/posts/Javascript-snippets-save-your-time.html#comments">View comments</a></h4>
-      <div class="post-head group"><a href="/blog/posts/Tips-and-Tricks-of-OSX-makes-you-smile.html">
-          <h1 class="post-title">Tips and Tricks of OSX makes you smile</h1></a>
-        <h2 class="post-date">2013 &#183; 10 &#183; 2</h2>
-      </div>
-      <div class="post-body"><p>I love to work with Mac OSX. Few days before, i came across the <a href="http://apple.stackexchange.com/questions/400/please-share-your-hidden-os-x-features-or-tips-and-tricks">Tips and Tricks of OSX in Stack Exchange answers</a>. It is mind blowing and has lot more stuff to learn. I like to share tips and tricks that i like and using regularly.</p>
-<a name="quick-look-in-finder" class="anchor" href="#quick-look-in-finder"><h3>Quick Look in Finder</h3>
-</a><p>When you are in <code>Finder</code> and wanted to check the content of a file, you typically double click the item.  Instead you can hit the <code>Spacebar</code> to have quick look. It is much faster than opening the file.</p>
-<a name="spotlight-search-and-its-calculator" class="anchor" href="#spotlight-search-and-its-calculator"><h3>Spotlight Search and its Calculator</h3>
-</a><p>Spotlight Search can be opened by hitting <code>⌘ + space</code>.</p>
-<p>The Spotlight search can also handle simple mathematical expressions.
-You can type any simple math expression, it will give you the answer.</p>
-<a name="show-hidden-files-in-finder" class="anchor" href="#show-hidden-files-in-finder"><h3>Show Hidden files in Finder</h3>
-</a><p>By default, The <code>Finder</code> hide the hidden files which starts with .(dot). To set <code>Finder</code> to show hidden files, run following command in the terminal</p>
-<pre><code><div class="highlight"><pre><span class="nx">defaults</span> <span class="nx">write</span> <span class="nx">com</span><span class="p">.</span><span class="nx">apple</span><span class="p">.</span><span class="nx">finder</span> <span class="nx">AppleShowAllFiles</span> <span class="nx">TRUE</span>
-
-<span class="nx">killall</span> <span class="nx">Finder</span>
-</pre></div>
-</code></pre>
-<p>Reopen <code>Finder</code>. Now it will show hidden files.</p>
-<p>You can use <code>⌘ + ⇧ + .</code> that will show hidden files in any file-open dialog box.</p>
-<a name="finder-window-shortcuts" class="anchor" href="#finder-window-shortcuts"><h3>Finder Window Shortcuts</h3>
-</a><p>In Finder window or Open/Save dialog,</p>
-<pre><code><div class="highlight"><pre><span class="err">⌘</span> <span class="o">+</span> <span class="err">⇧</span> <span class="o">+</span> <span class="nx">G</span> <span class="o">-</span> <span class="nx">Get</span> <span class="nx">a</span> <span class="nx">location</span> <span class="nx">bar</span> <span class="nx">from</span> <span class="nx">which</span> <span class="nx">you</span> <span class="nx">can</span> <span class="nx">type</span>
-<span class="err">⌘</span> <span class="o">+</span> <span class="nx">I</span>     <span class="o">-</span> <span class="nx">Info</span> <span class="nb">window</span> <span class="nx">shows</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">selected</span> <span class="nx">item</span><span class="p">.</span>
-<span class="err">⌘</span> <span class="o">+</span> <span class="nx">F</span>     <span class="o">-</span> <span class="nx">Cursor</span> <span class="nx">jumps</span> <span class="nx">to</span> <span class="nx">the</span> <span class="nx">Find</span> <span class="nx">text</span> <span class="nx">field</span>
-<span class="err">⌘</span> <span class="o">+</span> <span class="nx">R</span>     <span class="o">-</span> <span class="nx">Reveals</span> <span class="nx">the</span> <span class="nx">selected</span> <span class="nx">item</span> <span class="k">in</span> <span class="nx">a</span> <span class="k">new</span> <span class="nx">Finder</span> <span class="nb">window</span><span class="p">.</span>
-</pre></div>
-</code></pre>
-<p>In Open/Save dialog,</p>
-<pre><code><div class="highlight"><pre><span class="err">⌘</span> <span class="o">+</span> <span class="nx">D</span>     <span class="o">-</span> <span class="nx">Selects</span> <span class="nx">the</span> <span class="nx">Desktop</span> <span class="nx">folder</span> <span class="nx">as</span> <span class="nx">a</span> <span class="nx">destination</span>
-</pre></div>
-</code></pre>
-<a name="show-and-hide-desktop-icons" class="anchor" href="#show-and-hide-desktop-icons"><h3>Show and Hide Desktop Icons</h3>
-</a><p>When you do presentation or in meeting, you do not want others to see your desktop.
-You can use following commands to hide and show desktop icons.</p>
-<p>To Hide Desktop icons</p>
-<pre><code><div class="highlight"><pre><span class="nx">defaults</span> <span class="nx">write</span> <span class="nx">com</span><span class="p">.</span><span class="nx">apple</span><span class="p">.</span><span class="nx">finder</span> <span class="nx">CreateDesktop</span> <span class="o">-</span><span class="nx">bool</span> <span class="kc">false</span> <span class="o">&amp;&amp;</span> <span class="nx">killall</span> <span class="nx">Finder</span>
-</pre></div>
-</code></pre>
-<p>To Show Desktop icons</p>
-<pre><code><div class="highlight"><pre><span class="nx">defaults</span> <span class="nx">write</span> <span class="nx">com</span><span class="p">.</span><span class="nx">apple</span><span class="p">.</span><span class="nx">finder</span> <span class="nx">CreateDesktop</span> <span class="o">-</span><span class="nx">bool</span> <span class="kc">true</span> <span class="o">&amp;&amp;</span> <span class="nx">killall</span> <span class="nx">Finder</span>
-</pre></div>
-</code></pre>
-<a name="screenshot-shortcuts" class="anchor" href="#screenshot-shortcuts"><h3>Screenshot shortcuts</h3>
-</a><p>You can use following shortcuts to take screenshots. Kudos to <a href="http://oreilly.com/digitalmedia/2006/01/01/mac-os-x-screenshot-secrets.html">screenshot-secret</a></p>
-<p><code>⌘+⇧+3</code>      -  Capture entire screen and save as a file</p>
-<p><code>⌘+ctrl+⇧+3</code> -  Capture entire screen and copy to the clipboard</p>
-<p><code>⌘+⇧+4</code>      -  Capture dragged area and save as a file</p>
-<p><code>⌘+ctrl+⇧+4</code> -  Capture dragged area and copy to the clipboard</p>
-<p><code>⌘+⇧+4 then space</code>      -  Capture a window, menu, desktop icon, or the menu bar and save as a file</p>
-<p><code>⌘+ctrl+⇧+4 then space</code> -  Capture a window, menu, desktop icon, or the menu bar and copy to the clipboard</p>
-<a name="clipboard-copy-and-paste-from-terminal" class="anchor" href="#clipboard-copy-and-paste-from-terminal"><h3>Clipboard copy and paste from Terminal</h3>
-</a><p>You may want to copy output of some command to clipboard, then use <code>pbcopy</code></p>
-<pre><code><div class="highlight"><pre><span class="nx">echo</span> <span class="s2">&quot;I am going to clipboard&quot;</span> <span class="o">|</span> <span class="nx">pbcopy</span>
-</pre></div>
-</code></pre>
-<p>Save clipboard contents to file</p>
-<pre><code><div class="highlight"><pre><span class="nx">pbpaste</span> <span class="o">&gt;</span> <span class="nx">myfile</span><span class="p">.</span><span class="nx">txt</span>
-</pre></div>
-</code></pre>
-<a name="start-quick-web-server" class="anchor" href="#start-quick-web-server"><h3>Start Quick Web server</h3>
-</a><p>Start a quick web server by</p>
-<pre><code><div class="highlight"><pre><span class="nx">python</span> <span class="o">-</span><span class="nx">m</span> <span class="nx">SimpleHTTPServer</span>
-</pre></div>
-</code></pre>
-<p>It will start web server port 8000 and serve files in the current directory.
-To start in a specific port</p>
-<pre><code><div class="highlight"><pre><span class="nx">python</span> <span class="o">-</span><span class="nx">m</span> <span class="nx">SimpleHTTPServer</span> <span class="mi">8080</span>
-</pre></div>
-</code></pre>
-<a name="useful-command-on-terminal" class="anchor" href="#useful-command-on-terminal"><h3>Useful command on Terminal</h3>
-</a><p>You can use <code>open</code> command to open any application and any file.</p>
-<pre><code><div class="highlight"><pre><span class="nx">open</span> <span class="p">.</span>            <span class="err">#</span> <span class="nx">Open</span> <span class="nx">current</span> <span class="nx">folder</span> <span class="k">in</span> <span class="nx">the</span> <span class="nx">Finder</span><span class="p">.</span>
-<span class="nx">open</span> <span class="o">-</span><span class="nx">a</span> <span class="nx">Firefox</span>   <span class="err">#</span> <span class="nx">To</span> <span class="nx">open</span> <span class="nx">application</span><span class="p">.</span> <span class="nx">Use</span> <span class="o">-</span><span class="nx">a</span> <span class="nx">option</span>
-<span class="nx">open</span> <span class="nx">ticket</span><span class="p">.</span><span class="nx">pdf</span>   <span class="err">#</span> <span class="nx">To</span> <span class="nx">open</span> <span class="nx">a</span> <span class="nx">file</span><span class="p">.</span> <span class="nx">It</span> <span class="nx">will</span> <span class="nx">open</span> <span class="nx">PDF</span> <span class="k">in</span> <span class="k">default</span> <span class="nx">application</span><span class="p">.</span>
-</pre></div>
-</code></pre>
-<p>For Non-English speaker like me, it always find difficulties in pronouncing the word :) You can use <code>say</code> to know how to pronounce</p>
-<pre><code><div class="highlight"><pre><span class="nx">say</span> <span class="nx">Hello</span> <span class="nx">World</span>
-</pre></div>
-</code></pre>
-<a name="view-more-information-on-menu-bar-icons" class="anchor" href="#view-more-information-on-menu-bar-icons"><h3>View More information on Menu bar icons</h3>
-</a><p>Holding <code>⌥</code> while clicking menu bar icon will give you additional menu items.</p>
-<p>Hold <code>Option ⌥</code> + Click Battery Menulet, it will show battery condition.</p>
-<p>Have a nice day.</p>
-</div>
-      <h4><a href="/blog/posts/Tips-and-Tricks-of-OSX-makes-you-smile.html#comments">View comments</a></h4>
       <ul class="pagination group">
         <li><a href="/">1</a>
         </li>
