@@ -23,10 +23,6 @@ To Deploy in Google app engine
 
     $ git push appengine master
 
-Notes: During deploy, Google app engine throws JSP compilation error.
-       So move the `node_modules` folder to main folder, then deploy.
-       After deploy, move back the `node_modules` to `war` folder.
-
 # Tools
 
 * [Cabin](http://colinwren.github.io/Cabin/)
