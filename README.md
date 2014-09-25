@@ -17,7 +17,7 @@ To build
 
 To deploy
 
-    $ git push github master
+    $ git push
 
 To Deploy in Google app engine
 
