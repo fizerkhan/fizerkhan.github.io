@@ -32,7 +32,7 @@ The <strong>Shellshock</strong> vulnerability is very widespread and even more s
 <p>To know more about <strong>Shellshock</strong>, read an amazing <a href="http://www.troyhunt.com/2014/09/everything-you-need-to-know-about.html">article from Troy Hunt</a></p>
 <a name="check-system-vulnerability" class="anchor" href="#check-system-vulnerability"><h3>Check System Vulnerability</h3>
 </a><p>You can check the system for Shellshock vulnerability by running following command in bash</p>
-<pre><code><div class="highlight"><pre><span class="nx">env</span> <span class="nx">DB</span><span class="o">=</span><span class="s1">&#39;() { :;}; echo I am vulnerable!&#39;</span> <span class="nx">bash</span> <span class="o">-</span><span class="nx">c</span> <span class="s2">&quot;echo This is Bash&quot;</span>
+<pre><code><div class="highlight"><pre><span class="nx">env</span> <span class="nx">Y</span><span class="o">=</span><span class="s1">&#39;() { :;}; echo I am vulnerable!&#39;</span> <span class="nx">bash</span> <span class="o">-</span><span class="nx">c</span> <span class="s2">&quot;echo This is Bash&quot;</span>
 </pre></div>
 </code></pre>
 <p>If your version of Bash is vulnerable, then you will see following output</p>
@@ -43,8 +43,8 @@ The <strong>Shellshock</strong> vulnerability is very widespread and even more s
 <p>Instead of <strong>echo I am vulnerable!</strong> portion, attacker can run any command;
 arbitrary code following a function definition within an environment variable assignment.
 If your system don&#39;t have Shellshock vulnerability, then you will see following output</p>
-<pre><code><div class="highlight"><pre><span class="nx">bash</span><span class="o">:</span> <span class="nx">warning</span><span class="o">:</span> <span class="nx">DB</span><span class="o">:</span> <span class="nx">ignoring</span> <span class="kd">function</span> <span class="nx">definition</span> <span class="nx">attempt</span>
-<span class="nx">bash</span><span class="o">:</span> <span class="nx">error</span> <span class="nx">importing</span> <span class="kd">function</span> <span class="nx">definition</span> <span class="k">for</span> <span class="err">`</span><span class="nx">DB</span><span class="err">&#39;</span>
+<pre><code><div class="highlight"><pre><span class="nx">bash</span><span class="o">:</span> <span class="nx">warning</span><span class="o">:</span> <span class="nx">Y</span><span class="o">:</span> <span class="nx">ignoring</span> <span class="kd">function</span> <span class="nx">definition</span> <span class="nx">attempt</span>
+<span class="nx">bash</span><span class="o">:</span> <span class="nx">error</span> <span class="nx">importing</span> <span class="kd">function</span> <span class="nx">definition</span> <span class="k">for</span> <span class="err">`</span><span class="nx">Y</span><span class="err">&#39;</span>
 <span class="nx">This</span> <span class="nx">is</span> <span class="nx">Bash</span>
 </pre></div>
 </code></pre>
