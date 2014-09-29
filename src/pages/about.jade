@@ -9,12 +9,32 @@ block content
     .post-body
       div.json
         p.tag {
-        p.field    name : "Fizer Khan",
-        p.field    job  : "Web developer",
-        p.field    location :  "Chennai, India",
-        p.field    twitter :  "@fizerkhan",
-        p.field    likes : [ "Node.js", "Angularjs"]
-        //-p.field    philosophy :  "Steal, Improve, GiveBack"
+        table
+          tr.field
+            td.field-name.
+              name:
+            td.field-value.
+              "Fizer Khan",
+          tr.field
+            td.field-name.
+              job:
+            td.field-value.
+              "Web developer",
+          tr.field
+            td.field-name.
+              location:
+            td.field-value.
+              "Chennai, India",
+          tr.field
+            td.field-name.
+              twitter:
+            td.field-value.
+              "<a class="field-twitter" href="https://www.twitter.com/fizerkhan">@fizerkhan</a>",
+          tr.field
+            td.field-name.
+              likes:
+            td.field-value.
+              [ "Node.js", "Angularjs"]
         p.tag }
 
 

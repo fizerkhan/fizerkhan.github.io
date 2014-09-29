@@ -18,6 +18,44 @@
       <div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div>
     </nav>
     <div class="content">
+      <div class="post-head group"><a href="/blog/posts/Google-App-Engine-Deployment-Tips.html">
+          <h1 class="post-title">Google App Engine Deployment Tips</h1></a>
+        <h2 class="post-date">2013 &#183; 6 &#183; 26</h2>
+      </div>
+      <div class="post-body"><p>I uses Google App Engine for few of my projects. I choose it, because it is <strong>Free</strong> for small application like blog and faster, easy to deploy. This blog is also deployed in the App Engine.</p>
+<a name="command-line-alias" class="anchor" href="#command-line-alias"><h2>Command Line Alias</h2>
+</a><p>I usually deployed to Google App Engine from command line. I have aliases for deployment and rollback.</p>
+<pre><code><div class="highlight"><pre><span class="nx">$</span> <span class="nx">alias</span> <span class="nx">gaed</span><span class="o">=</span><span class="s1">&#39;/Users/maasan/development/tools/eclipse/plugins/com.google.appengine.eclipse.sdkbundle_1.7.3/appengine-java-sdk-1.7.3/bin/appcfg.sh update war&#39;</span>
+
+<span class="nx">$</span> <span class="nx">alias</span> <span class="nx">gaer</span><span class="o">=</span><span class="s1">&#39;/Users/maasan/development/tools/eclipse/plugins/com.google.appengine.eclipse.sdkbundle_1.7.3/appengine-java-sdk-1.7.3/bin/appcfg.sh rollback war&#39;</span>
+</pre></div>
+</code></pre>
+<p>When i want to deploy, i just change to application directory and run</p>
+<pre><code><div class="highlight"><pre><span class="nx">$</span> <span class="nx">gaed</span>
+</pre></div>
+</code></pre>
+<p>If you want update the version of application, then</p>
+<pre><code><div class="highlight"><pre><span class="nx">$</span> <span class="nx">gaed</span> <span class="o">-</span><span class="nx">v</span> <span class="mi">2</span>
+</pre></div>
+</code></pre>
+<p>The version can be anything from single integer or current date or anything you like.</p>
+<a name="different-versions-access" class="anchor" href="#different-versions-access"><h2>Different versions access</h2>
+</a><p>Even though you deployed the new version of your application to App Engine, it will not come to live until you go to Admin console and set as Default.
+Once you set new version as Default, then it comes to live.</p>
+<p><strong>But will there any way to access the old versions when new version is live?</strong></p>
+<p><strong>Yes</strong>, i recently found that we can access any version of your application by</p>
+<pre><code><div class="highlight"><pre><span class="nx">http</span><span class="o">:</span><span class="c1">//&lt;version&gt;-dot-&lt;application identifier&gt;.appspot.com</span>
+</pre></div>
+</code></pre>
+<p>Let&#39;s assume, you want to access the version <code>1</code> of your <code>sample.appspot.com</code>, then</p>
+<pre><code><div class="highlight"><pre><span class="nx">http</span><span class="o">:</span><span class="c1">//1-dot-sample.appspot.com</span>
+</pre></div>
+</code></pre>
+<p>But keep in mind that all your application will use same database. If any changes in the database schema might break the older versions.</p>
+<p>You can also use it vice-versa. Just deploy the new version, access the new version by above version URL and test it. Once you confidence that you can make it live, then go and set the new version as Default.</p>
+<p>Happy deployment and Have a nice day.</p>
+</div>
+      <h4><a href="/blog/posts/Google-App-Engine-Deployment-Tips.html#comments">View comments</a></h4>
       <div class="post-head group"><a href="/blog/posts/JSON-is-not-Javascript-Object.html">
           <h1 class="post-title">JSON is not Javascript Object</h1></a>
         <h2 class="post-date">2013 &#183; 6 &#183; 24</h2>

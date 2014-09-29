@@ -18,6 +18,65 @@
       <div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div>
     </nav>
     <div class="content">
+      <div class="post-head group"><a href="/blog/posts/Every-Programmer-should-use-IRC.html">
+          <h1 class="post-title">Every Programmer should use IRC</h1></a>
+        <h2 class="post-date">2013 &#183; 11 &#183; 3</h2>
+      </div>
+      <div class="post-body"><p>I am a very average programmer, but like to learn new things from others. We have lot of medium to learn something new, interesting and useful. As a programmer, i use <code>Google Search</code>, <code>Stack Overflow</code> and <code>Github</code> to get to know new things and the answers for my questions. But most of the time,
+when i see the answers, there are multiple questions and other solutions(Mostly Stupid) come out from my brain. Even though, i can reply or add comment to questions in <code>Stack Overflow</code> and <code>Github issues</code>, they are not very humanized. I mean, it is not like interacting with real human and have continuous conversation in a moment when we have lot of things going around mind, not like getting reply after two hours and sometimes two days.</p>
+<a name="what-is-irc" class="anchor" href="#what-is-irc"><h3>What is IRC</h3>
+</a><p>IRC is the greatest medium to have humanized conversation where you can clarify your doubts, learn new things. In the top of all, it is a place to meet amazing talented personalities.</p>
+<p>From Wikipedia</p>
+<pre><code><div class="highlight"><pre><span class="nx">Internet</span> <span class="nx">Relay</span> <span class="nx">Chat</span> <span class="p">(</span><span class="nx">IRC</span><span class="p">)</span> <span class="nx">is</span> <span class="nx">a</span> <span class="nx">protocol</span> <span class="k">for</span> <span class="nx">live</span> <span class="nx">interactive</span> <span class="nx">Internet</span> <span class="nx">text</span> <span class="nx">messaging</span> <span class="p">(</span><span class="nx">chat</span><span class="p">)</span> <span class="nx">or</span> <span class="nx">synchronous</span> <span class="nx">conferencing</span><span class="p">.</span> <span class="nx">It</span> <span class="nx">is</span> <span class="nx">mainly</span> <span class="nx">designed</span> <span class="k">for</span> <span class="nx">group</span> <span class="nx">communication</span> <span class="k">in</span> <span class="nx">discussion</span> <span class="nx">forums</span><span class="p">,</span> <span class="nx">called</span> <span class="nx">channels</span><span class="p">,</span> <span class="nx">but</span> <span class="nx">also</span> <span class="nx">allows</span> <span class="nx">one</span><span class="o">-</span><span class="nx">to</span><span class="o">-</span><span class="nx">one</span> <span class="nx">communication</span> <span class="nx">via</span> <span class="kr">private</span> <span class="nx">message</span> <span class="nx">as</span> <span class="nx">well</span> <span class="nx">as</span> <span class="nx">chat</span> <span class="nx">and</span> <span class="nx">data</span> <span class="nx">transfer</span><span class="p">,</span> <span class="nx">including</span> <span class="nx">file</span> <span class="nx">sharing</span><span class="p">.</span>
+</pre></div>
+</code></pre>
+<p>IRC consists of channels. Channel is something like a chat room, but it will be dedicated for some technology or language, ex: #html, #css, #javascript, #go-lang. You can go to any channel and ask questions or just listen and learn from other&#39;s discussion.</p>
+<p>I am using <a href="http://webchat.freenode.net/">Freenode</a> which is a widely used open IRC server.
+Lets see how you can get started with IRC on <code>Freenode</code>.</p>
+<a name="register-your-nickname" class="anchor" href="#register-your-nickname"><h3>Register your nickname</h3>
+</a><p>In IRC, you will be addressed by your nickname. It is good to register your nick name.
+But it is not mandatory to register your nick name to access IRC channel.</p>
+<ol>
+<li>Visit <a href="http://webchat.freenode.net/"><a href="http://webchat.freenode.net/">http://webchat.freenode.net/</a></a></li>
+<li>Enter your nick name</li>
+<li>Enter <code>Captcha</code> and <code>Connect</code></li>
+</ol>
+<p>To register your nick name,</p>
+<pre><code><div class="highlight"><pre><span class="err">/msg NickServ REGISTER password youremail@example.com</span>
+</pre></div>
+</code></pre>
+<p>Once you registered, email is sent to you and just copy and paste the VERIFY command in IRC.
+Now you own the nick name, no one can use the same nick name. Even if someone try to use, it will
+be suffixed by underscore(_)</p>
+<a name="login-with-your-nick-name" class="anchor" href="#login-with-your-nick-name"><h3>Login with your nick name</h3>
+</a><p>Whenever you enter IRC, you have to identify your nickname with password by</p>
+<pre><code><div class="highlight"><pre><span class="err">/msg nickserv identify yourpassword</span>
+</pre></div>
+</code></pre>
+<a name="join-channel" class="anchor" href="#join-channel"><h3>Join Channel</h3>
+</a><p>If you want to go to particular channel, then type <code>/join #channelname</code>.
+Lets say if you want to go to <code>c</code> language channel, type <code>/join #c</code></p>
+<p>Incase you do not know the channel name, then go and search <a href="http://irc.netsplit.de/channels/">here</a></p>
+<p>Once you join the channel, you can ask questions or listen others.</p>
+<a name="other-useful-commands" class="anchor" href="#other-useful-commands"><h3>Other useful commands</h3>
+</a><pre><code><div class="highlight"><pre><span class="err">/msg &lt;name&gt;         - Sends a short message to a person privately.</span>
+<span class="o">/</span><span class="nx">whois</span> <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span>       <span class="o">-</span> <span class="nx">Get</span> <span class="nx">a</span> <span class="kr">short</span> <span class="nx">description</span> <span class="nx">of</span> <span class="nx">who</span> <span class="nx">a</span> <span class="nx">person</span> <span class="nx">is</span><span class="p">.</span>
+<span class="o">/</span><span class="nx">nick</span>  <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span>       <span class="o">-</span> <span class="nx">Change</span> <span class="nx">your</span> <span class="nx">nick</span> <span class="nx">name</span>
+<span class="o">/</span><span class="nx">me</span>                 <span class="o">-</span> <span class="nx">Sends</span> <span class="nx">an</span> <span class="nx">action</span> <span class="nx">to</span> <span class="nx">the</span> <span class="nx">channel</span><span class="p">.</span>
+<span class="o">/</span><span class="nx">away</span> <span class="o">&lt;</span><span class="nx">message</span><span class="o">&gt;</span>     <span class="o">-</span> <span class="nx">Sets</span> <span class="nx">an</span> <span class="nx">away</span> <span class="nx">message</span><span class="p">.</span>
+<span class="o">/</span><span class="nx">quit</span> <span class="o">&lt;</span><span class="nx">last</span> <span class="nx">words</span><span class="o">&gt;</span>  <span class="o">-</span> <span class="nx">Quits</span> <span class="nx">and</span> <span class="nx">allows</span> <span class="nx">you</span> <span class="nx">a</span> <span class="kr">final</span> <span class="nx">message</span> <span class="nx">before</span> <span class="nx">quitting</span><span class="p">.</span>
+<span class="o">/</span><span class="nx">clear</span>              <span class="o">-</span> <span class="nx">Clears</span> <span class="nx">a</span> <span class="nx">channel</span><span class="s1">&#39;s text.</span>
+<span class="s1">/clear all          - Clears a channel&#39;</span><span class="nx">s</span> <span class="nx">text</span><span class="p">.</span>
+</pre></div>
+</code></pre>
+<p>When you use IRC, you must follow some etiquette which is defined precisely by
+<a href="https://workaround.org/getting-help-on-irc">Christoph Haas</a>.</p>
+<p>Regarding IRC client, apart from web, there are other IRC client application available.
+You can checkout <a href="http://en.wikipedia.org/wiki/Comparison_of_Internet_Relay_Chat_clients">here</a></p>
+<p>IRC taught me a lot. I hope, you will feel the same after using it.
+Have a nice day.</p>
+</div>
+      <h4><a href="/blog/posts/Every-Programmer-should-use-IRC.html#comments">View comments</a></h4>
       <div class="post-head group"><a href="/blog/posts/Javascript-snippets-save-your-time.html">
           <h1 class="post-title">Javascript snippets save your time</h1></a>
         <h2 class="post-date">2013 &#183; 10 &#183; 6</h2>
@@ -181,146 +240,6 @@ To start in a specific port</p>
 <p>Have a nice day.</p>
 </div>
       <h4><a href="/blog/posts/Tips-and-Tricks-of-OSX-makes-you-smile.html#comments">View comments</a></h4>
-      <div class="post-head group"><a href="/blog/posts/What-I-learned-from-other-s-shell-scripts.html">
-          <h1 class="post-title">What I learned from other's shell scripts</h1></a>
-        <h2 class="post-date">2013 &#183; 8 &#183; 14</h2>
-      </div>
-      <div class="post-body"><p>I am big fan of shell scripts and so love to learn interesting stuff from other&#39;s shell scripts. Recently i came across the <a href="https://github.com/authy/authy-ssh">authy-ssh</a> scripts which eases two-factor authentication for ssh servers. When i walk through scripts, i learned lot of cool things that i am going to share it with you.</p>
-<a name="colors-your-echo" class="anchor" href="#colors-your-echo"><h3>Colors your echo</h3>
-</a><p>Lots of time, you want to color your echo output like green for success, red for failure, yellow for warning.</p>
-<pre><code class="lang-bash"><div class="highlight"><pre><span class="nv">NORMAL</span><span class="o">=</span><span class="k">$(</span>tput sgr0<span class="k">)</span>
-<span class="nv">GREEN</span><span class="o">=</span><span class="k">$(</span>tput setaf 2; tput bold<span class="k">)</span>
-<span class="nv">YELLOW</span><span class="o">=</span><span class="k">$(</span>tput setaf 3<span class="k">)</span>
-<span class="nv">RED</span><span class="o">=</span><span class="k">$(</span>tput setaf 1<span class="k">)</span>
-
-<span class="k">function </span>red<span class="o">()</span> <span class="o">{</span>
-    <span class="nb">echo</span> -e <span class="s2">&quot;$RED$*$NORMAL&quot;</span>
-<span class="o">}</span>
-
-<span class="k">function </span>green<span class="o">()</span> <span class="o">{</span>
-    <span class="nb">echo</span> -e <span class="s2">&quot;$GREEN$*$NORMAL&quot;</span>
-<span class="o">}</span>
-
-<span class="k">function </span>yellow<span class="o">()</span> <span class="o">{</span>
-    <span class="nb">echo</span> -e <span class="s2">&quot;$YELLOW$*$NORMAL&quot;</span>
-<span class="o">}</span>
-
-<span class="c"># To print success</span>
-green <span class="s2">&quot;Task has been completed&quot;</span>
-
-<span class="c"># To print error</span>
-red <span class="s2">&quot;The configuration file does not exist&quot;</span>
-
-<span class="c"># To print warning</span>
-yellow <span class="s2">&quot;You have to use higher version.&quot;</span>
-</pre></div>
-</code></pre>
-<p>It uses <code>tput</code> to set a colors and place the text and reset the color to normal.
-To know more about <code>tput</code>, refer <a href="http://linux.101hacks.com/ps1-examples/prompt-color-using-tput/">prompt-color-using-tput</a></p>
-<a name="to-print-debug-information" class="anchor" href="#to-print-debug-information"><h3>To print debug information</h3>
-</a><p>Print debug information only if debug flag is set.</p>
-<pre><code class="lang-bash"><div class="highlight"><pre><span class="k">function </span>debug<span class="o">()</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">[[</span> <span class="nv">$DEBUG</span> <span class="o">]]</span>
-    <span class="k">then</span>
-<span class="k">        </span><span class="nb">echo</span> <span class="s2">&quot;&gt;&gt;&gt; $*&quot;</span>
-    <span class="k">fi</span>
-<span class="o">}</span>
-
-<span class="c"># For any debug message</span>
-debug <span class="s2">&quot;Trying to find config file&quot;</span>
-</pre></div>
-</code></pre>
-<p>Some Cool geeks give one line debug function</p>
-<pre><code class="lang-bash"><div class="highlight"><pre><span class="c"># From cool geeks at hacker news</span>
-<span class="k">function </span>debug<span class="o">()</span> <span class="o">{</span> <span class="o">((</span>DEBUG<span class="o">))</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&quot;&gt;&gt;&gt; $*&quot;</span>; <span class="o">}</span>
-<span class="k">function </span>debug<span class="o">()</span> <span class="o">{</span> <span class="o">[</span> <span class="s2">&quot;$DEBUG&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&quot;&gt;&gt;&gt; $*&quot;</span>; <span class="o">}</span>
-</pre></div>
-</code></pre>
-<a name="to-check-specific-executable-exists-or-not" class="anchor" href="#to-check-specific-executable-exists-or-not"><h3>To check specific executable exists or not</h3>
-</a><pre><code><div class="highlight"><pre><span class="nx">OK</span><span class="o">=</span><span class="mi">0</span>
-<span class="nx">FAIL</span><span class="o">=</span><span class="mi">1</span>
-
-<span class="kd">function</span> <span class="nx">require_curl</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">which</span> <span class="nx">curl</span> <span class="o">&amp;&gt;</span><span class="err">/dev/null</span>
-    <span class="k">if</span> <span class="p">[</span> <span class="nx">$</span><span class="o">?</span> <span class="o">-</span><span class="nx">eq</span> <span class="mi">0</span> <span class="p">]</span>
-    <span class="nx">then</span>
-      <span class="k">return</span> <span class="nx">$OK</span>
-    <span class="nx">fi</span>
-
-    <span class="k">return</span> <span class="nx">$FAIL</span>
-<span class="p">}</span>
-</pre></div>
-</code></pre>
-<p>It uses <code>which</code> command to find the path of <code>curl</code> executable. If it succeeds, then the executable exists, Otherwise not. The <code>&amp;&gt;/dev/null</code> puts both output stream and error stream to <code>/dev/null</code> (which means nothing printed on console).</p>
-<p>Some Cool geeks suggest me that we can directly returns the <code>which</code> return code</p>
-<pre><code class="lang-bash"><div class="highlight"><pre><span class="c"># From cool geeks at hacker news</span>
-<span class="k">function </span>require_curl<span class="o">()</span> <span class="o">{</span> which <span class="s2">&quot;curl&quot;</span> &amp;&gt;/dev/null; <span class="o">}</span>
-<span class="k">function </span>require_curl<span class="o">()</span> <span class="o">{</span> which -s <span class="s2">&quot;curl&quot;</span>; <span class="o">}</span>
-</pre></div>
-</code></pre>
-<a name="to-print-usage-of-scripts" class="anchor" href="#to-print-usage-of-scripts"><h3>To print usage of scripts</h3>
-</a><p>When i start writing shell scripts, i used echo commands to print the usage of the scripts. The echo commands becomes messy when we have large text for usage.
-Then i found <code>cat</code> command used to print usage.</p>
-<pre><code><div class="highlight"><pre><span class="nx">cat</span> <span class="o">&lt;&lt;</span> <span class="nx">EOF</span>
-
-<span class="nx">Usage</span><span class="o">:</span> <span class="nx">myscript</span> <span class="o">&lt;</span><span class="nx">command</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="nx">arguments</span><span class="o">&gt;</span>
-
-<span class="nx">VERSION</span><span class="o">:</span> <span class="mf">1.0</span>
-
-<span class="nx">Available</span> <span class="nx">Commands</span>
-
-    <span class="nx">install</span> <span class="o">-</span> <span class="nx">Install</span> <span class="kr">package</span>
-
-    <span class="nx">uninstall</span> <span class="o">-</span> <span class="nx">Uninstall</span> <span class="kr">package</span>
-
-    <span class="nx">update</span> <span class="o">-</span> <span class="nx">Update</span> <span class="kr">package</span>
-
-    <span class="nx">list</span> <span class="o">-</span> <span class="nx">List</span> <span class="nx">packages</span>
-
-<span class="nx">EOF</span>
-</pre></div>
-</code></pre>
-<p>The <code>&lt;&lt;</code> is called as <a href="http://www.tldp.org/LDP/abs/html/here-docs.html">here document</a>. It takes string between two <em>EOF</em>.</p>
-<a name="user-configured-value-vs-default-value" class="anchor" href="#user-configured-value-vs-default-value"><h3>User configured value vs Default value</h3>
-</a><p>Sometime, we want to use default value if user does not set the value.</p>
-<pre><code class="lang-bash"><div class="highlight"><pre><span class="nv">URL</span><span class="o">=</span><span class="k">${</span><span class="nv">URL</span><span class="k">:-</span><span class="nv">http</span><span class="p">://localhost:</span><span class="nv">8080</span><span class="k">}</span>
-</pre></div>
-</code></pre>
-<p>It checks for URL environment variable. If not exists, then it is assigned to <code>localhost</code>.</p>
-<a name="to-check-the-length-of-the-string" class="anchor" href="#to-check-the-length-of-the-string"><h3>To check the length of the string</h3>
-</a><pre><code class="lang-bash"><div class="highlight"><pre><span class="k">if</span> <span class="o">[</span> <span class="k">${#</span><span class="nv">authy_api_key</span><span class="k">}</span> !<span class="o">=</span> 32 <span class="o">]</span>
-<span class="k">then</span>
-<span class="k">  </span>red <span class="s2">&quot;you have entered a wrong API key&quot;</span>
-  <span class="k">return</span> <span class="nv">$FAIL</span>
-<span class="k">fi</span>
-</pre></div>
-</code></pre>
-<p>The <code>${#VARIABLE_NAME}</code> gives the length of the value of the variable.</p>
-<a name="to-read-inputs-with-timeout" class="anchor" href="#to-read-inputs-with-timeout"><h3>To read inputs with timeout</h3>
-</a><pre><code class="lang-bash"><div class="highlight"><pre><span class="nv">READ_TIMEOUT</span><span class="o">=</span>60
-<span class="nb">read</span> -t <span class="s2">&quot;$READ_TIMEOUT&quot;</span> input
-
-<span class="c"># if you do not want quotes, then escape it</span>
-<span class="nv">input</span><span class="o">=</span><span class="k">$(</span>sed <span class="s2">&quot;s/[;\`\&quot;\$\&#39; ]//g&quot;</span> <span class="o">&lt;&lt;&lt;</span> <span class="nv">$input</span><span class="k">)</span>
-
-<span class="c"># For reading number, then you can escape other characters</span>
-<span class="nv">input</span><span class="o">=</span><span class="k">$(</span>sed <span class="s1">&#39;s/[^0-9]*//g&#39;</span> <span class="o">&lt;&lt;&lt;</span> <span class="nv">$input</span><span class="k">)</span>
-</pre></div>
-</code></pre>
-<a name="to-get-directory-name-and-file-name" class="anchor" href="#to-get-directory-name-and-file-name"><h3>To get directory name and file name</h3>
-</a><pre><code class="lang-bash"><div class="highlight"><pre><span class="c"># To find base directory</span>
-<span class="nv">APP_ROOT</span><span class="o">=</span><span class="sb">`</span>dirname <span class="s2">&quot;$0&quot;</span><span class="sb">`</span>
-
-<span class="c"># To find the file name</span>
-<span class="nv">filename</span><span class="o">=</span><span class="sb">`</span>basename <span class="s2">&quot;$filepath&quot;</span><span class="sb">`</span>
-
-<span class="c"># To find the file name without extension</span>
-<span class="nv">filename</span><span class="o">=</span><span class="sb">`</span>basename <span class="s2">&quot;$filepath&quot;</span> .html<span class="sb">`</span>
-</pre></div>
-</code></pre>
-<p>Happy Scripting and Have a nice day.</p>
-</div>
-      <h4><a href="/blog/posts/What-I-learned-from-other-s-shell-scripts.html#comments">View comments</a></h4>
       <ul class="pagination group">
         <li><a href="/">1</a>
         </li>

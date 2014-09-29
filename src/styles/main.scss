@@ -32,11 +32,22 @@ nav,
       font-size: 2em;
       font-weight: bold;
     }
-
-    .field {
+    table {
       margin-left: 3em;
+    }
+    td {
       font-size: 1.22em;
       color: #2980b9;
+      height: 50px;
+    }
+    .field-value {
+      padding-left: 20px;
+      color: #d50164;
+      font-size: 1.33em;
+    }
+    .field-twitter {
+      text-decoration: none;
+      color: #d50164;
     }
   }
 }
