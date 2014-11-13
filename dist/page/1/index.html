@@ -18,6 +18,70 @@
       <div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div>
     </nav>
     <div class="content">
+      <div class="post-head group"><a href="/blog/posts/Fix-Shellshock-Bash-Vulnerability-in-OSX-Bash.html">
+          <h1 class="post-title">Fix Shellshock Bash Vulnerability in OSX Bash</h1></a>
+        <h2 class="post-date">2014 &#183; 9 &#183; 27</h2>
+      </div>
+      <div class="post-body"><p>GNU Bash vulnerability, referred to as <strong>Shellshock</strong> or the <strong>Bash Bug</strong>, was found on Sep 24, 2014.
+The <strong>Shellshock</strong> vulnerability is very widespread and even more so than the OpenSSL Heartbleed bug
+ So it is highly recommended that affected systems are properly updated to fix or mitigate the vulnerability as soon as possible.</p>
+<a name="what-is-shellshock" class="anchor" href="#what-is-shellshock"><h3>What is Shellshock</h3>
+</a><pre><code><div class="highlight"><pre><span class="nx">GNU</span> <span class="nx">Bash</span> <span class="nx">through</span> <span class="mf">4.3</span> <span class="nx">processes</span> <span class="nx">trailing</span> <span class="nx">strings</span> <span class="nx">after</span> <span class="kd">function</span> <span class="nx">definitions</span> <span class="k">in</span> <span class="nx">the</span> <span class="nx">values</span> <span class="nx">of</span> <span class="nx">environment</span> <span class="nx">variables</span><span class="p">,</span> <span class="nx">which</span> <span class="nx">allows</span> <span class="nx">remote</span> <span class="nx">attackers</span> <span class="nx">to</span> <span class="nx">execute</span> <span class="nx">arbitrary</span> <span class="nx">code</span> <span class="nx">via</span> <span class="nx">a</span> <span class="nx">crafted</span> <span class="nx">environment</span><span class="p">,</span> <span class="nx">as</span> <span class="nx">demonstrated</span> <span class="nx">by</span> <span class="nx">vectors</span> <span class="nx">involving</span> <span class="nx">the</span> <span class="nx">ForceCommand</span> <span class="nx">feature</span> <span class="k">in</span> <span class="nx">OpenSSH</span> <span class="nx">sshd</span><span class="p">,</span> <span class="nx">the</span> <span class="nx">mod_cgi</span> <span class="nx">and</span> <span class="nx">mod_cgid</span> <span class="nx">modules</span> <span class="k">in</span> <span class="nx">the</span> <span class="nx">Apache</span> <span class="nx">HTTP</span> <span class="nx">Server</span><span class="p">,</span> <span class="nx">scripts</span> <span class="nx">executed</span> <span class="nx">by</span> <span class="nx">unspecified</span> <span class="nx">DHCP</span> <span class="nx">clients</span><span class="p">,</span> <span class="nx">and</span> <span class="nx">other</span> <span class="nx">situations</span> <span class="k">in</span> <span class="nx">which</span> <span class="nx">setting</span> <span class="nx">the</span> <span class="nx">environment</span> <span class="nx">occurs</span> <span class="nx">across</span> <span class="nx">a</span> <span class="nx">privilege</span> <span class="nx">boundary</span> <span class="nx">from</span> <span class="nx">Bash</span> <span class="nx">execution</span><span class="p">.</span>
+</pre></div>
+</code></pre>
+<p>To know more about <strong>Shellshock</strong>, read an amazing <a href="http://www.troyhunt.com/2014/09/everything-you-need-to-know-about.html">article from Troy Hunt</a></p>
+<a name="check-system-vulnerability" class="anchor" href="#check-system-vulnerability"><h3>Check System Vulnerability</h3>
+</a><p>You can check the system for Shellshock vulnerability by running following command in bash</p>
+<pre><code><div class="highlight"><pre><span class="nx">env</span> <span class="nx">Y</span><span class="o">=</span><span class="s1">&#39;() { :;}; echo I am vulnerable!&#39;</span> <span class="nx">bash</span> <span class="o">-</span><span class="nx">c</span> <span class="s2">&quot;echo This is Bash&quot;</span>
+</pre></div>
+</code></pre>
+<p>If your version of Bash is vulnerable, then you will see following output</p>
+<pre><code><div class="highlight"><pre><span class="nx">I</span> <span class="nx">am</span> <span class="nx">vulnerable</span>
+<span class="nx">This</span> <span class="nx">is</span> <span class="nx">Bash</span>
+</pre></div>
+</code></pre>
+<p>Instead of <strong>echo I am vulnerable!</strong> portion, attacker can run any command;
+arbitrary code following a function definition within an environment variable assignment.
+If your system don&#39;t have Shellshock vulnerability, then you will see following output</p>
+<pre><code><div class="highlight"><pre><span class="nx">bash</span><span class="o">:</span> <span class="nx">warning</span><span class="o">:</span> <span class="nx">Y</span><span class="o">:</span> <span class="nx">ignoring</span> <span class="kd">function</span> <span class="nx">definition</span> <span class="nx">attempt</span>
+<span class="nx">bash</span><span class="o">:</span> <span class="nx">error</span> <span class="nx">importing</span> <span class="kd">function</span> <span class="nx">definition</span> <span class="k">for</span> <span class="err">`</span><span class="nx">Y</span><span class="err">&#39;</span>
+<span class="nx">This</span> <span class="nx">is</span> <span class="nx">Bash</span>
+</pre></div>
+</code></pre>
+<a name="how-to-fix-in-mac-osx" class="anchor" href="#how-to-fix-in-mac-osx"><h3>How to fix in Mac OSX</h3>
+</a><p>If your bash is vulnerable, then  you can install latest version of bash as follows, provided that you have XCode installed,</p>
+<pre><code><div class="highlight"><pre><span class="nx">$</span> <span class="nx">mkdir</span> <span class="nx">bash</span><span class="o">-</span><span class="nx">fix</span>
+<span class="nx">$</span> <span class="nx">cd</span> <span class="nx">bash</span><span class="o">-</span><span class="nx">fix</span>
+<span class="nx">$</span> <span class="nx">curl</span> <span class="nx">https</span><span class="o">:</span><span class="c1">//opensource.apple.com/tarballs/bash/bash-92.tar.gz | tar zxf -</span>
+<span class="nx">$</span> <span class="nx">cd</span> <span class="nx">bash</span><span class="o">-</span><span class="mi">92</span><span class="o">/</span><span class="nx">bash</span><span class="o">-</span><span class="mf">3.2</span>
+<span class="nx">$</span> <span class="nx">curl</span> <span class="nx">https</span><span class="o">:</span><span class="c1">//ftp.gnu.org/pub/gnu/bash/bash-3.2-patches/bash32-052 | patch -p0</span>
+<span class="nx">$</span> <span class="nx">curl</span> <span class="nx">https</span><span class="o">:</span><span class="c1">//ftp.gnu.org/pub/gnu/bash/bash-3.2-patches/bash32-053 | patch -p0</span>
+<span class="nx">$</span> <span class="nx">cd</span> <span class="p">..</span>
+<span class="nx">$</span> <span class="nx">sudo</span> <span class="nx">xcodebuild</span>
+<span class="nx">$</span> <span class="nx">sudo</span> <span class="nx">cp</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">bash</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">bash</span><span class="p">.</span><span class="nx">old</span>
+<span class="nx">$</span> <span class="nx">sudo</span> <span class="nx">cp</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">sh</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">sh</span><span class="p">.</span><span class="nx">old</span>
+<span class="nx">$</span> <span class="nx">build</span><span class="o">/</span><span class="nx">Release</span><span class="o">/</span><span class="nx">bash</span> <span class="o">--</span><span class="nx">version</span> <span class="err">#</span> <span class="nx">GNU</span> <span class="nx">bash</span><span class="p">,</span> <span class="nx">version</span> <span class="mf">3.2</span><span class="p">.</span><span class="mi">53</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="nx">release</span>
+<span class="nx">$</span> <span class="nx">build</span><span class="o">/</span><span class="nx">Release</span><span class="o">/</span><span class="nx">sh</span> <span class="o">--</span><span class="nx">version</span>   <span class="err">#</span> <span class="nx">GNU</span> <span class="nx">bash</span><span class="p">,</span> <span class="nx">version</span> <span class="mf">3.2</span><span class="p">.</span><span class="mi">53</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="nx">release</span>
+<span class="nx">$</span> <span class="nx">sudo</span> <span class="nx">cp</span> <span class="nx">build</span><span class="o">/</span><span class="nx">Release</span><span class="o">/</span><span class="nx">bash</span> <span class="o">/</span><span class="nx">bin</span>
+<span class="nx">$</span> <span class="nx">sudo</span> <span class="nx">cp</span> <span class="nx">build</span><span class="o">/</span><span class="nx">Release</span><span class="o">/</span><span class="nx">sh</span> <span class="o">/</span><span class="nx">bin</span>
+</pre></div>
+</code></pre>
+<p>Once you installed, check your bash version(<code>bash --version</code>), it should be
+<code>GNU bash, version 3.2.53(1)-release</code></p>
+<p>For security reason, you have to remove the executable permission from older bash</p>
+<pre><code><div class="highlight"><pre><span class="nx">$</span> <span class="nx">sudo</span> <span class="nx">chmod</span> <span class="nx">a</span><span class="o">-</span><span class="nx">x</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">bash</span><span class="p">.</span><span class="nx">old</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">sh</span><span class="p">.</span><span class="nx">old</span>
+</pre></div>
+</code></pre>
+<p>That&#39;s it. Keep in mind that this fix is temporary.
+We have to wait for real fix until apple releases it.</p>
+<p>If you using Linux distribution, please read <a href="https://www.digitalocean.com/community/tutorials/how-to-protect-your-server-against-the-shellshock-bash-vulnerability">Digital Ocean blog on Shellshock</a></p>
+<a name="kudos" class="anchor" href="#kudos"><h3>Kudos</h3>
+</a><ul>
+<li><a href="http://apple.stackexchange.com/questions/146849/how-do-i-recompile-bash-to-avoid-shellshock-the-remote-exploit-cve-2014-6271-an">AlBlue at stackexchange</a></li>
+<li><a href="http://www.troyhunt.com/">Troy Hunt</a></li>
+</ul>
+</div>
+      <h4><a href="/blog/posts/Fix-Shellshock-Bash-Vulnerability-in-OSX-Bash.html#comments">View comments</a></h4>
       <div class="post-head group"><a href="/blog/posts/Download-a-file-without-server-request.html">
           <h1 class="post-title">Download a file without server request</h1></a>
         <h2 class="post-date">2014 &#183; 8 &#183; 1</h2>
@@ -206,48 +270,6 @@ hosting services. Because it runs on Google infrastructure.</p>
 <p>Happy static hosting and Have a nice day.</p>
 </div>
       <h4><a href="/blog/posts/Free-Static-Page-Hosting-on-Google-App-Engine-in-a-5-minutes.html#comments">View comments</a></h4>
-      <div class="post-head group"><a href="/blog/posts/Things-you-should-consider-for-MongoDB-in-production.html">
-          <h1 class="post-title">Things you should consider for MongoDB in production</h1></a>
-        <h2 class="post-date">2013 &#183; 11 &#183; 4</h2>
-      </div>
-      <div class="post-body"><p>We are using MongoDB for few of our products. We like to share some of the
-recommendations for MongoDB in production.</p>
-<a name="handle-connection-errors" class="anchor" href="#handle-connection-errors"><h3>Handle Connection Errors</h3>
-</a><p>Few weeks before, we faced one weird problem in our NodeJS  application.
-Our customer can view our site and not able to login into the application.
-We tried to figure out the issue and found that MongoDB database connection is
-broken during mid night. After that, our application is not crashed,
-but it is failed to connect MongoDB. We assume that it should auto reconnect if it is failed.
-But it does not happen. Finally we found that we did not handle error of MongoDB
-connection in our code.</p>
-<p>You must handle error of MongoDB connection in you code. It can be even simple console log.</p>
-<pre><code><div class="highlight"><pre> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">connection</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">console</span><span class="p">,</span> <span class="s1">&#39;MongoDB connection error:&#39;</span><span class="p">));</span>
-</pre></div>
-</code></pre>
-<p>If you are using NodeJS, you must handle <code>error</code> and <code>exception</code> in all places.
-It is a best practice.</p>
-<a name="setting-timeout" class="anchor" href="#setting-timeout"><h3>Setting Timeout</h3>
-</a><p>You have to properly set your timeouts. The driver&#39;s default timeouts are very aggressive ranges anywhere from 1 second (e.g. the Node.JS driver in some cases) to 30 seconds (e.g  the Ruby driver), so you really need to think about what the optimal setting is for your use case.</p>
-<p>For connections made through a Platform-as-a-Serivce (PaaS) such as Heroku, you might consider an even higher timeout (e.g. 30 seconds) since your application is likely running in a container that can be “idled” or “passivated” during periods of low activity</p>
-<p>If you use Mongoose and NodeJS, then you can set connection timeout by</p>
-<pre><code><div class="highlight"><pre><span class="c1">// Database connect options</span>
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">replset</span><span class="o">:</span> <span class="p">{</span> <span class="nx">socketOptions</span><span class="o">:</span> <span class="p">{</span> <span class="nx">connectTimeoutMS</span> <span class="o">:</span> <span class="nx">conf</span><span class="p">.</span><span class="nx">dbTimeout</span> <span class="p">}}};</span>
-
-<span class="c1">// Establish Database connection</span>
-<span class="kd">var</span> <span class="nx">conn</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">conf</span><span class="p">.</span><span class="nx">dbURL</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
-</pre></div>
-</code></pre>
-<p><a href="https://mongolab.com/">MongoLab</a> has written very good article on <a href="http://blog.mongolab.com/2013/10/do-you-want-a-timeout/">MongoDB Timeout</a></p>
-<a name="connection-polling" class="anchor" href="#connection-polling"><h3>Connection Polling</h3>
-</a><p>You should consider using connection pooling. It will make for a much faster and
-more stable application. You won&#39;t spend the time on each request to create connections (can be noticeable to the end user) and you aren&#39;t subject to connect errors either.</p>
-<p>The <code>mongoose</code> package for NodeJS handles connection pooling by default. If you use your own
-MongoDB driver, make sure you have implemented connection pooling.</p>
-<p>Thanks to <a href="https://mongolab.com/">MongoLab</a> for sharing amazing tips of MongoDB with us.
-The support of MongoLab is awesome and respond for questions very quickly. I highly recommending for MongoDB database.</p>
-<p>Have a nice day.</p>
-</div>
-      <h4><a href="/blog/posts/Things-you-should-consider-for-MongoDB-in-production.html#comments">View comments</a></h4>
       <ul class="pagination group">
         <li><a href="/">1</a>
         </li>
