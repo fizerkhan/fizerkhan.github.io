@@ -18,6 +18,146 @@
       <div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div>
     </nav>
     <div class="content">
+      <div class="post-head group"><a href="/blog/posts/What-I-learned-from-other-s-shell-scripts.html">
+          <h1 class="post-title">What I learned from other's shell scripts</h1></a>
+        <h2 class="post-date">2013 &#183; 8 &#183; 14</h2>
+      </div>
+      <div class="post-body"><p>I am big fan of shell scripts and so love to learn interesting stuff from other&#39;s shell scripts. Recently i came across the <a href="https://github.com/authy/authy-ssh">authy-ssh</a> scripts which eases two-factor authentication for ssh servers. When i walk through scripts, i learned lot of cool things that i am going to share it with you.</p>
+<a name="colors-your-echo" class="anchor" href="#colors-your-echo"><h3>Colors your echo</h3>
+</a><p>Lots of time, you want to color your echo output like green for success, red for failure, yellow for warning.</p>
+<pre><code class="lang-bash"><div class="highlight"><pre><span class="nv">NORMAL</span><span class="o">=</span><span class="k">$(</span>tput sgr0<span class="k">)</span>
+<span class="nv">GREEN</span><span class="o">=</span><span class="k">$(</span>tput setaf 2; tput bold<span class="k">)</span>
+<span class="nv">YELLOW</span><span class="o">=</span><span class="k">$(</span>tput setaf 3<span class="k">)</span>
+<span class="nv">RED</span><span class="o">=</span><span class="k">$(</span>tput setaf 1<span class="k">)</span>
+
+<span class="k">function </span>red<span class="o">()</span> <span class="o">{</span>
+    <span class="nb">echo</span> -e <span class="s2">&quot;$RED$*$NORMAL&quot;</span>
+<span class="o">}</span>
+
+<span class="k">function </span>green<span class="o">()</span> <span class="o">{</span>
+    <span class="nb">echo</span> -e <span class="s2">&quot;$GREEN$*$NORMAL&quot;</span>
+<span class="o">}</span>
+
+<span class="k">function </span>yellow<span class="o">()</span> <span class="o">{</span>
+    <span class="nb">echo</span> -e <span class="s2">&quot;$YELLOW$*$NORMAL&quot;</span>
+<span class="o">}</span>
+
+<span class="c"># To print success</span>
+green <span class="s2">&quot;Task has been completed&quot;</span>
+
+<span class="c"># To print error</span>
+red <span class="s2">&quot;The configuration file does not exist&quot;</span>
+
+<span class="c"># To print warning</span>
+yellow <span class="s2">&quot;You have to use higher version.&quot;</span>
+</pre></div>
+</code></pre>
+<p>It uses <code>tput</code> to set a colors and place the text and reset the color to normal.
+To know more about <code>tput</code>, refer <a href="http://linux.101hacks.com/ps1-examples/prompt-color-using-tput/">prompt-color-using-tput</a></p>
+<a name="to-print-debug-information" class="anchor" href="#to-print-debug-information"><h3>To print debug information</h3>
+</a><p>Print debug information only if debug flag is set.</p>
+<pre><code class="lang-bash"><div class="highlight"><pre><span class="k">function </span>debug<span class="o">()</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">[[</span> <span class="nv">$DEBUG</span> <span class="o">]]</span>
+    <span class="k">then</span>
+<span class="k">        </span><span class="nb">echo</span> <span class="s2">&quot;&gt;&gt;&gt; $*&quot;</span>
+    <span class="k">fi</span>
+<span class="o">}</span>
+
+<span class="c"># For any debug message</span>
+debug <span class="s2">&quot;Trying to find config file&quot;</span>
+</pre></div>
+</code></pre>
+<p>Some Cool geeks give one line debug function</p>
+<pre><code class="lang-bash"><div class="highlight"><pre><span class="c"># From cool geeks at hacker news</span>
+<span class="k">function </span>debug<span class="o">()</span> <span class="o">{</span> <span class="o">((</span>DEBUG<span class="o">))</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&quot;&gt;&gt;&gt; $*&quot;</span>; <span class="o">}</span>
+<span class="k">function </span>debug<span class="o">()</span> <span class="o">{</span> <span class="o">[</span> <span class="s2">&quot;$DEBUG&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&quot;&gt;&gt;&gt; $*&quot;</span>; <span class="o">}</span>
+</pre></div>
+</code></pre>
+<a name="to-check-specific-executable-exists-or-not" class="anchor" href="#to-check-specific-executable-exists-or-not"><h3>To check specific executable exists or not</h3>
+</a><pre><code><div class="highlight"><pre><span class="nx">OK</span><span class="o">=</span><span class="mi">0</span>
+<span class="nx">FAIL</span><span class="o">=</span><span class="mi">1</span>
+
+<span class="kd">function</span> <span class="nx">require_curl</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">which</span> <span class="nx">curl</span> <span class="o">&amp;&gt;</span><span class="err">/dev/null</span>
+    <span class="k">if</span> <span class="p">[</span> <span class="nx">$</span><span class="o">?</span> <span class="o">-</span><span class="nx">eq</span> <span class="mi">0</span> <span class="p">]</span>
+    <span class="nx">then</span>
+      <span class="k">return</span> <span class="nx">$OK</span>
+    <span class="nx">fi</span>
+
+    <span class="k">return</span> <span class="nx">$FAIL</span>
+<span class="p">}</span>
+</pre></div>
+</code></pre>
+<p>It uses <code>which</code> command to find the path of <code>curl</code> executable. If it succeeds, then the executable exists, Otherwise not. The <code>&amp;&gt;/dev/null</code> puts both output stream and error stream to <code>/dev/null</code> (which means nothing printed on console).</p>
+<p>Some Cool geeks suggest me that we can directly returns the <code>which</code> return code</p>
+<pre><code class="lang-bash"><div class="highlight"><pre><span class="c"># From cool geeks at hacker news</span>
+<span class="k">function </span>require_curl<span class="o">()</span> <span class="o">{</span> which <span class="s2">&quot;curl&quot;</span> &amp;&gt;/dev/null; <span class="o">}</span>
+<span class="k">function </span>require_curl<span class="o">()</span> <span class="o">{</span> which -s <span class="s2">&quot;curl&quot;</span>; <span class="o">}</span>
+</pre></div>
+</code></pre>
+<a name="to-print-usage-of-scripts" class="anchor" href="#to-print-usage-of-scripts"><h3>To print usage of scripts</h3>
+</a><p>When i start writing shell scripts, i used echo commands to print the usage of the scripts. The echo commands becomes messy when we have large text for usage.
+Then i found <code>cat</code> command used to print usage.</p>
+<pre><code><div class="highlight"><pre><span class="nx">cat</span> <span class="o">&lt;&lt;</span> <span class="nx">EOF</span>
+
+<span class="nx">Usage</span><span class="o">:</span> <span class="nx">myscript</span> <span class="o">&lt;</span><span class="nx">command</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="nx">arguments</span><span class="o">&gt;</span>
+
+<span class="nx">VERSION</span><span class="o">:</span> <span class="mf">1.0</span>
+
+<span class="nx">Available</span> <span class="nx">Commands</span>
+
+    <span class="nx">install</span> <span class="o">-</span> <span class="nx">Install</span> <span class="kr">package</span>
+
+    <span class="nx">uninstall</span> <span class="o">-</span> <span class="nx">Uninstall</span> <span class="kr">package</span>
+
+    <span class="nx">update</span> <span class="o">-</span> <span class="nx">Update</span> <span class="kr">package</span>
+
+    <span class="nx">list</span> <span class="o">-</span> <span class="nx">List</span> <span class="nx">packages</span>
+
+<span class="nx">EOF</span>
+</pre></div>
+</code></pre>
+<p>The <code>&lt;&lt;</code> is called as <a href="http://www.tldp.org/LDP/abs/html/here-docs.html">here document</a>. It takes string between two <em>EOF</em>.</p>
+<a name="user-configured-value-vs-default-value" class="anchor" href="#user-configured-value-vs-default-value"><h3>User configured value vs Default value</h3>
+</a><p>Sometime, we want to use default value if user does not set the value.</p>
+<pre><code class="lang-bash"><div class="highlight"><pre><span class="nv">URL</span><span class="o">=</span><span class="k">${</span><span class="nv">URL</span><span class="k">:-</span><span class="nv">http</span><span class="p">://localhost:</span><span class="nv">8080</span><span class="k">}</span>
+</pre></div>
+</code></pre>
+<p>It checks for URL environment variable. If not exists, then it is assigned to <code>localhost</code>.</p>
+<a name="to-check-the-length-of-the-string" class="anchor" href="#to-check-the-length-of-the-string"><h3>To check the length of the string</h3>
+</a><pre><code class="lang-bash"><div class="highlight"><pre><span class="k">if</span> <span class="o">[</span> <span class="k">${#</span><span class="nv">authy_api_key</span><span class="k">}</span> !<span class="o">=</span> 32 <span class="o">]</span>
+<span class="k">then</span>
+<span class="k">  </span>red <span class="s2">&quot;you have entered a wrong API key&quot;</span>
+  <span class="k">return</span> <span class="nv">$FAIL</span>
+<span class="k">fi</span>
+</pre></div>
+</code></pre>
+<p>The <code>${#VARIABLE_NAME}</code> gives the length of the value of the variable.</p>
+<a name="to-read-inputs-with-timeout" class="anchor" href="#to-read-inputs-with-timeout"><h3>To read inputs with timeout</h3>
+</a><pre><code class="lang-bash"><div class="highlight"><pre><span class="nv">READ_TIMEOUT</span><span class="o">=</span>60
+<span class="nb">read</span> -t <span class="s2">&quot;$READ_TIMEOUT&quot;</span> input
+
+<span class="c"># if you do not want quotes, then escape it</span>
+<span class="nv">input</span><span class="o">=</span><span class="k">$(</span>sed <span class="s2">&quot;s/[;\`\&quot;\$\&#39; ]//g&quot;</span> <span class="o">&lt;&lt;&lt;</span> <span class="nv">$input</span><span class="k">)</span>
+
+<span class="c"># For reading number, then you can escape other characters</span>
+<span class="nv">input</span><span class="o">=</span><span class="k">$(</span>sed <span class="s1">&#39;s/[^0-9]*//g&#39;</span> <span class="o">&lt;&lt;&lt;</span> <span class="nv">$input</span><span class="k">)</span>
+</pre></div>
+</code></pre>
+<a name="to-get-directory-name-and-file-name" class="anchor" href="#to-get-directory-name-and-file-name"><h3>To get directory name and file name</h3>
+</a><pre><code class="lang-bash"><div class="highlight"><pre><span class="c"># To find base directory</span>
+<span class="nv">APP_ROOT</span><span class="o">=</span><span class="sb">`</span>dirname <span class="s2">&quot;$0&quot;</span><span class="sb">`</span>
+
+<span class="c"># To find the file name</span>
+<span class="nv">filename</span><span class="o">=</span><span class="sb">`</span>basename <span class="s2">&quot;$filepath&quot;</span><span class="sb">`</span>
+
+<span class="c"># To find the file name without extension</span>
+<span class="nv">filename</span><span class="o">=</span><span class="sb">`</span>basename <span class="s2">&quot;$filepath&quot;</span> .html<span class="sb">`</span>
+</pre></div>
+</code></pre>
+<p>Happy Scripting and Have a nice day.</p>
+</div>
+      <h4><a href="/blog/posts/What-I-learned-from-other-s-shell-scripts.html#comments">View comments</a></h4>
       <div class="post-head group"><a href="/blog/posts/Script-Tag-XSS-attack.html">
           <h1 class="post-title">Script Tag XSS attack</h1></a>
         <h2 class="post-date">2013 &#183; 8 &#183; 1</h2>
@@ -61,55 +201,6 @@
 <p>Web is awesome. Have a nice day.</p>
 </div>
       <h4><a href="/blog/posts/Use-your-browser-as-Notepad.html#comments">View comments</a></h4>
-      <div class="post-head group"><a href="/blog/posts/MongoDB-tips.html">
-          <h1 class="post-title">MongoDB tips</h1></a>
-        <h2 class="post-date">2013 &#183; 7 &#183; 2</h2>
-      </div>
-      <div class="post-body"><p><a href="http://www.mongodb.org/">MongoDB</a> becomes more popular among the developers because of its schemaless nature which give more flexibility. We can store any kind of data  without having to worry about the structure of the data.</p>
-<p>For few operations, i went through lot of searches to get the correct solutions. Some of them are</p>
-<ol>
-<li>Renaming a field name</li>
-<li>Change type of field value</li>
-<li>Finding document if the field exists</li>
-<li>Sucking MongoDB console</li>
-</ol>
-<p>Lets assume that you have a MongoDB collection <code>bookmarks</code> for Bookmarking application</p>
-<pre><code><div class="highlight"><pre><span class="p">{</span>
-  <span class="s1">&#39;name&#39;</span> <span class="o">:</span> <span class="s1">&#39;DIVE INTO HTML5&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;url&#39;</span> <span class="o">:</span> <span class="s1">&#39;http://diveintohtml5.info/index.html&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;author&#39;</span><span class="o">:</span> <span class="s1">&#39;MARK PILGRIM&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;upvote&#39;</span><span class="o">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;created_at&#39;</span><span class="o">:</span> <span class="s2">&quot;2013-07-02 00:00:00&quot;</span>
-<span class="p">}</span>
-</pre></div>
-</code></pre>
-<a name="renaming-a-field-name" class="anchor" href="#renaming-a-field-name"><h3>Renaming a field name</h3>
-</a><p>Let&#39;s say you want to rename a <code>name</code> filed to <code>title</code>, then</p>
-<pre><code><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">bookmarks</span><span class="p">.</span><span class="nx">update</span><span class="p">({},</span> <span class="p">{</span> <span class="nx">$rename</span><span class="o">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;title&quot;</span><span class="p">}},</span> <span class="p">{</span> <span class="nx">multi</span> <span class="o">:</span> <span class="kc">true</span><span class="p">})</span>
-</pre></div>
-</code></pre>
-<p>In above command, the option <code>multi</code> is important. Otherwise it will update only one document.</p>
-<a name="change-type-of-field-value" class="anchor" href="#change-type-of-field-value"><h3>Change type of field value</h3>
-</a><p>If you want to change type of <code>upvote</code> field from <code>string</code> to <code>number</code> value, then</p>
-<pre><code><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">bookmarks</span><span class="p">.</span><span class="nx">find</span><span class="p">().</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">bookmark</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">bookmark</span><span class="p">.</span><span class="nx">upvote</span> <span class="o">=</span> <span class="o">+</span><span class="p">(</span><span class="nx">bookmark</span><span class="p">.</span><span class="nx">upvote</span><span class="p">);</span>  <span class="c1">// equivalent to parseInt</span>
-  <span class="nx">db</span><span class="p">.</span><span class="nx">bookmarks</span><span class="p">.</span><span class="nx">save</span><span class="p">(</span><span class="nx">bookmark</span><span class="p">);</span>
-<span class="p">});</span>
-</pre></div>
-</code></pre>
-<a name="finding-the-document-if-the-field-exists" class="anchor" href="#finding-the-document-if-the-field-exists"><h3>Finding the document if the field exists</h3>
-</a><p> Some scenarios, you might want to find the document which has a specific fields.
- Lets say, get bookmarks which has <code>tags</code> field.</p>
-<pre><code><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">bookmarks</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="nx">tags</span> <span class="o">:</span> <span class="p">{</span> <span class="nx">$exists</span> <span class="o">:</span> <span class="kc">true</span> <span class="p">}</span> <span class="p">});</span>
-</pre></div>
-</code></pre>
-<p>If the value of field is <code>null</code>, then the field is considered as Not exist.</p>
-<a name="sucking-mongodb-console" class="anchor" href="#sucking-mongodb-console"><h3>Sucking MongoDB console</h3>
-</a><p>MongoDB console sucks. I got frustrated  whenever i work with MongoDB console. I desperately need JSON pretty for console output, and some more useful commands. Then I found the <a href="https://github.com/TylerBrock/mongo-hacker">Mongo-hacker</a>  by
-<a href="https://github.com/TylerBrock">TylerBrock</a>(Thanks bro). It is awesome and you must give a try.</p>
-<p>Let me know if anything you got useful. Have a nice day.</p>
-</div>
-      <h4><a href="/blog/posts/MongoDB-tips.html#comments">View comments</a></h4>
       <ul class="pagination group">
         <li><a href="/page/1/">2</a>
         </li>

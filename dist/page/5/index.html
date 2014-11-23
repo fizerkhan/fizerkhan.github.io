@@ -18,6 +18,55 @@
       <div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div>
     </nav>
     <div class="content">
+      <div class="post-head group"><a href="/blog/posts/MongoDB-tips.html">
+          <h1 class="post-title">MongoDB tips</h1></a>
+        <h2 class="post-date">2013 &#183; 7 &#183; 2</h2>
+      </div>
+      <div class="post-body"><p><a href="http://www.mongodb.org/">MongoDB</a> becomes more popular among the developers because of its schemaless nature which give more flexibility. We can store any kind of data  without having to worry about the structure of the data.</p>
+<p>For few operations, i went through lot of searches to get the correct solutions. Some of them are</p>
+<ol>
+<li>Renaming a field name</li>
+<li>Change type of field value</li>
+<li>Finding document if the field exists</li>
+<li>Sucking MongoDB console</li>
+</ol>
+<p>Lets assume that you have a MongoDB collection <code>bookmarks</code> for Bookmarking application</p>
+<pre><code><div class="highlight"><pre><span class="p">{</span>
+  <span class="s1">&#39;name&#39;</span> <span class="o">:</span> <span class="s1">&#39;DIVE INTO HTML5&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;url&#39;</span> <span class="o">:</span> <span class="s1">&#39;http://diveintohtml5.info/index.html&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;author&#39;</span><span class="o">:</span> <span class="s1">&#39;MARK PILGRIM&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;upvote&#39;</span><span class="o">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;created_at&#39;</span><span class="o">:</span> <span class="s2">&quot;2013-07-02 00:00:00&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</code></pre>
+<a name="renaming-a-field-name" class="anchor" href="#renaming-a-field-name"><h3>Renaming a field name</h3>
+</a><p>Let&#39;s say you want to rename a <code>name</code> filed to <code>title</code>, then</p>
+<pre><code><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">bookmarks</span><span class="p">.</span><span class="nx">update</span><span class="p">({},</span> <span class="p">{</span> <span class="nx">$rename</span><span class="o">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;title&quot;</span><span class="p">}},</span> <span class="p">{</span> <span class="nx">multi</span> <span class="o">:</span> <span class="kc">true</span><span class="p">})</span>
+</pre></div>
+</code></pre>
+<p>In above command, the option <code>multi</code> is important. Otherwise it will update only one document.</p>
+<a name="change-type-of-field-value" class="anchor" href="#change-type-of-field-value"><h3>Change type of field value</h3>
+</a><p>If you want to change type of <code>upvote</code> field from <code>string</code> to <code>number</code> value, then</p>
+<pre><code><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">bookmarks</span><span class="p">.</span><span class="nx">find</span><span class="p">().</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">bookmark</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">bookmark</span><span class="p">.</span><span class="nx">upvote</span> <span class="o">=</span> <span class="o">+</span><span class="p">(</span><span class="nx">bookmark</span><span class="p">.</span><span class="nx">upvote</span><span class="p">);</span>  <span class="c1">// equivalent to parseInt</span>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">bookmarks</span><span class="p">.</span><span class="nx">save</span><span class="p">(</span><span class="nx">bookmark</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</code></pre>
+<a name="finding-the-document-if-the-field-exists" class="anchor" href="#finding-the-document-if-the-field-exists"><h3>Finding the document if the field exists</h3>
+</a><p> Some scenarios, you might want to find the document which has a specific fields.
+ Lets say, get bookmarks which has <code>tags</code> field.</p>
+<pre><code><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">bookmarks</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="nx">tags</span> <span class="o">:</span> <span class="p">{</span> <span class="nx">$exists</span> <span class="o">:</span> <span class="kc">true</span> <span class="p">}</span> <span class="p">});</span>
+</pre></div>
+</code></pre>
+<p>If the value of field is <code>null</code>, then the field is considered as Not exist.</p>
+<a name="sucking-mongodb-console" class="anchor" href="#sucking-mongodb-console"><h3>Sucking MongoDB console</h3>
+</a><p>MongoDB console sucks. I got frustrated  whenever i work with MongoDB console. I desperately need JSON pretty for console output, and some more useful commands. Then I found the <a href="https://github.com/TylerBrock/mongo-hacker">Mongo-hacker</a>  by
+<a href="https://github.com/TylerBrock">TylerBrock</a>(Thanks bro). It is awesome and you must give a try.</p>
+<p>Let me know if anything you got useful. Have a nice day.</p>
+</div>
+      <h4><a href="/blog/posts/MongoDB-tips.html#comments">View comments</a></h4>
       <div class="post-head group"><a href="/blog/posts/Grunt-Live-reloading-with-external-server.html">
           <h1 class="post-title">Grunt Live reloading with external server</h1></a>
         <h2 class="post-date">2013 &#183; 6 &#183; 29</h2>
@@ -527,44 +576,6 @@ If you write blog, then you cannot avoid social buttons on your blog. I like to 
 </code></pre>
 </div>
       <h4><a href="/blog/posts/Social-sharing-buttons.html#comments">View comments</a></h4>
-      <div class="post-head group"><a href="/blog/posts/Google-App-Engine-Deployment-Tips.html">
-          <h1 class="post-title">Google App Engine Deployment Tips</h1></a>
-        <h2 class="post-date">2013 &#183; 6 &#183; 26</h2>
-      </div>
-      <div class="post-body"><p>I uses Google App Engine for few of my projects. I choose it, because it is <strong>Free</strong> for small application like blog and faster, easy to deploy. This blog is also deployed in the App Engine.</p>
-<a name="command-line-alias" class="anchor" href="#command-line-alias"><h2>Command Line Alias</h2>
-</a><p>I usually deployed to Google App Engine from command line. I have aliases for deployment and rollback.</p>
-<pre><code><div class="highlight"><pre><span class="nx">$</span> <span class="nx">alias</span> <span class="nx">gaed</span><span class="o">=</span><span class="s1">&#39;/Users/maasan/development/tools/eclipse/plugins/com.google.appengine.eclipse.sdkbundle_1.7.3/appengine-java-sdk-1.7.3/bin/appcfg.sh update war&#39;</span>
-
-<span class="nx">$</span> <span class="nx">alias</span> <span class="nx">gaer</span><span class="o">=</span><span class="s1">&#39;/Users/maasan/development/tools/eclipse/plugins/com.google.appengine.eclipse.sdkbundle_1.7.3/appengine-java-sdk-1.7.3/bin/appcfg.sh rollback war&#39;</span>
-</pre></div>
-</code></pre>
-<p>When i want to deploy, i just change to application directory and run</p>
-<pre><code><div class="highlight"><pre><span class="nx">$</span> <span class="nx">gaed</span>
-</pre></div>
-</code></pre>
-<p>If you want update the version of application, then</p>
-<pre><code><div class="highlight"><pre><span class="nx">$</span> <span class="nx">gaed</span> <span class="o">-</span><span class="nx">v</span> <span class="mi">2</span>
-</pre></div>
-</code></pre>
-<p>The version can be anything from single integer or current date or anything you like.</p>
-<a name="different-versions-access" class="anchor" href="#different-versions-access"><h2>Different versions access</h2>
-</a><p>Even though you deployed the new version of your application to App Engine, it will not come to live until you go to Admin console and set as Default.
-Once you set new version as Default, then it comes to live.</p>
-<p><strong>But will there any way to access the old versions when new version is live?</strong></p>
-<p><strong>Yes</strong>, i recently found that we can access any version of your application by</p>
-<pre><code><div class="highlight"><pre><span class="nx">http</span><span class="o">:</span><span class="c1">//&lt;version&gt;-dot-&lt;application identifier&gt;.appspot.com</span>
-</pre></div>
-</code></pre>
-<p>Let&#39;s assume, you want to access the version <code>1</code> of your <code>sample.appspot.com</code>, then</p>
-<pre><code><div class="highlight"><pre><span class="nx">http</span><span class="o">:</span><span class="c1">//1-dot-sample.appspot.com</span>
-</pre></div>
-</code></pre>
-<p>But keep in mind that all your application will use same database. If any changes in the database schema might break the older versions.</p>
-<p>You can also use it vice-versa. Just deploy the new version, access the new version by above version URL and test it. Once you confidence that you can make it live, then go and set the new version as Default.</p>
-<p>Happy deployment and Have a nice day.</p>
-</div>
-      <h4><a href="/blog/posts/Google-App-Engine-Deployment-Tips.html#comments">View comments</a></h4>
       <ul class="pagination group">
         <li><a href="/page/2/">3</a>
         </li>

@@ -18,6 +18,39 @@
       <div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div>
     </nav>
     <div class="content">
+      <div class="post-head group"><a href="/blog/posts/Clean-up-your-local-branches-after-merge-and-delete-in-GitHub.html">
+          <h1 class="post-title">Clean up your local branches after merge and delete in GitHub</h1></a>
+        <h2 class="post-date">2014 &#183; 11 &#183; 23</h2>
+      </div>
+      <div class="post-body"><p>If you are a Github user, then you might familiar with Pull Requests. Github
+has an <a href="https://github.com/blog/1335-tidying-up-after-pull-requests">options</a>
+to delete a branch after merging of pull request.</p>
+<p>After a Pull Request has been merged, you’ll see a button to delete the lingering branch:</p>
+<p><img src="https://github-images.s3.amazonaws.com/skitch/Commits_next_forward_compatibility_by_rtomayko_%C2%B7_Pull_Request_%C2%B7_github_github-20121127-131321.png" style="max-width:100%;"></p>
+<p>Above action will delete the branch only in the remote. Then there is a question:
+how do i clean up my local branches? I found an answer as follows</p>
+<p>Lets say my test branch name <code>feature-collaboration</code></p>
+<a name="-.-list-branches-in-local-machine" class="anchor" href="#-.-list-branches-in-local-machine"><h3>1. List branches in local machine</h3>
+</a><p>The command <code>git branch -a</code> shows the test branch <code>feature-collaboration</code>
+is present on local and also present on remote</p>
+<p><img src="/images/git/git-branch-a-before.png" alt="git branch -a"></p>
+<a name="-.-prune-cleanup-the-local-references-to-remote-branch" class="anchor" href="#-.-prune-cleanup-the-local-references-to-remote-branch"><h3>2. Prune/Cleanup the local references to remote branch</h3>
+</a><p>The command <code>git remote prune origin --dry-run</code> lists branches that can be
+deleted/pruned on your local. An option <code>--dry-run</code> is needed.</p>
+<p><img src="/images/git/git-remote-prune-origin-dry-run.png" alt="git remote prune origin --dry-run"></p>
+<p>Now go ahead and actually prune/cleanup the local references by running the command
+<code>git remote prune origin</code>. Note that you don&#39;t need an option <code>--dry-run</code>.</p>
+<p><img src="/images/git/git-remote-prune-origin.png" alt="git remote prune origin"></p>
+<p>Again, run the command <code>git branch -a</code> will show the local status of branches.</p>
+<p><img src="/images/git/git-branch-a-after.png" alt="git branch -a"></p>
+<p>Now you can notice that <code>remotes/origin/feature-collaboration</code> has been removed,
+but not the local branch <code>feature-collaboration</code>.</p>
+<a name="-.-delete-local-branch" class="anchor" href="#-.-delete-local-branch"><h3>3. Delete local branch</h3>
+</a><p>If wanted, we can clean-up the local branch <code>feature-collaboration</code> as well</p>
+<p><img src="/images/git/git-branch-d-name.png" alt="git branch -d"></p>
+<p>That&#39;s it. Have a nice day.</p>
+</div>
+      <h4><a href="/blog/posts/Clean-up-your-local-branches-after-merge-and-delete-in-GitHub.html#comments">View comments</a></h4>
       <div class="post-head group"><a href="/blog/posts/Restrict-user-access-to-Single-S3-Bucket-using-Amazon-IAM.html">
           <h1 class="post-title">Restrict user access to Single S3 Bucket using Amazon IAM</h1></a>
         <h2 class="post-date">2014 &#183; 11 &#183; 12</h2>
@@ -181,85 +214,6 @@ change the policy name as you wish. In the Policy Document section, paste the fo
 <p>Please share your thoughts and suggestions. Have a nice day.</p>
 </div>
       <h4><a href="/blog/posts/Startup-Landing-Pages-with-Firebase.html#comments">View comments</a></h4>
-      <div class="post-head group"><a href="/blog/posts/Commands-and-Options-I-Wish-I-Knew-Earlier-About-Git.html">
-          <h1 class="post-title">Commands and Options I Wish I Knew Earlier About Git</h1></a>
-        <h2 class="post-date">2014 &#183; 9 &#183; 29</h2>
-      </div>
-      <div class="post-body"><p><code>Git</code> becomes de facto of source code management (SCM) system among developers.
-Many developers used to work on git from console. Mostly used commands are
-<code>git status</code>, <code>git add</code>, <code>git commit</code> and <code>git push</code>.</p>
-<p>Apart from these commands, there are lot of useful commands in git.
-Initial days, i find difficulties in tracking changes made by me and my team mates
-couple of days or few weeks ago. Here we will see some of commands that are interesting and
-useful to your workflow.</p>
-<a name="-.-short-status-output" class="anchor" href="#-.-short-status-output"><h4>1. Short status output</h4>
-</a><p><code>git status</code> is mostly used command in <code>Git</code>. But it gives lot of
-information which is not useful for people who are proficient with git.
-If you are one among them, then use</p>
-<pre><code><div class="highlight"><pre><span class="nx">git</span> <span class="nx">status</span> <span class="o">-</span><span class="nx">sb</span>
-</pre></div>
-</code></pre>
-<a name="-.-view-changes-by-revision" class="anchor" href="#-.-view-changes-by-revision"><h4>2. View changes by revision</h4>
-</a><p>If you want to view changes made at particular revision</p>
-<pre><code><div class="highlight"><pre>  <span class="nx">git</span> <span class="nx">show</span> <span class="o">&lt;</span><span class="nx">revision</span><span class="o">&gt;</span>
-
-  <span class="nx">git</span> <span class="nx">show</span> <span class="nx">df2edcd</span>
-  <span class="p">(</span><span class="nx">or</span><span class="p">)</span>
-  <span class="nx">git</span> <span class="nx">show</span> <span class="nx">HEAD</span>     <span class="err">#</span><span class="nx">HEAD</span> <span class="nx">means</span> <span class="nx">latest</span> <span class="nx">commit</span>
-  <span class="p">(</span><span class="nx">or</span><span class="p">)</span>
-  <span class="nx">git</span> <span class="nx">show</span> <span class="nx">HEAD</span><span class="o">~</span><span class="mi">1</span>   <span class="err">#</span><span class="nx">HEAD</span><span class="o">~</span><span class="mi">1</span> <span class="nx">means</span> <span class="nx">commit</span> <span class="nx">before</span> <span class="nx">the</span> <span class="nx">commit</span> <span class="nx">that</span> <span class="nx">HEAD</span> <span class="nx">currently</span> <span class="nx">points</span> <span class="nx">at</span>
-</pre></div>
-</code></pre>
-<p>In case, you want to view only changed file name, not the contents, Use <code>--name-only</code> option</p>
-<pre><code><div class="highlight"><pre>  <span class="nx">git</span> <span class="nx">show</span> <span class="o">--</span><span class="nx">name</span><span class="o">-</span><span class="nx">only</span>  <span class="nx">df2edcd</span>
-  <span class="p">(</span><span class="nx">or</span><span class="p">)</span>
-  <span class="nx">git</span> <span class="nx">show</span> <span class="o">--</span><span class="nx">name</span><span class="o">-</span><span class="nx">only</span> <span class="o">--</span><span class="nx">oneline</span> <span class="nx">df2edcd</span>
-  <span class="p">(</span><span class="nx">or</span><span class="p">)</span>
-  <span class="nx">git</span> <span class="nx">show</span> <span class="o">--</span><span class="nx">name</span><span class="o">-</span><span class="nx">only</span>  <span class="o">--</span><span class="nx">pretty</span><span class="o">=</span><span class="s2">&quot;format:&quot;</span> <span class="nx">df2edcd</span>
-</pre></div>
-</code></pre>
-<a name="-.-view-changes-of-specific-file" class="anchor" href="#-.-view-changes-of-specific-file"><h4>3. View changes of specific file</h4>
-</a><p>If you want to view changes of specific file, then</p>
-<pre><code><div class="highlight"><pre>  <span class="nx">git</span> <span class="nx">show</span> <span class="nx">df2edcd</span><span class="o">:</span><span class="nx">app</span><span class="o">/</span><span class="nx">index</span><span class="p">.</span><span class="nx">html</span>
-  <span class="p">(</span><span class="nx">or</span><span class="p">)</span>
-  <span class="nx">git</span> <span class="nx">show</span> <span class="nx">HEAD</span><span class="o">~</span><span class="mi">1</span><span class="o">:</span><span class="nx">app</span><span class="o">/</span><span class="nx">index</span><span class="p">.</span><span class="nx">html</span>
-
-  <span class="nx">git</span> <span class="nx">show</span> <span class="err">@</span><span class="p">{</span><span class="mi">22</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">2014</span><span class="p">}</span><span class="o">:</span><span class="nx">app</span><span class="o">/</span><span class="nx">index</span><span class="p">.</span><span class="nx">html</span>
-</pre></div>
-</code></pre>
-<a name="-.-search-for-commit-message" class="anchor" href="#-.-search-for-commit-message"><h4>4. Search for commit message</h4>
-</a><p>You want to search a commit which message matches a regex</p>
-<pre><code><div class="highlight"><pre>  <span class="nx">git</span> <span class="nx">show</span> <span class="o">:</span><span class="err">/fixed</span>
-  <span class="err">#</span> <span class="nx">shows</span> <span class="nx">the</span> <span class="nx">last</span> <span class="nx">commit</span> <span class="nx">which</span> <span class="nx">has</span> <span class="nx">the</span> <span class="nx">word</span> <span class="s2">&quot;fixed&quot;</span> <span class="k">in</span> <span class="nx">its</span> <span class="nx">message</span>
-
-  <span class="nx">git</span> <span class="nx">show</span> <span class="o">:</span><span class="err">/analytics</span>
-  <span class="err">#</span> <span class="nx">shows</span> <span class="nx">the</span> <span class="nx">last</span> <span class="nx">commit</span> <span class="nx">which</span> <span class="nx">has</span> <span class="nx">the</span> <span class="nx">word</span> <span class="s2">&quot;analytics&quot;</span> <span class="k">in</span> <span class="nx">its</span> <span class="nx">message</span>
-</pre></div>
-</code></pre>
-<a name="-.-list-all-files-that-were-modified-or-added-in-this-time" class="anchor" href="#-.-list-all-files-that-were-modified-or-added-in-this-time"><h4>5. list all files that were modified or added in this time</h4>
-</a><p>List all files added/modified 9 days ago</p>
-<pre><code><div class="highlight"><pre>  <span class="nx">git</span> <span class="nx">diff</span> <span class="s2">&quot;@{9 days ago}&quot;</span>
-  <span class="nx">git</span> <span class="nx">diff</span> <span class="o">--</span><span class="nx">name</span><span class="o">-</span><span class="nx">only</span> <span class="s2">&quot;@{9 days ago}&quot;</span>
-  <span class="nx">git</span> <span class="nx">diff</span> <span class="o">--</span><span class="nx">name</span><span class="o">-</span><span class="nx">status</span> <span class="s2">&quot;@{9 days ago}&quot;</span>
-</pre></div>
-</code></pre>
-<p>List all files added/modified between 9 days ago and 6 days ago</p>
-<pre><code><div class="highlight"><pre>  <span class="nx">git</span> <span class="nx">diff</span> <span class="s2">&quot;@{9 days ago}&quot;</span> <span class="s2">&quot;@{6 days ago}&quot;</span>
-  <span class="nx">git</span> <span class="nx">diff</span> <span class="o">--</span><span class="nx">name</span><span class="o">-</span><span class="nx">only</span> <span class="s2">&quot;@{9 days ago}&quot;</span> <span class="s2">&quot;@{6 days ago}&quot;</span>
-  <span class="nx">git</span> <span class="nx">diff</span> <span class="o">--</span><span class="nx">name</span><span class="o">-</span><span class="nx">status</span> <span class="s2">&quot;@{9 days ago}&quot;</span> <span class="s2">&quot;@{6 days ago}&quot;</span>
-</pre></div>
-</code></pre>
-<a name="-.-changes-between-two-commit-revision" class="anchor" href="#-.-changes-between-two-commit-revision"><h4>6. Changes between two commit revision</h4>
-</a><p>List all files between two commits adab4ab and 6da161b</p>
-<pre><code><div class="highlight"><pre>  <span class="nx">git</span> <span class="nx">diff</span> <span class="nx">adab4ab</span><span class="o">^</span> <span class="mi">6</span><span class="nx">da161b</span>
-  <span class="nx">git</span> <span class="nx">diff</span> <span class="o">--</span><span class="nx">name</span><span class="o">-</span><span class="nx">only</span> <span class="nx">adab4ab</span><span class="o">^</span> <span class="mi">6</span><span class="nx">da161b</span>
-  <span class="nx">git</span> <span class="nx">diff</span> <span class="o">--</span><span class="nx">name</span><span class="o">-</span><span class="nx">status</span> <span class="nx">adab4ab</span><span class="o">^</span> <span class="mi">6</span><span class="nx">da161b</span>
-</pre></div>
-</code></pre>
-<p>Hope it useful. Share your favorite commands in comments.
-Happy commit and have a nice day.</p>
-</div>
-      <h4><a href="/blog/posts/Commands-and-Options-I-Wish-I-Knew-Earlier-About-Git.html#comments">View comments</a></h4>
       <ul class="pagination group">
         <li><a href="/" class="active-page">1</a>
         </li>

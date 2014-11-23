@@ -18,33 +18,102 @@
       <div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div>
     </nav>
     <div class="content">
-      <div class="post-head group"><a href="/blog/posts/Dropbox-will-save-your-head.html">
-          <h1 class="post-title">Dropbox will save your head</h1></a>
-        <h2 class="post-date">2013 &#183; 11 &#183; 4</h2>
+      <div class="post-head group"><a href="/blog/posts/Free-Static-Page-Hosting-on-Google-App-Engine-in-a-5-minutes.html">
+          <h1 class="post-title">Free Static Page Hosting on Google App Engine in a 5 minutes</h1></a>
+        <h2 class="post-date">2014 &#183; 2 &#183; 17</h2>
       </div>
-      <div class="post-body"><p>Recently My Mac OSX has been crashed and somehow i cannot retrieve some of my data from hard drive.
-But i am fortunate that i have already synced important folder to the <code>Dropbox</code> that saves my head.</p>
-<p>Few days ago, i got a tweet from my favorite Github contributor <a href="https://twitter.com/tjholowaychuk">tj</a> (Creator of ExpressJs, Jade, Mocha)</p>
-<p><blockquote class="twitter-tweet"><p>haha dammit.. just rm -fr a project that isn&#39;t on github yet :( <a href="https://twitter.com/search?q=%23fail&amp;src=hash">#fail</a></p>&mdash; TJ Holowaychuk (@tjholowaychuk) <a href="https://twitter.com/tjholowaychuk/statuses/391262571350593536">October 18, 2013</a></blockquote></p>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>I am really sad about it. It can happen to anyone. So, whenever you started working on project(Pre-Github), You should consider sync to the <code>Dropbox</code>. Moreover it is always better and safer to sync important folder and files. It can be simply done by creating symbolic link to the folder in the <code>Dropbox</code>.</p>
-<p>Open <code>terminal</code> and do the following</p>
-<pre><code><div class="highlight"><pre><span class="err">##</span> <span class="nx">Go</span> <span class="nx">to</span> <span class="nx">dropbox</span> <span class="nx">folder</span><span class="p">.</span> <span class="nx">It</span> <span class="nx">can</span> <span class="nx">be</span> <span class="nx">any</span> <span class="nx">dropbox</span> <span class="nx">folder</span>
-<span class="nx">cd</span> <span class="o">~</span><span class="err">/Dropbox/MacOSX</span>
-
-<span class="err">#</span> <span class="nx">Create</span> <span class="nx">symbolic</span> <span class="nx">link</span> <span class="nx">to</span> <span class="nx">Stickies</span> <span class="nx">database</span>
-<span class="nx">ln</span> <span class="o">-</span><span class="nx">sf</span> <span class="o">~</span><span class="err">/Library/StickiesDatabase .</span>
-
-<span class="err">#</span> <span class="nx">Create</span> <span class="nx">symbolic</span> <span class="nx">link</span> <span class="nx">to</span> <span class="nx">Sublime</span> <span class="nx">text</span> <span class="nx">User</span> <span class="nx">data</span>
-<span class="nx">ln</span> <span class="o">-</span><span class="nx">sf</span> <span class="o">~</span><span class="err">/Library/Application\ Support/Sublime\ Text\ 3/Packages/User Sublime3-User</span>
+      <div class="post-body"><p>Now-a-days we have a lot of options to deploy our applications. Some of them are
+Google App Engine, Google Compute Cloud, Amazon EC2, Heroku, Nodejitsu and much more.
+All the services have their advantages and disadvantages over others. Generally,
+we do not prefer much complex infrastructure or steps to deploy our static pages.
+Recently, I found that Google App engine has been a best platform for hosting our
+static web pages with decent free plan over other services. In this article,
+we will discuss a steps to host your static pages which can be personal blog, company site or even your client sites.</p>
+<a name="create-an-application-in-google-app-engine" class="anchor" href="#create-an-application-in-google-app-engine"><h3>Create an application in Google App Engine</h3>
+</a><p>Visit <a href="http://appengine.google.com">Google App Engine</a> and then create an application.
+When creating App engine application, the application id is very important. Because
+it acts as subdomain for your site. Lets say, application id is <code>coolmoon</code>, the site
+will be in <code>coolmoon.appspot.com</code>.</p>
+<a name="install-app-engine-sdk-for-python" class="anchor" href="#install-app-engine-sdk-for-python"><h3>Install App Engine SDK for python</h3>
+</a><p>Since <code>python</code> has been a best supported language in App Engine, Download and Install
+<a href="https://developers.google.com/appengine/downloads#Google_App_Engine_SDK_for_Python">App Engine SDK for python</a>. <code>Are you not a python developer(like me)?</code> Do not worry, you do not need to write a single piece of python code.</p>
+<p>You will use two commands from the SDK:</p>
+<pre><code><div class="highlight"><pre><span class="nx">dev_appserver</span><span class="p">.</span><span class="nx">py</span>  <span class="o">-</span>  <span class="nx">the</span> <span class="nx">development</span> <span class="nx">web</span> <span class="nx">server</span>
+<span class="nx">appcfg</span><span class="p">.</span><span class="nx">py</span>  <span class="o">-</span>  <span class="k">for</span> <span class="nx">uploading</span> <span class="nx">your</span> <span class="nx">app</span> <span class="nx">to</span> <span class="nx">App</span> <span class="nx">Engine</span>
 </pre></div>
 </code></pre>
-<p>In symbolic link creation, you can use .(dot) in the last argument to use same folder or file name as original. Otherwise you can specify the name that you wanted to have in your <code>Dropbox</code>.</p>
-<p>Have a nice day.</p>
+<a name="create-an-application-folder" class="anchor" href="#create-an-application-folder"><h3>Create an application folder</h3>
+</a><p>You have to create an application folder which has static files and configuration file to be deployed.
+The structure of the folder may be as follows</p>
+<pre><code><div class="highlight"><pre><span class="nx">application_folder</span><span class="o">/</span>
+  <span class="o">-</span> <span class="nx">app</span><span class="p">.</span><span class="nx">yaml</span>              <span class="err">#</span> <span class="nx">configuration</span> <span class="nx">file</span><span class="p">.</span> <span class="nx">we</span> <span class="nx">will</span> <span class="nx">see</span> <span class="k">in</span> <span class="nx">next</span> <span class="nx">section</span>
+  <span class="o">-</span> <span class="kr">public</span><span class="o">/</span>               <span class="err">#</span> <span class="kr">public</span> <span class="nx">folder</span> <span class="nx">will</span> <span class="nx">contain</span> <span class="kr">static</span> <span class="nx">files</span>
+    <span class="o">-</span> <span class="nx">index</span><span class="p">.</span><span class="nx">html</span>
+    <span class="o">-</span> <span class="nx">js</span><span class="o">/</span>
+    <span class="o">-</span> <span class="nx">css</span><span class="o">/</span>
+    <span class="o">-</span> <span class="nx">img</span><span class="o">/</span>
+</pre></div>
+</code></pre>
+<a name="content-of-app-engine-configuration-app.yaml-" class="anchor" href="#content-of-app-engine-configuration-app.yaml-"><h3>Content of App Engine configuration(app.yaml)</h3>
+</a><pre><code><div class="highlight"><pre>  <span class="nx">application</span><span class="o">:</span> <span class="nx">coolmoon</span>
+  <span class="nx">version</span><span class="o">:</span> <span class="mi">1</span>
+  <span class="nx">runtime</span><span class="o">:</span> <span class="nx">python27</span>
+  <span class="nx">api_version</span><span class="o">:</span> <span class="mi">1</span>
+  <span class="nx">threadsafe</span><span class="o">:</span> <span class="nx">yes</span>
+
+  <span class="nx">handlers</span><span class="o">:</span>
+
+  <span class="o">-</span> <span class="nx">url</span><span class="o">:</span> <span class="err">/(.+)</span>
+    <span class="nx">static_files</span><span class="o">:</span> <span class="kr">public</span><span class="o">/</span><span class="err">\</span><span class="mi">1</span>
+    <span class="nx">upload</span><span class="o">:</span> <span class="kr">public</span><span class="o">/</span><span class="p">(.</span><span class="o">*</span><span class="p">)</span>
+
+  <span class="o">-</span> <span class="nx">url</span><span class="o">:</span> <span class="err">/</span>
+    <span class="nx">static_files</span><span class="o">:</span> <span class="kr">public</span><span class="o">/</span><span class="nx">index</span><span class="p">.</span><span class="nx">html</span>
+    <span class="nx">upload</span><span class="o">:</span> <span class="kr">public</span><span class="o">/</span><span class="nx">index</span><span class="p">.</span><span class="nx">html</span>
+
+  <span class="nx">skip_files</span><span class="o">:</span>
+  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?app\.yaml</span>
+  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?app\.yml</span>
+  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?#.*#</span>
+  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?.*~</span>
+  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?.*\.py[co]</span>
+  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?.*/RCS/.*</span>
+  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?\..*</span>
+  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?tests$</span>
+  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?test$</span>
+  <span class="o">-</span> <span class="o">^</span><span class="nx">test</span><span class="o">/</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?</span>
+  <span class="o">-</span> <span class="o">^</span><span class="nx">COPYING</span><span class="p">.</span><span class="nx">LESSER</span>
+  <span class="o">-</span> <span class="o">^</span><span class="nx">README</span><span class="err">\</span><span class="p">..</span><span class="o">*</span>
+  <span class="o">-</span> <span class="err">\</span><span class="p">.</span><span class="nx">gitignore</span>
+  <span class="o">-</span> <span class="o">^</span><span class="err">\</span><span class="p">.</span><span class="nx">git</span><span class="o">/</span><span class="p">.</span><span class="o">*</span>
+  <span class="o">-</span> <span class="err">\</span><span class="p">.</span><span class="o">*</span><span class="err">\</span><span class="p">.</span><span class="nx">lint$</span>
+  <span class="o">-</span> <span class="o">^</span><span class="nx">fabfile</span><span class="err">\</span><span class="p">.</span><span class="nx">py</span>
+  <span class="o">-</span> <span class="o">^</span><span class="nx">testrunner</span><span class="err">\</span><span class="p">.</span><span class="nx">py</span>
+  <span class="o">-</span> <span class="o">^</span><span class="nx">grunt</span><span class="err">\</span><span class="p">.</span><span class="nx">js</span>
+  <span class="o">-</span> <span class="o">^</span><span class="nx">node_modules</span><span class="o">/</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?</span>
+</pre></div>
+</code></pre>
+<a name="test-static-pages" class="anchor" href="#test-static-pages"><h3>Test static pages</h3>
+</a><p>You can run development server locally and check your static pages by following command</p>
+<pre><code><div class="highlight"><pre> <span class="nx">dev_appserver</span><span class="p">.</span><span class="nx">py</span> <span class="p">.</span><span class="o">/</span>
+</pre></div>
+</code></pre>
+<p>Visit <code>http://localhost:8080</code> to test your pages.</p>
+<a name="deploy" class="anchor" href="#deploy"><h3>Deploy</h3>
+</a><p>Everything is perfect and deploy the static pages. The command <code>appcfg.py</code> is used for deploy the application to Google App engine</p>
+<pre><code><div class="highlight"><pre><span class="nx">appcfg</span><span class="p">.</span><span class="nx">py</span> <span class="nx">update</span> <span class="p">.</span>
+</pre></div>
+</code></pre>
+<p>It will ask for <code>email</code> and <code>password</code> of your Google account. The password must be
+application specific password. To know how to generate application specific password,
+please refer <a href="https://support.google.com/accounts/answer/185833?hl=en">Application specific password</a>.</p>
+<a name="you-ve-made-it" class="anchor" href="#you-ve-made-it"><h3>You&#39;ve made it</h3>
+</a><p>Finally you got your site hosted in <code>&lt;application-id&gt;.appspot.com</code>.
+Static hosting is super easy with App Engine. Moreover it is faster than other static
+hosting services. Because it runs on Google infrastructure.</p>
+<p>Happy static hosting and Have a nice day.</p>
 </div>
-      <h4><a href="/blog/posts/Dropbox-will-save-your-head.html#comments">View comments</a></h4>
+      <h4><a href="/blog/posts/Free-Static-Page-Hosting-on-Google-App-Engine-in-a-5-minutes.html#comments">View comments</a></h4>
       <div class="post-head group"><a href="/blog/posts/Things-you-should-consider-for-MongoDB-in-production.html">
           <h1 class="post-title">Things you should consider for MongoDB in production</h1></a>
         <h2 class="post-date">2013 &#183; 11 &#183; 4</h2>
@@ -87,65 +156,33 @@ The support of MongoLab is awesome and respond for questions very quickly. I hig
 <p>Have a nice day.</p>
 </div>
       <h4><a href="/blog/posts/Things-you-should-consider-for-MongoDB-in-production.html#comments">View comments</a></h4>
-      <div class="post-head group"><a href="/blog/posts/Every-Programmer-should-use-IRC.html">
-          <h1 class="post-title">Every Programmer should use IRC</h1></a>
-        <h2 class="post-date">2013 &#183; 11 &#183; 3</h2>
+      <div class="post-head group"><a href="/blog/posts/Dropbox-will-save-your-head.html">
+          <h1 class="post-title">Dropbox will save your head</h1></a>
+        <h2 class="post-date">2013 &#183; 11 &#183; 4</h2>
       </div>
-      <div class="post-body"><p>I am a very average programmer, but like to learn new things from others. We have lot of medium to learn something new, interesting and useful. As a programmer, i use <code>Google Search</code>, <code>Stack Overflow</code> and <code>Github</code> to get to know new things and the answers for my questions. But most of the time,
-when i see the answers, there are multiple questions and other solutions(Mostly Stupid) come out from my brain. Even though, i can reply or add comment to questions in <code>Stack Overflow</code> and <code>Github issues</code>, they are not very humanized. I mean, it is not like interacting with real human and have continuous conversation in a moment when we have lot of things going around mind, not like getting reply after two hours and sometimes two days.</p>
-<a name="what-is-irc" class="anchor" href="#what-is-irc"><h3>What is IRC</h3>
-</a><p>IRC is the greatest medium to have humanized conversation where you can clarify your doubts, learn new things. In the top of all, it is a place to meet amazing talented personalities.</p>
-<p>From Wikipedia</p>
-<pre><code><div class="highlight"><pre><span class="nx">Internet</span> <span class="nx">Relay</span> <span class="nx">Chat</span> <span class="p">(</span><span class="nx">IRC</span><span class="p">)</span> <span class="nx">is</span> <span class="nx">a</span> <span class="nx">protocol</span> <span class="k">for</span> <span class="nx">live</span> <span class="nx">interactive</span> <span class="nx">Internet</span> <span class="nx">text</span> <span class="nx">messaging</span> <span class="p">(</span><span class="nx">chat</span><span class="p">)</span> <span class="nx">or</span> <span class="nx">synchronous</span> <span class="nx">conferencing</span><span class="p">.</span> <span class="nx">It</span> <span class="nx">is</span> <span class="nx">mainly</span> <span class="nx">designed</span> <span class="k">for</span> <span class="nx">group</span> <span class="nx">communication</span> <span class="k">in</span> <span class="nx">discussion</span> <span class="nx">forums</span><span class="p">,</span> <span class="nx">called</span> <span class="nx">channels</span><span class="p">,</span> <span class="nx">but</span> <span class="nx">also</span> <span class="nx">allows</span> <span class="nx">one</span><span class="o">-</span><span class="nx">to</span><span class="o">-</span><span class="nx">one</span> <span class="nx">communication</span> <span class="nx">via</span> <span class="kr">private</span> <span class="nx">message</span> <span class="nx">as</span> <span class="nx">well</span> <span class="nx">as</span> <span class="nx">chat</span> <span class="nx">and</span> <span class="nx">data</span> <span class="nx">transfer</span><span class="p">,</span> <span class="nx">including</span> <span class="nx">file</span> <span class="nx">sharing</span><span class="p">.</span>
+      <div class="post-body"><p>Recently My Mac OSX has been crashed and somehow i cannot retrieve some of my data from hard drive.
+But i am fortunate that i have already synced important folder to the <code>Dropbox</code> that saves my head.</p>
+<p>Few days ago, i got a tweet from my favorite Github contributor <a href="https://twitter.com/tjholowaychuk">tj</a> (Creator of ExpressJs, Jade, Mocha)</p>
+<p><blockquote class="twitter-tweet"><p>haha dammit.. just rm -fr a project that isn&#39;t on github yet :( <a href="https://twitter.com/search?q=%23fail&amp;src=hash">#fail</a></p>&mdash; TJ Holowaychuk (@tjholowaychuk) <a href="https://twitter.com/tjholowaychuk/statuses/391262571350593536">October 18, 2013</a></blockquote></p>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>I am really sad about it. It can happen to anyone. So, whenever you started working on project(Pre-Github), You should consider sync to the <code>Dropbox</code>. Moreover it is always better and safer to sync important folder and files. It can be simply done by creating symbolic link to the folder in the <code>Dropbox</code>.</p>
+<p>Open <code>terminal</code> and do the following</p>
+<pre><code><div class="highlight"><pre><span class="err">##</span> <span class="nx">Go</span> <span class="nx">to</span> <span class="nx">dropbox</span> <span class="nx">folder</span><span class="p">.</span> <span class="nx">It</span> <span class="nx">can</span> <span class="nx">be</span> <span class="nx">any</span> <span class="nx">dropbox</span> <span class="nx">folder</span>
+<span class="nx">cd</span> <span class="o">~</span><span class="err">/Dropbox/MacOSX</span>
+
+<span class="err">#</span> <span class="nx">Create</span> <span class="nx">symbolic</span> <span class="nx">link</span> <span class="nx">to</span> <span class="nx">Stickies</span> <span class="nx">database</span>
+<span class="nx">ln</span> <span class="o">-</span><span class="nx">sf</span> <span class="o">~</span><span class="err">/Library/StickiesDatabase .</span>
+
+<span class="err">#</span> <span class="nx">Create</span> <span class="nx">symbolic</span> <span class="nx">link</span> <span class="nx">to</span> <span class="nx">Sublime</span> <span class="nx">text</span> <span class="nx">User</span> <span class="nx">data</span>
+<span class="nx">ln</span> <span class="o">-</span><span class="nx">sf</span> <span class="o">~</span><span class="err">/Library/Application\ Support/Sublime\ Text\ 3/Packages/User Sublime3-User</span>
 </pre></div>
 </code></pre>
-<p>IRC consists of channels. Channel is something like a chat room, but it will be dedicated for some technology or language, ex: #html, #css, #javascript, #go-lang. You can go to any channel and ask questions or just listen and learn from other&#39;s discussion.</p>
-<p>I am using <a href="http://webchat.freenode.net/">Freenode</a> which is a widely used open IRC server.
-Lets see how you can get started with IRC on <code>Freenode</code>.</p>
-<a name="register-your-nickname" class="anchor" href="#register-your-nickname"><h3>Register your nickname</h3>
-</a><p>In IRC, you will be addressed by your nickname. It is good to register your nick name.
-But it is not mandatory to register your nick name to access IRC channel.</p>
-<ol>
-<li>Visit <a href="http://webchat.freenode.net/"><a href="http://webchat.freenode.net/">http://webchat.freenode.net/</a></a></li>
-<li>Enter your nick name</li>
-<li>Enter <code>Captcha</code> and <code>Connect</code></li>
-</ol>
-<p>To register your nick name,</p>
-<pre><code><div class="highlight"><pre><span class="err">/msg NickServ REGISTER password youremail@example.com</span>
-</pre></div>
-</code></pre>
-<p>Once you registered, email is sent to you and just copy and paste the VERIFY command in IRC.
-Now you own the nick name, no one can use the same nick name. Even if someone try to use, it will
-be suffixed by underscore(_)</p>
-<a name="login-with-your-nick-name" class="anchor" href="#login-with-your-nick-name"><h3>Login with your nick name</h3>
-</a><p>Whenever you enter IRC, you have to identify your nickname with password by</p>
-<pre><code><div class="highlight"><pre><span class="err">/msg nickserv identify yourpassword</span>
-</pre></div>
-</code></pre>
-<a name="join-channel" class="anchor" href="#join-channel"><h3>Join Channel</h3>
-</a><p>If you want to go to particular channel, then type <code>/join #channelname</code>.
-Lets say if you want to go to <code>c</code> language channel, type <code>/join #c</code></p>
-<p>Incase you do not know the channel name, then go and search <a href="http://irc.netsplit.de/channels/">here</a></p>
-<p>Once you join the channel, you can ask questions or listen others.</p>
-<a name="other-useful-commands" class="anchor" href="#other-useful-commands"><h3>Other useful commands</h3>
-</a><pre><code><div class="highlight"><pre><span class="err">/msg &lt;name&gt;         - Sends a short message to a person privately.</span>
-<span class="o">/</span><span class="nx">whois</span> <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span>       <span class="o">-</span> <span class="nx">Get</span> <span class="nx">a</span> <span class="kr">short</span> <span class="nx">description</span> <span class="nx">of</span> <span class="nx">who</span> <span class="nx">a</span> <span class="nx">person</span> <span class="nx">is</span><span class="p">.</span>
-<span class="o">/</span><span class="nx">nick</span>  <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span>       <span class="o">-</span> <span class="nx">Change</span> <span class="nx">your</span> <span class="nx">nick</span> <span class="nx">name</span>
-<span class="o">/</span><span class="nx">me</span>                 <span class="o">-</span> <span class="nx">Sends</span> <span class="nx">an</span> <span class="nx">action</span> <span class="nx">to</span> <span class="nx">the</span> <span class="nx">channel</span><span class="p">.</span>
-<span class="o">/</span><span class="nx">away</span> <span class="o">&lt;</span><span class="nx">message</span><span class="o">&gt;</span>     <span class="o">-</span> <span class="nx">Sets</span> <span class="nx">an</span> <span class="nx">away</span> <span class="nx">message</span><span class="p">.</span>
-<span class="o">/</span><span class="nx">quit</span> <span class="o">&lt;</span><span class="nx">last</span> <span class="nx">words</span><span class="o">&gt;</span>  <span class="o">-</span> <span class="nx">Quits</span> <span class="nx">and</span> <span class="nx">allows</span> <span class="nx">you</span> <span class="nx">a</span> <span class="kr">final</span> <span class="nx">message</span> <span class="nx">before</span> <span class="nx">quitting</span><span class="p">.</span>
-<span class="o">/</span><span class="nx">clear</span>              <span class="o">-</span> <span class="nx">Clears</span> <span class="nx">a</span> <span class="nx">channel</span><span class="s1">&#39;s text.</span>
-<span class="s1">/clear all          - Clears a channel&#39;</span><span class="nx">s</span> <span class="nx">text</span><span class="p">.</span>
-</pre></div>
-</code></pre>
-<p>When you use IRC, you must follow some etiquette which is defined precisely by
-<a href="https://workaround.org/getting-help-on-irc">Christoph Haas</a>.</p>
-<p>Regarding IRC client, apart from web, there are other IRC client application available.
-You can checkout <a href="http://en.wikipedia.org/wiki/Comparison_of_Internet_Relay_Chat_clients">here</a></p>
-<p>IRC taught me a lot. I hope, you will feel the same after using it.
-Have a nice day.</p>
+<p>In symbolic link creation, you can use .(dot) in the last argument to use same folder or file name as original. Otherwise you can specify the name that you wanted to have in your <code>Dropbox</code>.</p>
+<p>Have a nice day.</p>
 </div>
-      <h4><a href="/blog/posts/Every-Programmer-should-use-IRC.html#comments">View comments</a></h4>
+      <h4><a href="/blog/posts/Dropbox-will-save-your-head.html#comments">View comments</a></h4>
       <ul class="pagination group">
         <li><a href="/">1</a>
         </li>
