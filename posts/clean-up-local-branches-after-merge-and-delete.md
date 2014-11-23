@@ -1,5 +1,5 @@
 ----
-title: GitHub - Clean up your local branches after merge and delete
+title: Clean up your local branches after merge and delete in GitHub
 date:   2014-11-23
 ----
 
