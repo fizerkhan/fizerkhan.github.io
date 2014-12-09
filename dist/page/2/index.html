@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf8">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="/images/cabin.png">
     <link href="/styles/main.css" rel="stylesheet">
     <title>Fizer Khan Blog</title>
@@ -13,176 +13,247 @@
       <ul class="nav-links">
         <li class="menu icon-menu"></li>
         <li class="text-link"><a href="/about.html">About</a></li>
+        <li class="text-link"><a href="/projects.html">Projects</a></li>
         <li class="text-link"><a href="/archives.html">Archives</a></li>
       </ul>
       <div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div>
     </nav>
     <div class="content">
-      <div class="post-head group"><a href="/blog/posts/Free-Static-Page-Hosting-on-Google-App-Engine-in-a-5-minutes.html">
-          <h1 class="post-title">Free Static Page Hosting on Google App Engine in a 5 minutes</h1></a>
-        <h2 class="post-date">2014 &#183; 2 &#183; 17</h2>
+      <div class="post-head group"><a href="/blog/posts/Commands-and-Options-I-Wish-I-Knew-Earlier-About-Git.html">
+          <h1 class="post-title">Commands and Options I Wish I Knew Earlier About Git</h1></a>
+        <h2 class="post-date">2014 &#183; 9 &#183; 29</h2>
       </div>
-      <div class="post-body"><p>Now-a-days we have a lot of options to deploy our applications. Some of them are
-Google App Engine, Google Compute Cloud, Amazon EC2, Heroku, Nodejitsu and much more.
-All the services have their advantages and disadvantages over others. Generally,
-we do not prefer much complex infrastructure or steps to deploy our static pages.
-Recently, I found that Google App engine has been a best platform for hosting our
-static web pages with decent free plan over other services. In this article,
-we will discuss a steps to host your static pages which can be personal blog, company site or even your client sites.</p>
-<a name="create-an-application-in-google-app-engine" class="anchor" href="#create-an-application-in-google-app-engine"><h3>Create an application in Google App Engine</h3>
-</a><p>Visit <a href="http://appengine.google.com">Google App Engine</a> and then create an application.
-When creating App engine application, the application id is very important. Because
-it acts as subdomain for your site. Lets say, application id is <code>coolmoon</code>, the site
-will be in <code>coolmoon.appspot.com</code>.</p>
-<a name="install-app-engine-sdk-for-python" class="anchor" href="#install-app-engine-sdk-for-python"><h3>Install App Engine SDK for python</h3>
-</a><p>Since <code>python</code> has been a best supported language in App Engine, Download and Install
-<a href="https://developers.google.com/appengine/downloads#Google_App_Engine_SDK_for_Python">App Engine SDK for python</a>. <code>Are you not a python developer(like me)?</code> Do not worry, you do not need to write a single piece of python code.</p>
-<p>You will use two commands from the SDK:</p>
-<pre><code><div class="highlight"><pre><span class="nx">dev_appserver</span><span class="p">.</span><span class="nx">py</span>  <span class="o">-</span>  <span class="nx">the</span> <span class="nx">development</span> <span class="nx">web</span> <span class="nx">server</span>
-<span class="nx">appcfg</span><span class="p">.</span><span class="nx">py</span>  <span class="o">-</span>  <span class="k">for</span> <span class="nx">uploading</span> <span class="nx">your</span> <span class="nx">app</span> <span class="nx">to</span> <span class="nx">App</span> <span class="nx">Engine</span>
+      <div class="post-body"><p><code>Git</code> becomes de facto of source code management (SCM) system among developers.
+Many developers used to work on git from console. Mostly used commands are
+<code>git status</code>, <code>git add</code>, <code>git commit</code> and <code>git push</code>.</p>
+<p>Apart from these commands, there are lot of useful commands in git.
+Initial days, i find difficulties in tracking changes made by me and my team mates
+couple of days or few weeks ago. Here we will see some of commands that are interesting and
+useful to your workflow.</p>
+<a name="-.-short-status-output" class="anchor" href="#-.-short-status-output"><h4>1. Short status output</h4>
+</a><p><code>git status</code> is mostly used command in <code>Git</code>. But it gives lot of
+information which is not useful for people who are proficient with git.
+If you are one among them, then use</p>
+<pre><code><div class="highlight"><pre><span class="nx">git</span> <span class="nx">status</span> <span class="o">-</span><span class="nx">sb</span>
 </pre></div>
 </code></pre>
-<a name="create-an-application-folder" class="anchor" href="#create-an-application-folder"><h3>Create an application folder</h3>
-</a><p>You have to create an application folder which has static files and configuration file to be deployed.
-The structure of the folder may be as follows</p>
-<pre><code><div class="highlight"><pre><span class="nx">application_folder</span><span class="o">/</span>
-  <span class="o">-</span> <span class="nx">app</span><span class="p">.</span><span class="nx">yaml</span>              <span class="err">#</span> <span class="nx">configuration</span> <span class="nx">file</span><span class="p">.</span> <span class="nx">we</span> <span class="nx">will</span> <span class="nx">see</span> <span class="k">in</span> <span class="nx">next</span> <span class="nx">section</span>
-  <span class="o">-</span> <span class="kr">public</span><span class="o">/</span>               <span class="err">#</span> <span class="kr">public</span> <span class="nx">folder</span> <span class="nx">will</span> <span class="nx">contain</span> <span class="kr">static</span> <span class="nx">files</span>
-    <span class="o">-</span> <span class="nx">index</span><span class="p">.</span><span class="nx">html</span>
-    <span class="o">-</span> <span class="nx">js</span><span class="o">/</span>
-    <span class="o">-</span> <span class="nx">css</span><span class="o">/</span>
-    <span class="o">-</span> <span class="nx">img</span><span class="o">/</span>
-</pre></div>
-</code></pre>
-<a name="content-of-app-engine-configuration-app.yaml-" class="anchor" href="#content-of-app-engine-configuration-app.yaml-"><h3>Content of App Engine configuration(app.yaml)</h3>
-</a><pre><code><div class="highlight"><pre>  <span class="nx">application</span><span class="o">:</span> <span class="nx">coolmoon</span>
-  <span class="nx">version</span><span class="o">:</span> <span class="mi">1</span>
-  <span class="nx">runtime</span><span class="o">:</span> <span class="nx">python27</span>
-  <span class="nx">api_version</span><span class="o">:</span> <span class="mi">1</span>
-  <span class="nx">threadsafe</span><span class="o">:</span> <span class="nx">yes</span>
+<a name="-.-view-changes-by-revision" class="anchor" href="#-.-view-changes-by-revision"><h4>2. View changes by revision</h4>
+</a><p>If you want to view changes made at particular revision</p>
+<pre><code><div class="highlight"><pre>  <span class="nx">git</span> <span class="nx">show</span> <span class="o">&lt;</span><span class="nx">revision</span><span class="o">&gt;</span>
 
-  <span class="nx">handlers</span><span class="o">:</span>
-
-  <span class="o">-</span> <span class="nx">url</span><span class="o">:</span> <span class="err">/(.+)</span>
-    <span class="nx">static_files</span><span class="o">:</span> <span class="kr">public</span><span class="o">/</span><span class="err">\</span><span class="mi">1</span>
-    <span class="nx">upload</span><span class="o">:</span> <span class="kr">public</span><span class="o">/</span><span class="p">(.</span><span class="o">*</span><span class="p">)</span>
-
-  <span class="o">-</span> <span class="nx">url</span><span class="o">:</span> <span class="err">/</span>
-    <span class="nx">static_files</span><span class="o">:</span> <span class="kr">public</span><span class="o">/</span><span class="nx">index</span><span class="p">.</span><span class="nx">html</span>
-    <span class="nx">upload</span><span class="o">:</span> <span class="kr">public</span><span class="o">/</span><span class="nx">index</span><span class="p">.</span><span class="nx">html</span>
-
-  <span class="nx">skip_files</span><span class="o">:</span>
-  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?app\.yaml</span>
-  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?app\.yml</span>
-  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?#.*#</span>
-  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?.*~</span>
-  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?.*\.py[co]</span>
-  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?.*/RCS/.*</span>
-  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?\..*</span>
-  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?tests$</span>
-  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?test$</span>
-  <span class="o">-</span> <span class="o">^</span><span class="nx">test</span><span class="o">/</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?</span>
-  <span class="o">-</span> <span class="o">^</span><span class="nx">COPYING</span><span class="p">.</span><span class="nx">LESSER</span>
-  <span class="o">-</span> <span class="o">^</span><span class="nx">README</span><span class="err">\</span><span class="p">..</span><span class="o">*</span>
-  <span class="o">-</span> <span class="err">\</span><span class="p">.</span><span class="nx">gitignore</span>
-  <span class="o">-</span> <span class="o">^</span><span class="err">\</span><span class="p">.</span><span class="nx">git</span><span class="o">/</span><span class="p">.</span><span class="o">*</span>
-  <span class="o">-</span> <span class="err">\</span><span class="p">.</span><span class="o">*</span><span class="err">\</span><span class="p">.</span><span class="nx">lint$</span>
-  <span class="o">-</span> <span class="o">^</span><span class="nx">fabfile</span><span class="err">\</span><span class="p">.</span><span class="nx">py</span>
-  <span class="o">-</span> <span class="o">^</span><span class="nx">testrunner</span><span class="err">\</span><span class="p">.</span><span class="nx">py</span>
-  <span class="o">-</span> <span class="o">^</span><span class="nx">grunt</span><span class="err">\</span><span class="p">.</span><span class="nx">js</span>
-  <span class="o">-</span> <span class="o">^</span><span class="nx">node_modules</span><span class="o">/</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?</span>
+  <span class="nx">git</span> <span class="nx">show</span> <span class="nx">df2edcd</span>
+  <span class="p">(</span><span class="nx">or</span><span class="p">)</span>
+  <span class="nx">git</span> <span class="nx">show</span> <span class="nx">HEAD</span>     <span class="err">#</span><span class="nx">HEAD</span> <span class="nx">means</span> <span class="nx">latest</span> <span class="nx">commit</span>
+  <span class="p">(</span><span class="nx">or</span><span class="p">)</span>
+  <span class="nx">git</span> <span class="nx">show</span> <span class="nx">HEAD</span><span class="o">~</span><span class="mi">1</span>   <span class="err">#</span><span class="nx">HEAD</span><span class="o">~</span><span class="mi">1</span> <span class="nx">means</span> <span class="nx">commit</span> <span class="nx">before</span> <span class="nx">the</span> <span class="nx">commit</span> <span class="nx">that</span> <span class="nx">HEAD</span> <span class="nx">currently</span> <span class="nx">points</span> <span class="nx">at</span>
 </pre></div>
 </code></pre>
-<a name="test-static-pages" class="anchor" href="#test-static-pages"><h3>Test static pages</h3>
-</a><p>You can run development server locally and check your static pages by following command</p>
-<pre><code><div class="highlight"><pre> <span class="nx">dev_appserver</span><span class="p">.</span><span class="nx">py</span> <span class="p">.</span><span class="o">/</span>
+<p>In case, you want to view only changed file name, not the contents, Use <code>--name-only</code> option</p>
+<pre><code><div class="highlight"><pre>  <span class="nx">git</span> <span class="nx">show</span> <span class="o">--</span><span class="nx">name</span><span class="o">-</span><span class="nx">only</span>  <span class="nx">df2edcd</span>
+  <span class="p">(</span><span class="nx">or</span><span class="p">)</span>
+  <span class="nx">git</span> <span class="nx">show</span> <span class="o">--</span><span class="nx">name</span><span class="o">-</span><span class="nx">only</span> <span class="o">--</span><span class="nx">oneline</span> <span class="nx">df2edcd</span>
+  <span class="p">(</span><span class="nx">or</span><span class="p">)</span>
+  <span class="nx">git</span> <span class="nx">show</span> <span class="o">--</span><span class="nx">name</span><span class="o">-</span><span class="nx">only</span>  <span class="o">--</span><span class="nx">pretty</span><span class="o">=</span><span class="s2">&quot;format:&quot;</span> <span class="nx">df2edcd</span>
 </pre></div>
 </code></pre>
-<p>Visit <code>http://localhost:8080</code> to test your pages.</p>
-<a name="deploy" class="anchor" href="#deploy"><h3>Deploy</h3>
-</a><p>Everything is perfect and deploy the static pages. The command <code>appcfg.py</code> is used for deploy the application to Google App engine</p>
-<pre><code><div class="highlight"><pre><span class="nx">appcfg</span><span class="p">.</span><span class="nx">py</span> <span class="nx">update</span> <span class="p">.</span>
+<a name="-.-view-changes-of-specific-file" class="anchor" href="#-.-view-changes-of-specific-file"><h4>3. View changes of specific file</h4>
+</a><p>If you want to view changes of specific file, then</p>
+<pre><code><div class="highlight"><pre>  <span class="nx">git</span> <span class="nx">show</span> <span class="nx">df2edcd</span><span class="o">:</span><span class="nx">app</span><span class="o">/</span><span class="nx">index</span><span class="p">.</span><span class="nx">html</span>
+  <span class="p">(</span><span class="nx">or</span><span class="p">)</span>
+  <span class="nx">git</span> <span class="nx">show</span> <span class="nx">HEAD</span><span class="o">~</span><span class="mi">1</span><span class="o">:</span><span class="nx">app</span><span class="o">/</span><span class="nx">index</span><span class="p">.</span><span class="nx">html</span>
+
+  <span class="nx">git</span> <span class="nx">show</span> <span class="err">@</span><span class="p">{</span><span class="mi">22</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">2014</span><span class="p">}</span><span class="o">:</span><span class="nx">app</span><span class="o">/</span><span class="nx">index</span><span class="p">.</span><span class="nx">html</span>
 </pre></div>
 </code></pre>
-<p>It will ask for <code>email</code> and <code>password</code> of your Google account. The password must be
-application specific password. To know how to generate application specific password,
-please refer <a href="https://support.google.com/accounts/answer/185833?hl=en">Application specific password</a>.</p>
-<a name="you-ve-made-it" class="anchor" href="#you-ve-made-it"><h3>You&#39;ve made it</h3>
-</a><p>Finally you got your site hosted in <code>&lt;application-id&gt;.appspot.com</code>.
-Static hosting is super easy with App Engine. Moreover it is faster than other static
-hosting services. Because it runs on Google infrastructure.</p>
-<p>Happy static hosting and Have a nice day.</p>
+<a name="-.-search-for-commit-message" class="anchor" href="#-.-search-for-commit-message"><h4>4. Search for commit message</h4>
+</a><p>You want to search a commit which message matches a regex</p>
+<pre><code><div class="highlight"><pre>  <span class="nx">git</span> <span class="nx">show</span> <span class="o">:</span><span class="err">/fixed</span>
+  <span class="err">#</span> <span class="nx">shows</span> <span class="nx">the</span> <span class="nx">last</span> <span class="nx">commit</span> <span class="nx">which</span> <span class="nx">has</span> <span class="nx">the</span> <span class="nx">word</span> <span class="s2">&quot;fixed&quot;</span> <span class="k">in</span> <span class="nx">its</span> <span class="nx">message</span>
+
+  <span class="nx">git</span> <span class="nx">show</span> <span class="o">:</span><span class="err">/analytics</span>
+  <span class="err">#</span> <span class="nx">shows</span> <span class="nx">the</span> <span class="nx">last</span> <span class="nx">commit</span> <span class="nx">which</span> <span class="nx">has</span> <span class="nx">the</span> <span class="nx">word</span> <span class="s2">&quot;analytics&quot;</span> <span class="k">in</span> <span class="nx">its</span> <span class="nx">message</span>
+</pre></div>
+</code></pre>
+<a name="-.-list-all-files-that-were-modified-or-added-in-this-time" class="anchor" href="#-.-list-all-files-that-were-modified-or-added-in-this-time"><h4>5. list all files that were modified or added in this time</h4>
+</a><p>List all files added/modified 9 days ago</p>
+<pre><code><div class="highlight"><pre>  <span class="nx">git</span> <span class="nx">diff</span> <span class="s2">&quot;@{9 days ago}&quot;</span>
+  <span class="nx">git</span> <span class="nx">diff</span> <span class="o">--</span><span class="nx">name</span><span class="o">-</span><span class="nx">only</span> <span class="s2">&quot;@{9 days ago}&quot;</span>
+  <span class="nx">git</span> <span class="nx">diff</span> <span class="o">--</span><span class="nx">name</span><span class="o">-</span><span class="nx">status</span> <span class="s2">&quot;@{9 days ago}&quot;</span>
+</pre></div>
+</code></pre>
+<p>List all files added/modified between 9 days ago and 6 days ago</p>
+<pre><code><div class="highlight"><pre>  <span class="nx">git</span> <span class="nx">diff</span> <span class="s2">&quot;@{9 days ago}&quot;</span> <span class="s2">&quot;@{6 days ago}&quot;</span>
+  <span class="nx">git</span> <span class="nx">diff</span> <span class="o">--</span><span class="nx">name</span><span class="o">-</span><span class="nx">only</span> <span class="s2">&quot;@{9 days ago}&quot;</span> <span class="s2">&quot;@{6 days ago}&quot;</span>
+  <span class="nx">git</span> <span class="nx">diff</span> <span class="o">--</span><span class="nx">name</span><span class="o">-</span><span class="nx">status</span> <span class="s2">&quot;@{9 days ago}&quot;</span> <span class="s2">&quot;@{6 days ago}&quot;</span>
+</pre></div>
+</code></pre>
+<a name="-.-changes-between-two-commit-revision" class="anchor" href="#-.-changes-between-two-commit-revision"><h4>6. Changes between two commit revision</h4>
+</a><p>List all files between two commits adab4ab and 6da161b</p>
+<pre><code><div class="highlight"><pre>  <span class="nx">git</span> <span class="nx">diff</span> <span class="nx">adab4ab</span><span class="o">^</span> <span class="mi">6</span><span class="nx">da161b</span>
+  <span class="nx">git</span> <span class="nx">diff</span> <span class="o">--</span><span class="nx">name</span><span class="o">-</span><span class="nx">only</span> <span class="nx">adab4ab</span><span class="o">^</span> <span class="mi">6</span><span class="nx">da161b</span>
+  <span class="nx">git</span> <span class="nx">diff</span> <span class="o">--</span><span class="nx">name</span><span class="o">-</span><span class="nx">status</span> <span class="nx">adab4ab</span><span class="o">^</span> <span class="mi">6</span><span class="nx">da161b</span>
+</pre></div>
+</code></pre>
+<p>Hope it useful. Share your favorite commands in comments.
+Happy commit and have a nice day.</p>
 </div>
-      <h4><a href="/blog/posts/Free-Static-Page-Hosting-on-Google-App-Engine-in-a-5-minutes.html#comments">View comments</a></h4>
-      <div class="post-head group"><a href="/blog/posts/Things-you-should-consider-for-MongoDB-in-production.html">
-          <h1 class="post-title">Things you should consider for MongoDB in production</h1></a>
-        <h2 class="post-date">2013 &#183; 11 &#183; 4</h2>
+      <h4><a href="/blog/posts/Commands-and-Options-I-Wish-I-Knew-Earlier-About-Git.html#comments">View comments</a></h4>
+      <div class="post-head group"><a href="/blog/posts/Fix-Shellshock-Bash-Vulnerability-in-OSX-Bash.html">
+          <h1 class="post-title">Fix Shellshock Bash Vulnerability in OSX Bash</h1></a>
+        <h2 class="post-date">2014 &#183; 9 &#183; 27</h2>
       </div>
-      <div class="post-body"><p>We are using MongoDB for few of our products. We like to share some of the
-recommendations for MongoDB in production.</p>
-<a name="handle-connection-errors" class="anchor" href="#handle-connection-errors"><h3>Handle Connection Errors</h3>
-</a><p>Few weeks before, we faced one weird problem in our NodeJS  application.
-Our customer can view our site and not able to login into the application.
-We tried to figure out the issue and found that MongoDB database connection is
-broken during mid night. After that, our application is not crashed,
-but it is failed to connect MongoDB. We assume that it should auto reconnect if it is failed.
-But it does not happen. Finally we found that we did not handle error of MongoDB
-connection in our code.</p>
-<p>You must handle error of MongoDB connection in you code. It can be even simple console log.</p>
-<pre><code><div class="highlight"><pre> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">connection</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">console</span><span class="p">,</span> <span class="s1">&#39;MongoDB connection error:&#39;</span><span class="p">));</span>
+      <div class="post-body"><p>GNU Bash vulnerability, referred to as <strong>Shellshock</strong> or the <strong>Bash Bug</strong>, was found on Sep 24, 2014.
+The <strong>Shellshock</strong> vulnerability is very widespread and even more so than the OpenSSL Heartbleed bug
+ So it is highly recommended that affected systems are properly updated to fix or mitigate the vulnerability as soon as possible.</p>
+<a name="what-is-shellshock" class="anchor" href="#what-is-shellshock"><h3>What is Shellshock</h3>
+</a><pre><code><div class="highlight"><pre><span class="nx">GNU</span> <span class="nx">Bash</span> <span class="nx">through</span> <span class="mf">4.3</span> <span class="nx">processes</span> <span class="nx">trailing</span> <span class="nx">strings</span> <span class="nx">after</span> <span class="kd">function</span> <span class="nx">definitions</span> <span class="k">in</span> <span class="nx">the</span> <span class="nx">values</span> <span class="nx">of</span> <span class="nx">environment</span> <span class="nx">variables</span><span class="p">,</span> <span class="nx">which</span> <span class="nx">allows</span> <span class="nx">remote</span> <span class="nx">attackers</span> <span class="nx">to</span> <span class="nx">execute</span> <span class="nx">arbitrary</span> <span class="nx">code</span> <span class="nx">via</span> <span class="nx">a</span> <span class="nx">crafted</span> <span class="nx">environment</span><span class="p">,</span> <span class="nx">as</span> <span class="nx">demonstrated</span> <span class="nx">by</span> <span class="nx">vectors</span> <span class="nx">involving</span> <span class="nx">the</span> <span class="nx">ForceCommand</span> <span class="nx">feature</span> <span class="k">in</span> <span class="nx">OpenSSH</span> <span class="nx">sshd</span><span class="p">,</span> <span class="nx">the</span> <span class="nx">mod_cgi</span> <span class="nx">and</span> <span class="nx">mod_cgid</span> <span class="nx">modules</span> <span class="k">in</span> <span class="nx">the</span> <span class="nx">Apache</span> <span class="nx">HTTP</span> <span class="nx">Server</span><span class="p">,</span> <span class="nx">scripts</span> <span class="nx">executed</span> <span class="nx">by</span> <span class="nx">unspecified</span> <span class="nx">DHCP</span> <span class="nx">clients</span><span class="p">,</span> <span class="nx">and</span> <span class="nx">other</span> <span class="nx">situations</span> <span class="k">in</span> <span class="nx">which</span> <span class="nx">setting</span> <span class="nx">the</span> <span class="nx">environment</span> <span class="nx">occurs</span> <span class="nx">across</span> <span class="nx">a</span> <span class="nx">privilege</span> <span class="nx">boundary</span> <span class="nx">from</span> <span class="nx">Bash</span> <span class="nx">execution</span><span class="p">.</span>
 </pre></div>
 </code></pre>
-<p>If you are using NodeJS, you must handle <code>error</code> and <code>exception</code> in all places.
-It is a best practice.</p>
-<a name="setting-timeout" class="anchor" href="#setting-timeout"><h3>Setting Timeout</h3>
-</a><p>You have to properly set your timeouts. The driver&#39;s default timeouts are very aggressive ranges anywhere from 1 second (e.g. the Node.JS driver in some cases) to 30 seconds (e.g  the Ruby driver), so you really need to think about what the optimal setting is for your use case.</p>
-<p>For connections made through a Platform-as-a-Serivce (PaaS) such as Heroku, you might consider an even higher timeout (e.g. 30 seconds) since your application is likely running in a container that can be “idled” or “passivated” during periods of low activity</p>
-<p>If you use Mongoose and NodeJS, then you can set connection timeout by</p>
-<pre><code><div class="highlight"><pre><span class="c1">// Database connect options</span>
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">replset</span><span class="o">:</span> <span class="p">{</span> <span class="nx">socketOptions</span><span class="o">:</span> <span class="p">{</span> <span class="nx">connectTimeoutMS</span> <span class="o">:</span> <span class="nx">conf</span><span class="p">.</span><span class="nx">dbTimeout</span> <span class="p">}}};</span>
-
-<span class="c1">// Establish Database connection</span>
-<span class="kd">var</span> <span class="nx">conn</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">conf</span><span class="p">.</span><span class="nx">dbURL</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+<p>To know more about <strong>Shellshock</strong>, read an amazing <a href="http://www.troyhunt.com/2014/09/everything-you-need-to-know-about.html">article from Troy Hunt</a></p>
+<a name="check-system-vulnerability" class="anchor" href="#check-system-vulnerability"><h3>Check System Vulnerability</h3>
+</a><p>You can check the system for Shellshock vulnerability by running following command in bash</p>
+<pre><code><div class="highlight"><pre><span class="nx">env</span> <span class="nx">Y</span><span class="o">=</span><span class="s1">&#39;() { :;}; echo I am vulnerable!&#39;</span> <span class="nx">bash</span> <span class="o">-</span><span class="nx">c</span> <span class="s2">&quot;echo This is Bash&quot;</span>
 </pre></div>
 </code></pre>
-<p><a href="https://mongolab.com/">MongoLab</a> has written very good article on <a href="http://blog.mongolab.com/2013/10/do-you-want-a-timeout/">MongoDB Timeout</a></p>
-<a name="connection-polling" class="anchor" href="#connection-polling"><h3>Connection Polling</h3>
-</a><p>You should consider using connection pooling. It will make for a much faster and
-more stable application. You won&#39;t spend the time on each request to create connections (can be noticeable to the end user) and you aren&#39;t subject to connect errors either.</p>
-<p>The <code>mongoose</code> package for NodeJS handles connection pooling by default. If you use your own
-MongoDB driver, make sure you have implemented connection pooling.</p>
-<p>Thanks to <a href="https://mongolab.com/">MongoLab</a> for sharing amazing tips of MongoDB with us.
-The support of MongoLab is awesome and respond for questions very quickly. I highly recommending for MongoDB database.</p>
-<p>Have a nice day.</p>
+<p>If your version of Bash is vulnerable, then you will see following output</p>
+<pre><code><div class="highlight"><pre><span class="nx">I</span> <span class="nx">am</span> <span class="nx">vulnerable</span>
+<span class="nx">This</span> <span class="nx">is</span> <span class="nx">Bash</span>
+</pre></div>
+</code></pre>
+<p>Instead of <strong>echo I am vulnerable!</strong> portion, attacker can run any command;
+arbitrary code following a function definition within an environment variable assignment.
+If your system don&#39;t have Shellshock vulnerability, then you will see following output</p>
+<pre><code><div class="highlight"><pre><span class="nx">bash</span><span class="o">:</span> <span class="nx">warning</span><span class="o">:</span> <span class="nx">Y</span><span class="o">:</span> <span class="nx">ignoring</span> <span class="kd">function</span> <span class="nx">definition</span> <span class="nx">attempt</span>
+<span class="nx">bash</span><span class="o">:</span> <span class="nx">error</span> <span class="nx">importing</span> <span class="kd">function</span> <span class="nx">definition</span> <span class="k">for</span> <span class="err">`</span><span class="nx">Y</span><span class="err">&#39;</span>
+<span class="nx">This</span> <span class="nx">is</span> <span class="nx">Bash</span>
+</pre></div>
+</code></pre>
+<a name="how-to-fix-in-mac-osx" class="anchor" href="#how-to-fix-in-mac-osx"><h3>How to fix in Mac OSX</h3>
+</a><p>If your bash is vulnerable, then  you can install latest version of bash as follows, provided that you have XCode installed,</p>
+<pre><code><div class="highlight"><pre><span class="nx">$</span> <span class="nx">mkdir</span> <span class="nx">bash</span><span class="o">-</span><span class="nx">fix</span>
+<span class="nx">$</span> <span class="nx">cd</span> <span class="nx">bash</span><span class="o">-</span><span class="nx">fix</span>
+<span class="nx">$</span> <span class="nx">curl</span> <span class="nx">https</span><span class="o">:</span><span class="c1">//opensource.apple.com/tarballs/bash/bash-92.tar.gz | tar zxf -</span>
+<span class="nx">$</span> <span class="nx">cd</span> <span class="nx">bash</span><span class="o">-</span><span class="mi">92</span><span class="o">/</span><span class="nx">bash</span><span class="o">-</span><span class="mf">3.2</span>
+<span class="nx">$</span> <span class="nx">curl</span> <span class="nx">https</span><span class="o">:</span><span class="c1">//ftp.gnu.org/pub/gnu/bash/bash-3.2-patches/bash32-052 | patch -p0</span>
+<span class="nx">$</span> <span class="nx">curl</span> <span class="nx">https</span><span class="o">:</span><span class="c1">//ftp.gnu.org/pub/gnu/bash/bash-3.2-patches/bash32-053 | patch -p0</span>
+<span class="nx">$</span> <span class="nx">cd</span> <span class="p">..</span>
+<span class="nx">$</span> <span class="nx">sudo</span> <span class="nx">xcodebuild</span>
+<span class="nx">$</span> <span class="nx">sudo</span> <span class="nx">cp</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">bash</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">bash</span><span class="p">.</span><span class="nx">old</span>
+<span class="nx">$</span> <span class="nx">sudo</span> <span class="nx">cp</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">sh</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">sh</span><span class="p">.</span><span class="nx">old</span>
+<span class="nx">$</span> <span class="nx">build</span><span class="o">/</span><span class="nx">Release</span><span class="o">/</span><span class="nx">bash</span> <span class="o">--</span><span class="nx">version</span> <span class="err">#</span> <span class="nx">GNU</span> <span class="nx">bash</span><span class="p">,</span> <span class="nx">version</span> <span class="mf">3.2</span><span class="p">.</span><span class="mi">53</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="nx">release</span>
+<span class="nx">$</span> <span class="nx">build</span><span class="o">/</span><span class="nx">Release</span><span class="o">/</span><span class="nx">sh</span> <span class="o">--</span><span class="nx">version</span>   <span class="err">#</span> <span class="nx">GNU</span> <span class="nx">bash</span><span class="p">,</span> <span class="nx">version</span> <span class="mf">3.2</span><span class="p">.</span><span class="mi">53</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="nx">release</span>
+<span class="nx">$</span> <span class="nx">sudo</span> <span class="nx">cp</span> <span class="nx">build</span><span class="o">/</span><span class="nx">Release</span><span class="o">/</span><span class="nx">bash</span> <span class="o">/</span><span class="nx">bin</span>
+<span class="nx">$</span> <span class="nx">sudo</span> <span class="nx">cp</span> <span class="nx">build</span><span class="o">/</span><span class="nx">Release</span><span class="o">/</span><span class="nx">sh</span> <span class="o">/</span><span class="nx">bin</span>
+</pre></div>
+</code></pre>
+<p>Once you installed, check your bash version(<code>bash --version</code>), it should be
+<code>GNU bash, version 3.2.53(1)-release</code></p>
+<p>For security reason, you have to remove the executable permission from older bash</p>
+<pre><code><div class="highlight"><pre><span class="nx">$</span> <span class="nx">sudo</span> <span class="nx">chmod</span> <span class="nx">a</span><span class="o">-</span><span class="nx">x</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">bash</span><span class="p">.</span><span class="nx">old</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">sh</span><span class="p">.</span><span class="nx">old</span>
+</pre></div>
+</code></pre>
+<p>That&#39;s it. Keep in mind that this fix is temporary.
+We have to wait for real fix until apple releases it.</p>
+<p>If you using Linux distribution, please read <a href="https://www.digitalocean.com/community/tutorials/how-to-protect-your-server-against-the-shellshock-bash-vulnerability">Digital Ocean blog on Shellshock</a></p>
+<a name="kudos" class="anchor" href="#kudos"><h3>Kudos</h3>
+</a><ul>
+<li><a href="http://apple.stackexchange.com/questions/146849/how-do-i-recompile-bash-to-avoid-shellshock-the-remote-exploit-cve-2014-6271-an">AlBlue at stackexchange</a></li>
+<li><a href="http://www.troyhunt.com/">Troy Hunt</a></li>
+</ul>
 </div>
-      <h4><a href="/blog/posts/Things-you-should-consider-for-MongoDB-in-production.html#comments">View comments</a></h4>
-      <div class="post-head group"><a href="/blog/posts/Dropbox-will-save-your-head.html">
-          <h1 class="post-title">Dropbox will save your head</h1></a>
-        <h2 class="post-date">2013 &#183; 11 &#183; 4</h2>
+      <h4><a href="/blog/posts/Fix-Shellshock-Bash-Vulnerability-in-OSX-Bash.html#comments">View comments</a></h4>
+      <div class="post-head group"><a href="/blog/posts/Download-a-file-without-server-request.html">
+          <h1 class="post-title">Download a file without server request</h1></a>
+        <h2 class="post-date">2014 &#183; 8 &#183; 1</h2>
       </div>
-      <div class="post-body"><p>Recently My Mac OSX has been crashed and somehow i cannot retrieve some of my data from hard drive.
-But i am fortunate that i have already synced important folder to the <code>Dropbox</code> that saves my head.</p>
-<p>Few days ago, i got a tweet from my favorite Github contributor <a href="https://twitter.com/tjholowaychuk">tj</a> (Creator of ExpressJs, Jade, Mocha)</p>
-<p><blockquote class="twitter-tweet"><p>haha dammit.. just rm -fr a project that isn&#39;t on github yet :( <a href="https://twitter.com/search?q=%23fail&amp;src=hash">#fail</a></p>&mdash; TJ Holowaychuk (@tjholowaychuk) <a href="https://twitter.com/tjholowaychuk/statuses/391262571350593536">October 18, 2013</a></blockquote></p>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <div class="post-body"><p>We have come across <code>Download file</code> link(button) in lot of sites. Generally, When you click <code>download</code> link or button, it sends <code>GET</code> request to server and server returns the downloadable content(with <code>content-disposition</code> header). Now-a-days we are building lot of Single Page application where we get the <code>JSON</code> payload from the server and render it in the client side.
+Since we have the data in the client side, we don&#39;t want to sent another request to download the content. So we will see how to download the content from the client side
+without an extra request to server.</p>
+<a name="how-existing-download-from-server-works" class="anchor" href="#how-existing-download-from-server-works"><h3>How existing download from server works</h3>
+</a><p>Whenever you click the <code>download</code> link, it will send <code>GET</code> request. The server will
+set <code>Content-disposition</code> header to <code>attachment; filename=some-filename.csv</code> and set the data in the body.</p>
+<p><strong>Sample code from Node.js to download CSV file</strong></p>
+<pre><code class="lang-javascript"><div class="highlight"><pre><span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">response</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="s1">&#39;Content-disposition&#39;</span><span class="p">,</span> <span class="s1">&#39;attachment; filename=some-filename.csv&#39;</span><span class="p">);</span>
+    <span class="nx">response</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span>
+        <span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;text/csv&#39;</span>
+    <span class="p">});</span>
 
+    <span class="nx">csv</span><span class="p">().</span><span class="nx">from</span><span class="p">(</span><span class="nx">data</span><span class="p">).</span><span class="nx">to</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span>
 
-<p>I am really sad about it. It can happen to anyone. So, whenever you started working on project(Pre-Github), You should consider sync to the <code>Dropbox</code>. Moreover it is always better and safer to sync important folder and files. It can be simply done by creating symbolic link to the folder in the <code>Dropbox</code>.</p>
-<p>Open <code>terminal</code> and do the following</p>
-<pre><code><div class="highlight"><pre><span class="err">##</span> <span class="nx">Go</span> <span class="nx">to</span> <span class="nx">dropbox</span> <span class="nx">folder</span><span class="p">.</span> <span class="nx">It</span> <span class="nx">can</span> <span class="nx">be</span> <span class="nx">any</span> <span class="nx">dropbox</span> <span class="nx">folder</span>
-<span class="nx">cd</span> <span class="o">~</span><span class="err">/Dropbox/MacOSX</span>
-
-<span class="err">#</span> <span class="nx">Create</span> <span class="nx">symbolic</span> <span class="nx">link</span> <span class="nx">to</span> <span class="nx">Stickies</span> <span class="nx">database</span>
-<span class="nx">ln</span> <span class="o">-</span><span class="nx">sf</span> <span class="o">~</span><span class="err">/Library/StickiesDatabase .</span>
-
-<span class="err">#</span> <span class="nx">Create</span> <span class="nx">symbolic</span> <span class="nx">link</span> <span class="nx">to</span> <span class="nx">Sublime</span> <span class="nx">text</span> <span class="nx">User</span> <span class="nx">data</span>
-<span class="nx">ln</span> <span class="o">-</span><span class="nx">sf</span> <span class="o">~</span><span class="err">/Library/Application\ Support/Sublime\ Text\ 3/Packages/User Sublime3-User</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
 </pre></div>
 </code></pre>
-<p>In symbolic link creation, you can use .(dot) in the last argument to use same folder or file name as original. Otherwise you can specify the name that you wanted to have in your <code>Dropbox</code>.</p>
-<p>Have a nice day.</p>
+<a name="download-content-without-server-request" class="anchor" href="#download-content-without-server-request"><h3>Download content without server request</h3>
+</a><p>This can be done by two ways.</p>
+<ol>
+<li>Using Data URL</li>
+<li>Using <a href="https://github.com/dcneiner/Downloadify">Downloadify</a> library</li>
+</ol>
+<p><strong>Using Data URI</strong></p>
+<p>The data should be placed in the <code>href</code> attribute with data url format. You can also set
+the filename in the <code>download</code> attribute.</p>
+<pre><code class="lang-html"><div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;data:text/plain,this is some text&quot;</span> <span class="na">download=</span><span class="s">&quot;some-filename.txt&quot;</span> <span class="na">target=</span><span class="s">&quot;_blank&quot;</span><span class="nt">&gt;</span>Download<span class="nt">&lt;a&gt;</span>
+</pre></div>
+</code></pre>
+<p><strong>Caution:</strong> The data url is not supported across all browser/version combinations.</p>
+<p><strong>Using Downloadify</strong></p>
+<p><a href="https://github.com/dcneiner/Downloadify">Downloadify</a> is a tiny javascript + Flash library that enables the creation and download of text files without server interaction. It works even in IE.
+It is much better than previous one.</p>
+<p><strong>Usage:</strong></p>
+<pre><code><div class="highlight"><pre><span class="c1">// Any JavaScript framework:</span>
+<span class="nx">Downloadify</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span> <span class="nx">id_or_DOM_element</span><span class="p">,</span> <span class="nx">options</span> <span class="p">);</span>
+
+<span class="c1">// With Jquery</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#element&quot;</span><span class="p">).</span><span class="nx">downloadify</span><span class="p">(</span> <span class="nx">options</span> <span class="p">);</span>
+</pre></div>
+</code></pre>
+<p><strong>HTML</strong></p>
+<pre><code class="lang-html"><div class="highlight"><pre><span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;js/swfobject.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;js/downloadify.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body</span> <span class="na">onload=</span><span class="s">&quot;load();&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;form&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span> <span class="na">value=</span><span class="s">&quot;testfile.txt&quot;</span> <span class="na">id=</span><span class="s">&quot;filename&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;textarea</span> <span class="na">cols=</span><span class="s">&quot;60&quot;</span> <span class="na">rows=</span><span class="s">&quot;10&quot;</span> <span class="na">name=</span><span class="s">&quot;data&quot;</span> <span class="na">id=</span><span class="s">&quot;data&quot;</span><span class="nt">&gt;</span>
+        Whatever you put in this text box will be downloaded and saved in the file. If you leave it blank, no file will be downloaded
+    <span class="nt">&lt;/textarea&gt;</span>
+    <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;downloadify&quot;</span><span class="nt">&gt;</span>
+      You must have Flash 10 installed to download this file.
+    <span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+</pre></div>
+</code></pre>
+<p><strong>Javascript</strong></p>
+<pre><code class="lang-javascript"><div class="highlight"><pre><span class="kd">function</span> <span class="nx">load</span><span class="p">(){</span>
+      <span class="nx">Downloadify</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;downloadify&#39;</span><span class="p">,{</span>
+        <span class="nx">filename</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+          <span class="k">return</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;filename&#39;</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span>
+        <span class="p">},</span>
+        <span class="nx">data</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+          <span class="k">return</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span>
+        <span class="p">},</span>
+        <span class="nx">onComplete</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span> <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Your File Has Been Saved!&#39;</span><span class="p">);</span> <span class="p">},</span>
+        <span class="nx">onCancel</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span> <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;You have cancelled the saving of this file.&#39;</span><span class="p">);</span> <span class="p">},</span>
+        <span class="nx">onError</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span> <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;You must put something in the File Contents or there will be nothing to save!&#39;</span><span class="p">);</span> <span class="p">},</span>
+        <span class="nx">swf</span><span class="o">:</span> <span class="s1">&#39;media/downloadify.swf&#39;</span><span class="p">,</span>
+        <span class="nx">downloadImage</span><span class="o">:</span> <span class="s1">&#39;images/download.png&#39;</span><span class="p">,</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="nx">height</span><span class="o">:</span> <span class="mi">30</span><span class="p">,</span>
+        <span class="nx">transparent</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nx">append</span><span class="o">:</span> <span class="kc">false</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+</pre></div>
+</code></pre>
+<p>A <a href="http://pixelgraphics.us/downloadify/test.html">very simple demo is available</a> that lets you supply your own content and filename and test out saving, canceling, and the error functionality when the file is blank.</p>
+<p>Please check <a href="https://github.com/dcneiner/Downloadify">Downloadify</a> Readme for more information.
+Share your thoughts and suggestions in the comment. Have a nice day.</p>
 </div>
-      <h4><a href="/blog/posts/Dropbox-will-save-your-head.html#comments">View comments</a></h4>
+      <h4><a href="/blog/posts/Download-a-file-without-server-request.html#comments">View comments</a></h4>
       <ul class="pagination group">
         <li><a href="/">1</a>
         </li>
@@ -195,7 +266,7 @@ But i am fortunate that i have already synced important folder to the <code>Drop
         <li><a href="/page/4/">5</a>
         </li>
       </ul>
-    </div><a href="http://fizerkhan.com/"><img src="/images/cabin.png" class="cabin"></a>
+    </div><a href="http://www.fizerkhan.com/"><img src="/images/cabin.png" class="cabin"></a>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script src="/scripts/main.js"></script>
     <script>

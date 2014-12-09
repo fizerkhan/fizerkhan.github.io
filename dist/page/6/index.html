@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf8">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="/images/cabin.png">
     <link href="/styles/main.css" rel="stylesheet">
     <title>Fizer Khan Blog</title>
@@ -13,11 +13,521 @@
       <ul class="nav-links">
         <li class="menu icon-menu"></li>
         <li class="text-link"><a href="/about.html">About</a></li>
+        <li class="text-link"><a href="/projects.html">Projects</a></li>
         <li class="text-link"><a href="/archives.html">Archives</a></li>
       </ul>
       <div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div>
     </nav>
     <div class="content">
+      <div class="post-head group"><a href="/blog/posts/Grunt-Live-reloading-with-external-server.html">
+          <h1 class="post-title">Grunt Live reloading with external server</h1></a>
+        <h2 class="post-date">2013 &#183; 6 &#183; 29</h2>
+      </div>
+      <div class="post-body"><p>Grunt is amazing task runner for front end application. We are using grunt for our front end project and it works great. But for a while, we don&#39;t know how to run grunt live reload with our own Node JS server.</p>
+<a name="gruntfile" class="anchor" href="#gruntfile"><h3>Gruntfile</h3>
+</a><p>we have generated our web application skeleton using <a href="http://yeoman.io/">Yeoman</a> tool based on the webapp generator(yo webapp). The generated Gruntfile as follows</p>
+<pre><code class="lang-javascript"><div class="highlight"><pre><span class="c1">// Generated on 2013-06-29 using generator-webapp 0.1.7</span>
+<span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">lrSnippet</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;grunt-contrib-livereload/lib/utils&#39;</span><span class="p">).</span><span class="nx">livereloadSnippet</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">mountFolder</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">connect</span><span class="p">,</span> <span class="nx">dir</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">connect</span><span class="p">.</span><span class="kr">static</span><span class="p">(</span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">).</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">dir</span><span class="p">));</span>
+<span class="p">};</span>
+
+<span class="c1">// # Globbing</span>
+<span class="c1">// for performance reasons we&#39;re only matching one level down:</span>
+<span class="c1">// &#39;test/spec/{,*/}*.js&#39;</span>
+<span class="c1">// use this if you want to match all subfolders:</span>
+<span class="c1">// &#39;test/spec/**/*.js&#39;</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">grunt</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// load all grunt tasks</span>
+    <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;matchdep&#39;</span><span class="p">).</span><span class="nx">filterDev</span><span class="p">(</span><span class="s1">&#39;grunt-*&#39;</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">);</span>
+
+    <span class="c1">// configurable paths</span>
+    <span class="kd">var</span> <span class="nx">yeomanConfig</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">app</span><span class="o">:</span> <span class="s1">&#39;app&#39;</span><span class="p">,</span>
+        <span class="nx">dist</span><span class="o">:</span> <span class="s1">&#39;dist&#39;</span>
+    <span class="p">};</span>
+
+    <span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+        <span class="nx">yeoman</span><span class="o">:</span> <span class="nx">yeomanConfig</span><span class="p">,</span>
+        <span class="nx">watch</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">coffee</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">files</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&lt;%= yeoman.app %&gt;/scripts/{,*/}*.coffee&#39;</span><span class="p">],</span>
+                <span class="nx">tasks</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;coffee:dist&#39;</span><span class="p">]</span>
+            <span class="p">},</span>
+            <span class="nx">coffeeTest</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">files</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;test/spec/{,*/}*.coffee&#39;</span><span class="p">],</span>
+                <span class="nx">tasks</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;coffee:test&#39;</span><span class="p">]</span>
+            <span class="p">},</span>
+            <span class="nx">compass</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">files</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&lt;%= yeoman.app %&gt;/styles/{,*/}*.{scss,sass}&#39;</span><span class="p">],</span>
+                <span class="nx">tasks</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;compass:server&#39;</span><span class="p">]</span>
+            <span class="p">},</span>
+            <span class="nx">livereload</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">files</span><span class="o">:</span> <span class="p">[</span>
+                    <span class="s1">&#39;&lt;%= yeoman.app %&gt;/*.html&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;{.tmp,&lt;%= yeoman.app %&gt;}/styles/{,*/}*.css&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;{.tmp,&lt;%= yeoman.app %&gt;}/scripts/{,*/}*.js&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;&lt;%= yeoman.app %&gt;/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}&#39;</span>
+                <span class="p">],</span>
+                <span class="nx">tasks</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;livereload&#39;</span><span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nx">connect</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">port</span><span class="o">:</span> <span class="mi">9000</span><span class="p">,</span>
+                <span class="c1">// change this to &#39;0.0.0.0&#39; to access the server from outside</span>
+                <span class="nx">hostname</span><span class="o">:</span> <span class="s1">&#39;localhost&#39;</span>
+            <span class="p">},</span>
+            <span class="nx">livereload</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+                    <span class="nx">middleware</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">connect</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="k">return</span> <span class="p">[</span>
+                            <span class="nx">lrSnippet</span><span class="p">,</span>
+                            <span class="nx">mountFolder</span><span class="p">(</span><span class="nx">connect</span><span class="p">,</span> <span class="s1">&#39;.tmp&#39;</span><span class="p">),</span>
+                            <span class="nx">mountFolder</span><span class="p">(</span><span class="nx">connect</span><span class="p">,</span> <span class="s1">&#39;app&#39;</span><span class="p">)</span>
+                        <span class="p">];</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="nx">test</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+                    <span class="nx">middleware</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">connect</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="k">return</span> <span class="p">[</span>
+                            <span class="nx">mountFolder</span><span class="p">(</span><span class="nx">connect</span><span class="p">,</span> <span class="s1">&#39;.tmp&#39;</span><span class="p">),</span>
+                            <span class="nx">mountFolder</span><span class="p">(</span><span class="nx">connect</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">)</span>
+                        <span class="p">];</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="nx">dist</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+                    <span class="nx">middleware</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">connect</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="k">return</span> <span class="p">[</span>
+                            <span class="nx">mountFolder</span><span class="p">(</span><span class="nx">connect</span><span class="p">,</span> <span class="s1">&#39;dist&#39;</span><span class="p">)</span>
+                        <span class="p">];</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nx">open</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">server</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;http://localhost:&lt;%= connect.options.port %&gt;&#39;</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nx">clean</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">dist</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">files</span><span class="o">:</span> <span class="p">[{</span>
+                    <span class="nx">dot</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+                    <span class="nx">src</span><span class="o">:</span> <span class="p">[</span>
+                        <span class="s1">&#39;.tmp&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;&lt;%= yeoman.dist %&gt;/*&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;!&lt;%= yeoman.dist %&gt;/.git*&#39;</span>
+                    <span class="p">]</span>
+                <span class="p">}]</span>
+            <span class="p">},</span>
+            <span class="nx">server</span><span class="o">:</span> <span class="s1">&#39;.tmp&#39;</span>
+        <span class="p">},</span>
+        <span class="nx">jshint</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">jshintrc</span><span class="o">:</span> <span class="s1">&#39;.jshintrc&#39;</span>
+            <span class="p">},</span>
+            <span class="nx">all</span><span class="o">:</span> <span class="p">[</span>
+                <span class="s1">&#39;Gruntfile.js&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;&lt;%= yeoman.app %&gt;/scripts/{,*/}*.js&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;!&lt;%= yeoman.app %&gt;/scripts/vendor/*&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;test/spec/{,*/}*.js&#39;</span>
+            <span class="p">]</span>
+        <span class="p">},</span>
+        <span class="nx">mocha</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">all</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+                    <span class="nx">run</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+                    <span class="nx">urls</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;http://localhost:&lt;%= connect.options.port %&gt;/index.html&#39;</span><span class="p">]</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nx">coffee</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">dist</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">files</span><span class="o">:</span> <span class="p">[{</span>
+                    <span class="nx">expand</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+                    <span class="nx">cwd</span><span class="o">:</span> <span class="s1">&#39;&lt;%= yeoman.app %&gt;/scripts&#39;</span><span class="p">,</span>
+                    <span class="nx">src</span><span class="o">:</span> <span class="s1">&#39;{,*/}*.coffee&#39;</span><span class="p">,</span>
+                    <span class="nx">dest</span><span class="o">:</span> <span class="s1">&#39;.tmp/scripts&#39;</span><span class="p">,</span>
+                    <span class="nx">ext</span><span class="o">:</span> <span class="s1">&#39;.js&#39;</span>
+                <span class="p">}]</span>
+            <span class="p">},</span>
+            <span class="nx">test</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">files</span><span class="o">:</span> <span class="p">[{</span>
+                    <span class="nx">expand</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+                    <span class="nx">cwd</span><span class="o">:</span> <span class="s1">&#39;test/spec&#39;</span><span class="p">,</span>
+                    <span class="nx">src</span><span class="o">:</span> <span class="s1">&#39;{,*/}*.coffee&#39;</span><span class="p">,</span>
+                    <span class="nx">dest</span><span class="o">:</span> <span class="s1">&#39;.tmp/spec&#39;</span><span class="p">,</span>
+                    <span class="nx">ext</span><span class="o">:</span> <span class="s1">&#39;.js&#39;</span>
+                <span class="p">}]</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nx">compass</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">sassDir</span><span class="o">:</span> <span class="s1">&#39;&lt;%= yeoman.app %&gt;/styles&#39;</span><span class="p">,</span>
+                <span class="nx">cssDir</span><span class="o">:</span> <span class="s1">&#39;.tmp/styles&#39;</span><span class="p">,</span>
+                <span class="nx">imagesDir</span><span class="o">:</span> <span class="s1">&#39;&lt;%= yeoman.app %&gt;/images&#39;</span><span class="p">,</span>
+                <span class="nx">javascriptsDir</span><span class="o">:</span> <span class="s1">&#39;&lt;%= yeoman.app %&gt;/scripts&#39;</span><span class="p">,</span>
+                <span class="nx">fontsDir</span><span class="o">:</span> <span class="s1">&#39;&lt;%= yeoman.app %&gt;/styles/fonts&#39;</span><span class="p">,</span>
+                <span class="nx">importPath</span><span class="o">:</span> <span class="s1">&#39;app/components&#39;</span><span class="p">,</span>
+                <span class="nx">relativeAssets</span><span class="o">:</span> <span class="kc">true</span>
+            <span class="p">},</span>
+            <span class="nx">dist</span><span class="o">:</span> <span class="p">{},</span>
+            <span class="nx">server</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+                    <span class="nx">debugInfo</span><span class="o">:</span> <span class="kc">true</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="c1">// not used since Uglify task does concat,</span>
+        <span class="c1">// but still available if needed</span>
+        <span class="cm">/*concat: {</span>
+<span class="cm">            dist: {}</span>
+<span class="cm">        },*/</span>
+        <span class="nx">requirejs</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">dist</span><span class="o">:</span> <span class="p">{</span>
+                <span class="c1">// Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js</span>
+                <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+                    <span class="c1">// `name` and `out` is set by grunt-usemin</span>
+                    <span class="nx">baseUrl</span><span class="o">:</span> <span class="s1">&#39;app/scripts&#39;</span><span class="p">,</span>
+                    <span class="nx">optimize</span><span class="o">:</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span>
+                    <span class="c1">// TODO: Figure out how to make sourcemaps work with grunt-usemin</span>
+                    <span class="c1">// https://github.com/yeoman/grunt-usemin/issues/30</span>
+                    <span class="c1">//generateSourceMaps: true,</span>
+                    <span class="c1">// required to support SourceMaps</span>
+                    <span class="c1">// http://requirejs.org/docs/errors.html#sourcemapcomments</span>
+                    <span class="nx">preserveLicenseComments</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+                    <span class="nx">useStrict</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+                    <span class="nx">wrap</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+                    <span class="c1">//uglify2: {} // https://github.com/mishoo/UglifyJS2</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nx">rev</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">dist</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">files</span><span class="o">:</span> <span class="p">{</span>
+                    <span class="nx">src</span><span class="o">:</span> <span class="p">[</span>
+                        <span class="s1">&#39;&lt;%= yeoman.dist %&gt;/scripts/{,*/}*.js&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;&lt;%= yeoman.dist %&gt;/styles/{,*/}*.css&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;&lt;%= yeoman.dist %&gt;/images/{,*/}*.{png,jpg,jpeg,gif,webp}&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;&lt;%= yeoman.dist %&gt;/styles/fonts/*&#39;</span>
+                    <span class="p">]</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nx">useminPrepare</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">html</span><span class="o">:</span> <span class="s1">&#39;&lt;%= yeoman.app %&gt;/index.html&#39;</span><span class="p">,</span>
+            <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">dest</span><span class="o">:</span> <span class="s1">&#39;&lt;%= yeoman.dist %&gt;&#39;</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nx">usemin</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">html</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&lt;%= yeoman.dist %&gt;/{,*/}*.html&#39;</span><span class="p">],</span>
+            <span class="nx">css</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&lt;%= yeoman.dist %&gt;/styles/{,*/}*.css&#39;</span><span class="p">],</span>
+            <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">dirs</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&lt;%= yeoman.dist %&gt;&#39;</span><span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nx">imagemin</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">dist</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">files</span><span class="o">:</span> <span class="p">[{</span>
+                    <span class="nx">expand</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+                    <span class="nx">cwd</span><span class="o">:</span> <span class="s1">&#39;&lt;%= yeoman.app %&gt;/images&#39;</span><span class="p">,</span>
+                    <span class="nx">src</span><span class="o">:</span> <span class="s1">&#39;{,*/}*.{png,jpg,jpeg}&#39;</span><span class="p">,</span>
+                    <span class="nx">dest</span><span class="o">:</span> <span class="s1">&#39;&lt;%= yeoman.dist %&gt;/images&#39;</span>
+                <span class="p">}]</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nx">svgmin</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">dist</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">files</span><span class="o">:</span> <span class="p">[{</span>
+                    <span class="nx">expand</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+                    <span class="nx">cwd</span><span class="o">:</span> <span class="s1">&#39;&lt;%= yeoman.app %&gt;/images&#39;</span><span class="p">,</span>
+                    <span class="nx">src</span><span class="o">:</span> <span class="s1">&#39;{,*/}*.svg&#39;</span><span class="p">,</span>
+                    <span class="nx">dest</span><span class="o">:</span> <span class="s1">&#39;&lt;%= yeoman.dist %&gt;/images&#39;</span>
+                <span class="p">}]</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nx">cssmin</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">dist</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">files</span><span class="o">:</span> <span class="p">{</span>
+                    <span class="s1">&#39;&lt;%= yeoman.dist %&gt;/styles/main.css&#39;</span><span class="o">:</span> <span class="p">[</span>
+                        <span class="s1">&#39;.tmp/styles/{,*/}*.css&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;&lt;%= yeoman.app %&gt;/styles/{,*/}*.css&#39;</span>
+                    <span class="p">]</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nx">htmlmin</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">dist</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+                    <span class="cm">/*removeCommentsFromCDATA: true,</span>
+<span class="cm">                    // https://github.com/yeoman/grunt-usemin/issues/44</span>
+<span class="cm">                    //collapseWhitespace: true,</span>
+<span class="cm">                    collapseBooleanAttributes: true,</span>
+<span class="cm">                    removeAttributeQuotes: true,</span>
+<span class="cm">                    removeRedundantAttributes: true,</span>
+<span class="cm">                    useShortDoctype: true,</span>
+<span class="cm">                    removeEmptyAttributes: true,</span>
+<span class="cm">                    removeOptionalTags: true*/</span>
+                <span class="p">},</span>
+                <span class="nx">files</span><span class="o">:</span> <span class="p">[{</span>
+                    <span class="nx">expand</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+                    <span class="nx">cwd</span><span class="o">:</span> <span class="s1">&#39;&lt;%= yeoman.app %&gt;&#39;</span><span class="p">,</span>
+                    <span class="nx">src</span><span class="o">:</span> <span class="s1">&#39;*.html&#39;</span><span class="p">,</span>
+                    <span class="nx">dest</span><span class="o">:</span> <span class="s1">&#39;&lt;%= yeoman.dist %&gt;&#39;</span>
+                <span class="p">}]</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="c1">// Put files not handled in other tasks here</span>
+        <span class="nx">copy</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">dist</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">files</span><span class="o">:</span> <span class="p">[{</span>
+                    <span class="nx">expand</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+                    <span class="nx">dot</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+                    <span class="nx">cwd</span><span class="o">:</span> <span class="s1">&#39;&lt;%= yeoman.app %&gt;&#39;</span><span class="p">,</span>
+                    <span class="nx">dest</span><span class="o">:</span> <span class="s1">&#39;&lt;%= yeoman.dist %&gt;&#39;</span><span class="p">,</span>
+                    <span class="nx">src</span><span class="o">:</span> <span class="p">[</span>
+                        <span class="s1">&#39;*.{ico,txt}&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;.htaccess&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;images/{,*/}*.{webp,gif}&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;styles/fonts/*&#39;</span>
+                    <span class="p">]</span>
+                <span class="p">}]</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nx">concurrent</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">server</span><span class="o">:</span> <span class="p">[</span>
+                <span class="s1">&#39;coffee:dist&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;compass:server&#39;</span>
+            <span class="p">],</span>
+            <span class="nx">test</span><span class="o">:</span> <span class="p">[</span>
+                <span class="s1">&#39;coffee&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;compass&#39;</span>
+            <span class="p">],</span>
+            <span class="nx">dist</span><span class="o">:</span> <span class="p">[</span>
+                <span class="s1">&#39;coffee&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;compass:dist&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;imagemin&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;svgmin&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;htmlmin&#39;</span>
+            <span class="p">]</span>
+        <span class="p">},</span>
+        <span class="nx">bower</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">exclude</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;modernizr&#39;</span><span class="p">]</span>
+            <span class="p">},</span>
+            <span class="nx">all</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">rjsConfig</span><span class="o">:</span> <span class="s1">&#39;&lt;%= yeoman.app %&gt;/scripts/main.js&#39;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+
+    <span class="nx">grunt</span><span class="p">.</span><span class="nx">renameTask</span><span class="p">(</span><span class="s1">&#39;regarde&#39;</span><span class="p">,</span> <span class="s1">&#39;watch&#39;</span><span class="p">);</span>
+
+    <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;server&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">target</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">target</span> <span class="o">===</span> <span class="s1">&#39;dist&#39;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">grunt</span><span class="p">.</span><span class="nx">task</span><span class="p">.</span><span class="nx">run</span><span class="p">([</span><span class="s1">&#39;build&#39;</span><span class="p">,</span> <span class="s1">&#39;open&#39;</span><span class="p">,</span> <span class="s1">&#39;connect:dist:keepalive&#39;</span><span class="p">]);</span>
+        <span class="p">}</span>
+
+        <span class="nx">grunt</span><span class="p">.</span><span class="nx">task</span><span class="p">.</span><span class="nx">run</span><span class="p">([</span>
+            <span class="s1">&#39;clean:server&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;concurrent:server&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;livereload-start&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;connect:livereload&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;open&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;watch&#39;</span>
+        <span class="p">]);</span>
+    <span class="p">});</span>
+
+    <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="p">[</span>
+        <span class="s1">&#39;clean:server&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;concurrent:test&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;connect:test&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;mocha&#39;</span>
+    <span class="p">]);</span>
+
+    <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;build&#39;</span><span class="p">,</span> <span class="p">[</span>
+        <span class="s1">&#39;clean:dist&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;useminPrepare&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;concurrent:dist&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;requirejs&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;cssmin&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;concat&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;uglify&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;copy&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;rev&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;usemin&#39;</span>
+    <span class="p">]);</span>
+
+    <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="p">[</span>
+        <span class="s1">&#39;jshint&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;test&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;build&#39;</span>
+    <span class="p">]);</span>
+<span class="p">};</span>
+</pre></div>
+</code></pre>
+<p>The <code>connect</code> task in above code run its own server to serve the static pages.
+And the <code>livereload</code> task refreshes the pages if any changes in the files that is mentioned in the <code>watch:livereload</code> task. Above code works well when you don&#39;t need/have your own server to serve pages.</p>
+<p>Incase if you have your own server, then live reload must refresh the pages served from your own server. How can we do it?</p>
+<a name="solution" class="anchor" href="#solution"><h3>Solution</h3>
+</a><p>You don&#39;t need default static server. So go and remove <code>connect</code> task from Gruntfile</p>
+<pre><code class="lang-javascript"><div class="highlight"><pre><span class="nx">connect</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">port</span><span class="o">:</span> <span class="mi">9000</span><span class="p">,</span>
+        <span class="c1">// change this to &#39;0.0.0.0&#39; to access the server from outside</span>
+        <span class="nx">hostname</span><span class="o">:</span> <span class="s1">&#39;localhost&#39;</span>
+    <span class="p">},</span>
+    <span class="nx">livereload</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">middleware</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">connect</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="p">[</span>
+                    <span class="nx">lrSnippet</span><span class="p">,</span>
+                    <span class="nx">mountFolder</span><span class="p">(</span><span class="nx">connect</span><span class="p">,</span> <span class="s1">&#39;.tmp&#39;</span><span class="p">),</span>
+                    <span class="nx">mountFolder</span><span class="p">(</span><span class="nx">connect</span><span class="p">,</span> <span class="s1">&#39;app&#39;</span><span class="p">)</span>
+                <span class="p">];</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nx">test</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">middleware</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">connect</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="p">[</span>
+                    <span class="nx">mountFolder</span><span class="p">(</span><span class="nx">connect</span><span class="p">,</span> <span class="s1">&#39;.tmp&#39;</span><span class="p">),</span>
+                    <span class="nx">mountFolder</span><span class="p">(</span><span class="nx">connect</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">)</span>
+                <span class="p">];</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nx">dist</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">middleware</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">connect</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="p">[</span>
+                    <span class="nx">mountFolder</span><span class="p">(</span><span class="nx">connect</span><span class="p">,</span> <span class="s1">&#39;dist&#39;</span><span class="p">)</span>
+                <span class="p">];</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">},</span>
+</pre></div>
+</code></pre>
+<p>Also remove <code>connect:livereload</code> and <code>open</code> from <code>server</code> task</p>
+<pre><code class="lang-javascript"><div class="highlight"><pre><span class="nx">grunt</span><span class="p">.</span><span class="nx">task</span><span class="p">.</span><span class="nx">run</span><span class="p">([</span>
+    <span class="s1">&#39;clean:server&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;concurrent:server&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;livereload-start&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;connect:livereload&#39;</span><span class="p">,</span>      <span class="o">==&gt;</span> <span class="nx">Remove</span> <span class="nx">This</span> <span class="nx">line</span>
+    <span class="s1">&#39;open&#39;</span><span class="p">,</span>                    <span class="o">==&gt;</span> <span class="nx">Remove</span> <span class="nx">This</span> <span class="nx">line</span>
+    <span class="s1">&#39;watch&#39;</span>
+<span class="p">]);</span>
+</pre></div>
+</code></pre>
+<p>Then add following scripts in your html files.</p>
+<pre><code class="lang-html"><div class="highlight"><pre><span class="c">&lt;!-- livereload script --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">&#39;&lt;script src=&quot;http://&#39;</span>
+        <span class="o">+</span> <span class="p">(</span><span class="nx">location</span><span class="p">.</span><span class="nx">host</span> <span class="o">||</span> <span class="s1">&#39;localhost&#39;</span><span class="p">).</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="o">+</span> <span class="s1">&#39;:35729/livereload.js?snipver=1&quot; type=&quot;text/javascript&quot;&gt;&lt;\/script&gt;&#39;</span><span class="p">)</span>
+<span class="nt">&lt;/script&gt;</span>
+</pre></div>
+</code></pre>
+<p>Then run grunt server to watch and livereload</p>
+<pre><code><div class="highlight"><pre><span class="nx">$</span> <span class="nx">grunt</span> <span class="nx">server</span>
+</pre></div>
+</code></pre>
+<p>Now run your server and see the beauty of page refresh whenever you make changes in the file.</p>
+<p>Happy Coding and Have a nice day.</p>
+</div>
+      <h4><a href="/blog/posts/Grunt-Live-reloading-with-external-server.html#comments">View comments</a></h4>
+      <div class="post-head group"><a href="/blog/posts/Social-sharing-buttons.html">
+          <h1 class="post-title">Social sharing buttons</h1></a>
+        <h2 class="post-date">2013 &#183; 6 &#183; 27</h2>
+      </div>
+      <div class="post-body"><p>Social sharing buttons becomes essential to all pages available on the web.
+If you write blog, then you cannot avoid social buttons on your blog. I like to share the social sharing button snippets which i collected from web. I believe, anything is taken from web must be given back to web.</p>
+<a name="twitter" class="anchor" href="#twitter"><h3>Twitter</h3>
+</a><pre><code class="lang-html"><div class="highlight"><pre><span class="c">&lt;!-- Place this tag where you want the share button to render. --&gt;</span>
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;https://twitter.com/share&quot;</span> <span class="na">class=</span><span class="s">&quot;twitter-share-button&quot;</span><span class="nt">&gt;</span>Tweet<span class="nt">&lt;/a&gt;</span>
+
+<span class="c">&lt;!-- Place this tag after the last share tag --&gt;</span>
+<span class="nt">&lt;script&gt;</span><span class="o">!</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span><span class="nx">s</span><span class="p">,</span><span class="nx">id</span><span class="p">){</span><span class="kd">var</span> <span class="nx">js</span><span class="p">,</span><span class="nx">fjs</span><span class="o">=</span><span class="nx">d</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="nx">s</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span><span class="nx">p</span><span class="o">=</span><span class="sr">/^http:/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">location</span><span class="p">)</span><span class="o">?</span><span class="s1">&#39;http&#39;</span><span class="o">:</span><span class="s1">&#39;https&#39;</span><span class="p">;</span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">d</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">id</span><span class="p">)){</span><span class="nx">js</span><span class="o">=</span><span class="nx">d</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span><span class="nx">js</span><span class="p">.</span><span class="nx">id</span><span class="o">=</span><span class="nx">id</span><span class="p">;</span><span class="nx">js</span><span class="p">.</span><span class="nx">src</span><span class="o">=</span><span class="nx">p</span><span class="o">+</span><span class="s1">&#39;://platform.twitter.com/widgets.js&#39;</span><span class="p">;</span><span class="nx">fjs</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">js</span><span class="p">,</span><span class="nx">fjs</span><span class="p">);}}(</span><span class="nb">document</span><span class="p">,</span> <span class="s1">&#39;script&#39;</span><span class="p">,</span> <span class="s1">&#39;twitter-wjs&#39;</span><span class="p">);</span><span class="nt">&lt;/script&gt;</span>
+</pre></div>
+</code></pre>
+<a name="google-plus" class="anchor" href="#google-plus"><h3>Google Plus</h3>
+</a><pre><code class="lang-html"><div class="highlight"><pre><span class="c">&lt;!-- Place this tag where you want the share button to render. --&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;g-plus&quot;</span> <span class="na">data-action=</span><span class="s">&quot;share&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+
+<span class="c">&lt;!-- Place this tag after the last share tag. --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
+  <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">po</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;script&#39;</span><span class="p">);</span> <span class="nx">po</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">&#39;text/javascript&#39;</span><span class="p">;</span> <span class="nx">po</span><span class="p">.</span><span class="nx">async</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="nx">po</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">&#39;https://apis.google.com/js/plusone.js&#39;</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">&#39;script&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span> <span class="nx">s</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">po</span><span class="p">,</span> <span class="nx">s</span><span class="p">);</span>
+  <span class="p">})();</span>
+<span class="nt">&lt;/script&gt;</span>
+</pre></div>
+</code></pre>
+<a name="facebook-like" class="anchor" href="#facebook-like"><h3>Facebook Like</h3>
+</a><pre><code class="lang-html"><div class="highlight"><pre><span class="c">&lt;!--Place the code for your plugin wherever you want the plugin to appear on your page. --&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;fb-like&quot;</span> <span class="na">data-href=</span><span class="s">&quot;http://developers.facebook.com/docs/reference/plugins/like&quot;</span> <span class="na">data-send=</span><span class="s">&quot;true&quot;</span> <span class="na">data-width=</span><span class="s">&quot;450&quot;</span> <span class="na">data-show-faces=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+
+<span class="c">&lt;!-- Include the JavaScript SDK on your page once, ideally right after the opening &lt;body&gt; tag. --&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;fb-root&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span> <span class="nx">s</span><span class="p">,</span> <span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">js</span><span class="p">,</span> <span class="nx">fjs</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="nx">s</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">id</span><span class="p">))</span> <span class="k">return</span><span class="p">;</span>
+  <span class="nx">js</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span> <span class="nx">js</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="nx">id</span><span class="p">;</span>
+  <span class="nx">js</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s2">&quot;//connect.facebook.net/en_US/all.js#xfbml=1&quot;</span><span class="p">;</span>
+  <span class="nx">fjs</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">js</span><span class="p">,</span> <span class="nx">fjs</span><span class="p">);</span>
+<span class="p">}(</span><span class="nb">document</span><span class="p">,</span> <span class="s1">&#39;script&#39;</span><span class="p">,</span> <span class="s1">&#39;facebook-jssdk&#39;</span><span class="p">));</span><span class="nt">&lt;/script&gt;</span>
+</pre></div>
+</code></pre>
+<a name="hacker-news" class="anchor" href="#hacker-news"><h3>Hacker News</h3>
+</a><pre><code class="lang-html"><div class="highlight"><pre><span class="c">&lt;!-- Place this tag where you want the share button to render. --&gt;</span>
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://news.ycombinator.com/submit&quot;</span> <span class="na">class=</span><span class="s">&quot;hn-share-button&quot;</span><span class="nt">&gt;</span>Vote on HN<span class="nt">&lt;/a&gt;</span>
+
+<span class="c">&lt;!-- Place this tag after the last share tag --&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+    <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span> <span class="nx">t</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">g</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">t</span><span class="p">),</span>
+            <span class="nx">s</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="nx">t</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+        <span class="nx">g</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">&#39;//hnbutton.appspot.com/static/hn.min.js&#39;</span><span class="p">;</span>
+        <span class="nx">s</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">g</span><span class="p">,</span> <span class="nx">s</span><span class="p">);</span>
+    <span class="p">}(</span><span class="nb">document</span><span class="p">,</span> <span class="s1">&#39;script&#39;</span><span class="p">));</span>
+<span class="nt">&lt;/script&gt;</span>
+</pre></div>
+</code></pre>
+<a name="reddit" class="anchor" href="#reddit"><h3>Reddit</h3>
+</a><pre><code class="lang-html"><div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://www.reddit.com/submit&quot;</span> <span class="na">onclick=</span><span class="s">&quot;window.location = &#39;http://www.reddit.com/submit?url=&#39; + encodeURIComponent(window.location); return false&quot;</span><span class="nt">&gt;</span> <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;http://www.reddit.com/static/spreddit7.gif&quot;</span> <span class="na">alt=</span><span class="s">&quot;submit to reddit&quot;</span> <span class="na">border=</span><span class="s">&quot;0&quot;</span> <span class="nt">/&gt;</span> <span class="nt">&lt;/a&gt;</span>
+</pre></div>
+</code></pre>
+<p>If you want Reddit button with points, then</p>
+<pre><code class="lang-html"><div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;http://www.reddit.com/buttonlite.js?i=1&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+</code></pre>
+<a name="kippt" class="anchor" href="#kippt"><h3>Kippt</h3>
+</a><p>I love to have all my favorites site in Kippt. Those who love kippt, this is for you.</p>
+<pre><code class="lang-html"><div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;https://kippt.com/save&quot;</span> <span class="na">class=</span><span class="s">&quot;kippt-save-button&quot;</span> <span class="na">data-url=</span><span class="s">&quot;https://kippt.com/karrisaarinen/&quot;</span> <span class="na">data-title=</span><span class="s">&quot;Karri Saarinen on Kippt&quot;</span> <span class="na">data-source=</span><span class="s">&quot;example.com&quot;</span><span class="nt">&gt;</span>Save to Kippt<span class="nt">&lt;/a&gt;</span>
+
+<span class="nt">&lt;script&gt;</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span><span class="nx">s</span><span class="p">,</span><span class="nx">id</span><span class="p">){</span><span class="kd">var</span> <span class="nx">js</span><span class="p">,</span><span class="nx">fjs</span><span class="o">=</span><span class="nx">d</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="nx">s</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">d</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">id</span><span class="p">)){</span><span class="nx">js</span><span class="o">=</span><span class="nx">d</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span><span class="nx">js</span><span class="p">.</span><span class="nx">id</span><span class="o">=</span><span class="nx">id</span><span class="p">;</span><span class="nx">js</span><span class="p">.</span><span class="nx">src</span><span class="o">=</span><span class="s2">&quot;http://addons.kippt.com/widgets.js&quot;</span><span class="p">;</span><span class="nx">fjs</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">js</span><span class="p">,</span><span class="nx">fjs</span><span class="p">);}}(</span><span class="nb">document</span><span class="p">,</span><span class="s2">&quot;script&quot;</span><span class="p">,</span><span class="s2">&quot;kippt-wjs&quot;</span><span class="p">));</span><span class="nt">&lt;/script&gt;</span>
+</pre></div>
+</code></pre>
+<a name="linkedin" class="anchor" href="#linkedin"><h3>Linkedin</h3>
+</a><pre><code class="lang-html"><div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//platform.linkedin.com/in.js&quot;</span> <span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
+ <span class="nx">lang</span><span class="o">:</span> <span class="nx">en_US</span>
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;IN/Share&quot;</span> <span class="na">data-counter=</span><span class="s">&quot;right&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+</code></pre>
+</div>
+      <h4><a href="/blog/posts/Social-sharing-buttons.html#comments">View comments</a></h4>
       <div class="post-head group"><a href="/blog/posts/Google-App-Engine-Deployment-Tips.html">
           <h1 class="post-title">Google App Engine Deployment Tips</h1></a>
         <h2 class="post-date">2013 &#183; 6 &#183; 26</h2>
@@ -56,52 +566,6 @@ Once you set new version as Default, then it comes to live.</p>
 <p>Happy deployment and Have a nice day.</p>
 </div>
       <h4><a href="/blog/posts/Google-App-Engine-Deployment-Tips.html#comments">View comments</a></h4>
-      <div class="post-head group"><a href="/blog/posts/JSON-is-not-Javascript-Object.html">
-          <h1 class="post-title">JSON is not Javascript Object</h1></a>
-        <h2 class="post-date">2013 &#183; 6 &#183; 24</h2>
-      </div>
-      <div class="post-body"><p>Many people treat JSON as javascript object. But really it is not.
-JSON is just string representation inspired from Java Script Object structure.
-JSON is designed to ease and simplify the data transfer between
-server and browser. Because of the simplicity, it works among other applications not just between browser and server.</p>
-<p>I try to copy some javascript object and send over to JSON based bookmark web server. But it does not work, why? Lets have javascript object that i tried to sent.</p>
-<pre><code class="lang-javascript"><div class="highlight"><pre><span class="p">{</span>
-    <span class="nx">name</span> <span class="o">:</span> <span class="s2">&quot;why this kolaveri di&quot;</span><span class="p">,</span>
-    <span class="nx">url</span>  <span class="o">:</span> <span class="s2">&quot;http://www.youtube.com/watch?v=YR12Z8f1Dh8&quot;</span><span class="p">,</span>
-    <span class="nx">singer</span><span class="o">:</span> <span class="s2">&quot;Dhanush&quot;</span><span class="p">,</span>
-    <span class="nx">movie</span><span class="o">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
-    <span class="nx">music</span> <span class="o">:</span> <span class="s2">&quot;Anirudh Ravichandran&quot;</span><span class="p">,</span>
-    <span class="nx">views</span> <span class="o">:</span> <span class="mi">10000000</span><span class="p">,</span>
-    <span class="c1">// Adding this for testing purpose</span>
-    <span class="nx">play</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="p">},</span>
-<span class="p">}</span>
-</pre></div>
-</code></pre>
-<p>When i sent this, i got the error <strong>Unexpected token n</strong> from the server (By the way, i uses <strong>NodeJS</strong> with <strong>Express</strong> framework). It means, it is not valid JSON. I wonder why it is not working. Then i read <a href="http://www.json.org/">JSON spec</a> by Douglas Crockford and understood the followings</p>
-<pre><code><div class="highlight"><pre><span class="mi">1</span><span class="p">.</span> <span class="nx">All</span> <span class="nx">keys</span> <span class="nx">should</span> <span class="nx">be</span> <span class="kr">double</span> <span class="nx">quotes</span><span class="p">.</span>
-<span class="mi">2</span><span class="p">.</span> <span class="nx">JSON</span> <span class="nx">does</span> <span class="nx">not</span> <span class="nx">support</span> <span class="nx">comments</span><span class="p">.</span>
-<span class="mi">3</span><span class="p">.</span> <span class="nx">JSON</span> <span class="nx">value</span> <span class="nx">should</span> <span class="nx">not</span> <span class="nx">be</span> <span class="kd">function</span> <span class="nx">or</span> <span class="kc">undefined</span><span class="p">.</span> <span class="nx">A</span> <span class="nx">value</span> <span class="nx">can</span> <span class="nx">be</span> <span class="nx">a</span> <span class="nx">string</span> <span class="k">in</span> <span class="kr">double</span> <span class="nx">quotes</span><span class="p">,</span> <span class="nx">or</span> <span class="nx">a</span> <span class="nx">number</span><span class="p">,</span> <span class="nx">or</span> <span class="kc">true</span> <span class="nx">or</span> <span class="kc">false</span> <span class="nx">or</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">or</span> <span class="nx">an</span> <span class="nx">object</span> <span class="nx">or</span> <span class="nx">an</span> <span class="nx">array</span><span class="p">.</span> <span class="nx">These</span> <span class="nx">structures</span> <span class="nx">can</span> <span class="nx">be</span> <span class="nx">nested</span><span class="p">.</span>
-<span class="mi">4</span><span class="p">.</span> <span class="nx">Last</span> <span class="nx">value</span> <span class="nx">of</span> <span class="nx">JSON</span> <span class="nx">should</span> <span class="nx">not</span> <span class="nx">have</span> <span class="nx">comma</span><span class="p">(,)</span> <span class="nx">separator</span><span class="p">.</span>
-</pre></div>
-</code></pre>
-<p>Then it changed into</p>
-<pre><code class="lang-javascript"><div class="highlight"><pre><span class="p">{</span>
-    <span class="s2">&quot;name&quot;</span> <span class="o">:</span> <span class="s2">&quot;why this kolaveri di&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;url&quot;</span>  <span class="o">:</span> <span class="s2">&quot;http://www.youtube.com/watch?v=YR12Z8f1Dh8&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;singer&quot;</span><span class="o">:</span> <span class="s2">&quot;Dhanush&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;movie&quot;</span><span class="o">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;views&quot;</span> <span class="o">:</span> <span class="mi">10000000</span><span class="p">,</span>
-    <span class="s2">&quot;music&quot;</span> <span class="o">:</span> <span class="s2">&quot;Anirudh Ravichandran&quot;</span>
-<span class="p">}</span>
-</pre></div>
-</code></pre>
-<a name="take-away" class="anchor" href="#take-away"><h3>Take away</h3>
-</a><p>I think, it is very important to learn the JSON notation since we have lot of our
-configuration files(package.json, bower.json) in web development in JSON format.
-So understanding about JSON is must for every web developers.</p>
-<p>Happy coding and Have a nice day.</p>
-</div>
-      <h4><a href="/blog/posts/JSON-is-not-Javascript-Object.html#comments">View comments</a></h4>
       <ul class="pagination group">
         <li><a href="/page/3/">4</a>
         </li>
@@ -111,8 +575,10 @@ So understanding about JSON is must for every web developers.</p>
         </li>
         <li><a href="/page/6/" class="active-page">7</a>
         </li>
+        <li><a href="/page/7/">8</a>
+        </li>
       </ul>
-    </div><a href="http://fizerkhan.com/"><img src="/images/cabin.png" class="cabin"></a>
+    </div><a href="http://www.fizerkhan.com/"><img src="/images/cabin.png" class="cabin"></a>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script src="/scripts/main.js"></script>
     <script>

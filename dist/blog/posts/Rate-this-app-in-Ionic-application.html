@@ -2,10 +2,10 @@
 <html>
   <head>
     <meta charset="utf8">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="/images/cabin.png">
     <link href="/styles/main.css" rel="stylesheet">
-    <title>Script Tag XSS attack</title>
+    <title>Rate this app in Ionic application</title>
   </head>
   <body>
     <nav id="nav">
@@ -13,25 +13,39 @@
       <ul class="nav-links">
         <li class="menu icon-menu"></li>
         <li class="text-link"><a href="/about.html">About</a></li>
+        <li class="text-link"><a href="/projects.html">Projects</a></li>
         <li class="text-link"><a href="/archives.html">Archives</a></li>
       </ul>
       <div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div>
     </nav>
     <div class="content">
-      <div class="post-head group"><a href="/blog/posts/Script-Tag-XSS-attack.html">
-          <h1 class="post-title">Script Tag XSS attack</h1></a>
-        <h2 class="post-date">2013 &#183; 8 &#183; 1</h2>
+      <div class="post-head group"><a href="/blog/posts/Rate-this-app-in-Ionic-application.html">
+          <h1 class="post-title">Rate this app in Ionic application</h1></a>
+        <h2 class="post-date">2014 &#183; 12 &#183; 4</h2>
       </div>
-      <div class="post-body"><p>I heard lot about cross site scripting(XSS) and recommendation to escape the string before placing in to HTML. I rarely seen any good example to prove it until i got the following code.</p>
-<pre><code class="lang-html"><div class="highlight"><pre><span class="nt">&lt;script&gt;</span>
-  <span class="kd">var</span> <span class="nx">info</span> <span class="o">=</span> <span class="err">&quot;</span><span class="nt">&lt;/script&gt;&lt;script&gt;</span><span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;I am not a string. I am a Javascript&#39;</span><span class="p">);</span><span class="nt">&lt;/script&gt;</span>&quot;;
-<span class="nt">&lt;/script&gt;</span>
+      <div class="post-body"><p>You may need a &quot;Rate this app&quot; link inside your Ionic Framework Android
+and iOS application. When i implemented this features by adding the link to
+Google Play and App Store, the link does not work. Then i found that
+it needs <code>inappbrowser</code> cordova plugin.</p>
+<a name="add-inapp-browser-cordova-plugin" class="anchor" href="#add-inapp-browser-cordova-plugin"><h3>Add InApp Browser cordova plugin</h3>
+</a><pre><code><div class="highlight"><pre><span class="nx">cordova</span> <span class="nx">plugin</span> <span class="nx">add</span> <span class="nx">org</span><span class="p">.</span><span class="nx">apache</span><span class="p">.</span><span class="nx">cordova</span><span class="p">.</span><span class="nx">inappbrowser</span>
 </pre></div>
 </code></pre>
-<p>You can run <a href="http://jsfiddle.net/fizerkhan/yxXvV/1/">this fiddle</a>.</p>
-<p>The reason behind is that always HTML is parsed and render tree before the Javascript execution. The HTML parser does not have any knowledge about javascipt expression(like <code>var info</code>). It considers <code>script</code> inside a <code>info</code> string as script node. Then alert becomes normal JavaScript expression.</p>
-<p>In current days, we uses lot server side template engine like Jade, ERB, Handlebars and etc. When you uses them, you make sure that the strings are escaped properly.</p>
-<p>Secure your code and Have a nice day.</p>
+<a name="implement--rate-this-app-" class="anchor" href="#implement--rate-this-app-"><h3>Implement &quot;Rate this app&quot;</h3>
+</a><p>Now, go ahead and start creating method to open a link based on the device.</p>
+<pre><code class="lang-html"><div class="highlight"><pre><span class="nt">&lt;button</span> <span class="na">ng-click=</span><span class="s">&quot;rateUs()&quot;</span><span class="nt">&gt;</span>Rate us<span class="nt">&lt;/button&gt;</span>
+</pre></div>
+</code></pre>
+<pre><code class="lang-javascript"><div class="highlight"><pre><span class="nx">$scope</span><span class="p">.</span><span class="nx">rateUs</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">$ionicPlatform</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="s1">&#39;ios&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nb">window</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">&#39;itms-apps://itunes.apple.com/us/app/domainsicle-domain-name-search/id511364723?ls=1&amp;mt=8&#39;</span><span class="p">);</span> <span class="c1">// or itms://</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">$ionicPlatform</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="s1">&#39;android&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nb">window</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">&#39;market://details?id=&lt;package_name&gt;&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</code></pre>
+<p>Have a nice day.</p>
 </div>
       <div class="social"><a href="http://news.ycombinator.com/submit" class="hn-share-button">Vote on HN</a><a href="https://twitter.com/share" data-via="fizerkhan" data-lang="en" class="twitter-share-button">Tweet</a>
         <div data-action="share" data-annotation="bubble" class="g-plus"></div>
@@ -68,7 +82,7 @@
         })();
         
       </script>
-    </div><a href="http://fizerkhan.com/"><img src="/images/cabin.png" class="cabin"></a>
+    </div><a href="http://www.fizerkhan.com/"><img src="/images/cabin.png" class="cabin"></a>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script src="/scripts/main.js"></script>
     <script>

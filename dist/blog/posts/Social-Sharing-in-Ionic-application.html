@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/images/cabin.png">
+    <link href="/styles/main.css" rel="stylesheet">
+    <title>Social Sharing in Ionic application</title>
+  </head>
+  <body>
+    <nav id="nav">
+      <h1 class="name"><a href="/">Fizer Khan</a></h1>
+      <ul class="nav-links">
+        <li class="menu icon-menu"></li>
+        <li class="text-link"><a href="/about.html">About</a></li>
+        <li class="text-link"><a href="/projects.html">Projects</a></li>
+        <li class="text-link"><a href="/archives.html">Archives</a></li>
+      </ul>
+      <div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div>
+    </nav>
+    <div class="content">
+      <div class="post-head group"><a href="/blog/posts/Social-Sharing-in-Ionic-application.html">
+          <h1 class="post-title">Social Sharing in Ionic application</h1></a>
+        <h2 class="post-date">2014 &#183; 12 &#183; 8</h2>
+      </div>
+      <div class="post-body"><p>You may need a social sharing feature inside your Ionic Framework Android and iOS application.</p>
+<p>Using the <a href="https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin">Social Sharing plugin</a> for Apache Cordova, we are able to do the social sharing.</p>
+<a name="add-ngcordova" class="anchor" href="#add-ngcordova"><h3>Add ngCordova</h3>
+</a><p>First you have to add <a href="http://ngcordova.com/">ngCordova</a> to your Ionic application.
+If you already have this in your app, you can skip this step.</p>
+<p>Install ngCordova</p>
+<pre><code><div class="highlight"><pre><span class="nx">bower</span> <span class="nx">install</span> <span class="nx">ngCordova</span> <span class="o">--</span><span class="nx">save</span>
+</pre></div>
+</code></pre>
+<p>Add <code>ng-cordova.js</code> before cordova script inside <code>index.html</code></p>
+<pre><code class="lang-html"><div class="highlight"><pre>//index.html
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;lib/ngCordova/dist/ng-cordova.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;cordova.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+</code></pre>
+<p>Add <code>ngCordova</code> in your app module dependencies</p>
+<pre><code><div class="highlight"><pre><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;myApp&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;ionic&#39;</span><span class="p">,</span> <span class="s1">&#39;ngCordova&#39;</span><span class="p">])</span>
+</pre></div>
+</code></pre>
+<a name="add-social-sharing-cordova-plugin" class="anchor" href="#add-social-sharing-cordova-plugin"><h3>Add Social Sharing cordova plugin</h3>
+</a><p>In order to implement social sharing, add cordova social sharing plugin.</p>
+<pre><code><div class="highlight"><pre><span class="nx">cordova</span> <span class="nx">plugin</span> <span class="nx">add</span> <span class="nx">https</span><span class="o">:</span><span class="c1">//github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git</span>
+</pre></div>
+</code></pre>
+<a name="implement-social-sharing" class="anchor" href="#implement-social-sharing"><h3>Implement Social sharing</h3>
+</a><p>Now, go ahead and start creating method to share in your controllers</p>
+<pre><code class="lang-javascript"><div class="highlight"><pre><span class="c1">// share anywhere</span>
+<span class="nx">$scope</span><span class="p">.</span><span class="nx">share</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">$cordovaSocialSharing</span><span class="p">.</span><span class="nx">share</span><span class="p">(</span><span class="s1">&#39;This is my message&#39;</span><span class="p">,</span> <span class="s1">&#39;Subject string&#39;</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="s1">&#39;http://www.mylink.com&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Share via email. Can be used for feedback</span>
+<span class="nx">$scope</span><span class="p">.</span><span class="nx">sendFeedback</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">$cordovaSocialSharing</span>
+            <span class="p">.</span><span class="nx">shareViaEmail</span><span class="p">(</span><span class="s1">&#39;Some message&#39;</span><span class="p">,</span> <span class="s1">&#39;Some Subject&#39;</span><span class="p">,</span> <span class="s1">&#39;to_address@gmail.com&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Share via SMS. Access multiple numbers in a string like: &#39;0612345678,0687654321&#39;</span>
+<span class="nx">$scope</span><span class="p">.</span><span class="nx">sendSMS</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">number</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">$cordovaSocialSharing</span><span class="p">.</span><span class="nx">shareViaSMS</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">number</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</code></pre>
+<p>For more functionalities, refer the <a href="https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin">documentation</a>.</p>
+<p>Have a nice day.</p>
+</div>
+      <div class="social"><a href="http://news.ycombinator.com/submit" class="hn-share-button">Vote on HN</a><a href="https://twitter.com/share" data-via="fizerkhan" data-lang="en" class="twitter-share-button">Tweet</a>
+        <div data-action="share" data-annotation="bubble" class="g-plus"></div>
+      </div>
+      <hr class="style-eight">
+      <div id="comments">
+        <div id="disqus_thread"></div>
+      </div>
+      <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'fizerkhan'; // required: replace example with your forum shortname
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the<a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript><a href="http://disqus.com" class="dsq-brlink">comments powered by<span class="logo-disqus">Disqus</span></a>
+      <script>
+        (function(d, t) {
+          var g = d.createElement(t),
+              s = d.getElementsByTagName(t)[0];
+          g.src = '//hnbutton.appspot.com/static/hn.min.js';
+          s.parentNode.insertBefore(g, s);
+        }(document, 'script'));
+      </script>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      <script>
+        (function() {
+          var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+          po.src = 'https://apis.google.com/js/plusone.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        })();
+        
+      </script>
+    </div><a href="http://www.fizerkhan.com/"><img src="/images/cabin.png" class="cabin"></a>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="/scripts/main.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      
+      ga('create', 'UA-41972683-1', 'fizerkhan.com');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>

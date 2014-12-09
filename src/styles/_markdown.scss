@@ -1,0 +1,39 @@
+// Markdown code styles
+
+code {
+  background: hsl(240, 100%, 96%);
+  border: 1px solid hsl(0, 0%, 90%);
+  padding: 0 0.23em;
+  @include border-radius(3px);
+  margin: 0;
+  font-size: .8em;
+  line-height: 1.5em;
+  font-family: $codeFont;
+}
+
+.post-body > pre {
+  font-family: $codeFont;
+  margin: 1em 0;
+  white-space: normal;
+
+  pre {
+    white-space: pre;
+    -webkit-overflow-scrolling: touch;
+    margin: 0;
+    overflow: auto;
+  }
+
+  code {
+    border: 0;
+    padding: 0;
+  }
+}
+
+.highlight {
+  @include border-radius(3px);
+
+  pre {
+    padding: 15px;
+    margin-bottom: 0;
+  }
+}
