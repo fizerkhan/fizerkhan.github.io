@@ -3,10 +3,10 @@ title:  Dropbox will save your head
 date:   2013-11-4
 ----
 
-Recently My Mac OSX has been crashed and somehow i cannot retrieve some of my data from hard drive.
-But i am fortunate that i have already synced important folder to the `Dropbox` that saves my head.
+Recently My Mac OSX has been crashed and i cannot retrieve some of my data from hard drive.
+Fortunately i have already synced important folders to the `Dropbox` that saves my head.
 
-Few days ago, i got a tweet from my favorite Github contributor [tj](https://twitter.com/tjholowaychuk) (Creator of ExpressJs, Jade, Mocha)
+Few days ago, i saw the tweet from popular GitHub contributor [tj](https://twitter.com/tjholowaychuk) (Creator of ExpressJs, Jade, Mocha)
 
 
 <blockquote class="twitter-tweet"><p>haha dammit.. just rm -fr a project that isn&#39;t on github yet :( <a href="https://twitter.com/search?q=%23fail&amp;src=hash">#fail</a></p>&mdash; TJ Holowaychuk (@tjholowaychuk) <a href="https://twitter.com/tjholowaychuk/statuses/391262571350593536">October 18, 2013</a></blockquote>

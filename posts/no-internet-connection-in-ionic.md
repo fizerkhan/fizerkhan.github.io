@@ -30,12 +30,12 @@ angular.module('myApp', ['ionic'])
     if(window.Connection) {
       if(navigator.connection.type == Connection.NONE) {
         $ionicPopup.confirm({
-          title: 'Internet Disconnected',
-          content: 'The internet is disconnected on your device.'
+          title: 'No Internet Connection',
+          content: 'Sorry, no Internet connectivity detected. Please reconnect and try again.'
         })
         .then(function(result) {
           if(!result) {
-              ionic.Platform.exitApp();
+            ionic.Platform.exitApp();
           }
         });
       }

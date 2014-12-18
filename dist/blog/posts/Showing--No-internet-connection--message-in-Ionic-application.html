@@ -42,12 +42,12 @@ cordova plugin.</p>
     <span class="k">if</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">Connection</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">if</span><span class="p">(</span><span class="nx">navigator</span><span class="p">.</span><span class="nx">connection</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span> <span class="nx">Connection</span><span class="p">.</span><span class="nx">NONE</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">$ionicPopup</span><span class="p">.</span><span class="nx">confirm</span><span class="p">({</span>
-          <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Internet Disconnected&#39;</span><span class="p">,</span>
-          <span class="nx">content</span><span class="o">:</span> <span class="s1">&#39;The internet is disconnected on your device.&#39;</span>
+          <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;No Internet Connection&#39;</span><span class="p">,</span>
+          <span class="nx">content</span><span class="o">:</span> <span class="s1">&#39;Sorry, no Internet connectivity detected. Please reconnect and try again.&#39;</span>
         <span class="p">})</span>
         <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
           <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-              <span class="nx">ionic</span><span class="p">.</span><span class="nx">Platform</span><span class="p">.</span><span class="nx">exitApp</span><span class="p">();</span>
+            <span class="nx">ionic</span><span class="p">.</span><span class="nx">Platform</span><span class="p">.</span><span class="nx">exitApp</span><span class="p">();</span>
           <span class="p">}</span>
         <span class="p">});</span>
       <span class="p">}</span>
