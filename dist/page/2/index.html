@@ -19,241 +19,202 @@
       <div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div>
     </nav>
     <div class="content">
-      <div class="post-head group"><a href="/blog/posts/Commands-and-Options-I-Wish-I-Knew-Earlier-About-Git.html">
-          <h1 class="post-title">Commands and Options I Wish I Knew Earlier About Git</h1></a>
-        <h2 class="post-date">2014 &#183; 9 &#183; 29</h2>
+      <div class="post-head group"><a href="/blog/posts/Clean-up-your-local-branches-after-merge-and-delete-in-GitHub.html">
+          <h1 class="post-title">Clean up your local branches after merge and delete in GitHub</h1></a>
+        <h2 class="post-date">2014 &#183; 11 &#183; 23</h2>
       </div>
-      <div class="post-body"><p><code>Git</code> becomes de facto of source code management (SCM) system among developers.
-Many developers used to work on git from console. Mostly used commands are
-<code>git status</code>, <code>git add</code>, <code>git commit</code> and <code>git push</code>.</p>
-<p>Apart from these commands, there are lot of useful commands in git.
-Initial days, i find difficulties in tracking changes made by me and my team mates
-couple of days or few weeks ago. Here we will see some of commands that are interesting and
-useful to your workflow.</p>
-<a name="-.-short-status-output" class="anchor" href="#-.-short-status-output"><h4>1. Short status output</h4>
-</a><p><code>git status</code> is mostly used command in <code>Git</code>. But it gives lot of
-information which is not useful for people who are proficient with git.
-If you are one among them, then use</p>
-<pre><code><div class="highlight"><pre><span class="nx">git</span> <span class="nx">status</span> <span class="o">-</span><span class="nx">sb</span>
-</pre></div>
-</code></pre>
-<a name="-.-view-changes-by-revision" class="anchor" href="#-.-view-changes-by-revision"><h4>2. View changes by revision</h4>
-</a><p>If you want to view changes made at particular revision</p>
-<pre><code><div class="highlight"><pre>  <span class="nx">git</span> <span class="nx">show</span> <span class="o">&lt;</span><span class="nx">revision</span><span class="o">&gt;</span>
-
-  <span class="nx">git</span> <span class="nx">show</span> <span class="nx">df2edcd</span>
-  <span class="p">(</span><span class="nx">or</span><span class="p">)</span>
-  <span class="nx">git</span> <span class="nx">show</span> <span class="nx">HEAD</span>     <span class="err">#</span><span class="nx">HEAD</span> <span class="nx">means</span> <span class="nx">latest</span> <span class="nx">commit</span>
-  <span class="p">(</span><span class="nx">or</span><span class="p">)</span>
-  <span class="nx">git</span> <span class="nx">show</span> <span class="nx">HEAD</span><span class="o">~</span><span class="mi">1</span>   <span class="err">#</span><span class="nx">HEAD</span><span class="o">~</span><span class="mi">1</span> <span class="nx">means</span> <span class="nx">commit</span> <span class="nx">before</span> <span class="nx">the</span> <span class="nx">commit</span> <span class="nx">that</span> <span class="nx">HEAD</span> <span class="nx">currently</span> <span class="nx">points</span> <span class="nx">at</span>
-</pre></div>
-</code></pre>
-<p>In case, you want to view only changed file name, not the contents, Use <code>--name-only</code> option</p>
-<pre><code><div class="highlight"><pre>  <span class="nx">git</span> <span class="nx">show</span> <span class="o">--</span><span class="nx">name</span><span class="o">-</span><span class="nx">only</span>  <span class="nx">df2edcd</span>
-  <span class="p">(</span><span class="nx">or</span><span class="p">)</span>
-  <span class="nx">git</span> <span class="nx">show</span> <span class="o">--</span><span class="nx">name</span><span class="o">-</span><span class="nx">only</span> <span class="o">--</span><span class="nx">oneline</span> <span class="nx">df2edcd</span>
-  <span class="p">(</span><span class="nx">or</span><span class="p">)</span>
-  <span class="nx">git</span> <span class="nx">show</span> <span class="o">--</span><span class="nx">name</span><span class="o">-</span><span class="nx">only</span>  <span class="o">--</span><span class="nx">pretty</span><span class="o">=</span><span class="s2">&quot;format:&quot;</span> <span class="nx">df2edcd</span>
-</pre></div>
-</code></pre>
-<a name="-.-view-changes-of-specific-file" class="anchor" href="#-.-view-changes-of-specific-file"><h4>3. View changes of specific file</h4>
-</a><p>If you want to view changes of specific file, then</p>
-<pre><code><div class="highlight"><pre>  <span class="nx">git</span> <span class="nx">show</span> <span class="nx">df2edcd</span><span class="o">:</span><span class="nx">app</span><span class="o">/</span><span class="nx">index</span><span class="p">.</span><span class="nx">html</span>
-  <span class="p">(</span><span class="nx">or</span><span class="p">)</span>
-  <span class="nx">git</span> <span class="nx">show</span> <span class="nx">HEAD</span><span class="o">~</span><span class="mi">1</span><span class="o">:</span><span class="nx">app</span><span class="o">/</span><span class="nx">index</span><span class="p">.</span><span class="nx">html</span>
-
-  <span class="nx">git</span> <span class="nx">show</span> <span class="err">@</span><span class="p">{</span><span class="mi">22</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">2014</span><span class="p">}</span><span class="o">:</span><span class="nx">app</span><span class="o">/</span><span class="nx">index</span><span class="p">.</span><span class="nx">html</span>
-</pre></div>
-</code></pre>
-<a name="-.-search-for-commit-message" class="anchor" href="#-.-search-for-commit-message"><h4>4. Search for commit message</h4>
-</a><p>You want to search a commit which message matches a regex</p>
-<pre><code><div class="highlight"><pre>  <span class="nx">git</span> <span class="nx">show</span> <span class="o">:</span><span class="err">/fixed</span>
-  <span class="err">#</span> <span class="nx">shows</span> <span class="nx">the</span> <span class="nx">last</span> <span class="nx">commit</span> <span class="nx">which</span> <span class="nx">has</span> <span class="nx">the</span> <span class="nx">word</span> <span class="s2">&quot;fixed&quot;</span> <span class="k">in</span> <span class="nx">its</span> <span class="nx">message</span>
-
-  <span class="nx">git</span> <span class="nx">show</span> <span class="o">:</span><span class="err">/analytics</span>
-  <span class="err">#</span> <span class="nx">shows</span> <span class="nx">the</span> <span class="nx">last</span> <span class="nx">commit</span> <span class="nx">which</span> <span class="nx">has</span> <span class="nx">the</span> <span class="nx">word</span> <span class="s2">&quot;analytics&quot;</span> <span class="k">in</span> <span class="nx">its</span> <span class="nx">message</span>
-</pre></div>
-</code></pre>
-<a name="-.-list-all-files-that-were-modified-or-added-in-this-time" class="anchor" href="#-.-list-all-files-that-were-modified-or-added-in-this-time"><h4>5. list all files that were modified or added in this time</h4>
-</a><p>List all files added/modified 9 days ago</p>
-<pre><code><div class="highlight"><pre>  <span class="nx">git</span> <span class="nx">diff</span> <span class="s2">&quot;@{9 days ago}&quot;</span>
-  <span class="nx">git</span> <span class="nx">diff</span> <span class="o">--</span><span class="nx">name</span><span class="o">-</span><span class="nx">only</span> <span class="s2">&quot;@{9 days ago}&quot;</span>
-  <span class="nx">git</span> <span class="nx">diff</span> <span class="o">--</span><span class="nx">name</span><span class="o">-</span><span class="nx">status</span> <span class="s2">&quot;@{9 days ago}&quot;</span>
-</pre></div>
-</code></pre>
-<p>List all files added/modified between 9 days ago and 6 days ago</p>
-<pre><code><div class="highlight"><pre>  <span class="nx">git</span> <span class="nx">diff</span> <span class="s2">&quot;@{9 days ago}&quot;</span> <span class="s2">&quot;@{6 days ago}&quot;</span>
-  <span class="nx">git</span> <span class="nx">diff</span> <span class="o">--</span><span class="nx">name</span><span class="o">-</span><span class="nx">only</span> <span class="s2">&quot;@{9 days ago}&quot;</span> <span class="s2">&quot;@{6 days ago}&quot;</span>
-  <span class="nx">git</span> <span class="nx">diff</span> <span class="o">--</span><span class="nx">name</span><span class="o">-</span><span class="nx">status</span> <span class="s2">&quot;@{9 days ago}&quot;</span> <span class="s2">&quot;@{6 days ago}&quot;</span>
-</pre></div>
-</code></pre>
-<a name="-.-changes-between-two-commit-revision" class="anchor" href="#-.-changes-between-two-commit-revision"><h4>6. Changes between two commit revision</h4>
-</a><p>List all files between two commits adab4ab and 6da161b</p>
-<pre><code><div class="highlight"><pre>  <span class="nx">git</span> <span class="nx">diff</span> <span class="nx">adab4ab</span><span class="o">^</span> <span class="mi">6</span><span class="nx">da161b</span>
-  <span class="nx">git</span> <span class="nx">diff</span> <span class="o">--</span><span class="nx">name</span><span class="o">-</span><span class="nx">only</span> <span class="nx">adab4ab</span><span class="o">^</span> <span class="mi">6</span><span class="nx">da161b</span>
-  <span class="nx">git</span> <span class="nx">diff</span> <span class="o">--</span><span class="nx">name</span><span class="o">-</span><span class="nx">status</span> <span class="nx">adab4ab</span><span class="o">^</span> <span class="mi">6</span><span class="nx">da161b</span>
-</pre></div>
-</code></pre>
-<p>Hope it useful. Share your favorite commands in comments.
-Happy commit and have a nice day.</p>
+      <div class="post-body"><p>If you are a Github user, then you might familiar with Pull Requests. Github
+has an <a href="https://github.com/blog/1335-tidying-up-after-pull-requests">options</a>
+to delete a branch after merging of pull request.</p>
+<p>After a Pull Request has been merged, you’ll see a button to delete the lingering branch:</p>
+<p><img src="https://github-images.s3.amazonaws.com/skitch/Commits_next_forward_compatibility_by_rtomayko_%C2%B7_Pull_Request_%C2%B7_github_github-20121127-131321.png" style="max-width:100%;"></p>
+<p>Above action will delete the branch only in the remote. Then there is a question:
+how do i clean up my local branches? I found an answer as follows</p>
+<p>Lets say my test branch name <code>feature-collaboration</code></p>
+<a name="-.-list-branches-in-local-machine" class="anchor" href="#-.-list-branches-in-local-machine"><h3>1. List branches in local machine</h3>
+</a><p>The command <code>git branch -a</code> shows the test branch <code>feature-collaboration</code>
+is present on local and also present on remote</p>
+<p><img src="/images/git/git-branch-a-before.png" alt="git branch -a"></p>
+<a name="-.-prune-cleanup-the-local-references-to-remote-branch" class="anchor" href="#-.-prune-cleanup-the-local-references-to-remote-branch"><h3>2. Prune/Cleanup the local references to remote branch</h3>
+</a><p>The command <code>git remote prune origin --dry-run</code> lists branches that can be
+deleted/pruned on your local. An option <code>--dry-run</code> is needed.</p>
+<p><img src="/images/git/git-remote-prune-origin-dry-run.png" alt="git remote prune origin --dry-run"></p>
+<p>Now go ahead and actually prune/cleanup the local references by running the command
+<code>git remote prune origin</code>. Note that you don&#39;t need an option <code>--dry-run</code>.</p>
+<p><img src="/images/git/git-remote-prune-origin.png" alt="git remote prune origin"></p>
+<p>Again, run the command <code>git branch -a</code> will show the local status of branches.</p>
+<p><img src="/images/git/git-branch-a-after.png" alt="git branch -a"></p>
+<p>Now you can notice that <code>remotes/origin/feature-collaboration</code> has been removed,
+but not the local branch <code>feature-collaboration</code>.</p>
+<a name="-.-delete-local-branch" class="anchor" href="#-.-delete-local-branch"><h3>3. Delete local branch</h3>
+</a><p>If wanted, we can clean-up the local branch <code>feature-collaboration</code> as well</p>
+<p><img src="/images/git/git-branch-d-name.png" alt="git branch -d"></p>
+<p>That&#39;s it. Have a nice day.</p>
 </div>
-      <h4><a href="/blog/posts/Commands-and-Options-I-Wish-I-Knew-Earlier-About-Git.html#comments">View comments</a></h4>
-      <div class="post-head group"><a href="/blog/posts/Fix-Shellshock-Bash-Vulnerability-in-OSX-Bash.html">
-          <h1 class="post-title">Fix Shellshock Bash Vulnerability in OSX Bash</h1></a>
-        <h2 class="post-date">2014 &#183; 9 &#183; 27</h2>
+      <h4><a href="/blog/posts/Clean-up-your-local-branches-after-merge-and-delete-in-GitHub.html#comments">View comments</a></h4>
+      <div class="post-head group"><a href="/blog/posts/Restrict-user-access-to-Single-S3-Bucket-using-Amazon-IAM.html">
+          <h1 class="post-title">Restrict user access to Single S3 Bucket using Amazon IAM</h1></a>
+        <h2 class="post-date">2014 &#183; 11 &#183; 12</h2>
       </div>
-      <div class="post-body"><p>GNU Bash vulnerability, referred to as <strong>Shellshock</strong> or the <strong>Bash Bug</strong>, was found on Sep 24, 2014.
-The <strong>Shellshock</strong> vulnerability is very widespread and even more so than the OpenSSL Heartbleed bug
- So it is highly recommended that affected systems are properly updated to fix or mitigate the vulnerability as soon as possible.</p>
-<a name="what-is-shellshock" class="anchor" href="#what-is-shellshock"><h3>What is Shellshock</h3>
-</a><pre><code><div class="highlight"><pre><span class="nx">GNU</span> <span class="nx">Bash</span> <span class="nx">through</span> <span class="mf">4.3</span> <span class="nx">processes</span> <span class="nx">trailing</span> <span class="nx">strings</span> <span class="nx">after</span> <span class="kd">function</span> <span class="nx">definitions</span> <span class="k">in</span> <span class="nx">the</span> <span class="nx">values</span> <span class="nx">of</span> <span class="nx">environment</span> <span class="nx">variables</span><span class="p">,</span> <span class="nx">which</span> <span class="nx">allows</span> <span class="nx">remote</span> <span class="nx">attackers</span> <span class="nx">to</span> <span class="nx">execute</span> <span class="nx">arbitrary</span> <span class="nx">code</span> <span class="nx">via</span> <span class="nx">a</span> <span class="nx">crafted</span> <span class="nx">environment</span><span class="p">,</span> <span class="nx">as</span> <span class="nx">demonstrated</span> <span class="nx">by</span> <span class="nx">vectors</span> <span class="nx">involving</span> <span class="nx">the</span> <span class="nx">ForceCommand</span> <span class="nx">feature</span> <span class="k">in</span> <span class="nx">OpenSSH</span> <span class="nx">sshd</span><span class="p">,</span> <span class="nx">the</span> <span class="nx">mod_cgi</span> <span class="nx">and</span> <span class="nx">mod_cgid</span> <span class="nx">modules</span> <span class="k">in</span> <span class="nx">the</span> <span class="nx">Apache</span> <span class="nx">HTTP</span> <span class="nx">Server</span><span class="p">,</span> <span class="nx">scripts</span> <span class="nx">executed</span> <span class="nx">by</span> <span class="nx">unspecified</span> <span class="nx">DHCP</span> <span class="nx">clients</span><span class="p">,</span> <span class="nx">and</span> <span class="nx">other</span> <span class="nx">situations</span> <span class="k">in</span> <span class="nx">which</span> <span class="nx">setting</span> <span class="nx">the</span> <span class="nx">environment</span> <span class="nx">occurs</span> <span class="nx">across</span> <span class="nx">a</span> <span class="nx">privilege</span> <span class="nx">boundary</span> <span class="nx">from</span> <span class="nx">Bash</span> <span class="nx">execution</span><span class="p">.</span>
-</pre></div>
-</code></pre>
-<p>To know more about <strong>Shellshock</strong>, read an amazing <a href="http://www.troyhunt.com/2014/09/everything-you-need-to-know-about.html">article from Troy Hunt</a></p>
-<a name="check-system-vulnerability" class="anchor" href="#check-system-vulnerability"><h3>Check System Vulnerability</h3>
-</a><p>You can check the system for Shellshock vulnerability by running following command in bash</p>
-<pre><code><div class="highlight"><pre><span class="nx">env</span> <span class="nx">Y</span><span class="o">=</span><span class="s1">&#39;() { :;}; echo I am vulnerable!&#39;</span> <span class="nx">bash</span> <span class="o">-</span><span class="nx">c</span> <span class="s2">&quot;echo This is Bash&quot;</span>
-</pre></div>
-</code></pre>
-<p>If your version of Bash is vulnerable, then you will see following output</p>
-<pre><code><div class="highlight"><pre><span class="nx">I</span> <span class="nx">am</span> <span class="nx">vulnerable</span>
-<span class="nx">This</span> <span class="nx">is</span> <span class="nx">Bash</span>
-</pre></div>
-</code></pre>
-<p>Instead of <strong>echo I am vulnerable!</strong> portion, attacker can run any command;
-arbitrary code following a function definition within an environment variable assignment.
-If your system don&#39;t have Shellshock vulnerability, then you will see following output</p>
-<pre><code><div class="highlight"><pre><span class="nx">bash</span><span class="o">:</span> <span class="nx">warning</span><span class="o">:</span> <span class="nx">Y</span><span class="o">:</span> <span class="nx">ignoring</span> <span class="kd">function</span> <span class="nx">definition</span> <span class="nx">attempt</span>
-<span class="nx">bash</span><span class="o">:</span> <span class="nx">error</span> <span class="nx">importing</span> <span class="kd">function</span> <span class="nx">definition</span> <span class="k">for</span> <span class="err">`</span><span class="nx">Y</span><span class="err">&#39;</span>
-<span class="nx">This</span> <span class="nx">is</span> <span class="nx">Bash</span>
-</pre></div>
-</code></pre>
-<a name="how-to-fix-in-mac-osx" class="anchor" href="#how-to-fix-in-mac-osx"><h3>How to fix in Mac OSX</h3>
-</a><p>If your bash is vulnerable, then  you can install latest version of bash as follows, provided that you have XCode installed,</p>
-<pre><code><div class="highlight"><pre><span class="nx">$</span> <span class="nx">mkdir</span> <span class="nx">bash</span><span class="o">-</span><span class="nx">fix</span>
-<span class="nx">$</span> <span class="nx">cd</span> <span class="nx">bash</span><span class="o">-</span><span class="nx">fix</span>
-<span class="nx">$</span> <span class="nx">curl</span> <span class="nx">https</span><span class="o">:</span><span class="c1">//opensource.apple.com/tarballs/bash/bash-92.tar.gz | tar zxf -</span>
-<span class="nx">$</span> <span class="nx">cd</span> <span class="nx">bash</span><span class="o">-</span><span class="mi">92</span><span class="o">/</span><span class="nx">bash</span><span class="o">-</span><span class="mf">3.2</span>
-<span class="nx">$</span> <span class="nx">curl</span> <span class="nx">https</span><span class="o">:</span><span class="c1">//ftp.gnu.org/pub/gnu/bash/bash-3.2-patches/bash32-052 | patch -p0</span>
-<span class="nx">$</span> <span class="nx">curl</span> <span class="nx">https</span><span class="o">:</span><span class="c1">//ftp.gnu.org/pub/gnu/bash/bash-3.2-patches/bash32-053 | patch -p0</span>
-<span class="nx">$</span> <span class="nx">cd</span> <span class="p">..</span>
-<span class="nx">$</span> <span class="nx">sudo</span> <span class="nx">xcodebuild</span>
-<span class="nx">$</span> <span class="nx">sudo</span> <span class="nx">cp</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">bash</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">bash</span><span class="p">.</span><span class="nx">old</span>
-<span class="nx">$</span> <span class="nx">sudo</span> <span class="nx">cp</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">sh</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">sh</span><span class="p">.</span><span class="nx">old</span>
-<span class="nx">$</span> <span class="nx">build</span><span class="o">/</span><span class="nx">Release</span><span class="o">/</span><span class="nx">bash</span> <span class="o">--</span><span class="nx">version</span> <span class="err">#</span> <span class="nx">GNU</span> <span class="nx">bash</span><span class="p">,</span> <span class="nx">version</span> <span class="mf">3.2</span><span class="p">.</span><span class="mi">53</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="nx">release</span>
-<span class="nx">$</span> <span class="nx">build</span><span class="o">/</span><span class="nx">Release</span><span class="o">/</span><span class="nx">sh</span> <span class="o">--</span><span class="nx">version</span>   <span class="err">#</span> <span class="nx">GNU</span> <span class="nx">bash</span><span class="p">,</span> <span class="nx">version</span> <span class="mf">3.2</span><span class="p">.</span><span class="mi">53</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="nx">release</span>
-<span class="nx">$</span> <span class="nx">sudo</span> <span class="nx">cp</span> <span class="nx">build</span><span class="o">/</span><span class="nx">Release</span><span class="o">/</span><span class="nx">bash</span> <span class="o">/</span><span class="nx">bin</span>
-<span class="nx">$</span> <span class="nx">sudo</span> <span class="nx">cp</span> <span class="nx">build</span><span class="o">/</span><span class="nx">Release</span><span class="o">/</span><span class="nx">sh</span> <span class="o">/</span><span class="nx">bin</span>
-</pre></div>
-</code></pre>
-<p>Once you installed, check your bash version(<code>bash --version</code>), it should be
-<code>GNU bash, version 3.2.53(1)-release</code></p>
-<p>For security reason, you have to remove the executable permission from older bash</p>
-<pre><code><div class="highlight"><pre><span class="nx">$</span> <span class="nx">sudo</span> <span class="nx">chmod</span> <span class="nx">a</span><span class="o">-</span><span class="nx">x</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">bash</span><span class="p">.</span><span class="nx">old</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">sh</span><span class="p">.</span><span class="nx">old</span>
-</pre></div>
-</code></pre>
-<p>That&#39;s it. Keep in mind that this fix is temporary.
-We have to wait for real fix until apple releases it.</p>
-<p>If you using Linux distribution, please read <a href="https://www.digitalocean.com/community/tutorials/how-to-protect-your-server-against-the-shellshock-bash-vulnerability">Digital Ocean blog on Shellshock</a></p>
-<a name="kudos" class="anchor" href="#kudos"><h3>Kudos</h3>
-</a><ul>
-<li><a href="http://apple.stackexchange.com/questions/146849/how-do-i-recompile-bash-to-avoid-shellshock-the-remote-exploit-cve-2014-6271-an">AlBlue at stackexchange</a></li>
-<li><a href="http://www.troyhunt.com/">Troy Hunt</a></li>
-</ul>
-</div>
-      <h4><a href="/blog/posts/Fix-Shellshock-Bash-Vulnerability-in-OSX-Bash.html#comments">View comments</a></h4>
-      <div class="post-head group"><a href="/blog/posts/Download-a-file-without-server-request.html">
-          <h1 class="post-title">Download a file without server request</h1></a>
-        <h2 class="post-date">2014 &#183; 8 &#183; 1</h2>
-      </div>
-      <div class="post-body"><p>We have come across <code>Download file</code> link(button) in lot of sites. Generally, When you click <code>download</code> link or button, it sends <code>GET</code> request to server and server returns the downloadable content(with <code>content-disposition</code> header). Now-a-days we are building lot of Single Page application where we get the <code>JSON</code> payload from the server and render it in the client side.
-Since we have the data in the client side, we don&#39;t want to sent another request to download the content. So we will see how to download the content from the client side
-without an extra request to server.</p>
-<a name="how-existing-download-from-server-works" class="anchor" href="#how-existing-download-from-server-works"><h3>How existing download from server works</h3>
-</a><p>Whenever you click the <code>download</code> link, it will send <code>GET</code> request. The server will
-set <code>Content-disposition</code> header to <code>attachment; filename=some-filename.csv</code> and set the data in the body.</p>
-<p><strong>Sample code from Node.js to download CSV file</strong></p>
-<pre><code class="lang-javascript"><div class="highlight"><pre><span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">response</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="s1">&#39;Content-disposition&#39;</span><span class="p">,</span> <span class="s1">&#39;attachment; filename=some-filename.csv&#39;</span><span class="p">);</span>
-    <span class="nx">response</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span>
-        <span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;text/csv&#39;</span>
-    <span class="p">});</span>
-
-    <span class="nx">csv</span><span class="p">().</span><span class="nx">from</span><span class="p">(</span><span class="nx">data</span><span class="p">).</span><span class="nx">to</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span>
-
-<span class="p">})</span>
-<span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
-</pre></div>
-</code></pre>
-<a name="download-content-without-server-request" class="anchor" href="#download-content-without-server-request"><h3>Download content without server request</h3>
-</a><p>This can be done by two ways.</p>
+      <div class="post-body"><p>S3 becomes de-facto standard for publishing files in the internet.
+When you work with the team, you might want to restrict an access of single S3 bucket to
+specific users. You can do it in <a href="https://console.aws.amazon.com/iam/home">IAM</a> as follows</p>
 <ol>
-<li>Using Data URL</li>
-<li>Using <a href="https://github.com/dcneiner/Downloadify">Downloadify</a> library</li>
+<li>Create <a href="https://console.aws.amazon.com/iam/home#groups">Group</a></li>
+<li>Create <a href="https://console.aws.amazon.com/iam/home#users">User</a>. Then use <strong>Manage Password</strong> to add a password for your user.</li>
+<li>Add User to the created Group</li>
+<li>Create and Attach Permission Policy for the group.</li>
 </ol>
-<p><strong>Using Data URI</strong></p>
-<p>The data should be placed in the <code>href</code> attribute with data url format. You can also set
-the filename in the <code>download</code> attribute.</p>
-<pre><code class="lang-html"><div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;data:text/plain,this is some text&quot;</span> <span class="na">download=</span><span class="s">&quot;some-filename.txt&quot;</span> <span class="na">target=</span><span class="s">&quot;_blank&quot;</span><span class="nt">&gt;</span>Download<span class="nt">&lt;a&gt;</span>
-</pre></div>
-</code></pre>
-<p><strong>Caution:</strong> The data url is not supported across all browser/version combinations.</p>
-<p><strong>Using Downloadify</strong></p>
-<p><a href="https://github.com/dcneiner/Downloadify">Downloadify</a> is a tiny javascript + Flash library that enables the creation and download of text files without server interaction. It works even in IE.
-It is much better than previous one.</p>
-<p><strong>Usage:</strong></p>
-<pre><code><div class="highlight"><pre><span class="c1">// Any JavaScript framework:</span>
-<span class="nx">Downloadify</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span> <span class="nx">id_or_DOM_element</span><span class="p">,</span> <span class="nx">options</span> <span class="p">);</span>
-
-<span class="c1">// With Jquery</span>
-<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#element&quot;</span><span class="p">).</span><span class="nx">downloadify</span><span class="p">(</span> <span class="nx">options</span> <span class="p">);</span>
-</pre></div>
-</code></pre>
-<p><strong>HTML</strong></p>
-<pre><code class="lang-html"><div class="highlight"><pre><span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;js/swfobject.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;js/downloadify.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;/head&gt;</span>
-<span class="nt">&lt;body</span> <span class="na">onload=</span><span class="s">&quot;load();&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;form&gt;</span>
-    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span> <span class="na">value=</span><span class="s">&quot;testfile.txt&quot;</span> <span class="na">id=</span><span class="s">&quot;filename&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;textarea</span> <span class="na">cols=</span><span class="s">&quot;60&quot;</span> <span class="na">rows=</span><span class="s">&quot;10&quot;</span> <span class="na">name=</span><span class="s">&quot;data&quot;</span> <span class="na">id=</span><span class="s">&quot;data&quot;</span><span class="nt">&gt;</span>
-        Whatever you put in this text box will be downloaded and saved in the file. If you leave it blank, no file will be downloaded
-    <span class="nt">&lt;/textarea&gt;</span>
-    <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;downloadify&quot;</span><span class="nt">&gt;</span>
-      You must have Flash 10 installed to download this file.
-    <span class="nt">&lt;/p&gt;</span>
-  <span class="nt">&lt;/form&gt;</span>
-<span class="nt">&lt;/body&gt;</span>
-</pre></div>
-</code></pre>
-<p><strong>Javascript</strong></p>
-<pre><code class="lang-javascript"><div class="highlight"><pre><span class="kd">function</span> <span class="nx">load</span><span class="p">(){</span>
-      <span class="nx">Downloadify</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;downloadify&#39;</span><span class="p">,{</span>
-        <span class="nx">filename</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
-          <span class="k">return</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;filename&#39;</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span>
+<p>Step 1, 2 and 3 are straight forward. But creating and attaching permission
+policy needs some attention.</p>
+<p>In <a href="https://console.aws.amazon.com/iam/home#groups">Group</a> tab, go to created group.
+Then click the <strong>Permissions</strong> tab and Click the <strong>Attach Policy</strong> button.
+You’ll be taken to <strong>Set Permissions</strong> page where you can Manage User Permissions.
+Here you can select a <strong>Select Policy Template</strong> option, then find the <strong>Amazon S3 Full Access</strong>
+and click <strong>Select</strong> button.</p>
+<p>You will be prompted with <strong>Policy Name</strong> and <strong>Policy Document</strong>. You can
+change the policy name as you wish. In the Policy Document section, paste the following content</p>
+<pre><code class="lang-javascript"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s2">&quot;Statement&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;Effect&quot;</span><span class="o">:</span> <span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Action&quot;</span><span class="o">:</span> <span class="s2">&quot;s3:ListAllMyBuckets&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Resource&quot;</span><span class="o">:</span> <span class="s2">&quot;arn:aws:s3:::*&quot;</span>
         <span class="p">},</span>
-        <span class="nx">data</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
-          <span class="k">return</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span>
-        <span class="p">},</span>
-        <span class="nx">onComplete</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span> <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Your File Has Been Saved!&#39;</span><span class="p">);</span> <span class="p">},</span>
-        <span class="nx">onCancel</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span> <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;You have cancelled the saving of this file.&#39;</span><span class="p">);</span> <span class="p">},</span>
-        <span class="nx">onError</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span> <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;You must put something in the File Contents or there will be nothing to save!&#39;</span><span class="p">);</span> <span class="p">},</span>
-        <span class="nx">swf</span><span class="o">:</span> <span class="s1">&#39;media/downloadify.swf&#39;</span><span class="p">,</span>
-        <span class="nx">downloadImage</span><span class="o">:</span> <span class="s1">&#39;images/download.png&#39;</span><span class="p">,</span>
-        <span class="nx">width</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
-        <span class="nx">height</span><span class="o">:</span> <span class="mi">30</span><span class="p">,</span>
-        <span class="nx">transparent</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-        <span class="nx">append</span><span class="o">:</span> <span class="kc">false</span>
-      <span class="p">});</span>
-    <span class="p">}</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;Effect&quot;</span><span class="o">:</span> <span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Action&quot;</span><span class="o">:</span> <span class="s2">&quot;s3:*&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Resource&quot;</span><span class="o">:</span> <span class="p">[</span>
+                <span class="s2">&quot;arn:aws:s3:::mys3bucket&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;arn:aws:s3:::mys3bucket/*&quot;</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
 </pre></div>
 </code></pre>
-<p>A <a href="http://pixelgraphics.us/downloadify/test.html">very simple demo is available</a> that lets you supply your own content and filename and test out saving, canceling, and the error functionality when the file is blank.</p>
-<p>Please check <a href="https://github.com/dcneiner/Downloadify">Downloadify</a> Readme for more information.
-Share your thoughts and suggestions in the comment. Have a nice day.</p>
+<p>You are done. Have a nice day.</p>
 </div>
-      <h4><a href="/blog/posts/Download-a-file-without-server-request.html#comments">View comments</a></h4>
+      <h4><a href="/blog/posts/Restrict-user-access-to-Single-S3-Bucket-using-Amazon-IAM.html#comments">View comments</a></h4>
+      <div class="post-head group"><a href="/blog/posts/Startup-Landing-Pages-with-Firebase.html">
+          <h1 class="post-title">Startup Landing Pages with Firebase</h1></a>
+        <h2 class="post-date">2014 &#183; 10 &#183; 4</h2>
+      </div>
+      <div class="post-body"><p>Now-a-days <em>Landing Page</em> has become common and popular among startups and publishers. Every landing page has one important call-to-action, i.e. to sign up early adopters  for their beta version.</p>
+<p>To get up &amp; running as soon as possible, the simplest and fastest way to build a landing page is basically having it as a static site without any back end. The downside of this approach is, we need to figure out a way to store the emails that are signed up. As you would expect, there are quite a few really good services you can use right of the bat.</p>
+<ul>
+<li><a href="http://launchrock.co/">Launch Rock</a></li>
+<li><a href="http://unbounce.com">Unbounce</a></li>
+<li><a href="http://www.kickofflabs.com/">Kickofflabs</a></li>
+<li><a href="http://my.betali.st/">My Beta List</a></li>
+<li><a href="http://launcheffectapp.com/">Launch Effect (wordpress)</a></li>
+<li><a href="http://www.prefinery.com/">Prefinery</a></li>
+<li><a href="http://launch.deskgator.com/">LaunchGator</a></li>
+<li><a href="http://quickmvp.com">QuickMVP</a></li>
+<li><a href="http://mailchimp.com/">mailchimp</a></li>
+</ul>
+<p>Some of the above services even provides HTML templates, A/B testing and much more. For a non-developer these sites would be the best fit.</p>
+<p>If you know a bit of web development and want to build you own custom landing page, then I would strongly recommend to use <a href="https://www.firebase.com/">Firebase</a> to not only collect emails but even feedbacks. Firebase provides powerful APIs to store and sync data in realtime.</p>
+<p>Going forward I will show you the technical part of how you can build the pages in Firebase.</p>
+<a name="firebase-email-storage" class="anchor" href="#firebase-email-storage"><h3>Firebase Email Storage</h3>
+</a><p>Once you have created a <a href="https://www.firebase.com/signup/">firebase account</a> and have logged in, create a firebase application.</p>
+<p>You need to include the <strong>firebase javascript</strong> in your landing page. This provides the functionality to save your data (e.g. email) into your <strong>firebase application</strong>.</p>
+<p><code>&lt;script src=&quot;https://cdn.firebase.com/js/client/1.0.18/firebase.js&quot;&gt;&lt;/script&gt;</code></p>
+<a name="email-signup-form" class="anchor" href="#email-signup-form"><h5>Email Signup Form</h5>
+</a><p>Following is a basic HTML template for email sign up form.</p>
+<pre><code class="lang-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;signup&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h2</span> <span class="na">class=</span><span class="s">&quot;signup-title&quot;</span><span class="nt">&gt;</span>Sign up for beta<span class="nt">&lt;/h2&gt;</span>
+    <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;signup-success&quot;</span> <span class="na">class=</span><span class="s">&quot;text-success&quot;</span><span class="nt">&gt;&lt;/p&gt;</span>
+    <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;signup-error&quot;</span> <span class="na">class=</span><span class="s">&quot;text-danger&quot;</span><span class="nt">&gt;&lt;/p&gt;</span>
+    <span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">&quot;signup-form form-inline&quot;</span> <span class="na">id=</span><span class="s">&quot;signup-form&quot;</span> <span class="na">role=</span><span class="s">&quot;form&quot;</span> <span class="na">onsubmit=</span><span class="s">&quot;return signup(this)&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">&quot;form-control&quot;</span> <span class="na">name=</span><span class="s">&quot;email&quot;</span> <span class="na">type=</span><span class="s">&quot;email&quot;</span> <span class="na">placeholder=</span><span class="s">&quot;Your email. eg., joe@acme.com&quot;</span> <span class="na">required</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">&quot;btn btn-success&quot;</span> <span class="na">id=</span><span class="s">&quot;signup-button&quot;</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="nt">&gt;</span>Join now<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</code></pre>
+<a name="firebase-script-to-save-email-addresses" class="anchor" href="#firebase-script-to-save-email-addresses"><h5>Firebase script to save email addresses</h5>
+</a><p>On the submission of the button, the script script is invoked to store the email address into your <strong>firebase application</strong>.</p>
+<pre><code class="lang-javascript"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+    <span class="kd">var</span> <span class="nx">signupForm</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;signup-form&#39;</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">signupSuccess</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;signup-success&#39;</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">signupError</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;signup-error&#39;</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">signupBtn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;signup-button&#39;</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">onSignupComplete</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">signupBtn</span><span class="p">.</span><span class="nx">disabled</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">signupError</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">&#39;Sorry. Could not signup.&#39;</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">signupSuccess</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">&#39;Thanks for signing up!&#39;</span><span class="p">;</span>
+        <span class="c1">// hide the form</span>
+        <span class="nx">signupForm</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+    <span class="kd">function</span> <span class="nx">signup</span><span class="p">(</span><span class="nx">formObj</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Store emails to firebase</span>
+        <span class="kd">var</span> <span class="nx">myFirebaseRef</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Firebase</span><span class="p">(</span><span class="s2">&quot;https://yourappname.firebaseio.com/signups&quot;</span><span class="p">);</span>
+        <span class="nx">myFirebaseRef</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+          <span class="nx">email</span><span class="o">:</span> <span class="nx">formObj</span><span class="p">.</span><span class="nx">email</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
+        <span class="p">},</span> <span class="nx">onSignupComplete</span><span class="p">);</span>
+        <span class="nx">signupBtn</span><span class="p">.</span><span class="nx">disabled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+</pre></div>
+</code></pre>
+<a name="contact-messages" class="anchor" href="#contact-messages"><h3>Contact messages</h3>
+</a><p>You can also store the feedback, suggestions and questions into your <strong>firebase application</strong>.</p>
+<p>Following is the basic HTML template for a contact form.</p>
+<pre><code class="lang-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;contact&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h2</span> <span class="na">class=</span><span class="s">&quot;contact-title&quot;</span><span class="nt">&gt;</span>Send us a message<span class="nt">&lt;/h2&gt;</span>
+    <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;contact-success&quot;</span> <span class="na">class=</span><span class="s">&quot;text-success lead&quot;</span><span class="nt">&gt;&lt;/p&gt;</span>
+    <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;contact-error&quot;</span> <span class="na">class=</span><span class="s">&quot;text-danger lead&quot;</span><span class="nt">&gt;&lt;/p&gt;</span>
+    <span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">&quot;contact-form&quot;</span> <span class="na">id=</span><span class="s">&quot;contact-form&quot;</span> <span class="na">role=</span><span class="s">&quot;form&quot;</span> <span class="na">onsubmit=</span><span class="s">&quot;return sendMessage(this)&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">&quot;form-control&quot;</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">placeholder=</span><span class="s">&quot;Your name. eg., Joe&quot;</span> <span class="na">required</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">&quot;form-control&quot;</span> <span class="na">name=</span><span class="s">&quot;email&quot;</span> <span class="na">type=</span><span class="s">&quot;email&quot;</span> <span class="na">placeholder=</span><span class="s">&quot;Your email. eg., joe@acme.com&quot;</span> <span class="na">required</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;textarea</span> <span class="na">class=</span><span class="s">&quot;form-control&quot;</span> <span class="na">name=</span><span class="s">&quot;message&quot;</span> <span class="na">placeholder=</span><span class="s">&quot;Your message for us&quot;</span> <span class="na">rows=</span><span class="s">&quot;5&quot;</span> <span class="na">required</span><span class="nt">&gt;&lt;/textarea&gt;</span>
+        <span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">&quot;btn btn-success pull-right&quot;</span> <span class="na">id=</span><span class="s">&quot;send-button&quot;</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="nt">&gt;</span>Send Message<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</code></pre>
+<p>On submission, the below script is invoked to save your email address along with the message into your <strong>firebase application</strong>.</p>
+<pre><code class="lang-javascript"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+    <span class="c1">// Send message</span>
+    <span class="kd">var</span> <span class="nx">contactFrom</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;contact-form&#39;</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">contactSuccess</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;contact-success&#39;</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">contactError</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;contact-error&#39;</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">sendBtn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;send-button&#39;</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">onMessageComplete</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">sendBtn</span><span class="p">.</span><span class="nx">disabled</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">contactError</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">&#39;Sorry. Could not send message.&#39;</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">contactSuccess</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s2">&quot;Message has been sent.&quot;</span><span class="p">;</span>
+        <span class="c1">// hide the form</span>
+        <span class="nx">contactFrom</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+    <span class="kd">function</span> <span class="nx">sendMessage</span><span class="p">(</span><span class="nx">formObj</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Store emails to firebase</span>
+        <span class="kd">var</span> <span class="nx">myFirebaseRef</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Firebase</span><span class="p">(</span><span class="s2">&quot;https://yourappname.firebaseio.com/messages&quot;</span><span class="p">);</span>
+        <span class="nx">myFirebaseRef</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+          <span class="nx">name</span><span class="o">:</span> <span class="nx">formObj</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
+          <span class="nx">email</span><span class="o">:</span> <span class="nx">formObj</span><span class="p">.</span><span class="nx">email</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
+          <span class="nx">message</span><span class="o">:</span> <span class="nx">formObj</span><span class="p">.</span><span class="nx">message</span><span class="p">.</span><span class="nx">value</span>
+        <span class="p">},</span> <span class="nx">onMessageComplete</span><span class="p">);</span>
+        <span class="nx">sendBtn</span><span class="p">.</span><span class="nx">disabled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+</pre></div>
+</code></pre>
+<p>It is one of the simplest way to handle forms in your landing page. Firebase provides 100 MB of data storage in their basic free plan, which they have aptly named it as <strong>Hacker Plan</strong>. This should be sufficient for startups to store email addresses and messages.</p>
+<p>Caution: If someone gets your firebase URL, they can certainly spam you.  Anyway, that is not something you would be worrying about in evaluating your startup idea.</p>
+<p>Please share your thoughts and suggestions. Have a nice day.</p>
+</div>
+      <h4><a href="/blog/posts/Startup-Landing-Pages-with-Firebase.html#comments">View comments</a></h4>
       <ul class="pagination group">
         <li><a href="/">1</a>
         </li>

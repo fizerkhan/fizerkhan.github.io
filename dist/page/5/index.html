@@ -19,222 +19,228 @@
       <div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div>
     </nav>
     <div class="content">
-      <div class="post-head group"><a href="/blog/posts/What-I-learned-from-other-s-shell-scripts.html">
-          <h1 class="post-title">What I learned from other's shell scripts</h1></a>
-        <h2 class="post-date">2013 &#183; 8 &#183; 14</h2>
+      <div class="post-head group"><a href="/blog/posts/Every-Programmer-should-use-IRC.html">
+          <h1 class="post-title">Every Programmer should use IRC</h1></a>
+        <h2 class="post-date">2013 &#183; 11 &#183; 3</h2>
       </div>
-      <div class="post-body"><p>I am big fan of shell scripts and so love to learn interesting stuff from other&#39;s shell scripts. Recently i came across the <a href="https://github.com/authy/authy-ssh">authy-ssh</a> scripts which eases two-factor authentication for ssh servers. When i walk through scripts, i learned lot of cool things that i am going to share it with you.</p>
-<a name="colors-your-echo" class="anchor" href="#colors-your-echo"><h3>Colors your echo</h3>
-</a><p>Lots of time, you want to color your echo output like green for success, red for failure, yellow for warning.</p>
-<pre><code class="lang-bash"><div class="highlight"><pre><span class="nv">NORMAL</span><span class="o">=</span><span class="k">$(</span>tput sgr0<span class="k">)</span>
-<span class="nv">GREEN</span><span class="o">=</span><span class="k">$(</span>tput setaf 2; tput bold<span class="k">)</span>
-<span class="nv">YELLOW</span><span class="o">=</span><span class="k">$(</span>tput setaf 3<span class="k">)</span>
-<span class="nv">RED</span><span class="o">=</span><span class="k">$(</span>tput setaf 1<span class="k">)</span>
-
-<span class="k">function </span>red<span class="o">()</span> <span class="o">{</span>
-    <span class="nb">echo</span> -e <span class="s2">&quot;$RED$*$NORMAL&quot;</span>
-<span class="o">}</span>
-
-<span class="k">function </span>green<span class="o">()</span> <span class="o">{</span>
-    <span class="nb">echo</span> -e <span class="s2">&quot;$GREEN$*$NORMAL&quot;</span>
-<span class="o">}</span>
-
-<span class="k">function </span>yellow<span class="o">()</span> <span class="o">{</span>
-    <span class="nb">echo</span> -e <span class="s2">&quot;$YELLOW$*$NORMAL&quot;</span>
-<span class="o">}</span>
-
-<span class="c"># To print success</span>
-green <span class="s2">&quot;Task has been completed&quot;</span>
-
-<span class="c"># To print error</span>
-red <span class="s2">&quot;The configuration file does not exist&quot;</span>
-
-<span class="c"># To print warning</span>
-yellow <span class="s2">&quot;You have to use higher version.&quot;</span>
+      <div class="post-body"><p>I am a very average programmer, but like to learn new things from others. We have lot of medium to learn something new, interesting and useful. As a programmer, i use <code>Google Search</code>, <code>Stack Overflow</code> and <code>Github</code> to get to know new things and the answers for my questions. But most of the time,
+when i see the answers, there are multiple questions and other solutions(Mostly Stupid) come out from my brain. Even though, i can reply or add comment to questions in <code>Stack Overflow</code> and <code>Github issues</code>, they are not very humanized. I mean, it is not like interacting with real human and have continuous conversation in a moment when we have lot of things going around mind, not like getting reply after two hours and sometimes two days.</p>
+<a name="what-is-irc" class="anchor" href="#what-is-irc"><h3>What is IRC</h3>
+</a><p>IRC is the greatest medium to have humanized conversation where you can clarify your doubts, learn new things. In the top of all, it is a place to meet amazing talented personalities.</p>
+<p>From Wikipedia</p>
+<pre><code><div class="highlight"><pre><span class="nx">Internet</span> <span class="nx">Relay</span> <span class="nx">Chat</span> <span class="p">(</span><span class="nx">IRC</span><span class="p">)</span> <span class="nx">is</span> <span class="nx">a</span> <span class="nx">protocol</span> <span class="k">for</span> <span class="nx">live</span> <span class="nx">interactive</span> <span class="nx">Internet</span> <span class="nx">text</span> <span class="nx">messaging</span> <span class="p">(</span><span class="nx">chat</span><span class="p">)</span> <span class="nx">or</span> <span class="nx">synchronous</span> <span class="nx">conferencing</span><span class="p">.</span> <span class="nx">It</span> <span class="nx">is</span> <span class="nx">mainly</span> <span class="nx">designed</span> <span class="k">for</span> <span class="nx">group</span> <span class="nx">communication</span> <span class="k">in</span> <span class="nx">discussion</span> <span class="nx">forums</span><span class="p">,</span> <span class="nx">called</span> <span class="nx">channels</span><span class="p">,</span> <span class="nx">but</span> <span class="nx">also</span> <span class="nx">allows</span> <span class="nx">one</span><span class="o">-</span><span class="nx">to</span><span class="o">-</span><span class="nx">one</span> <span class="nx">communication</span> <span class="nx">via</span> <span class="kr">private</span> <span class="nx">message</span> <span class="nx">as</span> <span class="nx">well</span> <span class="nx">as</span> <span class="nx">chat</span> <span class="nx">and</span> <span class="nx">data</span> <span class="nx">transfer</span><span class="p">,</span> <span class="nx">including</span> <span class="nx">file</span> <span class="nx">sharing</span><span class="p">.</span>
 </pre></div>
 </code></pre>
-<p>It uses <code>tput</code> to set a colors and place the text and reset the color to normal.
-To know more about <code>tput</code>, refer <a href="http://linux.101hacks.com/ps1-examples/prompt-color-using-tput/">prompt-color-using-tput</a></p>
-<a name="to-print-debug-information" class="anchor" href="#to-print-debug-information"><h3>To print debug information</h3>
-</a><p>Print debug information only if debug flag is set.</p>
-<pre><code class="lang-bash"><div class="highlight"><pre><span class="k">function </span>debug<span class="o">()</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">[[</span> <span class="nv">$DEBUG</span> <span class="o">]]</span>
-    <span class="k">then</span>
-<span class="k">        </span><span class="nb">echo</span> <span class="s2">&quot;&gt;&gt;&gt; $*&quot;</span>
-    <span class="k">fi</span>
-<span class="o">}</span>
-
-<span class="c"># For any debug message</span>
-debug <span class="s2">&quot;Trying to find config file&quot;</span>
-</pre></div>
-</code></pre>
-<p>Some Cool geeks give one line debug function</p>
-<pre><code class="lang-bash"><div class="highlight"><pre><span class="c"># From cool geeks at hacker news</span>
-<span class="k">function </span>debug<span class="o">()</span> <span class="o">{</span> <span class="o">((</span>DEBUG<span class="o">))</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&quot;&gt;&gt;&gt; $*&quot;</span>; <span class="o">}</span>
-<span class="k">function </span>debug<span class="o">()</span> <span class="o">{</span> <span class="o">[</span> <span class="s2">&quot;$DEBUG&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&quot;&gt;&gt;&gt; $*&quot;</span>; <span class="o">}</span>
-</pre></div>
-</code></pre>
-<a name="to-check-specific-executable-exists-or-not" class="anchor" href="#to-check-specific-executable-exists-or-not"><h3>To check specific executable exists or not</h3>
-</a><pre><code><div class="highlight"><pre><span class="nx">OK</span><span class="o">=</span><span class="mi">0</span>
-<span class="nx">FAIL</span><span class="o">=</span><span class="mi">1</span>
-
-<span class="kd">function</span> <span class="nx">require_curl</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">which</span> <span class="nx">curl</span> <span class="o">&amp;&gt;</span><span class="err">/dev/null</span>
-    <span class="k">if</span> <span class="p">[</span> <span class="nx">$</span><span class="o">?</span> <span class="o">-</span><span class="nx">eq</span> <span class="mi">0</span> <span class="p">]</span>
-    <span class="nx">then</span>
-      <span class="k">return</span> <span class="nx">$OK</span>
-    <span class="nx">fi</span>
-
-    <span class="k">return</span> <span class="nx">$FAIL</span>
-<span class="p">}</span>
-</pre></div>
-</code></pre>
-<p>It uses <code>which</code> command to find the path of <code>curl</code> executable. If it succeeds, then the executable exists, Otherwise not. The <code>&amp;&gt;/dev/null</code> puts both output stream and error stream to <code>/dev/null</code> (which means nothing printed on console).</p>
-<p>Some Cool geeks suggest me that we can directly returns the <code>which</code> return code</p>
-<pre><code class="lang-bash"><div class="highlight"><pre><span class="c"># From cool geeks at hacker news</span>
-<span class="k">function </span>require_curl<span class="o">()</span> <span class="o">{</span> which <span class="s2">&quot;curl&quot;</span> &amp;&gt;/dev/null; <span class="o">}</span>
-<span class="k">function </span>require_curl<span class="o">()</span> <span class="o">{</span> which -s <span class="s2">&quot;curl&quot;</span>; <span class="o">}</span>
-</pre></div>
-</code></pre>
-<a name="to-print-usage-of-scripts" class="anchor" href="#to-print-usage-of-scripts"><h3>To print usage of scripts</h3>
-</a><p>When i start writing shell scripts, i used echo commands to print the usage of the scripts. The echo commands becomes messy when we have large text for usage.
-Then i found <code>cat</code> command used to print usage.</p>
-<pre><code><div class="highlight"><pre><span class="nx">cat</span> <span class="o">&lt;&lt;</span> <span class="nx">EOF</span>
-
-<span class="nx">Usage</span><span class="o">:</span> <span class="nx">myscript</span> <span class="o">&lt;</span><span class="nx">command</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="nx">arguments</span><span class="o">&gt;</span>
-
-<span class="nx">VERSION</span><span class="o">:</span> <span class="mf">1.0</span>
-
-<span class="nx">Available</span> <span class="nx">Commands</span>
-
-    <span class="nx">install</span> <span class="o">-</span> <span class="nx">Install</span> <span class="kr">package</span>
-
-    <span class="nx">uninstall</span> <span class="o">-</span> <span class="nx">Uninstall</span> <span class="kr">package</span>
-
-    <span class="nx">update</span> <span class="o">-</span> <span class="nx">Update</span> <span class="kr">package</span>
-
-    <span class="nx">list</span> <span class="o">-</span> <span class="nx">List</span> <span class="nx">packages</span>
-
-<span class="nx">EOF</span>
-</pre></div>
-</code></pre>
-<p>The <code>&lt;&lt;</code> is called as <a href="http://www.tldp.org/LDP/abs/html/here-docs.html">here document</a>. It takes string between two <em>EOF</em>.</p>
-<a name="user-configured-value-vs-default-value" class="anchor" href="#user-configured-value-vs-default-value"><h3>User configured value vs Default value</h3>
-</a><p>Sometime, we want to use default value if user does not set the value.</p>
-<pre><code class="lang-bash"><div class="highlight"><pre><span class="nv">URL</span><span class="o">=</span><span class="k">${</span><span class="nv">URL</span><span class="k">:-</span><span class="nv">http</span><span class="p">://localhost:</span><span class="nv">8080</span><span class="k">}</span>
-</pre></div>
-</code></pre>
-<p>It checks for URL environment variable. If not exists, then it is assigned to <code>localhost</code>.</p>
-<a name="to-check-the-length-of-the-string" class="anchor" href="#to-check-the-length-of-the-string"><h3>To check the length of the string</h3>
-</a><pre><code class="lang-bash"><div class="highlight"><pre><span class="k">if</span> <span class="o">[</span> <span class="k">${#</span><span class="nv">authy_api_key</span><span class="k">}</span> !<span class="o">=</span> 32 <span class="o">]</span>
-<span class="k">then</span>
-<span class="k">  </span>red <span class="s2">&quot;you have entered a wrong API key&quot;</span>
-  <span class="k">return</span> <span class="nv">$FAIL</span>
-<span class="k">fi</span>
-</pre></div>
-</code></pre>
-<p>The <code>${#VARIABLE_NAME}</code> gives the length of the value of the variable.</p>
-<a name="to-read-inputs-with-timeout" class="anchor" href="#to-read-inputs-with-timeout"><h3>To read inputs with timeout</h3>
-</a><pre><code class="lang-bash"><div class="highlight"><pre><span class="nv">READ_TIMEOUT</span><span class="o">=</span>60
-<span class="nb">read</span> -t <span class="s2">&quot;$READ_TIMEOUT&quot;</span> input
-
-<span class="c"># if you do not want quotes, then escape it</span>
-<span class="nv">input</span><span class="o">=</span><span class="k">$(</span>sed <span class="s2">&quot;s/[;\`\&quot;\$\&#39; ]//g&quot;</span> <span class="o">&lt;&lt;&lt;</span> <span class="nv">$input</span><span class="k">)</span>
-
-<span class="c"># For reading number, then you can escape other characters</span>
-<span class="nv">input</span><span class="o">=</span><span class="k">$(</span>sed <span class="s1">&#39;s/[^0-9]*//g&#39;</span> <span class="o">&lt;&lt;&lt;</span> <span class="nv">$input</span><span class="k">)</span>
-</pre></div>
-</code></pre>
-<a name="to-get-directory-name-and-file-name" class="anchor" href="#to-get-directory-name-and-file-name"><h3>To get directory name and file name</h3>
-</a><pre><code class="lang-bash"><div class="highlight"><pre><span class="c"># To find base directory</span>
-<span class="nv">APP_ROOT</span><span class="o">=</span><span class="sb">`</span>dirname <span class="s2">&quot;$0&quot;</span><span class="sb">`</span>
-
-<span class="c"># To find the file name</span>
-<span class="nv">filename</span><span class="o">=</span><span class="sb">`</span>basename <span class="s2">&quot;$filepath&quot;</span><span class="sb">`</span>
-
-<span class="c"># To find the file name without extension</span>
-<span class="nv">filename</span><span class="o">=</span><span class="sb">`</span>basename <span class="s2">&quot;$filepath&quot;</span> .html<span class="sb">`</span>
-</pre></div>
-</code></pre>
-<p>Happy Scripting and Have a nice day.</p>
-</div>
-      <h4><a href="/blog/posts/What-I-learned-from-other-s-shell-scripts.html#comments">View comments</a></h4>
-      <div class="post-head group"><a href="/blog/posts/Use-your-browser-as-Notepad.html">
-          <h1 class="post-title">Use your browser as Notepad</h1></a>
-        <h2 class="post-date">2013 &#183; 7 &#183; 8</h2>
-      </div>
-      <div class="post-body"><p>We all uses notepad or sticky note or some editor to take immediate notes on something like code snippet, ideas, blog content, todo. Recently i came to know that we can use our browser just like notepad. The trick hacks around <a href="http://en.wikipedia.org/wiki/Data_URI_scheme">Data URI scheme</a> and html <a href="http://www.w3schools.com/tags/att_global_contenteditable.asp">contenteditable</a> attribute.</p>
-<p>All you need to do is type the following code into the browser&#39;s URL bar:</p>
-<pre><code><div class="highlight"><pre><span class="nx">data</span><span class="o">:</span><span class="nx">text</span><span class="o">/</span><span class="nx">html</span><span class="p">,</span> <span class="o">&lt;</span><span class="nx">html</span> <span class="nx">contenteditable</span><span class="o">&gt;</span>
-</pre></div>
-</code></pre>
-<p>It will make your page as editable just like notepad. If you want to save your content, do the usual browser save(<strong>CMD+S</strong> for OSX). It will save your content as html file. You can also bookmark above data url to make it easier.</p>
-<p>After i share this post in <a href="https://news.ycombinator.com/item?id=6005295">Hacker News</a>, i got cool new things from cool guys.</p>
-<p>Editor with little bit styles by <a href="https://news.ycombinator.com/user?id=bichiliad">bichiliad</a></p>
-<pre><code><div class="highlight"><pre><span class="nx">data</span><span class="o">:</span><span class="nx">text</span><span class="o">/</span><span class="nx">html</span><span class="p">,</span> <span class="o">&lt;</span><span class="nx">html</span> <span class="nx">contenteditable</span><span class="o">&gt;&lt;</span><span class="nx">style</span><span class="o">&gt;</span><span class="nx">body</span> <span class="p">{</span><span class="nx">color</span><span class="o">:</span> <span class="err">#</span><span class="mi">333</span><span class="p">;</span> <span class="nx">width</span><span class="o">:</span> <span class="mi">960</span><span class="nx">px</span><span class="p">;</span> <span class="nx">margin</span><span class="o">:</span> <span class="mi">0</span> <span class="nx">auto</span><span class="p">;</span> <span class="nx">display</span><span class="o">:</span> <span class="nx">block</span><span class="p">;</span> <span class="nx">height</span><span class="o">:</span> <span class="mi">100</span><span class="o">%</span><span class="p">;</span> <span class="nx">font</span><span class="o">-</span><span class="nx">size</span><span class="o">:</span> <span class="mi">36</span><span class="nx">px</span><span class="p">;</span> <span class="nx">padding</span><span class="o">:</span> <span class="mi">20</span><span class="nx">px</span><span class="p">;}</span><span class="o">&lt;</span><span class="err">/style&gt;&lt;/html&gt;</span>
-<span class="nx">reply</span>
-</pre></div>
-</code></pre>
-<p>Theme that changes the background color as you type by <a href="https://coderwall.com/bgrins">bgrins</a></p>
-<pre><code><div class="highlight"><pre><span class="nx">data</span><span class="o">:</span><span class="nx">text</span><span class="o">/</span><span class="nx">html</span><span class="p">,</span> <span class="o">&lt;</span><span class="nx">html</span><span class="o">&gt;&lt;</span><span class="nx">head</span><span class="o">&gt;&lt;</span><span class="nx">link</span> <span class="nx">href</span><span class="o">=</span><span class="s1">&#39;http://fonts.googleapis.com/css?family=Open+Sans&#39;</span> <span class="nx">rel</span><span class="o">=</span><span class="s1">&#39;stylesheet&#39;</span> <span class="nx">type</span><span class="o">=</span><span class="s1">&#39;text/css&#39;</span><span class="o">&gt;&lt;</span><span class="nx">style</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/css&quot;</span><span class="o">&gt;</span> <span class="nx">html</span> <span class="p">{</span> <span class="nx">font</span><span class="o">-</span><span class="nx">family</span><span class="o">:</span> <span class="s2">&quot;Open Sans&quot;</span> <span class="p">}</span> <span class="o">*</span> <span class="p">{</span> <span class="o">-</span><span class="nx">webkit</span><span class="o">-</span><span class="nx">transition</span><span class="o">:</span> <span class="nx">all</span> <span class="nx">linear</span> <span class="mi">1</span><span class="nx">s</span><span class="p">;</span> <span class="p">}</span><span class="o">&lt;</span><span class="err">/style&gt;&lt;script&gt;window.onload=function(){var e=false;var t=0;setInterval(function(){if(!e){t=Math.round(Math.max(0,t-Math.max(t/3,1)))}var n=(255-t*2).toString(16);document.body.style.backgroundColor=&quot;#ff&quot;+n+&quot;&quot;+n},1e3);var n=null;document.onkeydown=function(){t=Math.min(128,t+2);e=true;clearTimeout(n);n=setTimeout(function(){e=false},1500)}}&lt;/script&gt;&lt;/head&gt;&lt;body contenteditable style=&quot;font-size:2rem;line-height:1.4;max-width:60rem;margin:0 auto;padding:4rem;&quot;&gt;</span>
-</pre></div>
-</code></pre>
-<p>I love this. Sublime Text Flavor with Ace by <a href="https://news.ycombinator.com/user?id=thinkxl">thinkxl</a></p>
-<pre><code><div class="highlight"><pre><span class="nx">data</span><span class="o">:</span><span class="nx">text</span><span class="o">/</span><span class="nx">html</span><span class="p">,</span><span class="o">&lt;</span><span class="nx">title</span><span class="o">&gt;</span><span class="nx">DoJS</span><span class="o">&lt;</span><span class="err">/title&gt;&lt;style type=&quot;text/css&quot;&gt;#e{font-size: 16px; position:absolute;top:0;right:0;bottom:0;left:0;}&lt;/style&gt;&lt;div id=&quot;e&quot;&gt;&lt;/div&gt;&lt;script src=&quot;http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js&quot; type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;&lt;script&gt;var e=ace.edit(&quot;e&quot;);e.setTheme(&quot;ace/theme/monokai&quot;);e.getSession().setMode(&quot;ace/mode/javascript&quot;);&lt;/script&gt;</span>
-</pre></div>
-</code></pre>
-<p>Web is awesome. Have a nice day.</p>
-</div>
-      <h4><a href="/blog/posts/Use-your-browser-as-Notepad.html#comments">View comments</a></h4>
-      <div class="post-head group"><a href="/blog/posts/MongoDB-tips.html">
-          <h1 class="post-title">MongoDB tips</h1></a>
-        <h2 class="post-date">2013 &#183; 7 &#183; 2</h2>
-      </div>
-      <div class="post-body"><p><a href="http://www.mongodb.org/">MongoDB</a> becomes more popular among the developers because of its schemaless nature which give more flexibility. We can store any kind of data  without having to worry about the structure of the data.</p>
-<p>For few operations, i went through lot of searches to get the correct solutions. Some of them are</p>
+<p>IRC consists of channels. Channel is something like a chat room, but it will be dedicated for some technology or language, ex: #html, #css, #javascript, #go-lang. You can go to any channel and ask questions or just listen and learn from other&#39;s discussion.</p>
+<p>I am using <a href="http://webchat.freenode.net/">Freenode</a> which is a widely used open IRC server.
+Lets see how you can get started with IRC on <code>Freenode</code>.</p>
+<a name="register-your-nickname" class="anchor" href="#register-your-nickname"><h3>Register your nickname</h3>
+</a><p>In IRC, you will be addressed by your nickname. It is good to register your nick name.
+But it is not mandatory to register your nick name to access IRC channel.</p>
 <ol>
-<li>Renaming a field name</li>
-<li>Change type of field value</li>
-<li>Finding document if the field exists</li>
-<li>Sucking MongoDB console</li>
+<li>Visit <a href="http://webchat.freenode.net/"><a href="http://webchat.freenode.net/">http://webchat.freenode.net/</a></a></li>
+<li>Enter your nick name</li>
+<li>Enter <code>Captcha</code> and <code>Connect</code></li>
 </ol>
-<p>Lets assume that you have a MongoDB collection <code>bookmarks</code> for Bookmarking application</p>
-<pre><code><div class="highlight"><pre><span class="p">{</span>
-  <span class="s1">&#39;name&#39;</span> <span class="o">:</span> <span class="s1">&#39;DIVE INTO HTML5&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;url&#39;</span> <span class="o">:</span> <span class="s1">&#39;http://diveintohtml5.info/index.html&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;author&#39;</span><span class="o">:</span> <span class="s1">&#39;MARK PILGRIM&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;upvote&#39;</span><span class="o">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;created_at&#39;</span><span class="o">:</span> <span class="s2">&quot;2013-07-02 00:00:00&quot;</span>
+<p>To register your nick name,</p>
+<pre><code><div class="highlight"><pre><span class="err">/msg NickServ REGISTER password youremail@example.com</span>
+</pre></div>
+</code></pre>
+<p>Once you registered, email is sent to you and just copy and paste the VERIFY command in IRC.
+Now you own the nick name, no one can use the same nick name. Even if someone try to use, it will
+be suffixed by underscore(_)</p>
+<a name="login-with-your-nick-name" class="anchor" href="#login-with-your-nick-name"><h3>Login with your nick name</h3>
+</a><p>Whenever you enter IRC, you have to identify your nickname with password by</p>
+<pre><code><div class="highlight"><pre><span class="err">/msg nickserv identify yourpassword</span>
+</pre></div>
+</code></pre>
+<a name="join-channel" class="anchor" href="#join-channel"><h3>Join Channel</h3>
+</a><p>If you want to go to particular channel, then type <code>/join #channelname</code>.
+Lets say if you want to go to <code>c</code> language channel, type <code>/join #c</code></p>
+<p>Incase you do not know the channel name, then go and search <a href="http://irc.netsplit.de/channels/">here</a></p>
+<p>Once you join the channel, you can ask questions or listen others.</p>
+<a name="other-useful-commands" class="anchor" href="#other-useful-commands"><h3>Other useful commands</h3>
+</a><pre><code><div class="highlight"><pre><span class="err">/msg &lt;name&gt;         - Sends a short message to a person privately.</span>
+<span class="o">/</span><span class="nx">whois</span> <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span>       <span class="o">-</span> <span class="nx">Get</span> <span class="nx">a</span> <span class="kr">short</span> <span class="nx">description</span> <span class="nx">of</span> <span class="nx">who</span> <span class="nx">a</span> <span class="nx">person</span> <span class="nx">is</span><span class="p">.</span>
+<span class="o">/</span><span class="nx">nick</span>  <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span>       <span class="o">-</span> <span class="nx">Change</span> <span class="nx">your</span> <span class="nx">nick</span> <span class="nx">name</span>
+<span class="o">/</span><span class="nx">me</span>                 <span class="o">-</span> <span class="nx">Sends</span> <span class="nx">an</span> <span class="nx">action</span> <span class="nx">to</span> <span class="nx">the</span> <span class="nx">channel</span><span class="p">.</span>
+<span class="o">/</span><span class="nx">away</span> <span class="o">&lt;</span><span class="nx">message</span><span class="o">&gt;</span>     <span class="o">-</span> <span class="nx">Sets</span> <span class="nx">an</span> <span class="nx">away</span> <span class="nx">message</span><span class="p">.</span>
+<span class="o">/</span><span class="nx">quit</span> <span class="o">&lt;</span><span class="nx">last</span> <span class="nx">words</span><span class="o">&gt;</span>  <span class="o">-</span> <span class="nx">Quits</span> <span class="nx">and</span> <span class="nx">allows</span> <span class="nx">you</span> <span class="nx">a</span> <span class="kr">final</span> <span class="nx">message</span> <span class="nx">before</span> <span class="nx">quitting</span><span class="p">.</span>
+<span class="o">/</span><span class="nx">clear</span>              <span class="o">-</span> <span class="nx">Clears</span> <span class="nx">a</span> <span class="nx">channel</span><span class="s1">&#39;s text.</span>
+<span class="s1">/clear all          - Clears a channel&#39;</span><span class="nx">s</span> <span class="nx">text</span><span class="p">.</span>
+</pre></div>
+</code></pre>
+<p>When you use IRC, you must follow some etiquette which is defined precisely by
+<a href="https://workaround.org/getting-help-on-irc">Christoph Haas</a>.</p>
+<p>Regarding IRC client, apart from web, there are other IRC client application available.
+You can checkout <a href="http://en.wikipedia.org/wiki/Comparison_of_Internet_Relay_Chat_clients">here</a></p>
+<p>IRC taught me a lot. I hope, you will feel the same after using it.
+Have a nice day.</p>
+</div>
+      <h4><a href="/blog/posts/Every-Programmer-should-use-IRC.html#comments">View comments</a></h4>
+      <div class="post-head group"><a href="/blog/posts/Javascript-snippets-save-your-time.html">
+          <h1 class="post-title">Javascript snippets save your time</h1></a>
+        <h2 class="post-date">2013 &#183; 10 &#183; 6</h2>
+      </div>
+      <div class="post-body"><p>When i work with web application, i got few JS snippet from different places(Mostly from StackOverflow). I hope, it will save your time.</p>
+<a name="get-query-string-value" class="anchor" href="#get-query-string-value"><h2>Get Query String Value</h2>
+</a><p>This function helps you to get query string value from URL(href).</p>
+<pre><code class="lang-javascript"><div class="highlight"><pre><span class="kd">function</span> <span class="nx">getParameterByName</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[\[]/</span><span class="p">,</span> <span class="s2">&quot;\\\[&quot;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[\]]/</span><span class="p">,</span> <span class="s2">&quot;\\\]&quot;</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">regex</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="s2">&quot;[\\?&amp;]&quot;</span> <span class="o">+</span> <span class="nx">name</span> <span class="o">+</span> <span class="s2">&quot;=([^&amp;#]*)&quot;</span><span class="p">),</span>
+        <span class="nx">results</span> <span class="o">=</span> <span class="nx">regex</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="nx">location</span><span class="p">.</span><span class="nx">search</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">results</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="s2">&quot;&quot;</span> <span class="o">:</span> <span class="nb">decodeURIComponent</span><span class="p">(</span><span class="nx">results</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\+/g</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">));</span>
 <span class="p">}</span>
 </pre></div>
 </code></pre>
-<a name="renaming-a-field-name" class="anchor" href="#renaming-a-field-name"><h3>Renaming a field name</h3>
-</a><p>Let&#39;s say you want to rename a <code>name</code> filed to <code>title</code>, then</p>
-<pre><code><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">bookmarks</span><span class="p">.</span><span class="nx">update</span><span class="p">({},</span> <span class="p">{</span> <span class="nx">$rename</span><span class="o">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;title&quot;</span><span class="p">}},</span> <span class="p">{</span> <span class="nx">multi</span> <span class="o">:</span> <span class="kc">true</span><span class="p">})</span>
+<a name="add-leading-zeros-to-date" class="anchor" href="#add-leading-zeros-to-date"><h2>Add leading zeros to date</h2>
+</a><p>Sometimes you may want to add leading zeros to date field.</p>
+<p><code>(&quot;0&quot; + anynumber).slice(-2))</code> will add leading zero to a number.</p>
+<pre><code class="lang-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">date</span> <span class="o">=</span>  <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">dateString</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;0&#39;</span> <span class="o">+</span> <span class="nx">date</span><span class="p">.</span><span class="nx">getDate</span><span class="p">()).</span><span class="nx">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span>
+             <span class="o">+</span> <span class="p">(</span><span class="s1">&#39;0&#39;</span> <span class="o">+</span> <span class="p">(</span><span class="nx">date</span><span class="p">.</span><span class="nx">getMonth</span><span class="p">()</span><span class="o">+</span><span class="mi">1</span><span class="p">)).</span><span class="nx">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span>
+             <span class="o">+</span> <span class="nx">date</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">();</span>
 </pre></div>
 </code></pre>
-<p>In above command, the option <code>multi</code> is important. Otherwise it will update only one document.</p>
-<a name="change-type-of-field-value" class="anchor" href="#change-type-of-field-value"><h3>Change type of field value</h3>
-</a><p>If you want to change type of <code>upvote</code> field from <code>string</code> to <code>number</code> value, then</p>
-<pre><code><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">bookmarks</span><span class="p">.</span><span class="nx">find</span><span class="p">().</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">bookmark</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">bookmark</span><span class="p">.</span><span class="nx">upvote</span> <span class="o">=</span> <span class="o">+</span><span class="p">(</span><span class="nx">bookmark</span><span class="p">.</span><span class="nx">upvote</span><span class="p">);</span>  <span class="c1">// equivalent to parseInt</span>
-  <span class="nx">db</span><span class="p">.</span><span class="nx">bookmarks</span><span class="p">.</span><span class="nx">save</span><span class="p">(</span><span class="nx">bookmark</span><span class="p">);</span>
+<a name="set-checkbox-checked-property-using-jquery" class="anchor" href="#set-checkbox-checked-property-using-jquery"><h2>Set checkbox checked property using Jquery</h2>
+</a><p>I was bit struggle with this problem. In latest jquery, i try to set checked property using <code>$(&#39;#checkBox&#39;).attr(&#39;checked&#39;);</code>. It does not work.</p>
+<p>From <code>jQuery &gt; 1.6</code>, it should be</p>
+<pre><code class="lang-javascript"><div class="highlight"><pre><span class="c1">// new property method</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#checkBox&#39;</span><span class="p">).</span><span class="nx">prop</span><span class="p">(</span><span class="s1">&#39;checked&#39;</span><span class="p">);</span>
+</pre></div>
+</code></pre>
+<a name="best-way-to-toggle-classes-on-window-scroll" class="anchor" href="#best-way-to-toggle-classes-on-window-scroll"><h2>Best way to Toggle Classes on window scroll</h2>
+</a><p>We like to hide or show some element based on window scroll. It may be show/hide of goto top button or fixed header position.</p>
+<pre><code class="lang-javascript"><div class="highlight"><pre><span class="c1">// Toggle header position</span>
+<span class="kd">var</span> <span class="nx">breakpoint</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span> <span class="c1">// Can be any value based on your layout</span>
+<span class="kd">var</span> <span class="nx">headerDomElement</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">$window</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">)</span>
+<span class="nx">$window</span> <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;scroll&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">top</span> <span class="o">=</span> <span class="nx">$window</span><span class="p">.</span><span class="nx">scrollTop</span><span class="p">();</span>
+    <span class="nx">headerDomElement</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="s2">&quot;header-fixed&quot;</span><span class="p">,</span>  <span class="nx">top</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span>
 <span class="p">});</span>
 </pre></div>
 </code></pre>
-<a name="finding-the-document-if-the-field-exists" class="anchor" href="#finding-the-document-if-the-field-exists"><h3>Finding the document if the field exists</h3>
-</a><p> Some scenarios, you might want to find the document which has a specific fields.
- Lets say, get bookmarks which has <code>tags</code> field.</p>
-<pre><code><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">bookmarks</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="nx">tags</span> <span class="o">:</span> <span class="p">{</span> <span class="nx">$exists</span> <span class="o">:</span> <span class="kc">true</span> <span class="p">}</span> <span class="p">});</span>
+<pre><code class="lang-javascript"><div class="highlight"><pre><span class="c1">// Goto top button show and hide</span>
+<span class="kd">var</span> <span class="nx">breakpoint</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">btnGoTopDomElement</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;btn-gotop&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">$window</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">)</span>
+<span class="nx">$window</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;scroll&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">top</span> <span class="o">=</span> <span class="nx">$window</span> <span class="p">.</span><span class="nx">scrollTop</span><span class="p">();</span>
+    <span class="nx">btnGoTopDomElement</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="s2">&quot;show&quot;</span><span class="p">,</span>  <span class="nx">top</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span>
+<span class="p">});</span>
 </pre></div>
 </code></pre>
-<p>If the value of field is <code>null</code>, then the field is considered as Not exist.</p>
-<a name="sucking-mongodb-console" class="anchor" href="#sucking-mongodb-console"><h3>Sucking MongoDB console</h3>
-</a><p>MongoDB console sucks. I got frustrated  whenever i work with MongoDB console. I desperately need JSON pretty for console output, and some more useful commands. Then I found the <a href="https://github.com/TylerBrock/mongo-hacker">Mongo-hacker</a>  by
-<a href="https://github.com/TylerBrock">TylerBrock</a>(Thanks bro). It is awesome and you must give a try.</p>
-<p>Let me know if anything you got useful. Have a nice day.</p>
+<p>Instead of Jquery <code>toggleClass</code> method, you can use <code>classList.toggle</code> on Dom element will improve the performance. Thanks to Paul Irish.</p>
+<a name="interactive-form-submission" class="anchor" href="#interactive-form-submission"><h2>Interactive Form Submission</h2>
+</a><p>Form submission might take time if server or network is slow. Meantime, if submit button
+is still clickable, It will not be user friendly.</p>
+<p>You can disable submit button and do any validation of the field by adding <code>onsubmit</code> attribute to the form.</p>
+<pre><code class="lang-html"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">accept-charset=</span><span class="s">&quot;UTF-8&quot;</span> <span class="na">method=</span><span class="s">&quot;POST&quot;</span> <span class="na">action=</span><span class="s">&quot;/message&quot;</span>
+<span class="na">onsubmit=</span><span class="s">&quot;return validateForm(this);&quot;</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;Submit&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</pre></div>
+</code></pre>
+<pre><code class="lang-javascript"><div class="highlight"><pre><span class="kd">function</span> <span class="nx">validateForm</span><span class="p">(</span><span class="nx">formObj</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">formObj</span><span class="p">.</span><span class="nx">submit</span><span class="p">.</span><span class="nx">disabled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="nx">formObj</span><span class="p">.</span><span class="nx">submit</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="s2">&quot;Submitting...&quot;</span><span class="p">;</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</code></pre>
+<p>Share if you have any interesting JS snippets.
+Happy coding and have a nice day.</p>
 </div>
-      <h4><a href="/blog/posts/MongoDB-tips.html#comments">View comments</a></h4>
+      <h4><a href="/blog/posts/Javascript-snippets-save-your-time.html#comments">View comments</a></h4>
+      <div class="post-head group"><a href="/blog/posts/Tips-and-Tricks-of-OSX-makes-you-smile.html">
+          <h1 class="post-title">Tips and Tricks of OSX makes you smile</h1></a>
+        <h2 class="post-date">2013 &#183; 10 &#183; 2</h2>
+      </div>
+      <div class="post-body"><p>I love to work with Mac OSX. Few days before, i came across the <a href="http://apple.stackexchange.com/questions/400/please-share-your-hidden-os-x-features-or-tips-and-tricks">Tips and Tricks of OSX in Stack Exchange answers</a>. It is mind blowing and has lot more stuff to learn. I like to share tips and tricks that i like and using regularly.</p>
+<a name="quick-look-in-finder" class="anchor" href="#quick-look-in-finder"><h3>Quick Look in Finder</h3>
+</a><p>When you are in <code>Finder</code> and wanted to check the content of a file, you typically double click the item.  Instead you can hit the <code>Spacebar</code> to have quick look. It is much faster than opening the file.</p>
+<a name="spotlight-search-and-its-calculator" class="anchor" href="#spotlight-search-and-its-calculator"><h3>Spotlight Search and its Calculator</h3>
+</a><p>Spotlight Search can be opened by hitting <code>⌘ + space</code>.</p>
+<p>The Spotlight search can also handle simple mathematical expressions.
+You can type any simple math expression, it will give you the answer.</p>
+<a name="show-hidden-files-in-finder" class="anchor" href="#show-hidden-files-in-finder"><h3>Show Hidden files in Finder</h3>
+</a><p>By default, The <code>Finder</code> hide the hidden files which starts with .(dot). To set <code>Finder</code> to show hidden files, run following command in the terminal</p>
+<pre><code><div class="highlight"><pre><span class="nx">defaults</span> <span class="nx">write</span> <span class="nx">com</span><span class="p">.</span><span class="nx">apple</span><span class="p">.</span><span class="nx">finder</span> <span class="nx">AppleShowAllFiles</span> <span class="nx">TRUE</span>
+
+<span class="nx">killall</span> <span class="nx">Finder</span>
+</pre></div>
+</code></pre>
+<p>Reopen <code>Finder</code>. Now it will show hidden files.</p>
+<p>You can use <code>⌘ + ⇧ + .</code> that will show hidden files in any file-open dialog box.</p>
+<a name="finder-window-shortcuts" class="anchor" href="#finder-window-shortcuts"><h3>Finder Window Shortcuts</h3>
+</a><p>In Finder window or Open/Save dialog,</p>
+<pre><code><div class="highlight"><pre><span class="err">⌘</span> <span class="o">+</span> <span class="err">⇧</span> <span class="o">+</span> <span class="nx">G</span> <span class="o">-</span> <span class="nx">Get</span> <span class="nx">a</span> <span class="nx">location</span> <span class="nx">bar</span> <span class="nx">from</span> <span class="nx">which</span> <span class="nx">you</span> <span class="nx">can</span> <span class="nx">type</span>
+<span class="err">⌘</span> <span class="o">+</span> <span class="nx">I</span>     <span class="o">-</span> <span class="nx">Info</span> <span class="nb">window</span> <span class="nx">shows</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">selected</span> <span class="nx">item</span><span class="p">.</span>
+<span class="err">⌘</span> <span class="o">+</span> <span class="nx">F</span>     <span class="o">-</span> <span class="nx">Cursor</span> <span class="nx">jumps</span> <span class="nx">to</span> <span class="nx">the</span> <span class="nx">Find</span> <span class="nx">text</span> <span class="nx">field</span>
+<span class="err">⌘</span> <span class="o">+</span> <span class="nx">R</span>     <span class="o">-</span> <span class="nx">Reveals</span> <span class="nx">the</span> <span class="nx">selected</span> <span class="nx">item</span> <span class="k">in</span> <span class="nx">a</span> <span class="k">new</span> <span class="nx">Finder</span> <span class="nb">window</span><span class="p">.</span>
+</pre></div>
+</code></pre>
+<p>In Open/Save dialog,</p>
+<pre><code><div class="highlight"><pre><span class="err">⌘</span> <span class="o">+</span> <span class="nx">D</span>     <span class="o">-</span> <span class="nx">Selects</span> <span class="nx">the</span> <span class="nx">Desktop</span> <span class="nx">folder</span> <span class="nx">as</span> <span class="nx">a</span> <span class="nx">destination</span>
+</pre></div>
+</code></pre>
+<a name="show-and-hide-desktop-icons" class="anchor" href="#show-and-hide-desktop-icons"><h3>Show and Hide Desktop Icons</h3>
+</a><p>When you do presentation or in meeting, you do not want others to see your desktop.
+You can use following commands to hide and show desktop icons.</p>
+<p>To Hide Desktop icons</p>
+<pre><code><div class="highlight"><pre><span class="nx">defaults</span> <span class="nx">write</span> <span class="nx">com</span><span class="p">.</span><span class="nx">apple</span><span class="p">.</span><span class="nx">finder</span> <span class="nx">CreateDesktop</span> <span class="o">-</span><span class="nx">bool</span> <span class="kc">false</span> <span class="o">&amp;&amp;</span> <span class="nx">killall</span> <span class="nx">Finder</span>
+</pre></div>
+</code></pre>
+<p>To Show Desktop icons</p>
+<pre><code><div class="highlight"><pre><span class="nx">defaults</span> <span class="nx">write</span> <span class="nx">com</span><span class="p">.</span><span class="nx">apple</span><span class="p">.</span><span class="nx">finder</span> <span class="nx">CreateDesktop</span> <span class="o">-</span><span class="nx">bool</span> <span class="kc">true</span> <span class="o">&amp;&amp;</span> <span class="nx">killall</span> <span class="nx">Finder</span>
+</pre></div>
+</code></pre>
+<a name="screenshot-shortcuts" class="anchor" href="#screenshot-shortcuts"><h3>Screenshot shortcuts</h3>
+</a><p>You can use following shortcuts to take screenshots. Kudos to <a href="http://oreilly.com/digitalmedia/2006/01/01/mac-os-x-screenshot-secrets.html">screenshot-secret</a></p>
+<p><code>⌘+⇧+3</code>      -  Capture entire screen and save as a file</p>
+<p><code>⌘+ctrl+⇧+3</code> -  Capture entire screen and copy to the clipboard</p>
+<p><code>⌘+⇧+4</code>      -  Capture dragged area and save as a file</p>
+<p><code>⌘+ctrl+⇧+4</code> -  Capture dragged area and copy to the clipboard</p>
+<p><code>⌘+⇧+4 then space</code>      -  Capture a window, menu, desktop icon, or the menu bar and save as a file</p>
+<p><code>⌘+ctrl+⇧+4 then space</code> -  Capture a window, menu, desktop icon, or the menu bar and copy to the clipboard</p>
+<a name="clipboard-copy-and-paste-from-terminal" class="anchor" href="#clipboard-copy-and-paste-from-terminal"><h3>Clipboard copy and paste from Terminal</h3>
+</a><p>You may want to copy output of some command to clipboard, then use <code>pbcopy</code></p>
+<pre><code><div class="highlight"><pre><span class="nx">echo</span> <span class="s2">&quot;I am going to clipboard&quot;</span> <span class="o">|</span> <span class="nx">pbcopy</span>
+</pre></div>
+</code></pre>
+<p>Save clipboard contents to file</p>
+<pre><code><div class="highlight"><pre><span class="nx">pbpaste</span> <span class="o">&gt;</span> <span class="nx">myfile</span><span class="p">.</span><span class="nx">txt</span>
+</pre></div>
+</code></pre>
+<a name="start-quick-web-server" class="anchor" href="#start-quick-web-server"><h3>Start Quick Web server</h3>
+</a><p>Start a quick web server by</p>
+<pre><code><div class="highlight"><pre><span class="nx">python</span> <span class="o">-</span><span class="nx">m</span> <span class="nx">SimpleHTTPServer</span>
+</pre></div>
+</code></pre>
+<p>It will start web server port 8000 and serve files in the current directory.
+To start in a specific port</p>
+<pre><code><div class="highlight"><pre><span class="nx">python</span> <span class="o">-</span><span class="nx">m</span> <span class="nx">SimpleHTTPServer</span> <span class="mi">8080</span>
+</pre></div>
+</code></pre>
+<a name="useful-command-on-terminal" class="anchor" href="#useful-command-on-terminal"><h3>Useful command on Terminal</h3>
+</a><p>You can use <code>open</code> command to open any application and any file.</p>
+<pre><code><div class="highlight"><pre><span class="nx">open</span> <span class="p">.</span>            <span class="err">#</span> <span class="nx">Open</span> <span class="nx">current</span> <span class="nx">folder</span> <span class="k">in</span> <span class="nx">the</span> <span class="nx">Finder</span><span class="p">.</span>
+<span class="nx">open</span> <span class="o">-</span><span class="nx">a</span> <span class="nx">Firefox</span>   <span class="err">#</span> <span class="nx">To</span> <span class="nx">open</span> <span class="nx">application</span><span class="p">.</span> <span class="nx">Use</span> <span class="o">-</span><span class="nx">a</span> <span class="nx">option</span>
+<span class="nx">open</span> <span class="nx">ticket</span><span class="p">.</span><span class="nx">pdf</span>   <span class="err">#</span> <span class="nx">To</span> <span class="nx">open</span> <span class="nx">a</span> <span class="nx">file</span><span class="p">.</span> <span class="nx">It</span> <span class="nx">will</span> <span class="nx">open</span> <span class="nx">PDF</span> <span class="k">in</span> <span class="k">default</span> <span class="nx">application</span><span class="p">.</span>
+</pre></div>
+</code></pre>
+<p>For Non-English speaker like me, it always find difficulties in pronouncing the word :) You can use <code>say</code> to know how to pronounce</p>
+<pre><code><div class="highlight"><pre><span class="nx">say</span> <span class="nx">Hello</span> <span class="nx">World</span>
+</pre></div>
+</code></pre>
+<a name="view-more-information-on-menu-bar-icons" class="anchor" href="#view-more-information-on-menu-bar-icons"><h3>View More information on Menu bar icons</h3>
+</a><p>Holding <code>⌥</code> while clicking menu bar icon will give you additional menu items.</p>
+<p>Hold <code>Option ⌥</code> + Click Battery Menulet, it will show battery condition.</p>
+<p>Have a nice day.</p>
+</div>
+      <h4><a href="/blog/posts/Tips-and-Tricks-of-OSX-makes-you-smile.html#comments">View comments</a></h4>
       <ul class="pagination group">
         <li><a href="/page/2/">3</a>
         </li>

@@ -19,228 +19,171 @@
       <div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div>
     </nav>
     <div class="content">
-      <div class="post-head group"><a href="/blog/posts/Every-Programmer-should-use-IRC.html">
-          <h1 class="post-title">Every Programmer should use IRC</h1></a>
-        <h2 class="post-date">2013 &#183; 11 &#183; 3</h2>
+      <div class="post-head group"><a href="/blog/posts/Free-Static-Page-Hosting-on-Google-App-Engine-in-a-5-minutes.html">
+          <h1 class="post-title">Free Static Page Hosting on Google App Engine in a 5 minutes</h1></a>
+        <h2 class="post-date">2014 &#183; 2 &#183; 17</h2>
       </div>
-      <div class="post-body"><p>I am a very average programmer, but like to learn new things from others. We have lot of medium to learn something new, interesting and useful. As a programmer, i use <code>Google Search</code>, <code>Stack Overflow</code> and <code>Github</code> to get to know new things and the answers for my questions. But most of the time,
-when i see the answers, there are multiple questions and other solutions(Mostly Stupid) come out from my brain. Even though, i can reply or add comment to questions in <code>Stack Overflow</code> and <code>Github issues</code>, they are not very humanized. I mean, it is not like interacting with real human and have continuous conversation in a moment when we have lot of things going around mind, not like getting reply after two hours and sometimes two days.</p>
-<a name="what-is-irc" class="anchor" href="#what-is-irc"><h3>What is IRC</h3>
-</a><p>IRC is the greatest medium to have humanized conversation where you can clarify your doubts, learn new things. In the top of all, it is a place to meet amazing talented personalities.</p>
-<p>From Wikipedia</p>
-<pre><code><div class="highlight"><pre><span class="nx">Internet</span> <span class="nx">Relay</span> <span class="nx">Chat</span> <span class="p">(</span><span class="nx">IRC</span><span class="p">)</span> <span class="nx">is</span> <span class="nx">a</span> <span class="nx">protocol</span> <span class="k">for</span> <span class="nx">live</span> <span class="nx">interactive</span> <span class="nx">Internet</span> <span class="nx">text</span> <span class="nx">messaging</span> <span class="p">(</span><span class="nx">chat</span><span class="p">)</span> <span class="nx">or</span> <span class="nx">synchronous</span> <span class="nx">conferencing</span><span class="p">.</span> <span class="nx">It</span> <span class="nx">is</span> <span class="nx">mainly</span> <span class="nx">designed</span> <span class="k">for</span> <span class="nx">group</span> <span class="nx">communication</span> <span class="k">in</span> <span class="nx">discussion</span> <span class="nx">forums</span><span class="p">,</span> <span class="nx">called</span> <span class="nx">channels</span><span class="p">,</span> <span class="nx">but</span> <span class="nx">also</span> <span class="nx">allows</span> <span class="nx">one</span><span class="o">-</span><span class="nx">to</span><span class="o">-</span><span class="nx">one</span> <span class="nx">communication</span> <span class="nx">via</span> <span class="kr">private</span> <span class="nx">message</span> <span class="nx">as</span> <span class="nx">well</span> <span class="nx">as</span> <span class="nx">chat</span> <span class="nx">and</span> <span class="nx">data</span> <span class="nx">transfer</span><span class="p">,</span> <span class="nx">including</span> <span class="nx">file</span> <span class="nx">sharing</span><span class="p">.</span>
+      <div class="post-body"><p>Now-a-days we have a lot of options to deploy our applications. Some of them are
+Google App Engine, Google Compute Cloud, Amazon EC2, Heroku, Nodejitsu and much more.
+All the services have their advantages and disadvantages over others. Generally,
+we do not prefer much complex infrastructure or steps to deploy our static pages.
+Recently, I found that Google App engine has been a best platform for hosting our
+static web pages with decent free plan over other services. In this article,
+we will discuss a steps to host your static pages which can be personal blog, company site or even your client sites.</p>
+<a name="create-an-application-in-google-app-engine" class="anchor" href="#create-an-application-in-google-app-engine"><h3>Create an application in Google App Engine</h3>
+</a><p>Visit <a href="http://appengine.google.com">Google App Engine</a> and then create an application.
+When creating App engine application, the application id is very important. Because
+it acts as subdomain for your site. Lets say, application id is <code>coolmoon</code>, the site
+will be in <code>coolmoon.appspot.com</code>.</p>
+<a name="install-app-engine-sdk-for-python" class="anchor" href="#install-app-engine-sdk-for-python"><h3>Install App Engine SDK for python</h3>
+</a><p>Since <code>python</code> has been a best supported language in App Engine, Download and Install
+<a href="https://developers.google.com/appengine/downloads#Google_App_Engine_SDK_for_Python">App Engine SDK for python</a>. <code>Are you not a python developer(like me)?</code> Do not worry, you do not need to write a single piece of python code.</p>
+<p>You will use two commands from the SDK:</p>
+<pre><code><div class="highlight"><pre><span class="nx">dev_appserver</span><span class="p">.</span><span class="nx">py</span>  <span class="o">-</span>  <span class="nx">the</span> <span class="nx">development</span> <span class="nx">web</span> <span class="nx">server</span>
+<span class="nx">appcfg</span><span class="p">.</span><span class="nx">py</span>  <span class="o">-</span>  <span class="k">for</span> <span class="nx">uploading</span> <span class="nx">your</span> <span class="nx">app</span> <span class="nx">to</span> <span class="nx">App</span> <span class="nx">Engine</span>
 </pre></div>
 </code></pre>
-<p>IRC consists of channels. Channel is something like a chat room, but it will be dedicated for some technology or language, ex: #html, #css, #javascript, #go-lang. You can go to any channel and ask questions or just listen and learn from other&#39;s discussion.</p>
-<p>I am using <a href="http://webchat.freenode.net/">Freenode</a> which is a widely used open IRC server.
-Lets see how you can get started with IRC on <code>Freenode</code>.</p>
-<a name="register-your-nickname" class="anchor" href="#register-your-nickname"><h3>Register your nickname</h3>
-</a><p>In IRC, you will be addressed by your nickname. It is good to register your nick name.
-But it is not mandatory to register your nick name to access IRC channel.</p>
-<ol>
-<li>Visit <a href="http://webchat.freenode.net/"><a href="http://webchat.freenode.net/">http://webchat.freenode.net/</a></a></li>
-<li>Enter your nick name</li>
-<li>Enter <code>Captcha</code> and <code>Connect</code></li>
-</ol>
-<p>To register your nick name,</p>
-<pre><code><div class="highlight"><pre><span class="err">/msg NickServ REGISTER password youremail@example.com</span>
+<a name="create-an-application-folder" class="anchor" href="#create-an-application-folder"><h3>Create an application folder</h3>
+</a><p>You have to create an application folder which has static files and configuration file to be deployed.
+The structure of the folder may be as follows</p>
+<pre><code><div class="highlight"><pre><span class="nx">application_folder</span><span class="o">/</span>
+  <span class="o">-</span> <span class="nx">app</span><span class="p">.</span><span class="nx">yaml</span>              <span class="err">#</span> <span class="nx">configuration</span> <span class="nx">file</span><span class="p">.</span> <span class="nx">we</span> <span class="nx">will</span> <span class="nx">see</span> <span class="k">in</span> <span class="nx">next</span> <span class="nx">section</span>
+  <span class="o">-</span> <span class="kr">public</span><span class="o">/</span>               <span class="err">#</span> <span class="kr">public</span> <span class="nx">folder</span> <span class="nx">will</span> <span class="nx">contain</span> <span class="kr">static</span> <span class="nx">files</span>
+    <span class="o">-</span> <span class="nx">index</span><span class="p">.</span><span class="nx">html</span>
+    <span class="o">-</span> <span class="nx">js</span><span class="o">/</span>
+    <span class="o">-</span> <span class="nx">css</span><span class="o">/</span>
+    <span class="o">-</span> <span class="nx">img</span><span class="o">/</span>
 </pre></div>
 </code></pre>
-<p>Once you registered, email is sent to you and just copy and paste the VERIFY command in IRC.
-Now you own the nick name, no one can use the same nick name. Even if someone try to use, it will
-be suffixed by underscore(_)</p>
-<a name="login-with-your-nick-name" class="anchor" href="#login-with-your-nick-name"><h3>Login with your nick name</h3>
-</a><p>Whenever you enter IRC, you have to identify your nickname with password by</p>
-<pre><code><div class="highlight"><pre><span class="err">/msg nickserv identify yourpassword</span>
-</pre></div>
-</code></pre>
-<a name="join-channel" class="anchor" href="#join-channel"><h3>Join Channel</h3>
-</a><p>If you want to go to particular channel, then type <code>/join #channelname</code>.
-Lets say if you want to go to <code>c</code> language channel, type <code>/join #c</code></p>
-<p>Incase you do not know the channel name, then go and search <a href="http://irc.netsplit.de/channels/">here</a></p>
-<p>Once you join the channel, you can ask questions or listen others.</p>
-<a name="other-useful-commands" class="anchor" href="#other-useful-commands"><h3>Other useful commands</h3>
-</a><pre><code><div class="highlight"><pre><span class="err">/msg &lt;name&gt;         - Sends a short message to a person privately.</span>
-<span class="o">/</span><span class="nx">whois</span> <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span>       <span class="o">-</span> <span class="nx">Get</span> <span class="nx">a</span> <span class="kr">short</span> <span class="nx">description</span> <span class="nx">of</span> <span class="nx">who</span> <span class="nx">a</span> <span class="nx">person</span> <span class="nx">is</span><span class="p">.</span>
-<span class="o">/</span><span class="nx">nick</span>  <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span>       <span class="o">-</span> <span class="nx">Change</span> <span class="nx">your</span> <span class="nx">nick</span> <span class="nx">name</span>
-<span class="o">/</span><span class="nx">me</span>                 <span class="o">-</span> <span class="nx">Sends</span> <span class="nx">an</span> <span class="nx">action</span> <span class="nx">to</span> <span class="nx">the</span> <span class="nx">channel</span><span class="p">.</span>
-<span class="o">/</span><span class="nx">away</span> <span class="o">&lt;</span><span class="nx">message</span><span class="o">&gt;</span>     <span class="o">-</span> <span class="nx">Sets</span> <span class="nx">an</span> <span class="nx">away</span> <span class="nx">message</span><span class="p">.</span>
-<span class="o">/</span><span class="nx">quit</span> <span class="o">&lt;</span><span class="nx">last</span> <span class="nx">words</span><span class="o">&gt;</span>  <span class="o">-</span> <span class="nx">Quits</span> <span class="nx">and</span> <span class="nx">allows</span> <span class="nx">you</span> <span class="nx">a</span> <span class="kr">final</span> <span class="nx">message</span> <span class="nx">before</span> <span class="nx">quitting</span><span class="p">.</span>
-<span class="o">/</span><span class="nx">clear</span>              <span class="o">-</span> <span class="nx">Clears</span> <span class="nx">a</span> <span class="nx">channel</span><span class="s1">&#39;s text.</span>
-<span class="s1">/clear all          - Clears a channel&#39;</span><span class="nx">s</span> <span class="nx">text</span><span class="p">.</span>
-</pre></div>
-</code></pre>
-<p>When you use IRC, you must follow some etiquette which is defined precisely by
-<a href="https://workaround.org/getting-help-on-irc">Christoph Haas</a>.</p>
-<p>Regarding IRC client, apart from web, there are other IRC client application available.
-You can checkout <a href="http://en.wikipedia.org/wiki/Comparison_of_Internet_Relay_Chat_clients">here</a></p>
-<p>IRC taught me a lot. I hope, you will feel the same after using it.
-Have a nice day.</p>
-</div>
-      <h4><a href="/blog/posts/Every-Programmer-should-use-IRC.html#comments">View comments</a></h4>
-      <div class="post-head group"><a href="/blog/posts/Javascript-snippets-save-your-time.html">
-          <h1 class="post-title">Javascript snippets save your time</h1></a>
-        <h2 class="post-date">2013 &#183; 10 &#183; 6</h2>
-      </div>
-      <div class="post-body"><p>When i work with web application, i got few JS snippet from different places(Mostly from StackOverflow). I hope, it will save your time.</p>
-<a name="get-query-string-value" class="anchor" href="#get-query-string-value"><h2>Get Query String Value</h2>
-</a><p>This function helps you to get query string value from URL(href).</p>
-<pre><code class="lang-javascript"><div class="highlight"><pre><span class="kd">function</span> <span class="nx">getParameterByName</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[\[]/</span><span class="p">,</span> <span class="s2">&quot;\\\[&quot;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[\]]/</span><span class="p">,</span> <span class="s2">&quot;\\\]&quot;</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">regex</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="s2">&quot;[\\?&amp;]&quot;</span> <span class="o">+</span> <span class="nx">name</span> <span class="o">+</span> <span class="s2">&quot;=([^&amp;#]*)&quot;</span><span class="p">),</span>
-        <span class="nx">results</span> <span class="o">=</span> <span class="nx">regex</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="nx">location</span><span class="p">.</span><span class="nx">search</span><span class="p">);</span>
-    <span class="k">return</span> <span class="nx">results</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="s2">&quot;&quot;</span> <span class="o">:</span> <span class="nb">decodeURIComponent</span><span class="p">(</span><span class="nx">results</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\+/g</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">));</span>
-<span class="p">}</span>
-</pre></div>
-</code></pre>
-<a name="add-leading-zeros-to-date" class="anchor" href="#add-leading-zeros-to-date"><h2>Add leading zeros to date</h2>
-</a><p>Sometimes you may want to add leading zeros to date field.</p>
-<p><code>(&quot;0&quot; + anynumber).slice(-2))</code> will add leading zero to a number.</p>
-<pre><code class="lang-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">date</span> <span class="o">=</span>  <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
-<span class="kd">var</span> <span class="nx">dateString</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;0&#39;</span> <span class="o">+</span> <span class="nx">date</span><span class="p">.</span><span class="nx">getDate</span><span class="p">()).</span><span class="nx">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span>
-             <span class="o">+</span> <span class="p">(</span><span class="s1">&#39;0&#39;</span> <span class="o">+</span> <span class="p">(</span><span class="nx">date</span><span class="p">.</span><span class="nx">getMonth</span><span class="p">()</span><span class="o">+</span><span class="mi">1</span><span class="p">)).</span><span class="nx">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span>
-             <span class="o">+</span> <span class="nx">date</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">();</span>
-</pre></div>
-</code></pre>
-<a name="set-checkbox-checked-property-using-jquery" class="anchor" href="#set-checkbox-checked-property-using-jquery"><h2>Set checkbox checked property using Jquery</h2>
-</a><p>I was bit struggle with this problem. In latest jquery, i try to set checked property using <code>$(&#39;#checkBox&#39;).attr(&#39;checked&#39;);</code>. It does not work.</p>
-<p>From <code>jQuery &gt; 1.6</code>, it should be</p>
-<pre><code class="lang-javascript"><div class="highlight"><pre><span class="c1">// new property method</span>
-<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#checkBox&#39;</span><span class="p">).</span><span class="nx">prop</span><span class="p">(</span><span class="s1">&#39;checked&#39;</span><span class="p">);</span>
-</pre></div>
-</code></pre>
-<a name="best-way-to-toggle-classes-on-window-scroll" class="anchor" href="#best-way-to-toggle-classes-on-window-scroll"><h2>Best way to Toggle Classes on window scroll</h2>
-</a><p>We like to hide or show some element based on window scroll. It may be show/hide of goto top button or fixed header position.</p>
-<pre><code class="lang-javascript"><div class="highlight"><pre><span class="c1">// Toggle header position</span>
-<span class="kd">var</span> <span class="nx">breakpoint</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span> <span class="c1">// Can be any value based on your layout</span>
-<span class="kd">var</span> <span class="nx">headerDomElement</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
-<span class="kd">var</span> <span class="nx">$window</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">)</span>
-<span class="nx">$window</span> <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;scroll&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">top</span> <span class="o">=</span> <span class="nx">$window</span><span class="p">.</span><span class="nx">scrollTop</span><span class="p">();</span>
-    <span class="nx">headerDomElement</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="s2">&quot;header-fixed&quot;</span><span class="p">,</span>  <span class="nx">top</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span>
-<span class="p">});</span>
-</pre></div>
-</code></pre>
-<pre><code class="lang-javascript"><div class="highlight"><pre><span class="c1">// Goto top button show and hide</span>
-<span class="kd">var</span> <span class="nx">breakpoint</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">btnGoTopDomElement</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;btn-gotop&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
-<span class="kd">var</span> <span class="nx">$window</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">)</span>
-<span class="nx">$window</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;scroll&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">top</span> <span class="o">=</span> <span class="nx">$window</span> <span class="p">.</span><span class="nx">scrollTop</span><span class="p">();</span>
-    <span class="nx">btnGoTopDomElement</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="s2">&quot;show&quot;</span><span class="p">,</span>  <span class="nx">top</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span>
-<span class="p">});</span>
-</pre></div>
-</code></pre>
-<p>Instead of Jquery <code>toggleClass</code> method, you can use <code>classList.toggle</code> on Dom element will improve the performance. Thanks to Paul Irish.</p>
-<a name="interactive-form-submission" class="anchor" href="#interactive-form-submission"><h2>Interactive Form Submission</h2>
-</a><p>Form submission might take time if server or network is slow. Meantime, if submit button
-is still clickable, It will not be user friendly.</p>
-<p>You can disable submit button and do any validation of the field by adding <code>onsubmit</code> attribute to the form.</p>
-<pre><code class="lang-html"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">accept-charset=</span><span class="s">&quot;UTF-8&quot;</span> <span class="na">method=</span><span class="s">&quot;POST&quot;</span> <span class="na">action=</span><span class="s">&quot;/message&quot;</span>
-<span class="na">onsubmit=</span><span class="s">&quot;return validateForm(this);&quot;</span><span class="nt">&gt;</span>
+<a name="content-of-app-engine-configuration-app.yaml-" class="anchor" href="#content-of-app-engine-configuration-app.yaml-"><h3>Content of App Engine configuration(app.yaml)</h3>
+</a><pre><code><div class="highlight"><pre>  <span class="nx">application</span><span class="o">:</span> <span class="nx">coolmoon</span>
+  <span class="nx">version</span><span class="o">:</span> <span class="mi">1</span>
+  <span class="nx">runtime</span><span class="o">:</span> <span class="nx">python27</span>
+  <span class="nx">api_version</span><span class="o">:</span> <span class="mi">1</span>
+  <span class="nx">threadsafe</span><span class="o">:</span> <span class="nx">yes</span>
 
-<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;Submit&quot;</span><span class="nt">&gt;</span>
-<span class="nt">&lt;/form&gt;</span>
-</pre></div>
-</code></pre>
-<pre><code class="lang-javascript"><div class="highlight"><pre><span class="kd">function</span> <span class="nx">validateForm</span><span class="p">(</span><span class="nx">formObj</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">formObj</span><span class="p">.</span><span class="nx">submit</span><span class="p">.</span><span class="nx">disabled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-    <span class="nx">formObj</span><span class="p">.</span><span class="nx">submit</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="s2">&quot;Submitting...&quot;</span><span class="p">;</span>
-    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</code></pre>
-<p>Share if you have any interesting JS snippets.
-Happy coding and have a nice day.</p>
-</div>
-      <h4><a href="/blog/posts/Javascript-snippets-save-your-time.html#comments">View comments</a></h4>
-      <div class="post-head group"><a href="/blog/posts/Tips-and-Tricks-of-OSX-makes-you-smile.html">
-          <h1 class="post-title">Tips and Tricks of OSX makes you smile</h1></a>
-        <h2 class="post-date">2013 &#183; 10 &#183; 2</h2>
-      </div>
-      <div class="post-body"><p>I love to work with Mac OSX. Few days before, i came across the <a href="http://apple.stackexchange.com/questions/400/please-share-your-hidden-os-x-features-or-tips-and-tricks">Tips and Tricks of OSX in Stack Exchange answers</a>. It is mind blowing and has lot more stuff to learn. I like to share tips and tricks that i like and using regularly.</p>
-<a name="quick-look-in-finder" class="anchor" href="#quick-look-in-finder"><h3>Quick Look in Finder</h3>
-</a><p>When you are in <code>Finder</code> and wanted to check the content of a file, you typically double click the item.  Instead you can hit the <code>Spacebar</code> to have quick look. It is much faster than opening the file.</p>
-<a name="spotlight-search-and-its-calculator" class="anchor" href="#spotlight-search-and-its-calculator"><h3>Spotlight Search and its Calculator</h3>
-</a><p>Spotlight Search can be opened by hitting <code>⌘ + space</code>.</p>
-<p>The Spotlight search can also handle simple mathematical expressions.
-You can type any simple math expression, it will give you the answer.</p>
-<a name="show-hidden-files-in-finder" class="anchor" href="#show-hidden-files-in-finder"><h3>Show Hidden files in Finder</h3>
-</a><p>By default, The <code>Finder</code> hide the hidden files which starts with .(dot). To set <code>Finder</code> to show hidden files, run following command in the terminal</p>
-<pre><code><div class="highlight"><pre><span class="nx">defaults</span> <span class="nx">write</span> <span class="nx">com</span><span class="p">.</span><span class="nx">apple</span><span class="p">.</span><span class="nx">finder</span> <span class="nx">AppleShowAllFiles</span> <span class="nx">TRUE</span>
+  <span class="nx">handlers</span><span class="o">:</span>
 
-<span class="nx">killall</span> <span class="nx">Finder</span>
+  <span class="o">-</span> <span class="nx">url</span><span class="o">:</span> <span class="err">/(.+)</span>
+    <span class="nx">static_files</span><span class="o">:</span> <span class="kr">public</span><span class="o">/</span><span class="err">\</span><span class="mi">1</span>
+    <span class="nx">upload</span><span class="o">:</span> <span class="kr">public</span><span class="o">/</span><span class="p">(.</span><span class="o">*</span><span class="p">)</span>
+
+  <span class="o">-</span> <span class="nx">url</span><span class="o">:</span> <span class="err">/</span>
+    <span class="nx">static_files</span><span class="o">:</span> <span class="kr">public</span><span class="o">/</span><span class="nx">index</span><span class="p">.</span><span class="nx">html</span>
+    <span class="nx">upload</span><span class="o">:</span> <span class="kr">public</span><span class="o">/</span><span class="nx">index</span><span class="p">.</span><span class="nx">html</span>
+
+  <span class="nx">skip_files</span><span class="o">:</span>
+  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?app\.yaml</span>
+  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?app\.yml</span>
+  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?#.*#</span>
+  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?.*~</span>
+  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?.*\.py[co]</span>
+  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?.*/RCS/.*</span>
+  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?\..*</span>
+  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?tests$</span>
+  <span class="o">-</span> <span class="o">^</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?test$</span>
+  <span class="o">-</span> <span class="o">^</span><span class="nx">test</span><span class="o">/</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?</span>
+  <span class="o">-</span> <span class="o">^</span><span class="nx">COPYING</span><span class="p">.</span><span class="nx">LESSER</span>
+  <span class="o">-</span> <span class="o">^</span><span class="nx">README</span><span class="err">\</span><span class="p">..</span><span class="o">*</span>
+  <span class="o">-</span> <span class="err">\</span><span class="p">.</span><span class="nx">gitignore</span>
+  <span class="o">-</span> <span class="o">^</span><span class="err">\</span><span class="p">.</span><span class="nx">git</span><span class="o">/</span><span class="p">.</span><span class="o">*</span>
+  <span class="o">-</span> <span class="err">\</span><span class="p">.</span><span class="o">*</span><span class="err">\</span><span class="p">.</span><span class="nx">lint$</span>
+  <span class="o">-</span> <span class="o">^</span><span class="nx">fabfile</span><span class="err">\</span><span class="p">.</span><span class="nx">py</span>
+  <span class="o">-</span> <span class="o">^</span><span class="nx">testrunner</span><span class="err">\</span><span class="p">.</span><span class="nx">py</span>
+  <span class="o">-</span> <span class="o">^</span><span class="nx">grunt</span><span class="err">\</span><span class="p">.</span><span class="nx">js</span>
+  <span class="o">-</span> <span class="o">^</span><span class="nx">node_modules</span><span class="o">/</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?</span>
 </pre></div>
 </code></pre>
-<p>Reopen <code>Finder</code>. Now it will show hidden files.</p>
-<p>You can use <code>⌘ + ⇧ + .</code> that will show hidden files in any file-open dialog box.</p>
-<a name="finder-window-shortcuts" class="anchor" href="#finder-window-shortcuts"><h3>Finder Window Shortcuts</h3>
-</a><p>In Finder window or Open/Save dialog,</p>
-<pre><code><div class="highlight"><pre><span class="err">⌘</span> <span class="o">+</span> <span class="err">⇧</span> <span class="o">+</span> <span class="nx">G</span> <span class="o">-</span> <span class="nx">Get</span> <span class="nx">a</span> <span class="nx">location</span> <span class="nx">bar</span> <span class="nx">from</span> <span class="nx">which</span> <span class="nx">you</span> <span class="nx">can</span> <span class="nx">type</span>
-<span class="err">⌘</span> <span class="o">+</span> <span class="nx">I</span>     <span class="o">-</span> <span class="nx">Info</span> <span class="nb">window</span> <span class="nx">shows</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">selected</span> <span class="nx">item</span><span class="p">.</span>
-<span class="err">⌘</span> <span class="o">+</span> <span class="nx">F</span>     <span class="o">-</span> <span class="nx">Cursor</span> <span class="nx">jumps</span> <span class="nx">to</span> <span class="nx">the</span> <span class="nx">Find</span> <span class="nx">text</span> <span class="nx">field</span>
-<span class="err">⌘</span> <span class="o">+</span> <span class="nx">R</span>     <span class="o">-</span> <span class="nx">Reveals</span> <span class="nx">the</span> <span class="nx">selected</span> <span class="nx">item</span> <span class="k">in</span> <span class="nx">a</span> <span class="k">new</span> <span class="nx">Finder</span> <span class="nb">window</span><span class="p">.</span>
+<a name="test-static-pages" class="anchor" href="#test-static-pages"><h3>Test static pages</h3>
+</a><p>You can run development server locally and check your static pages by following command</p>
+<pre><code><div class="highlight"><pre> <span class="nx">dev_appserver</span><span class="p">.</span><span class="nx">py</span> <span class="p">.</span><span class="o">/</span>
 </pre></div>
 </code></pre>
-<p>In Open/Save dialog,</p>
-<pre><code><div class="highlight"><pre><span class="err">⌘</span> <span class="o">+</span> <span class="nx">D</span>     <span class="o">-</span> <span class="nx">Selects</span> <span class="nx">the</span> <span class="nx">Desktop</span> <span class="nx">folder</span> <span class="nx">as</span> <span class="nx">a</span> <span class="nx">destination</span>
+<p>Visit <code>http://localhost:8080</code> to test your pages.</p>
+<a name="deploy" class="anchor" href="#deploy"><h3>Deploy</h3>
+</a><p>Everything is perfect and deploy the static pages. The command <code>appcfg.py</code> is used for deploy the application to Google App engine</p>
+<pre><code><div class="highlight"><pre><span class="nx">appcfg</span><span class="p">.</span><span class="nx">py</span> <span class="nx">update</span> <span class="p">.</span>
 </pre></div>
 </code></pre>
-<a name="show-and-hide-desktop-icons" class="anchor" href="#show-and-hide-desktop-icons"><h3>Show and Hide Desktop Icons</h3>
-</a><p>When you do presentation or in meeting, you do not want others to see your desktop.
-You can use following commands to hide and show desktop icons.</p>
-<p>To Hide Desktop icons</p>
-<pre><code><div class="highlight"><pre><span class="nx">defaults</span> <span class="nx">write</span> <span class="nx">com</span><span class="p">.</span><span class="nx">apple</span><span class="p">.</span><span class="nx">finder</span> <span class="nx">CreateDesktop</span> <span class="o">-</span><span class="nx">bool</span> <span class="kc">false</span> <span class="o">&amp;&amp;</span> <span class="nx">killall</span> <span class="nx">Finder</span>
+<p>It will ask for <code>email</code> and <code>password</code> of your Google account. The password must be
+application specific password. To know how to generate application specific password,
+please refer <a href="https://support.google.com/accounts/answer/185833?hl=en">Application specific password</a>.</p>
+<a name="you-ve-made-it" class="anchor" href="#you-ve-made-it"><h3>You&#39;ve made it</h3>
+</a><p>Finally you got your site hosted in <code>&lt;application-id&gt;.appspot.com</code>.
+Static hosting is super easy with App Engine. Moreover it is faster than other static
+hosting services. Because it runs on Google infrastructure.</p>
+<p>Happy static hosting and Have a nice day.</p>
+</div>
+      <h4><a href="/blog/posts/Free-Static-Page-Hosting-on-Google-App-Engine-in-a-5-minutes.html#comments">View comments</a></h4>
+      <div class="post-head group"><a href="/blog/posts/Things-you-should-consider-for-MongoDB-in-production.html">
+          <h1 class="post-title">Things you should consider for MongoDB in production</h1></a>
+        <h2 class="post-date">2013 &#183; 11 &#183; 4</h2>
+      </div>
+      <div class="post-body"><p>We are using MongoDB for few of our products. We like to share some of the
+recommendations for MongoDB in production.</p>
+<a name="handle-connection-errors" class="anchor" href="#handle-connection-errors"><h3>Handle Connection Errors</h3>
+</a><p>Few weeks before, we faced one weird problem in our NodeJS  application.
+Our customer can view our site and not able to login into the application.
+We tried to figure out the issue and found that MongoDB database connection is
+broken during mid night. After that, our application is not crashed,
+but it is failed to connect MongoDB. We assume that it should auto reconnect if it is failed.
+But it does not happen. Finally we found that we did not handle error of MongoDB
+connection in our code.</p>
+<p>You must handle error of MongoDB connection in you code. It can be even simple console log.</p>
+<pre><code><div class="highlight"><pre> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">connection</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">console</span><span class="p">,</span> <span class="s1">&#39;MongoDB connection error:&#39;</span><span class="p">));</span>
 </pre></div>
 </code></pre>
-<p>To Show Desktop icons</p>
-<pre><code><div class="highlight"><pre><span class="nx">defaults</span> <span class="nx">write</span> <span class="nx">com</span><span class="p">.</span><span class="nx">apple</span><span class="p">.</span><span class="nx">finder</span> <span class="nx">CreateDesktop</span> <span class="o">-</span><span class="nx">bool</span> <span class="kc">true</span> <span class="o">&amp;&amp;</span> <span class="nx">killall</span> <span class="nx">Finder</span>
+<p>If you are using NodeJS, you must handle <code>error</code> and <code>exception</code> in all places.
+It is a best practice.</p>
+<a name="setting-timeout" class="anchor" href="#setting-timeout"><h3>Setting Timeout</h3>
+</a><p>You have to properly set your timeouts. The driver&#39;s default timeouts are very aggressive ranges anywhere from 1 second (e.g. the Node.JS driver in some cases) to 30 seconds (e.g  the Ruby driver), so you really need to think about what the optimal setting is for your use case.</p>
+<p>For connections made through a Platform-as-a-Serivce (PaaS) such as Heroku, you might consider an even higher timeout (e.g. 30 seconds) since your application is likely running in a container that can be “idled” or “passivated” during periods of low activity</p>
+<p>If you use Mongoose and NodeJS, then you can set connection timeout by</p>
+<pre><code><div class="highlight"><pre><span class="c1">// Database connect options</span>
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">replset</span><span class="o">:</span> <span class="p">{</span> <span class="nx">socketOptions</span><span class="o">:</span> <span class="p">{</span> <span class="nx">connectTimeoutMS</span> <span class="o">:</span> <span class="nx">conf</span><span class="p">.</span><span class="nx">dbTimeout</span> <span class="p">}}};</span>
+
+<span class="c1">// Establish Database connection</span>
+<span class="kd">var</span> <span class="nx">conn</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">conf</span><span class="p">.</span><span class="nx">dbURL</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
 </pre></div>
 </code></pre>
-<a name="screenshot-shortcuts" class="anchor" href="#screenshot-shortcuts"><h3>Screenshot shortcuts</h3>
-</a><p>You can use following shortcuts to take screenshots. Kudos to <a href="http://oreilly.com/digitalmedia/2006/01/01/mac-os-x-screenshot-secrets.html">screenshot-secret</a></p>
-<p><code>⌘+⇧+3</code>      -  Capture entire screen and save as a file</p>
-<p><code>⌘+ctrl+⇧+3</code> -  Capture entire screen and copy to the clipboard</p>
-<p><code>⌘+⇧+4</code>      -  Capture dragged area and save as a file</p>
-<p><code>⌘+ctrl+⇧+4</code> -  Capture dragged area and copy to the clipboard</p>
-<p><code>⌘+⇧+4 then space</code>      -  Capture a window, menu, desktop icon, or the menu bar and save as a file</p>
-<p><code>⌘+ctrl+⇧+4 then space</code> -  Capture a window, menu, desktop icon, or the menu bar and copy to the clipboard</p>
-<a name="clipboard-copy-and-paste-from-terminal" class="anchor" href="#clipboard-copy-and-paste-from-terminal"><h3>Clipboard copy and paste from Terminal</h3>
-</a><p>You may want to copy output of some command to clipboard, then use <code>pbcopy</code></p>
-<pre><code><div class="highlight"><pre><span class="nx">echo</span> <span class="s2">&quot;I am going to clipboard&quot;</span> <span class="o">|</span> <span class="nx">pbcopy</span>
-</pre></div>
-</code></pre>
-<p>Save clipboard contents to file</p>
-<pre><code><div class="highlight"><pre><span class="nx">pbpaste</span> <span class="o">&gt;</span> <span class="nx">myfile</span><span class="p">.</span><span class="nx">txt</span>
-</pre></div>
-</code></pre>
-<a name="start-quick-web-server" class="anchor" href="#start-quick-web-server"><h3>Start Quick Web server</h3>
-</a><p>Start a quick web server by</p>
-<pre><code><div class="highlight"><pre><span class="nx">python</span> <span class="o">-</span><span class="nx">m</span> <span class="nx">SimpleHTTPServer</span>
-</pre></div>
-</code></pre>
-<p>It will start web server port 8000 and serve files in the current directory.
-To start in a specific port</p>
-<pre><code><div class="highlight"><pre><span class="nx">python</span> <span class="o">-</span><span class="nx">m</span> <span class="nx">SimpleHTTPServer</span> <span class="mi">8080</span>
-</pre></div>
-</code></pre>
-<a name="useful-command-on-terminal" class="anchor" href="#useful-command-on-terminal"><h3>Useful command on Terminal</h3>
-</a><p>You can use <code>open</code> command to open any application and any file.</p>
-<pre><code><div class="highlight"><pre><span class="nx">open</span> <span class="p">.</span>            <span class="err">#</span> <span class="nx">Open</span> <span class="nx">current</span> <span class="nx">folder</span> <span class="k">in</span> <span class="nx">the</span> <span class="nx">Finder</span><span class="p">.</span>
-<span class="nx">open</span> <span class="o">-</span><span class="nx">a</span> <span class="nx">Firefox</span>   <span class="err">#</span> <span class="nx">To</span> <span class="nx">open</span> <span class="nx">application</span><span class="p">.</span> <span class="nx">Use</span> <span class="o">-</span><span class="nx">a</span> <span class="nx">option</span>
-<span class="nx">open</span> <span class="nx">ticket</span><span class="p">.</span><span class="nx">pdf</span>   <span class="err">#</span> <span class="nx">To</span> <span class="nx">open</span> <span class="nx">a</span> <span class="nx">file</span><span class="p">.</span> <span class="nx">It</span> <span class="nx">will</span> <span class="nx">open</span> <span class="nx">PDF</span> <span class="k">in</span> <span class="k">default</span> <span class="nx">application</span><span class="p">.</span>
-</pre></div>
-</code></pre>
-<p>For Non-English speaker like me, it always find difficulties in pronouncing the word :) You can use <code>say</code> to know how to pronounce</p>
-<pre><code><div class="highlight"><pre><span class="nx">say</span> <span class="nx">Hello</span> <span class="nx">World</span>
-</pre></div>
-</code></pre>
-<a name="view-more-information-on-menu-bar-icons" class="anchor" href="#view-more-information-on-menu-bar-icons"><h3>View More information on Menu bar icons</h3>
-</a><p>Holding <code>⌥</code> while clicking menu bar icon will give you additional menu items.</p>
-<p>Hold <code>Option ⌥</code> + Click Battery Menulet, it will show battery condition.</p>
+<p><a href="https://mongolab.com/">MongoLab</a> has written very good article on <a href="http://blog.mongolab.com/2013/10/do-you-want-a-timeout/">MongoDB Timeout</a></p>
+<a name="connection-polling" class="anchor" href="#connection-polling"><h3>Connection Polling</h3>
+</a><p>You should consider using connection pooling. It will make for a much faster and
+more stable application. You won&#39;t spend the time on each request to create connections (can be noticeable to the end user) and you aren&#39;t subject to connect errors either.</p>
+<p>The <code>mongoose</code> package for NodeJS handles connection pooling by default. If you use your own
+MongoDB driver, make sure you have implemented connection pooling.</p>
+<p>Thanks to <a href="https://mongolab.com/">MongoLab</a> for sharing amazing tips of MongoDB with us.
+The support of MongoLab is awesome and respond for questions very quickly. I highly recommending for MongoDB database.</p>
 <p>Have a nice day.</p>
 </div>
-      <h4><a href="/blog/posts/Tips-and-Tricks-of-OSX-makes-you-smile.html#comments">View comments</a></h4>
+      <h4><a href="/blog/posts/Things-you-should-consider-for-MongoDB-in-production.html#comments">View comments</a></h4>
+      <div class="post-head group"><a href="/blog/posts/Dropbox-will-save-your-head.html">
+          <h1 class="post-title">Dropbox will save your head</h1></a>
+        <h2 class="post-date">2013 &#183; 11 &#183; 4</h2>
+      </div>
+      <div class="post-body"><p>Recently My Mac OSX has been crashed and i cannot retrieve some of my data from hard drive.
+Fortunately i have already synced important folders to the <code>Dropbox</code> that saves my head.</p>
+<p>Few days ago, i saw the tweet from popular GitHub contributor <a href="https://twitter.com/tjholowaychuk">tj</a> (Creator of ExpressJs, Jade, Mocha)</p>
+<p><blockquote class="twitter-tweet"><p>haha dammit.. just rm -fr a project that isn&#39;t on github yet :( <a href="https://twitter.com/search?q=%23fail&amp;src=hash">#fail</a></p>&mdash; TJ Holowaychuk (@tjholowaychuk) <a href="https://twitter.com/tjholowaychuk/statuses/391262571350593536">October 18, 2013</a></blockquote></p>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>I am really sad about it. It can happen to anyone. So, whenever you started working on project(Pre-Github), You should consider sync to the <code>Dropbox</code>. Moreover it is always better and safer to sync important folder and files. It can be simply done by creating symbolic link to the folder in the <code>Dropbox</code>.</p>
+<p>Open <code>terminal</code> and do the following</p>
+<pre><code><div class="highlight"><pre><span class="err">##</span> <span class="nx">Go</span> <span class="nx">to</span> <span class="nx">dropbox</span> <span class="nx">folder</span><span class="p">.</span> <span class="nx">It</span> <span class="nx">can</span> <span class="nx">be</span> <span class="nx">any</span> <span class="nx">dropbox</span> <span class="nx">folder</span>
+<span class="nx">cd</span> <span class="o">~</span><span class="err">/Dropbox/MacOSX</span>
+
+<span class="err">#</span> <span class="nx">Create</span> <span class="nx">symbolic</span> <span class="nx">link</span> <span class="nx">to</span> <span class="nx">Stickies</span> <span class="nx">database</span>
+<span class="nx">ln</span> <span class="o">-</span><span class="nx">sf</span> <span class="o">~</span><span class="err">/Library/StickiesDatabase .</span>
+
+<span class="err">#</span> <span class="nx">Create</span> <span class="nx">symbolic</span> <span class="nx">link</span> <span class="nx">to</span> <span class="nx">Sublime</span> <span class="nx">text</span> <span class="nx">User</span> <span class="nx">data</span>
+<span class="nx">ln</span> <span class="o">-</span><span class="nx">sf</span> <span class="o">~</span><span class="err">/Library/Application\ Support/Sublime\ Text\ 3/Packages/User Sublime3-User</span>
+</pre></div>
+</code></pre>
+<p>In symbolic link creation, you can use .(dot) in the last argument to use same folder or file name as original. Otherwise you can specify the name that you wanted to have in your <code>Dropbox</code>.</p>
+<p>Have a nice day.</p>
+</div>
+      <h4><a href="/blog/posts/Dropbox-will-save-your-head.html#comments">View comments</a></h4>
       <ul class="pagination group">
         <li><a href="/page/1/">2</a>
         </li>

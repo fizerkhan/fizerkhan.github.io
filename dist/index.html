@@ -19,127 +19,151 @@
       <div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div>
     </nav>
     <div class="content">
-      <div class="post-head group"><a href="/blog/posts/Social-Sharing-in-Ionic-application.html">
-          <h1 class="post-title">Social Sharing in Ionic application</h1></a>
-        <h2 class="post-date">2014 &#183; 12 &#183; 8</h2>
+      <div class="post-head group"><a href="/blog/posts/Security-HTTP-headers.html">
+          <h1 class="post-title">Security HTTP headers</h1></a>
+        <h2 class="post-date">2014 &#183; 12 &#183; 30</h2>
       </div>
-      <div class="post-body"><p>You may need a social sharing feature inside your Ionic Framework Android and iOS application.</p>
-<p>Using the <a href="https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin">Social Sharing plugin</a> for Apache Cordova, we are able to do the social sharing.</p>
-<a name="add-ngcordova" class="anchor" href="#add-ngcordova"><h3>Add ngCordova</h3>
-</a><p>First you have to add <a href="http://ngcordova.com/">ngCordova</a> to your Ionic application.
-If you already have this in your app, you can skip this step.</p>
-<p>Install ngCordova</p>
-<pre><code><div class="highlight"><pre><span class="nx">bower</span> <span class="nx">install</span> <span class="nx">ngCordova</span> <span class="o">--</span><span class="nx">save</span>
+      <div class="post-body"><p>Security becomes an inevitable feature for every web and mobile application.
+There are many things to consider when securing web applications.</p>
+<p>Now let&#39;s have a look at the headers and how they can improve the security of your website.</p>
+<a name="x-frame-options" class="anchor" href="#x-frame-options"><h3>X-FRAME-OPTIONS</h3>
+</a><p>This header Provides Clickjacking protection.</p>
+<pre><code><div class="highlight"><pre><span class="nx">X</span><span class="o">-</span><span class="nx">FRAME</span><span class="o">-</span><span class="nx">OPTIONS</span><span class="o">:</span> <span class="nx">SAMEORIGIN</span>
 </pre></div>
 </code></pre>
-<p>Add <code>ng-cordova.js</code> before cordova script inside <code>index.html</code></p>
-<pre><code class="lang-html"><div class="highlight"><pre>//index.html
-<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;lib/ngCordova/dist/ng-cordova.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;cordova.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<p><em>Values:</em></p>
+<ul>
+<li><strong>DENY</strong> - no rendering within a frame,</li>
+<li><strong>SAMEORIGIN</strong> - no rendering if origin mismatch,</li>
+<li><strong>ALLOW-FROM: DOMAIN</strong> - allow rendering if framed by frame loaded from DOMAIN</li>
+</ul>
+<a name="strict-transport-security" class="anchor" href="#strict-transport-security"><h3>Strict-Transport-Security</h3>
+</a><p>The Strict-Transport-Security header will instruct the browser to do two important things:</p>
+<ol>
+<li>Load all content from your domain over HTTPS</li>
+<li>Refuse to connect in case of certificate errors and warnings</li>
+</ol>
+<pre><code><div class="highlight"><pre><span class="nx">Strict</span><span class="o">-</span><span class="nx">Transport</span><span class="o">-</span><span class="nx">Security</span><span class="o">:</span><span class="nx">max</span><span class="o">-</span><span class="nx">age</span><span class="o">=</span><span class="mi">15552000</span><span class="p">;</span> <span class="nx">includeSubDomains</span>
 </pre></div>
 </code></pre>
-<p>Add <code>ngCordova</code> in your app module dependencies</p>
-<pre><code><div class="highlight"><pre><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;myApp&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;ionic&#39;</span><span class="p">,</span> <span class="s1">&#39;ngCordova&#39;</span><span class="p">])</span>
+<p><code>includeSubdomains</code> indicates whether the policy should also be applied to subdomains.</p>
+<a name="x-content-type-options" class="anchor" href="#x-content-type-options"><h3>X-Content-Type-Options</h3>
+</a><p>To disable the MIME-sniffing, add the header:</p>
+<pre><code><div class="highlight"><pre><span class="nx">X</span><span class="o">-</span><span class="nx">Content</span><span class="o">-</span><span class="nx">Type</span><span class="o">-</span><span class="nx">Options</span><span class="o">:</span><span class="nx">nosniff</span>
 </pre></div>
 </code></pre>
-<a name="add-social-sharing-cordova-plugin" class="anchor" href="#add-social-sharing-cordova-plugin"><h3>Add Social Sharing cordova plugin</h3>
-</a><p>In order to implement social sharing, add cordova social sharing plugin.</p>
-<pre><code><div class="highlight"><pre><span class="nx">cordova</span> <span class="nx">plugin</span> <span class="nx">add</span> <span class="nx">https</span><span class="o">:</span><span class="c1">//github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git</span>
+<p>The only defined value, &quot;nosniff&quot;, prevents Internet Explorer and Google Chrome from MIME-sniffing a response away from the declared content-type. This also applies to Google Chrome, when downloading extensions.</p>
+<a name="x-download-options" class="anchor" href="#x-download-options"><h3>X-Download-Options</h3>
+</a><p>This disables the option to open a file directly on download.</p>
+<pre><code><div class="highlight"><pre><span class="nx">X</span><span class="o">-</span><span class="nx">Download</span><span class="o">-</span><span class="nx">Options</span><span class="o">:</span><span class="nx">noopen</span>
 </pre></div>
 </code></pre>
-<a name="implement-social-sharing" class="anchor" href="#implement-social-sharing"><h3>Implement Social sharing</h3>
-</a><p>Now, go ahead and start creating method to share in your controllers</p>
-<pre><code class="lang-javascript"><div class="highlight"><pre><span class="c1">// share anywhere</span>
-<span class="nx">$scope</span><span class="p">.</span><span class="nx">share</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="nx">$cordovaSocialSharing</span><span class="p">.</span><span class="nx">share</span><span class="p">(</span><span class="s1">&#39;This is my message&#39;</span><span class="p">,</span> <span class="s1">&#39;Subject string&#39;</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="s1">&#39;http://www.mylink.com&#39;</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="c1">// Share via email. Can be used for feedback</span>
-<span class="nx">$scope</span><span class="p">.</span><span class="nx">sendFeedback</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="nx">$cordovaSocialSharing</span>
-            <span class="p">.</span><span class="nx">shareViaEmail</span><span class="p">(</span><span class="s1">&#39;Some message&#39;</span><span class="p">,</span> <span class="s1">&#39;Some Subject&#39;</span><span class="p">,</span> <span class="s1">&#39;to_address@gmail.com&#39;</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="c1">// Share via SMS. Access multiple numbers in a string like: &#39;0612345678,0687654321&#39;</span>
-<span class="nx">$scope</span><span class="p">.</span><span class="nx">sendSMS</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">number</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">$cordovaSocialSharing</span><span class="p">.</span><span class="nx">shareViaSMS</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">number</span><span class="p">);</span>
-<span class="p">}</span>
+<a name="x-xss-protection" class="anchor" href="#x-xss-protection"><h3>X-XSS-Protection</h3>
+</a><p>The XSS protection was introduced in IE 8 as a security measure designed
+to thwart XSS (Cross Site Scripting) attacks. In short, IE tries to detect
+whether there has occurred an XSS attack, if so it will modify the page to block
+the attack and display a warning to the user.</p>
+<p>You can set the XSS filter on or off (1 or 0), and there&#39;s an optional parameter
+called mode. If you set mode to block, the page will not be displayed at all.
+Here are examples of how you can set the header:</p>
+<pre><code><div class="highlight"><pre><span class="nx">X</span><span class="o">-</span><span class="nx">XSS</span><span class="o">-</span><span class="nx">Protection</span><span class="o">:</span> <span class="mi">0</span>
+<span class="nx">X</span><span class="o">-</span><span class="nx">XSS</span><span class="o">-</span><span class="nx">Protection</span><span class="o">:</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">mode</span><span class="o">=</span><span class="nx">block</span>
 </pre></div>
 </code></pre>
-<p>For more functionalities, refer the <a href="https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin">documentation</a>.</p>
-<p>Have a nice day.</p>
+<a name="content-security-policy" class="anchor" href="#content-security-policy"><h3>Content-Security-Policy</h3>
+</a><p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks.</p>
+<p>If enabled, CSP has significant impact on the way browser renders pages
+(e.g., inline JavaScript disabled by default and must be explicitly allowed in policy).</p>
+<pre><code><div class="highlight"><pre><span class="nx">Content</span><span class="o">-</span><span class="nx">Security</span><span class="o">-</span><span class="nx">Policy</span><span class="o">:</span><span class="k">default</span><span class="o">-</span><span class="nx">src</span> <span class="nx">https</span><span class="o">:</span><span class="p">;</span> <span class="nx">connect</span><span class="o">-</span><span class="nx">src</span> <span class="nx">https</span><span class="o">:</span><span class="p">;</span> <span class="nx">font</span><span class="o">-</span><span class="nx">src</span> <span class="nx">https</span><span class="o">:</span> <span class="nx">data</span><span class="o">:</span><span class="p">;</span> <span class="nx">frame</span><span class="o">-</span><span class="nx">src</span> <span class="nx">https</span><span class="o">:</span> <span class="nx">twitter</span><span class="o">:</span><span class="p">;</span> <span class="nx">img</span><span class="o">-</span><span class="nx">src</span> <span class="nx">https</span><span class="o">:</span> <span class="nx">data</span><span class="o">:</span><span class="p">;</span> <span class="nx">media</span><span class="o">-</span><span class="nx">src</span> <span class="nx">https</span><span class="o">:</span><span class="p">;</span> <span class="nx">object</span><span class="o">-</span><span class="nx">src</span> <span class="nx">https</span><span class="o">:</span><span class="p">;</span> <span class="nx">script</span><span class="o">-</span><span class="nx">src</span> <span class="s1">&#39;unsafe-inline&#39;</span> <span class="s1">&#39;unsafe-eval&#39;</span> <span class="nx">https</span><span class="o">:</span><span class="p">;</span> <span class="nx">style</span><span class="o">-</span><span class="nx">src</span> <span class="s1">&#39;unsafe-inline&#39;</span> <span class="nx">https</span><span class="o">:</span><span class="p">;</span> <span class="nx">report</span><span class="o">-</span><span class="nx">uri</span> <span class="nx">https</span><span class="o">:</span><span class="c1">//twitter.com/i/csp_report?a=NVQWGYLXFVZXO2LGOQ%3D%3D%3D%3D%3D%3D&amp;ro=false;</span>
+</pre></div>
+</code></pre>
+<p>These HTTP headers protect your users from various kinds of attacks.</p>
 </div>
-      <h4><a href="/blog/posts/Social-Sharing-in-Ionic-application.html#comments">View comments</a></h4>
-      <div class="post-head group"><a href="/blog/posts/Rate-this-app-in-Ionic-application.html">
-          <h1 class="post-title">Rate this app in Ionic application</h1></a>
-        <h2 class="post-date">2014 &#183; 12 &#183; 4</h2>
+      <h4><a href="/blog/posts/Security-HTTP-headers.html#comments">View comments</a></h4>
+      <div class="post-head group"><a href="/blog/posts/Sending-SMS-using-Plivo-in-Google-App-Engine.html">
+          <h1 class="post-title">Sending SMS using Plivo in Google App Engine</h1></a>
+        <h2 class="post-date">2014 &#183; 12 &#183; 26</h2>
       </div>
-      <div class="post-body"><p>You may need a &quot;Rate this app&quot; link inside your Ionic Framework Android
-and iOS application. When i implemented this features by adding the link to
-Google Play and App Store, the link does not work. Then i found that
-it needs <code>inappbrowser</code> cordova plugin.</p>
-<a name="add-inapp-browser-cordova-plugin" class="anchor" href="#add-inapp-browser-cordova-plugin"><h3>Add InApp Browser cordova plugin</h3>
-</a><pre><code><div class="highlight"><pre><span class="nx">cordova</span> <span class="nx">plugin</span> <span class="nx">add</span> <span class="nx">org</span><span class="p">.</span><span class="nx">apache</span><span class="p">.</span><span class="nx">cordova</span><span class="p">.</span><span class="nx">inappbrowser</span>
-</pre></div>
-</code></pre>
-<a name="implement--rate-this-app-" class="anchor" href="#implement--rate-this-app-"><h3>Implement &quot;Rate this app&quot;</h3>
-</a><p>Now, go ahead and start creating method to open a link based on the device.</p>
-<pre><code class="lang-html"><div class="highlight"><pre><span class="nt">&lt;button</span> <span class="na">ng-click=</span><span class="s">&quot;rateUs()&quot;</span><span class="nt">&gt;</span>Rate us<span class="nt">&lt;/button&gt;</span>
-</pre></div>
-</code></pre>
-<pre><code class="lang-javascript"><div class="highlight"><pre><span class="nx">$scope</span><span class="p">.</span><span class="nx">rateUs</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">$ionicPlatform</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="s1">&#39;ios&#39;</span><span class="p">))</span> <span class="p">{</span>
-        <span class="nb">window</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">&#39;itms-apps://itunes.apple.com/us/app/domainsicle-domain-name-search/id511364723?ls=1&amp;mt=8&#39;</span><span class="p">);</span> <span class="c1">// or itms://</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">$ionicPlatform</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="s1">&#39;android&#39;</span><span class="p">))</span> <span class="p">{</span>
-        <span class="nb">window</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">&#39;market://details?id=&lt;package_name&gt;&#39;</span><span class="p">);</span>
+      <div class="post-body"><p>Now-a-days, sending a SMS is part of the notification in all web and mobile products.
+We uses <a href="https://www.plivo.com/">Plivo</a> to send SMS notification.</p>
+<p>Let me share the code that we used for sending SMS in Java Google App Engine project.</p>
+<pre><code><div class="highlight"><pre>  <span class="kr">public</span> <span class="kr">static</span> <span class="kr">final</span> <span class="nb">String</span> <span class="nx">PLIVO_VERSION</span> <span class="o">=</span> <span class="s2">&quot;v1&quot;</span><span class="p">;</span>
+  <span class="kr">public</span> <span class="kr">static</span> <span class="kr">final</span> <span class="nb">String</span> <span class="nx">PLIVO_AUTH_ID</span> <span class="o">=</span> <span class="s2">&quot;YOUR_PLIVO_AUTH_ID&quot;</span><span class="p">;</span>
+  <span class="kr">public</span> <span class="kr">static</span> <span class="kr">final</span> <span class="nb">String</span> <span class="nx">PLIVO_AUTH_TOKEN</span> <span class="o">=</span> <span class="s2">&quot;YOUR_PLIVO_AUTH_TOKEN&quot;</span><span class="p">;</span>
+  <span class="kr">public</span> <span class="kr">static</span> <span class="kr">final</span> <span class="nb">String</span> <span class="nx">PLIVO_NUMBER</span> <span class="o">=</span> <span class="s2">&quot;YOUR_PLIVO_NUMBER&quot;</span><span class="p">;</span>
+
+  <span class="kr">public</span> <span class="kr">static</span> <span class="k">void</span> <span class="nx">sendSMS</span><span class="p">(</span><span class="nb">String</span> <span class="nx">dst</span><span class="p">,</span> <span class="nb">String</span> <span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="nx">Client</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">Client</span><span class="p">.</span><span class="nx">create</span><span class="p">();</span>
+    <span class="c1">// client.addFilter(new LoggingFilter(System.out));</span>
+    <span class="nx">WebResource</span> <span class="nx">webResource</span> <span class="o">=</span> <span class="nx">client</span>
+        <span class="p">.</span><span class="nx">resource</span><span class="p">(</span><span class="s2">&quot;https://api.plivo.com/v1/Account/&quot;</span> <span class="o">+</span> <span class="nx">PLIVO_AUTH_ID</span>
+            <span class="o">+</span> <span class="s2">&quot;/Message/&quot;</span><span class="p">);</span>
+    <span class="nx">client</span><span class="p">.</span><span class="nx">addFilter</span><span class="p">(</span><span class="k">new</span> <span class="nx">HTTPBasicAuthFilter</span><span class="p">(</span><span class="nx">PLIVO_AUTH_ID</span><span class="p">,</span>
+        <span class="nx">PLIVO_AUTH_TOKEN</span><span class="p">));</span>
+
+    <span class="nx">JSONObject</span> <span class="nx">object</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">JSONObject</span><span class="p">();</span>
+    <span class="nx">object</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s2">&quot;src&quot;</span><span class="p">,</span> <span class="nx">PLIVO_NUMBER</span><span class="p">);</span>
+    <span class="nx">object</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s2">&quot;dst&quot;</span><span class="p">,</span> <span class="nx">dst</span><span class="p">);</span>
+    <span class="nx">object</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="nx">text</span><span class="p">);</span>
+    <span class="nx">object</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="s2">&quot;sms&quot;</span><span class="p">);</span>
+    <span class="nx">ClientResponse</span> <span class="nx">clientResponse</span> <span class="o">=</span> <span class="nx">webResource</span>
+        <span class="p">.</span><span class="nx">type</span><span class="p">(</span><span class="nx">MediaType</span><span class="p">.</span><span class="nx">APPLICATION_JSON</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">header</span><span class="p">(</span><span class="nx">HTTPChecker</span><span class="p">.</span><span class="nx">USER_AGENT_NAME</span><span class="p">,</span>
+            <span class="nx">HTTPChecker</span><span class="p">.</span><span class="nx">USER_AGENT_VALUE</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">ClientResponse</span><span class="p">.</span><span class="kr">class</span><span class="p">,</span> <span class="nx">object</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+
+    <span class="kr">int</span> <span class="nx">status</span> <span class="o">=</span> <span class="nx">clientResponse</span><span class="p">.</span><span class="nx">getStatus</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">status</span> <span class="o">&gt;=</span> <span class="mi">400</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">System</span><span class="p">.</span><span class="nx">out</span><span class="p">.</span><span class="nx">println</span><span class="p">(</span><span class="nx">clientResponse</span><span class="p">.</span><span class="nx">getEntity</span><span class="p">(</span><span class="nb">String</span><span class="p">.</span><span class="kr">class</span><span class="p">));</span>
     <span class="p">}</span>
-<span class="p">}</span>
+  <span class="p">}</span>
 </pre></div>
 </code></pre>
-<p>Have a nice day.</p>
+<p>Here we uses Java Rest client <a href="https://jersey.java.net/">jersey</a> to send a request
+to <code>plivo</code>.</p>
+<p>Hope it helps and Have a nice day.</p>
 </div>
-      <h4><a href="/blog/posts/Rate-this-app-in-Ionic-application.html#comments">View comments</a></h4>
-      <div class="post-head group"><a href="/blog/posts/Showing--No-internet-connection--message-in-Ionic-application.html">
-          <h1 class="post-title">Showing 'No internet connection' message in Ionic application</h1></a>
-        <h2 class="post-date">2014 &#183; 12 &#183; 1</h2>
+      <h4><a href="/blog/posts/Sending-SMS-using-Plivo-in-Google-App-Engine.html#comments">View comments</a></h4>
+      <div class="post-head group"><a href="/blog/posts/Sending-Mail-using-MailGun-in-Google-App-Engine.html">
+          <h1 class="post-title">Sending Mail using MailGun in Google App Engine</h1></a>
+        <h2 class="post-date">2014 &#183; 12 &#183; 23</h2>
       </div>
-      <div class="post-body"><p>There are often times where you need to display <code>No internet connection</code>
-message to your users inside your Ionic Framework Android and iOS application.</p>
-<a name="add-network-information-cordova-plugin" class="anchor" href="#add-network-information-cordova-plugin"><h3>Add Network information cordova plugin</h3>
-</a><p>Inorder to check internet connection, you need to have <code>network information</code>
-cordova plugin.</p>
-<pre><code><div class="highlight"><pre><span class="nx">cordova</span> <span class="nx">plugin</span> <span class="nx">add</span> <span class="nx">org</span><span class="p">.</span><span class="nx">apache</span><span class="p">.</span><span class="nx">cordova</span><span class="p">.</span><span class="nx">network</span><span class="o">-</span><span class="nx">information</span>
-</pre></div>
-</code></pre>
-<a name="check-for-internet-connection-inside-platform-ready" class="anchor" href="#check-for-internet-connection-inside-platform-ready"><h3>Check for internet connection inside Platform ready</h3>
-</a><p>Now, you have to check the internet connection inside platform ready as follows</p>
-<pre><code class="lang-javascript"><div class="highlight"><pre><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;myApp&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;ionic&#39;</span><span class="p">])</span>
+      <div class="post-body"><p>Google App engine provides an email service to send email.
+Unfortunately it is limited to 100 emails per day.
+So we uses <a href="http://www.mailgun.com/">mailgun</a> to send an email.</p>
+<p>Let me share the code that we used in our Java project to send an email using mailgun.</p>
+<pre><code><div class="highlight"><pre>  <span class="kr">public</span> <span class="kr">static</span> <span class="kr">final</span> <span class="nb">String</span> <span class="nx">MAILGUN_API_KEY</span> <span class="o">=</span> <span class="s2">&quot;YOUR_MAILGUN_API_KEY&quot;</span><span class="p">;</span>
+  <span class="kr">public</span> <span class="kr">static</span> <span class="kr">final</span> <span class="nb">String</span> <span class="nx">MAILGUN_HOST</span> <span class="o">=</span> <span class="s2">&quot;example.com&quot;</span><span class="p">;</span> <span class="c1">// your host name</span>
 
-<span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$ionicPlatform</span><span class="p">,</span> <span class="nx">$ionicPopup</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">$ionicPlatform</span><span class="p">.</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kr">public</span> <span class="kr">static</span> <span class="k">void</span> <span class="nx">sendMail</span><span class="p">(</span><span class="nb">String</span> <span class="nx">to</span><span class="p">,</span> <span class="nx">Set</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="nx">cc</span><span class="p">,</span> <span class="nb">String</span> <span class="nx">subject</span><span class="p">,</span>
+      <span class="nb">String</span> <span class="nx">html</span><span class="p">)</span> <span class="p">{</span>
 
-    <span class="c1">// Check for network connection</span>
-    <span class="k">if</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">Connection</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">if</span><span class="p">(</span><span class="nx">navigator</span><span class="p">.</span><span class="nx">connection</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span> <span class="nx">Connection</span><span class="p">.</span><span class="nx">NONE</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">$ionicPopup</span><span class="p">.</span><span class="nx">confirm</span><span class="p">({</span>
-          <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;No Internet Connection&#39;</span><span class="p">,</span>
-          <span class="nx">content</span><span class="o">:</span> <span class="s1">&#39;Sorry, no Internet connectivity detected. Please reconnect and try again.&#39;</span>
-        <span class="p">})</span>
-        <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-          <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">ionic</span><span class="p">.</span><span class="nx">Platform</span><span class="p">.</span><span class="nx">exitApp</span><span class="p">();</span>
-          <span class="p">}</span>
-        <span class="p">});</span>
-      <span class="p">}</span>
+    <span class="nx">Client</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">Client</span><span class="p">.</span><span class="nx">create</span><span class="p">();</span>
+    <span class="nx">client</span><span class="p">.</span><span class="nx">addFilter</span><span class="p">(</span><span class="k">new</span> <span class="nx">HTTPBasicAuthFilter</span><span class="p">(</span><span class="s2">&quot;api&quot;</span><span class="p">,</span> <span class="nx">MAILGUN_API_KEY</span><span class="p">));</span>
+
+    <span class="nx">WebResource</span> <span class="nx">webResource</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">resource</span><span class="p">(</span><span class="s2">&quot;https://api.mailgun.net/v2/&quot;</span>
+        <span class="o">+</span> <span class="nx">MAILGUN_HOST</span> <span class="o">+</span> <span class="s2">&quot;/messages&quot;</span><span class="p">);</span>
+
+    <span class="nx">MultivaluedMapImpl</span> <span class="nx">formData</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MultivaluedMapImpl</span><span class="p">();</span>
+    <span class="nx">formData</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s2">&quot;from&quot;</span><span class="p">,</span> <span class="s2">&quot;Example &lt;hello@example.com&gt;&quot;</span><span class="p">);</span> <span class="c1">// your host email address</span>
+    <span class="nx">formData</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s2">&quot;to&quot;</span><span class="p">,</span> <span class="nx">to</span><span class="p">);</span>
+    <span class="nx">formData</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s2">&quot;subject&quot;</span><span class="p">,</span> <span class="nx">subject</span><span class="p">);</span>
+    <span class="nx">formData</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s2">&quot;html&quot;</span><span class="p">,</span> <span class="nx">html</span><span class="p">);</span>
+
+    <span class="nx">ClientResponse</span> <span class="nx">clientResponse</span> <span class="o">=</span> <span class="nx">webResource</span><span class="p">.</span><span class="nx">type</span><span class="p">(</span>
+        <span class="nx">MediaType</span><span class="p">.</span><span class="nx">APPLICATION_FORM_URLENCODED</span><span class="p">).</span><span class="nx">post</span><span class="p">(</span>
+        <span class="nx">ClientResponse</span><span class="p">.</span><span class="kr">class</span><span class="p">,</span> <span class="nx">formData</span><span class="p">);</span>
+    <span class="kr">int</span> <span class="nx">status</span> <span class="o">=</span> <span class="nx">clientResponse</span><span class="p">.</span><span class="nx">getStatus</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">status</span> <span class="o">&gt;=</span> <span class="mi">400</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">System</span><span class="p">.</span><span class="nx">out</span><span class="p">.</span><span class="nx">println</span><span class="p">(</span><span class="nx">clientResponse</span><span class="p">.</span><span class="nx">getEntity</span><span class="p">(</span><span class="nb">String</span><span class="p">.</span><span class="kr">class</span><span class="p">));</span>
     <span class="p">}</span>
-
-  <span class="p">});</span>
-<span class="p">})</span>
+  <span class="p">}</span>
 </pre></div>
 </code></pre>
 <p>Have a nice day.</p>
 </div>
-      <h4><a href="/blog/posts/Showing--No-internet-connection--message-in-Ionic-application.html#comments">View comments</a></h4>
+      <h4><a href="/blog/posts/Sending-Mail-using-MailGun-in-Google-App-Engine.html#comments">View comments</a></h4>
       <ul class="pagination group">
         <li><a href="/" class="active-page">1</a>
         </li>

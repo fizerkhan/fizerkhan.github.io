@@ -19,202 +19,127 @@
       <div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div>
     </nav>
     <div class="content">
-      <div class="post-head group"><a href="/blog/posts/Clean-up-your-local-branches-after-merge-and-delete-in-GitHub.html">
-          <h1 class="post-title">Clean up your local branches after merge and delete in GitHub</h1></a>
-        <h2 class="post-date">2014 &#183; 11 &#183; 23</h2>
+      <div class="post-head group"><a href="/blog/posts/Social-Sharing-in-Ionic-application.html">
+          <h1 class="post-title">Social Sharing in Ionic application</h1></a>
+        <h2 class="post-date">2014 &#183; 12 &#183; 8</h2>
       </div>
-      <div class="post-body"><p>If you are a Github user, then you might familiar with Pull Requests. Github
-has an <a href="https://github.com/blog/1335-tidying-up-after-pull-requests">options</a>
-to delete a branch after merging of pull request.</p>
-<p>After a Pull Request has been merged, you’ll see a button to delete the lingering branch:</p>
-<p><img src="https://github-images.s3.amazonaws.com/skitch/Commits_next_forward_compatibility_by_rtomayko_%C2%B7_Pull_Request_%C2%B7_github_github-20121127-131321.png" style="max-width:100%;"></p>
-<p>Above action will delete the branch only in the remote. Then there is a question:
-how do i clean up my local branches? I found an answer as follows</p>
-<p>Lets say my test branch name <code>feature-collaboration</code></p>
-<a name="-.-list-branches-in-local-machine" class="anchor" href="#-.-list-branches-in-local-machine"><h3>1. List branches in local machine</h3>
-</a><p>The command <code>git branch -a</code> shows the test branch <code>feature-collaboration</code>
-is present on local and also present on remote</p>
-<p><img src="/images/git/git-branch-a-before.png" alt="git branch -a"></p>
-<a name="-.-prune-cleanup-the-local-references-to-remote-branch" class="anchor" href="#-.-prune-cleanup-the-local-references-to-remote-branch"><h3>2. Prune/Cleanup the local references to remote branch</h3>
-</a><p>The command <code>git remote prune origin --dry-run</code> lists branches that can be
-deleted/pruned on your local. An option <code>--dry-run</code> is needed.</p>
-<p><img src="/images/git/git-remote-prune-origin-dry-run.png" alt="git remote prune origin --dry-run"></p>
-<p>Now go ahead and actually prune/cleanup the local references by running the command
-<code>git remote prune origin</code>. Note that you don&#39;t need an option <code>--dry-run</code>.</p>
-<p><img src="/images/git/git-remote-prune-origin.png" alt="git remote prune origin"></p>
-<p>Again, run the command <code>git branch -a</code> will show the local status of branches.</p>
-<p><img src="/images/git/git-branch-a-after.png" alt="git branch -a"></p>
-<p>Now you can notice that <code>remotes/origin/feature-collaboration</code> has been removed,
-but not the local branch <code>feature-collaboration</code>.</p>
-<a name="-.-delete-local-branch" class="anchor" href="#-.-delete-local-branch"><h3>3. Delete local branch</h3>
-</a><p>If wanted, we can clean-up the local branch <code>feature-collaboration</code> as well</p>
-<p><img src="/images/git/git-branch-d-name.png" alt="git branch -d"></p>
-<p>That&#39;s it. Have a nice day.</p>
-</div>
-      <h4><a href="/blog/posts/Clean-up-your-local-branches-after-merge-and-delete-in-GitHub.html#comments">View comments</a></h4>
-      <div class="post-head group"><a href="/blog/posts/Restrict-user-access-to-Single-S3-Bucket-using-Amazon-IAM.html">
-          <h1 class="post-title">Restrict user access to Single S3 Bucket using Amazon IAM</h1></a>
-        <h2 class="post-date">2014 &#183; 11 &#183; 12</h2>
-      </div>
-      <div class="post-body"><p>S3 becomes de-facto standard for publishing files in the internet.
-When you work with the team, you might want to restrict an access of single S3 bucket to
-specific users. You can do it in <a href="https://console.aws.amazon.com/iam/home">IAM</a> as follows</p>
-<ol>
-<li>Create <a href="https://console.aws.amazon.com/iam/home#groups">Group</a></li>
-<li>Create <a href="https://console.aws.amazon.com/iam/home#users">User</a>. Then use <strong>Manage Password</strong> to add a password for your user.</li>
-<li>Add User to the created Group</li>
-<li>Create and Attach Permission Policy for the group.</li>
-</ol>
-<p>Step 1, 2 and 3 are straight forward. But creating and attaching permission
-policy needs some attention.</p>
-<p>In <a href="https://console.aws.amazon.com/iam/home#groups">Group</a> tab, go to created group.
-Then click the <strong>Permissions</strong> tab and Click the <strong>Attach Policy</strong> button.
-You’ll be taken to <strong>Set Permissions</strong> page where you can Manage User Permissions.
-Here you can select a <strong>Select Policy Template</strong> option, then find the <strong>Amazon S3 Full Access</strong>
-and click <strong>Select</strong> button.</p>
-<p>You will be prompted with <strong>Policy Name</strong> and <strong>Policy Document</strong>. You can
-change the policy name as you wish. In the Policy Document section, paste the following content</p>
-<pre><code class="lang-javascript"><div class="highlight"><pre><span class="p">{</span>
-    <span class="s2">&quot;Statement&quot;</span><span class="o">:</span> <span class="p">[</span>
-        <span class="p">{</span>
-            <span class="s2">&quot;Effect&quot;</span><span class="o">:</span> <span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;Action&quot;</span><span class="o">:</span> <span class="s2">&quot;s3:ListAllMyBuckets&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;Resource&quot;</span><span class="o">:</span> <span class="s2">&quot;arn:aws:s3:::*&quot;</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="s2">&quot;Effect&quot;</span><span class="o">:</span> <span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;Action&quot;</span><span class="o">:</span> <span class="s2">&quot;s3:*&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;Resource&quot;</span><span class="o">:</span> <span class="p">[</span>
-                <span class="s2">&quot;arn:aws:s3:::mys3bucket&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;arn:aws:s3:::mys3bucket/*&quot;</span>
-            <span class="p">]</span>
-        <span class="p">}</span>
-    <span class="p">]</span>
+      <div class="post-body"><p>You may need a social sharing feature inside your Ionic Framework Android and iOS application.</p>
+<p>Using the <a href="https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin">Social Sharing plugin</a> for Apache Cordova, we are able to do the social sharing.</p>
+<a name="add-ngcordova" class="anchor" href="#add-ngcordova"><h3>Add ngCordova</h3>
+</a><p>First you have to add <a href="http://ngcordova.com/">ngCordova</a> to your Ionic application.
+If you already have this in your app, you can skip this step.</p>
+<p>Install ngCordova</p>
+<pre><code><div class="highlight"><pre><span class="nx">bower</span> <span class="nx">install</span> <span class="nx">ngCordova</span> <span class="o">--</span><span class="nx">save</span>
+</pre></div>
+</code></pre>
+<p>Add <code>ng-cordova.js</code> before cordova script inside <code>index.html</code></p>
+<pre><code class="lang-html"><div class="highlight"><pre>//index.html
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;lib/ngCordova/dist/ng-cordova.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;cordova.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+</code></pre>
+<p>Add <code>ngCordova</code> in your app module dependencies</p>
+<pre><code><div class="highlight"><pre><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;myApp&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;ionic&#39;</span><span class="p">,</span> <span class="s1">&#39;ngCordova&#39;</span><span class="p">])</span>
+</pre></div>
+</code></pre>
+<a name="add-social-sharing-cordova-plugin" class="anchor" href="#add-social-sharing-cordova-plugin"><h3>Add Social Sharing cordova plugin</h3>
+</a><p>In order to implement social sharing, add cordova social sharing plugin.</p>
+<pre><code><div class="highlight"><pre><span class="nx">cordova</span> <span class="nx">plugin</span> <span class="nx">add</span> <span class="nx">https</span><span class="o">:</span><span class="c1">//github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git</span>
+</pre></div>
+</code></pre>
+<a name="implement-social-sharing" class="anchor" href="#implement-social-sharing"><h3>Implement Social sharing</h3>
+</a><p>Now, go ahead and start creating method to share in your controllers</p>
+<pre><code class="lang-javascript"><div class="highlight"><pre><span class="c1">// share anywhere</span>
+<span class="nx">$scope</span><span class="p">.</span><span class="nx">share</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">$cordovaSocialSharing</span><span class="p">.</span><span class="nx">share</span><span class="p">(</span><span class="s1">&#39;This is my message&#39;</span><span class="p">,</span> <span class="s1">&#39;Subject string&#39;</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="s1">&#39;http://www.mylink.com&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Share via email. Can be used for feedback</span>
+<span class="nx">$scope</span><span class="p">.</span><span class="nx">sendFeedback</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">$cordovaSocialSharing</span>
+            <span class="p">.</span><span class="nx">shareViaEmail</span><span class="p">(</span><span class="s1">&#39;Some message&#39;</span><span class="p">,</span> <span class="s1">&#39;Some Subject&#39;</span><span class="p">,</span> <span class="s1">&#39;to_address@gmail.com&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Share via SMS. Access multiple numbers in a string like: &#39;0612345678,0687654321&#39;</span>
+<span class="nx">$scope</span><span class="p">.</span><span class="nx">sendSMS</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">number</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">$cordovaSocialSharing</span><span class="p">.</span><span class="nx">shareViaSMS</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">number</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </code></pre>
-<p>You are done. Have a nice day.</p>
+<p>For more functionalities, refer the <a href="https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin">documentation</a>.</p>
+<p>Have a nice day.</p>
 </div>
-      <h4><a href="/blog/posts/Restrict-user-access-to-Single-S3-Bucket-using-Amazon-IAM.html#comments">View comments</a></h4>
-      <div class="post-head group"><a href="/blog/posts/Startup-Landing-Pages-with-Firebase.html">
-          <h1 class="post-title">Startup Landing Pages with Firebase</h1></a>
-        <h2 class="post-date">2014 &#183; 10 &#183; 4</h2>
+      <h4><a href="/blog/posts/Social-Sharing-in-Ionic-application.html#comments">View comments</a></h4>
+      <div class="post-head group"><a href="/blog/posts/Rate-this-app-in-Ionic-application.html">
+          <h1 class="post-title">Rate this app in Ionic application</h1></a>
+        <h2 class="post-date">2014 &#183; 12 &#183; 4</h2>
       </div>
-      <div class="post-body"><p>Now-a-days <em>Landing Page</em> has become common and popular among startups and publishers. Every landing page has one important call-to-action, i.e. to sign up early adopters  for their beta version.</p>
-<p>To get up &amp; running as soon as possible, the simplest and fastest way to build a landing page is basically having it as a static site without any back end. The downside of this approach is, we need to figure out a way to store the emails that are signed up. As you would expect, there are quite a few really good services you can use right of the bat.</p>
-<ul>
-<li><a href="http://launchrock.co/">Launch Rock</a></li>
-<li><a href="http://unbounce.com">Unbounce</a></li>
-<li><a href="http://www.kickofflabs.com/">Kickofflabs</a></li>
-<li><a href="http://my.betali.st/">My Beta List</a></li>
-<li><a href="http://launcheffectapp.com/">Launch Effect (wordpress)</a></li>
-<li><a href="http://www.prefinery.com/">Prefinery</a></li>
-<li><a href="http://launch.deskgator.com/">LaunchGator</a></li>
-<li><a href="http://quickmvp.com">QuickMVP</a></li>
-<li><a href="http://mailchimp.com/">mailchimp</a></li>
-</ul>
-<p>Some of the above services even provides HTML templates, A/B testing and much more. For a non-developer these sites would be the best fit.</p>
-<p>If you know a bit of web development and want to build you own custom landing page, then I would strongly recommend to use <a href="https://www.firebase.com/">Firebase</a> to not only collect emails but even feedbacks. Firebase provides powerful APIs to store and sync data in realtime.</p>
-<p>Going forward I will show you the technical part of how you can build the pages in Firebase.</p>
-<a name="firebase-email-storage" class="anchor" href="#firebase-email-storage"><h3>Firebase Email Storage</h3>
-</a><p>Once you have created a <a href="https://www.firebase.com/signup/">firebase account</a> and have logged in, create a firebase application.</p>
-<p>You need to include the <strong>firebase javascript</strong> in your landing page. This provides the functionality to save your data (e.g. email) into your <strong>firebase application</strong>.</p>
-<p><code>&lt;script src=&quot;https://cdn.firebase.com/js/client/1.0.18/firebase.js&quot;&gt;&lt;/script&gt;</code></p>
-<a name="email-signup-form" class="anchor" href="#email-signup-form"><h5>Email Signup Form</h5>
-</a><p>Following is a basic HTML template for email sign up form.</p>
-<pre><code class="lang-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;signup&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;h2</span> <span class="na">class=</span><span class="s">&quot;signup-title&quot;</span><span class="nt">&gt;</span>Sign up for beta<span class="nt">&lt;/h2&gt;</span>
-    <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;signup-success&quot;</span> <span class="na">class=</span><span class="s">&quot;text-success&quot;</span><span class="nt">&gt;&lt;/p&gt;</span>
-    <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;signup-error&quot;</span> <span class="na">class=</span><span class="s">&quot;text-danger&quot;</span><span class="nt">&gt;&lt;/p&gt;</span>
-    <span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">&quot;signup-form form-inline&quot;</span> <span class="na">id=</span><span class="s">&quot;signup-form&quot;</span> <span class="na">role=</span><span class="s">&quot;form&quot;</span> <span class="na">onsubmit=</span><span class="s">&quot;return signup(this)&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">&quot;form-control&quot;</span> <span class="na">name=</span><span class="s">&quot;email&quot;</span> <span class="na">type=</span><span class="s">&quot;email&quot;</span> <span class="na">placeholder=</span><span class="s">&quot;Your email. eg., joe@acme.com&quot;</span> <span class="na">required</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">&quot;btn btn-success&quot;</span> <span class="na">id=</span><span class="s">&quot;signup-button&quot;</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="nt">&gt;</span>Join now<span class="nt">&lt;/button&gt;</span>
-    <span class="nt">&lt;/form&gt;</span>
-<span class="nt">&lt;/div&gt;</span>
+      <div class="post-body"><p>You may need a &quot;Rate this app&quot; link inside your Ionic Framework Android
+and iOS application. When i implemented this features by adding the link to
+Google Play and App Store, the link does not work. Then i found that
+it needs <code>inappbrowser</code> cordova plugin.</p>
+<a name="add-inapp-browser-cordova-plugin" class="anchor" href="#add-inapp-browser-cordova-plugin"><h3>Add InApp Browser cordova plugin</h3>
+</a><pre><code><div class="highlight"><pre><span class="nx">cordova</span> <span class="nx">plugin</span> <span class="nx">add</span> <span class="nx">org</span><span class="p">.</span><span class="nx">apache</span><span class="p">.</span><span class="nx">cordova</span><span class="p">.</span><span class="nx">inappbrowser</span>
 </pre></div>
 </code></pre>
-<a name="firebase-script-to-save-email-addresses" class="anchor" href="#firebase-script-to-save-email-addresses"><h5>Firebase script to save email addresses</h5>
-</a><p>On the submission of the button, the script script is invoked to store the email address into your <strong>firebase application</strong>.</p>
-<pre><code class="lang-javascript"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
-    <span class="kd">var</span> <span class="nx">signupForm</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;signup-form&#39;</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">signupSuccess</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;signup-success&#39;</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">signupError</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;signup-error&#39;</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">signupBtn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;signup-button&#39;</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">onSignupComplete</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">signupBtn</span><span class="p">.</span><span class="nx">disabled</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-      <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">signupError</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">&#39;Sorry. Could not signup.&#39;</span><span class="p">;</span>
-      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="nx">signupSuccess</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">&#39;Thanks for signing up!&#39;</span><span class="p">;</span>
-        <span class="c1">// hide the form</span>
-        <span class="nx">signupForm</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span><span class="p">;</span>
-      <span class="p">}</span>
-    <span class="p">};</span>
-    <span class="kd">function</span> <span class="nx">signup</span><span class="p">(</span><span class="nx">formObj</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// Store emails to firebase</span>
-        <span class="kd">var</span> <span class="nx">myFirebaseRef</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Firebase</span><span class="p">(</span><span class="s2">&quot;https://yourappname.firebaseio.com/signups&quot;</span><span class="p">);</span>
-        <span class="nx">myFirebaseRef</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
-          <span class="nx">email</span><span class="o">:</span> <span class="nx">formObj</span><span class="p">.</span><span class="nx">email</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
-        <span class="p">},</span> <span class="nx">onSignupComplete</span><span class="p">);</span>
-        <span class="nx">signupBtn</span><span class="p">.</span><span class="nx">disabled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<a name="implement--rate-this-app-" class="anchor" href="#implement--rate-this-app-"><h3>Implement &quot;Rate this app&quot;</h3>
+</a><p>Now, go ahead and start creating method to open a link based on the device.</p>
+<pre><code class="lang-html"><div class="highlight"><pre><span class="nt">&lt;button</span> <span class="na">ng-click=</span><span class="s">&quot;rateUs()&quot;</span><span class="nt">&gt;</span>Rate us<span class="nt">&lt;/button&gt;</span>
+</pre></div>
+</code></pre>
+<pre><code class="lang-javascript"><div class="highlight"><pre><span class="nx">$scope</span><span class="p">.</span><span class="nx">rateUs</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">$ionicPlatform</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="s1">&#39;ios&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nb">window</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">&#39;itms-apps://itunes.apple.com/us/app/domainsicle-domain-name-search/id511364723?ls=1&amp;mt=8&#39;</span><span class="p">);</span> <span class="c1">// or itms://</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">$ionicPlatform</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="s1">&#39;android&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nb">window</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">&#39;market://details?id=&lt;package_name&gt;&#39;</span><span class="p">);</span>
     <span class="p">}</span>
-<span class="o">&lt;</span><span class="err">/script&gt;</span>
+<span class="p">}</span>
 </pre></div>
 </code></pre>
-<a name="contact-messages" class="anchor" href="#contact-messages"><h3>Contact messages</h3>
-</a><p>You can also store the feedback, suggestions and questions into your <strong>firebase application</strong>.</p>
-<p>Following is the basic HTML template for a contact form.</p>
-<pre><code class="lang-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;contact&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;h2</span> <span class="na">class=</span><span class="s">&quot;contact-title&quot;</span><span class="nt">&gt;</span>Send us a message<span class="nt">&lt;/h2&gt;</span>
-    <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;contact-success&quot;</span> <span class="na">class=</span><span class="s">&quot;text-success lead&quot;</span><span class="nt">&gt;&lt;/p&gt;</span>
-    <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;contact-error&quot;</span> <span class="na">class=</span><span class="s">&quot;text-danger lead&quot;</span><span class="nt">&gt;&lt;/p&gt;</span>
-    <span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">&quot;contact-form&quot;</span> <span class="na">id=</span><span class="s">&quot;contact-form&quot;</span> <span class="na">role=</span><span class="s">&quot;form&quot;</span> <span class="na">onsubmit=</span><span class="s">&quot;return sendMessage(this)&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">&quot;form-control&quot;</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">placeholder=</span><span class="s">&quot;Your name. eg., Joe&quot;</span> <span class="na">required</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">&quot;form-control&quot;</span> <span class="na">name=</span><span class="s">&quot;email&quot;</span> <span class="na">type=</span><span class="s">&quot;email&quot;</span> <span class="na">placeholder=</span><span class="s">&quot;Your email. eg., joe@acme.com&quot;</span> <span class="na">required</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;textarea</span> <span class="na">class=</span><span class="s">&quot;form-control&quot;</span> <span class="na">name=</span><span class="s">&quot;message&quot;</span> <span class="na">placeholder=</span><span class="s">&quot;Your message for us&quot;</span> <span class="na">rows=</span><span class="s">&quot;5&quot;</span> <span class="na">required</span><span class="nt">&gt;&lt;/textarea&gt;</span>
-        <span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
-        <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">&quot;btn btn-success pull-right&quot;</span> <span class="na">id=</span><span class="s">&quot;send-button&quot;</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="nt">&gt;</span>Send Message<span class="nt">&lt;/button&gt;</span>
-    <span class="nt">&lt;/form&gt;</span>
-<span class="nt">&lt;/div&gt;</span>
-</pre></div>
-</code></pre>
-<p>On submission, the below script is invoked to save your email address along with the message into your <strong>firebase application</strong>.</p>
-<pre><code class="lang-javascript"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
-    <span class="c1">// Send message</span>
-    <span class="kd">var</span> <span class="nx">contactFrom</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;contact-form&#39;</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">contactSuccess</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;contact-success&#39;</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">contactError</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;contact-error&#39;</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">sendBtn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;send-button&#39;</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">onMessageComplete</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">sendBtn</span><span class="p">.</span><span class="nx">disabled</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-      <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">contactError</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">&#39;Sorry. Could not send message.&#39;</span><span class="p">;</span>
-      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="nx">contactSuccess</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s2">&quot;Message has been sent.&quot;</span><span class="p">;</span>
-        <span class="c1">// hide the form</span>
-        <span class="nx">contactFrom</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span><span class="p">;</span>
-      <span class="p">}</span>
-    <span class="p">};</span>
-    <span class="kd">function</span> <span class="nx">sendMessage</span><span class="p">(</span><span class="nx">formObj</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// Store emails to firebase</span>
-        <span class="kd">var</span> <span class="nx">myFirebaseRef</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Firebase</span><span class="p">(</span><span class="s2">&quot;https://yourappname.firebaseio.com/messages&quot;</span><span class="p">);</span>
-        <span class="nx">myFirebaseRef</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
-          <span class="nx">name</span><span class="o">:</span> <span class="nx">formObj</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
-          <span class="nx">email</span><span class="o">:</span> <span class="nx">formObj</span><span class="p">.</span><span class="nx">email</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
-          <span class="nx">message</span><span class="o">:</span> <span class="nx">formObj</span><span class="p">.</span><span class="nx">message</span><span class="p">.</span><span class="nx">value</span>
-        <span class="p">},</span> <span class="nx">onMessageComplete</span><span class="p">);</span>
-        <span class="nx">sendBtn</span><span class="p">.</span><span class="nx">disabled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="o">&lt;</span><span class="err">/script&gt;</span>
-</pre></div>
-</code></pre>
-<p>It is one of the simplest way to handle forms in your landing page. Firebase provides 100 MB of data storage in their basic free plan, which they have aptly named it as <strong>Hacker Plan</strong>. This should be sufficient for startups to store email addresses and messages.</p>
-<p>Caution: If someone gets your firebase URL, they can certainly spam you.  Anyway, that is not something you would be worrying about in evaluating your startup idea.</p>
-<p>Please share your thoughts and suggestions. Have a nice day.</p>
+<p>Have a nice day.</p>
 </div>
-      <h4><a href="/blog/posts/Startup-Landing-Pages-with-Firebase.html#comments">View comments</a></h4>
+      <h4><a href="/blog/posts/Rate-this-app-in-Ionic-application.html#comments">View comments</a></h4>
+      <div class="post-head group"><a href="/blog/posts/Showing--No-internet-connection--message-in-Ionic-application.html">
+          <h1 class="post-title">Showing 'No internet connection' message in Ionic application</h1></a>
+        <h2 class="post-date">2014 &#183; 12 &#183; 1</h2>
+      </div>
+      <div class="post-body"><p>There are often times where you need to display <code>No internet connection</code>
+message to your users inside your Ionic Framework Android and iOS application.</p>
+<a name="add-network-information-cordova-plugin" class="anchor" href="#add-network-information-cordova-plugin"><h3>Add Network information cordova plugin</h3>
+</a><p>Inorder to check internet connection, you need to have <code>network information</code>
+cordova plugin.</p>
+<pre><code><div class="highlight"><pre><span class="nx">cordova</span> <span class="nx">plugin</span> <span class="nx">add</span> <span class="nx">org</span><span class="p">.</span><span class="nx">apache</span><span class="p">.</span><span class="nx">cordova</span><span class="p">.</span><span class="nx">network</span><span class="o">-</span><span class="nx">information</span>
+</pre></div>
+</code></pre>
+<a name="check-for-internet-connection-inside-platform-ready" class="anchor" href="#check-for-internet-connection-inside-platform-ready"><h3>Check for internet connection inside Platform ready</h3>
+</a><p>Now, you have to check the internet connection inside platform ready as follows</p>
+<pre><code class="lang-javascript"><div class="highlight"><pre><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;myApp&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;ionic&#39;</span><span class="p">])</span>
+
+<span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$ionicPlatform</span><span class="p">,</span> <span class="nx">$ionicPopup</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">$ionicPlatform</span><span class="p">.</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="c1">// Check for network connection</span>
+    <span class="k">if</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">Connection</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="nx">navigator</span><span class="p">.</span><span class="nx">connection</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span> <span class="nx">Connection</span><span class="p">.</span><span class="nx">NONE</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">$ionicPopup</span><span class="p">.</span><span class="nx">confirm</span><span class="p">({</span>
+          <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;No Internet Connection&#39;</span><span class="p">,</span>
+          <span class="nx">content</span><span class="o">:</span> <span class="s1">&#39;Sorry, no Internet connectivity detected. Please reconnect and try again.&#39;</span>
+        <span class="p">})</span>
+        <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">ionic</span><span class="p">.</span><span class="nx">Platform</span><span class="p">.</span><span class="nx">exitApp</span><span class="p">();</span>
+          <span class="p">}</span>
+        <span class="p">});</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+  <span class="p">});</span>
+<span class="p">})</span>
+</pre></div>
+</code></pre>
+<p>Have a nice day.</p>
+</div>
+      <h4><a href="/blog/posts/Showing--No-internet-connection--message-in-Ionic-application.html#comments">View comments</a></h4>
       <ul class="pagination group">
         <li><a href="/">1</a>
         </li>
