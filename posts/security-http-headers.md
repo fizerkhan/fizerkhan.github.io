@@ -1,6 +1,6 @@
 ----
 title: Security HTTP headers
-date:   2014-12-30
+date:   2014-12-29
 ----
 
 Security becomes an inevitable feature for every web and mobile application.

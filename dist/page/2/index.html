@@ -19,6 +19,47 @@
       <div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div>
     </nav>
     <div class="content">
+      <div class="post-head group"><a href="/blog/posts/Showing--No-internet-connection--message-in-Ionic-application.html">
+          <h1 class="post-title">Showing 'No internet connection' message in Ionic application</h1></a>
+        <h2 class="post-date">2014 &#183; 12 &#183; 1</h2>
+      </div>
+      <div class="post-body"><p>There are often times where you need to display <code>No internet connection</code>
+message to your users inside your Ionic Framework Android and iOS application.</p>
+<a name="add-network-information-cordova-plugin" class="anchor" href="#add-network-information-cordova-plugin"><h3>Add Network information cordova plugin</h3>
+</a><p>Inorder to check internet connection, you need to have <code>network information</code>
+cordova plugin.</p>
+<pre><code><div class="highlight"><pre><span class="nx">cordova</span> <span class="nx">plugin</span> <span class="nx">add</span> <span class="nx">org</span><span class="p">.</span><span class="nx">apache</span><span class="p">.</span><span class="nx">cordova</span><span class="p">.</span><span class="nx">network</span><span class="o">-</span><span class="nx">information</span>
+</pre></div>
+</code></pre>
+<a name="check-for-internet-connection-inside-platform-ready" class="anchor" href="#check-for-internet-connection-inside-platform-ready"><h3>Check for internet connection inside Platform ready</h3>
+</a><p>Now, you have to check the internet connection inside platform ready as follows</p>
+<pre><code class="lang-javascript"><div class="highlight"><pre><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;myApp&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;ionic&#39;</span><span class="p">])</span>
+
+<span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$ionicPlatform</span><span class="p">,</span> <span class="nx">$ionicPopup</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">$ionicPlatform</span><span class="p">.</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="c1">// Check for network connection</span>
+    <span class="k">if</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">Connection</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="nx">navigator</span><span class="p">.</span><span class="nx">connection</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span> <span class="nx">Connection</span><span class="p">.</span><span class="nx">NONE</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">$ionicPopup</span><span class="p">.</span><span class="nx">confirm</span><span class="p">({</span>
+          <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;No Internet Connection&#39;</span><span class="p">,</span>
+          <span class="nx">content</span><span class="o">:</span> <span class="s1">&#39;Sorry, no Internet connectivity detected. Please reconnect and try again.&#39;</span>
+        <span class="p">})</span>
+        <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">ionic</span><span class="p">.</span><span class="nx">Platform</span><span class="p">.</span><span class="nx">exitApp</span><span class="p">();</span>
+          <span class="p">}</span>
+        <span class="p">});</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+  <span class="p">});</span>
+<span class="p">})</span>
+</pre></div>
+</code></pre>
+<p>Have a nice day.</p>
+</div>
+      <h4><a href="/blog/posts/Showing--No-internet-connection--message-in-Ionic-application.html#comments">View comments</a></h4>
       <div class="post-head group"><a href="/blog/posts/Clean-up-your-local-branches-after-merge-and-delete-in-GitHub.html">
           <h1 class="post-title">Clean up your local branches after merge and delete in GitHub</h1></a>
         <h2 class="post-date">2014 &#183; 11 &#183; 23</h2>
@@ -96,125 +137,6 @@ change the policy name as you wish. In the Policy Document section, paste the fo
 <p>You are done. Have a nice day.</p>
 </div>
       <h4><a href="/blog/posts/Restrict-user-access-to-Single-S3-Bucket-using-Amazon-IAM.html#comments">View comments</a></h4>
-      <div class="post-head group"><a href="/blog/posts/Startup-Landing-Pages-with-Firebase.html">
-          <h1 class="post-title">Startup Landing Pages with Firebase</h1></a>
-        <h2 class="post-date">2014 &#183; 10 &#183; 4</h2>
-      </div>
-      <div class="post-body"><p>Now-a-days <em>Landing Page</em> has become common and popular among startups and publishers. Every landing page has one important call-to-action, i.e. to sign up early adopters  for their beta version.</p>
-<p>To get up &amp; running as soon as possible, the simplest and fastest way to build a landing page is basically having it as a static site without any back end. The downside of this approach is, we need to figure out a way to store the emails that are signed up. As you would expect, there are quite a few really good services you can use right of the bat.</p>
-<ul>
-<li><a href="http://launchrock.co/">Launch Rock</a></li>
-<li><a href="http://unbounce.com">Unbounce</a></li>
-<li><a href="http://www.kickofflabs.com/">Kickofflabs</a></li>
-<li><a href="http://my.betali.st/">My Beta List</a></li>
-<li><a href="http://launcheffectapp.com/">Launch Effect (wordpress)</a></li>
-<li><a href="http://www.prefinery.com/">Prefinery</a></li>
-<li><a href="http://launch.deskgator.com/">LaunchGator</a></li>
-<li><a href="http://quickmvp.com">QuickMVP</a></li>
-<li><a href="http://mailchimp.com/">mailchimp</a></li>
-</ul>
-<p>Some of the above services even provides HTML templates, A/B testing and much more. For a non-developer these sites would be the best fit.</p>
-<p>If you know a bit of web development and want to build you own custom landing page, then I would strongly recommend to use <a href="https://www.firebase.com/">Firebase</a> to not only collect emails but even feedbacks. Firebase provides powerful APIs to store and sync data in realtime.</p>
-<p>Going forward I will show you the technical part of how you can build the pages in Firebase.</p>
-<a name="firebase-email-storage" class="anchor" href="#firebase-email-storage"><h3>Firebase Email Storage</h3>
-</a><p>Once you have created a <a href="https://www.firebase.com/signup/">firebase account</a> and have logged in, create a firebase application.</p>
-<p>You need to include the <strong>firebase javascript</strong> in your landing page. This provides the functionality to save your data (e.g. email) into your <strong>firebase application</strong>.</p>
-<p><code>&lt;script src=&quot;https://cdn.firebase.com/js/client/1.0.18/firebase.js&quot;&gt;&lt;/script&gt;</code></p>
-<a name="email-signup-form" class="anchor" href="#email-signup-form"><h5>Email Signup Form</h5>
-</a><p>Following is a basic HTML template for email sign up form.</p>
-<pre><code class="lang-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;signup&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;h2</span> <span class="na">class=</span><span class="s">&quot;signup-title&quot;</span><span class="nt">&gt;</span>Sign up for beta<span class="nt">&lt;/h2&gt;</span>
-    <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;signup-success&quot;</span> <span class="na">class=</span><span class="s">&quot;text-success&quot;</span><span class="nt">&gt;&lt;/p&gt;</span>
-    <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;signup-error&quot;</span> <span class="na">class=</span><span class="s">&quot;text-danger&quot;</span><span class="nt">&gt;&lt;/p&gt;</span>
-    <span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">&quot;signup-form form-inline&quot;</span> <span class="na">id=</span><span class="s">&quot;signup-form&quot;</span> <span class="na">role=</span><span class="s">&quot;form&quot;</span> <span class="na">onsubmit=</span><span class="s">&quot;return signup(this)&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">&quot;form-control&quot;</span> <span class="na">name=</span><span class="s">&quot;email&quot;</span> <span class="na">type=</span><span class="s">&quot;email&quot;</span> <span class="na">placeholder=</span><span class="s">&quot;Your email. eg., joe@acme.com&quot;</span> <span class="na">required</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">&quot;btn btn-success&quot;</span> <span class="na">id=</span><span class="s">&quot;signup-button&quot;</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="nt">&gt;</span>Join now<span class="nt">&lt;/button&gt;</span>
-    <span class="nt">&lt;/form&gt;</span>
-<span class="nt">&lt;/div&gt;</span>
-</pre></div>
-</code></pre>
-<a name="firebase-script-to-save-email-addresses" class="anchor" href="#firebase-script-to-save-email-addresses"><h5>Firebase script to save email addresses</h5>
-</a><p>On the submission of the button, the script script is invoked to store the email address into your <strong>firebase application</strong>.</p>
-<pre><code class="lang-javascript"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
-    <span class="kd">var</span> <span class="nx">signupForm</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;signup-form&#39;</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">signupSuccess</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;signup-success&#39;</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">signupError</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;signup-error&#39;</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">signupBtn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;signup-button&#39;</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">onSignupComplete</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">signupBtn</span><span class="p">.</span><span class="nx">disabled</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-      <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">signupError</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">&#39;Sorry. Could not signup.&#39;</span><span class="p">;</span>
-      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="nx">signupSuccess</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">&#39;Thanks for signing up!&#39;</span><span class="p">;</span>
-        <span class="c1">// hide the form</span>
-        <span class="nx">signupForm</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span><span class="p">;</span>
-      <span class="p">}</span>
-    <span class="p">};</span>
-    <span class="kd">function</span> <span class="nx">signup</span><span class="p">(</span><span class="nx">formObj</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// Store emails to firebase</span>
-        <span class="kd">var</span> <span class="nx">myFirebaseRef</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Firebase</span><span class="p">(</span><span class="s2">&quot;https://yourappname.firebaseio.com/signups&quot;</span><span class="p">);</span>
-        <span class="nx">myFirebaseRef</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
-          <span class="nx">email</span><span class="o">:</span> <span class="nx">formObj</span><span class="p">.</span><span class="nx">email</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
-        <span class="p">},</span> <span class="nx">onSignupComplete</span><span class="p">);</span>
-        <span class="nx">signupBtn</span><span class="p">.</span><span class="nx">disabled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="o">&lt;</span><span class="err">/script&gt;</span>
-</pre></div>
-</code></pre>
-<a name="contact-messages" class="anchor" href="#contact-messages"><h3>Contact messages</h3>
-</a><p>You can also store the feedback, suggestions and questions into your <strong>firebase application</strong>.</p>
-<p>Following is the basic HTML template for a contact form.</p>
-<pre><code class="lang-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;contact&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;h2</span> <span class="na">class=</span><span class="s">&quot;contact-title&quot;</span><span class="nt">&gt;</span>Send us a message<span class="nt">&lt;/h2&gt;</span>
-    <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;contact-success&quot;</span> <span class="na">class=</span><span class="s">&quot;text-success lead&quot;</span><span class="nt">&gt;&lt;/p&gt;</span>
-    <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;contact-error&quot;</span> <span class="na">class=</span><span class="s">&quot;text-danger lead&quot;</span><span class="nt">&gt;&lt;/p&gt;</span>
-    <span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">&quot;contact-form&quot;</span> <span class="na">id=</span><span class="s">&quot;contact-form&quot;</span> <span class="na">role=</span><span class="s">&quot;form&quot;</span> <span class="na">onsubmit=</span><span class="s">&quot;return sendMessage(this)&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">&quot;form-control&quot;</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">placeholder=</span><span class="s">&quot;Your name. eg., Joe&quot;</span> <span class="na">required</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">&quot;form-control&quot;</span> <span class="na">name=</span><span class="s">&quot;email&quot;</span> <span class="na">type=</span><span class="s">&quot;email&quot;</span> <span class="na">placeholder=</span><span class="s">&quot;Your email. eg., joe@acme.com&quot;</span> <span class="na">required</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;textarea</span> <span class="na">class=</span><span class="s">&quot;form-control&quot;</span> <span class="na">name=</span><span class="s">&quot;message&quot;</span> <span class="na">placeholder=</span><span class="s">&quot;Your message for us&quot;</span> <span class="na">rows=</span><span class="s">&quot;5&quot;</span> <span class="na">required</span><span class="nt">&gt;&lt;/textarea&gt;</span>
-        <span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
-        <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">&quot;btn btn-success pull-right&quot;</span> <span class="na">id=</span><span class="s">&quot;send-button&quot;</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="nt">&gt;</span>Send Message<span class="nt">&lt;/button&gt;</span>
-    <span class="nt">&lt;/form&gt;</span>
-<span class="nt">&lt;/div&gt;</span>
-</pre></div>
-</code></pre>
-<p>On submission, the below script is invoked to save your email address along with the message into your <strong>firebase application</strong>.</p>
-<pre><code class="lang-javascript"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
-    <span class="c1">// Send message</span>
-    <span class="kd">var</span> <span class="nx">contactFrom</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;contact-form&#39;</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">contactSuccess</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;contact-success&#39;</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">contactError</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;contact-error&#39;</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">sendBtn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;send-button&#39;</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">onMessageComplete</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">sendBtn</span><span class="p">.</span><span class="nx">disabled</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-      <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">contactError</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">&#39;Sorry. Could not send message.&#39;</span><span class="p">;</span>
-      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="nx">contactSuccess</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s2">&quot;Message has been sent.&quot;</span><span class="p">;</span>
-        <span class="c1">// hide the form</span>
-        <span class="nx">contactFrom</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span><span class="p">;</span>
-      <span class="p">}</span>
-    <span class="p">};</span>
-    <span class="kd">function</span> <span class="nx">sendMessage</span><span class="p">(</span><span class="nx">formObj</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// Store emails to firebase</span>
-        <span class="kd">var</span> <span class="nx">myFirebaseRef</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Firebase</span><span class="p">(</span><span class="s2">&quot;https://yourappname.firebaseio.com/messages&quot;</span><span class="p">);</span>
-        <span class="nx">myFirebaseRef</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
-          <span class="nx">name</span><span class="o">:</span> <span class="nx">formObj</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
-          <span class="nx">email</span><span class="o">:</span> <span class="nx">formObj</span><span class="p">.</span><span class="nx">email</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
-          <span class="nx">message</span><span class="o">:</span> <span class="nx">formObj</span><span class="p">.</span><span class="nx">message</span><span class="p">.</span><span class="nx">value</span>
-        <span class="p">},</span> <span class="nx">onMessageComplete</span><span class="p">);</span>
-        <span class="nx">sendBtn</span><span class="p">.</span><span class="nx">disabled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="o">&lt;</span><span class="err">/script&gt;</span>
-</pre></div>
-</code></pre>
-<p>It is one of the simplest way to handle forms in your landing page. Firebase provides 100 MB of data storage in their basic free plan, which they have aptly named it as <strong>Hacker Plan</strong>. This should be sufficient for startups to store email addresses and messages.</p>
-<p>Caution: If someone gets your firebase URL, they can certainly spam you.  Anyway, that is not something you would be worrying about in evaluating your startup idea.</p>
-<p>Please share your thoughts and suggestions. Have a nice day.</p>
-</div>
-      <h4><a href="/blog/posts/Startup-Landing-Pages-with-Firebase.html#comments">View comments</a></h4>
       <ul class="pagination group">
         <li><a href="/">1</a>
         </li>

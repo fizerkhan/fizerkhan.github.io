@@ -19,6 +19,98 @@
       <div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div>
     </nav>
     <div class="content">
+      <div class="post-head group"><a href="/blog/posts/Download-a-file-without-server-request.html">
+          <h1 class="post-title">Download a file without server request</h1></a>
+        <h2 class="post-date">2014 &#183; 8 &#183; 1</h2>
+      </div>
+      <div class="post-body"><p>We have come across <code>Download file</code> link(button) in lot of sites. Generally, When you click <code>download</code> link or button, it sends <code>GET</code> request to server and server returns the downloadable content(with <code>content-disposition</code> header). Now-a-days we are building lot of Single Page application where we get the <code>JSON</code> payload from the server and render it in the client side.
+Since we have the data in the client side, we don&#39;t want to sent another request to download the content. So we will see how to download the content from the client side
+without an extra request to server.</p>
+<a name="how-existing-download-from-server-works" class="anchor" href="#how-existing-download-from-server-works"><h3>How existing download from server works</h3>
+</a><p>Whenever you click the <code>download</code> link, it will send <code>GET</code> request. The server will
+set <code>Content-disposition</code> header to <code>attachment; filename=some-filename.csv</code> and set the data in the body.</p>
+<p><strong>Sample code from Node.js to download CSV file</strong></p>
+<pre><code class="lang-javascript"><div class="highlight"><pre><span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">response</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="s1">&#39;Content-disposition&#39;</span><span class="p">,</span> <span class="s1">&#39;attachment; filename=some-filename.csv&#39;</span><span class="p">);</span>
+    <span class="nx">response</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span>
+        <span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;text/csv&#39;</span>
+    <span class="p">});</span>
+
+    <span class="nx">csv</span><span class="p">().</span><span class="nx">from</span><span class="p">(</span><span class="nx">data</span><span class="p">).</span><span class="nx">to</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span>
+
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
+</pre></div>
+</code></pre>
+<a name="download-content-without-server-request" class="anchor" href="#download-content-without-server-request"><h3>Download content without server request</h3>
+</a><p>This can be done by two ways.</p>
+<ol>
+<li>Using Data URL</li>
+<li>Using <a href="https://github.com/dcneiner/Downloadify">Downloadify</a> library</li>
+</ol>
+<p><strong>Using Data URI</strong></p>
+<p>The data should be placed in the <code>href</code> attribute with data url format. You can also set
+the filename in the <code>download</code> attribute.</p>
+<pre><code class="lang-html"><div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;data:text/plain,this is some text&quot;</span> <span class="na">download=</span><span class="s">&quot;some-filename.txt&quot;</span> <span class="na">target=</span><span class="s">&quot;_blank&quot;</span><span class="nt">&gt;</span>Download<span class="nt">&lt;a&gt;</span>
+</pre></div>
+</code></pre>
+<p><strong>Caution:</strong> The data url is not supported across all browser/version combinations.</p>
+<p><strong>Using Downloadify</strong></p>
+<p><a href="https://github.com/dcneiner/Downloadify">Downloadify</a> is a tiny javascript + Flash library that enables the creation and download of text files without server interaction. It works even in IE.
+It is much better than previous one.</p>
+<p><strong>Usage:</strong></p>
+<pre><code><div class="highlight"><pre><span class="c1">// Any JavaScript framework:</span>
+<span class="nx">Downloadify</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span> <span class="nx">id_or_DOM_element</span><span class="p">,</span> <span class="nx">options</span> <span class="p">);</span>
+
+<span class="c1">// With Jquery</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#element&quot;</span><span class="p">).</span><span class="nx">downloadify</span><span class="p">(</span> <span class="nx">options</span> <span class="p">);</span>
+</pre></div>
+</code></pre>
+<p><strong>HTML</strong></p>
+<pre><code class="lang-html"><div class="highlight"><pre><span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;js/swfobject.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;js/downloadify.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body</span> <span class="na">onload=</span><span class="s">&quot;load();&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;form&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;filename&quot;</span> <span class="na">value=</span><span class="s">&quot;testfile.txt&quot;</span> <span class="na">id=</span><span class="s">&quot;filename&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;textarea</span> <span class="na">cols=</span><span class="s">&quot;60&quot;</span> <span class="na">rows=</span><span class="s">&quot;10&quot;</span> <span class="na">name=</span><span class="s">&quot;data&quot;</span> <span class="na">id=</span><span class="s">&quot;data&quot;</span><span class="nt">&gt;</span>
+        Whatever you put in this text box will be downloaded and saved in the file. If you leave it blank, no file will be downloaded
+    <span class="nt">&lt;/textarea&gt;</span>
+    <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;downloadify&quot;</span><span class="nt">&gt;</span>
+      You must have Flash 10 installed to download this file.
+    <span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+</pre></div>
+</code></pre>
+<p><strong>Javascript</strong></p>
+<pre><code class="lang-javascript"><div class="highlight"><pre><span class="kd">function</span> <span class="nx">load</span><span class="p">(){</span>
+      <span class="nx">Downloadify</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;downloadify&#39;</span><span class="p">,{</span>
+        <span class="nx">filename</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+          <span class="k">return</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;filename&#39;</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span>
+        <span class="p">},</span>
+        <span class="nx">data</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+          <span class="k">return</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span>
+        <span class="p">},</span>
+        <span class="nx">onComplete</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span> <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Your File Has Been Saved!&#39;</span><span class="p">);</span> <span class="p">},</span>
+        <span class="nx">onCancel</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span> <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;You have cancelled the saving of this file.&#39;</span><span class="p">);</span> <span class="p">},</span>
+        <span class="nx">onError</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span> <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;You must put something in the File Contents or there will be nothing to save!&#39;</span><span class="p">);</span> <span class="p">},</span>
+        <span class="nx">swf</span><span class="o">:</span> <span class="s1">&#39;media/downloadify.swf&#39;</span><span class="p">,</span>
+        <span class="nx">downloadImage</span><span class="o">:</span> <span class="s1">&#39;images/download.png&#39;</span><span class="p">,</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="nx">height</span><span class="o">:</span> <span class="mi">30</span><span class="p">,</span>
+        <span class="nx">transparent</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nx">append</span><span class="o">:</span> <span class="kc">false</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+</pre></div>
+</code></pre>
+<p>A <a href="http://pixelgraphics.us/downloadify/test.html">very simple demo is available</a> that lets you supply your own content and filename and test out saving, canceling, and the error functionality when the file is blank.</p>
+<p>Please check <a href="https://github.com/dcneiner/Downloadify">Downloadify</a> Readme for more information.
+Share your thoughts and suggestions in the comment. Have a nice day.</p>
+</div>
+      <h4><a href="/blog/posts/Download-a-file-without-server-request.html#comments">View comments</a></h4>
       <div class="post-head group"><a href="/blog/posts/Free-Static-Page-Hosting-on-Google-App-Engine-in-a-5-minutes.html">
           <h1 class="post-title">Free Static Page Hosting on Google App Engine in a 5 minutes</h1></a>
         <h2 class="post-date">2014 &#183; 2 &#183; 17</h2>
@@ -157,33 +249,6 @@ The support of MongoLab is awesome and respond for questions very quickly. I hig
 <p>Have a nice day.</p>
 </div>
       <h4><a href="/blog/posts/Things-you-should-consider-for-MongoDB-in-production.html#comments">View comments</a></h4>
-      <div class="post-head group"><a href="/blog/posts/Dropbox-will-save-your-head.html">
-          <h1 class="post-title">Dropbox will save your head</h1></a>
-        <h2 class="post-date">2013 &#183; 11 &#183; 4</h2>
-      </div>
-      <div class="post-body"><p>Recently My Mac OSX has been crashed and i cannot retrieve some of my data from hard drive.
-Fortunately i have already synced important folders to the <code>Dropbox</code> that saves my head.</p>
-<p>Few days ago, i saw the tweet from popular GitHub contributor <a href="https://twitter.com/tjholowaychuk">tj</a> (Creator of ExpressJs, Jade, Mocha)</p>
-<p><blockquote class="twitter-tweet"><p>haha dammit.. just rm -fr a project that isn&#39;t on github yet :( <a href="https://twitter.com/search?q=%23fail&amp;src=hash">#fail</a></p>&mdash; TJ Holowaychuk (@tjholowaychuk) <a href="https://twitter.com/tjholowaychuk/statuses/391262571350593536">October 18, 2013</a></blockquote></p>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>I am really sad about it. It can happen to anyone. So, whenever you started working on project(Pre-Github), You should consider sync to the <code>Dropbox</code>. Moreover it is always better and safer to sync important folder and files. It can be simply done by creating symbolic link to the folder in the <code>Dropbox</code>.</p>
-<p>Open <code>terminal</code> and do the following</p>
-<pre><code><div class="highlight"><pre><span class="err">##</span> <span class="nx">Go</span> <span class="nx">to</span> <span class="nx">dropbox</span> <span class="nx">folder</span><span class="p">.</span> <span class="nx">It</span> <span class="nx">can</span> <span class="nx">be</span> <span class="nx">any</span> <span class="nx">dropbox</span> <span class="nx">folder</span>
-<span class="nx">cd</span> <span class="o">~</span><span class="err">/Dropbox/MacOSX</span>
-
-<span class="err">#</span> <span class="nx">Create</span> <span class="nx">symbolic</span> <span class="nx">link</span> <span class="nx">to</span> <span class="nx">Stickies</span> <span class="nx">database</span>
-<span class="nx">ln</span> <span class="o">-</span><span class="nx">sf</span> <span class="o">~</span><span class="err">/Library/StickiesDatabase .</span>
-
-<span class="err">#</span> <span class="nx">Create</span> <span class="nx">symbolic</span> <span class="nx">link</span> <span class="nx">to</span> <span class="nx">Sublime</span> <span class="nx">text</span> <span class="nx">User</span> <span class="nx">data</span>
-<span class="nx">ln</span> <span class="o">-</span><span class="nx">sf</span> <span class="o">~</span><span class="err">/Library/Application\ Support/Sublime\ Text\ 3/Packages/User Sublime3-User</span>
-</pre></div>
-</code></pre>
-<p>In symbolic link creation, you can use .(dot) in the last argument to use same folder or file name as original. Otherwise you can specify the name that you wanted to have in your <code>Dropbox</code>.</p>
-<p>Have a nice day.</p>
-</div>
-      <h4><a href="/blog/posts/Dropbox-will-save-your-head.html#comments">View comments</a></h4>
       <ul class="pagination group">
         <li><a href="/page/1/">2</a>
         </li>

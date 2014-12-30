@@ -19,9 +19,44 @@
       <div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div>
     </nav>
     <div class="content">
+      <div class="post-head group"><a href="/blog/posts/GitHub-is-blocked-in-India.html">
+          <h1 class="post-title">GitHub is blocked in India</h1></a>
+        <h2 class="post-date">2014 &#183; 12 &#183; 30</h2>
+      </div>
+      <div class="post-body"><p><a href="https://github.com/">GitHub</a> is blocked in India along with <a href="http://pastebin.com/">pastebin</a> and <a href="http://imgur.com/">imgur</a>.</p>
+<p>Since 17th December Indian ISPs have started blocking the free Git hosting
+repository GitHub. No prior information, no explanations, no notice,
+simple block. The ISPs in India are setting a bad precedent of freedom of speech.
+Only one ISP, Reliance returned a message that GitHub has been blocked as per the
+instructions of competent authority.</p>
+<p>The Indian government also asked telecom operators and ISPs to block the
+image sharing site <code>imgur</code> and popular paste hosting website, <code>Pastebin</code>.</p>
+<p>It is really a bad news for the fast growing Indian economy.
+Hope, it will be resolved soon. If you are in India, you can use the following solution.</p>
+<a name="add-google-dns-server" class="anchor" href="#add-google-dns-server"><h3>Add Google DNS Server</h3>
+</a><p>This can be solved by adding Google DNS server. If you are a Mac OSX user,
+following steps will help you</p>
+<ol>
+<li><p>Choose <code>Apple menu &gt; System Preferences</code>, and then click <code>Network</code>.</p>
+</li>
+<li><p>Select the Network connection service you want to use (such as Wi-Fi or AirPort or Ethernet, unless you named it something else) from the list, and then click <code>Advanced</code>.</p>
+</li>
+<li><p>Select <code>DNS</code> tab</p>
+</li>
+<li><p>Click <code>+</code> to replace any listed addresses with, or add, the Google IP addresses at the top of the list:</p>
+<ul>
+<li>For IPv4: 8.8.8.8 and/or 8.8.4.4.</li>
+<li>For IPv6: 2001:4860:4860::8888 and/or 2001:4860:4860::8844</li>
+</ul>
+</li>
+</ol>
+<p>When you’re finished, click <code>OK</code> and then <code>Apply</code>. Now you can access the blocked sites.</p>
+<p>For Windows user, <a href="http://www.opennicproject.org/configure-your-dns/how-to-change-dns-servers-in-windows-7/">How to change DNS Servers in Windows 7</a></p>
+</div>
+      <h4><a href="/blog/posts/GitHub-is-blocked-in-India.html#comments">View comments</a></h4>
       <div class="post-head group"><a href="/blog/posts/Security-HTTP-headers.html">
           <h1 class="post-title">Security HTTP headers</h1></a>
-        <h2 class="post-date">2014 &#183; 12 &#183; 30</h2>
+        <h2 class="post-date">2014 &#183; 12 &#183; 29</h2>
       </div>
       <div class="post-body"><p>Security becomes an inevitable feature for every web and mobile application.
 There are many things to consider when securing web applications.</p>
@@ -125,45 +160,6 @@ to <code>plivo</code>.</p>
 <p>Hope it helps and Have a nice day.</p>
 </div>
       <h4><a href="/blog/posts/Sending-SMS-using-Plivo-in-Google-App-Engine.html#comments">View comments</a></h4>
-      <div class="post-head group"><a href="/blog/posts/Sending-Mail-using-MailGun-in-Google-App-Engine.html">
-          <h1 class="post-title">Sending Mail using MailGun in Google App Engine</h1></a>
-        <h2 class="post-date">2014 &#183; 12 &#183; 23</h2>
-      </div>
-      <div class="post-body"><p>Google App engine provides an email service to send email.
-Unfortunately it is limited to 100 emails per day.
-So we uses <a href="http://www.mailgun.com/">mailgun</a> to send an email.</p>
-<p>Let me share the code that we used in our Java project to send an email using mailgun.</p>
-<pre><code><div class="highlight"><pre>  <span class="kr">public</span> <span class="kr">static</span> <span class="kr">final</span> <span class="nb">String</span> <span class="nx">MAILGUN_API_KEY</span> <span class="o">=</span> <span class="s2">&quot;YOUR_MAILGUN_API_KEY&quot;</span><span class="p">;</span>
-  <span class="kr">public</span> <span class="kr">static</span> <span class="kr">final</span> <span class="nb">String</span> <span class="nx">MAILGUN_HOST</span> <span class="o">=</span> <span class="s2">&quot;example.com&quot;</span><span class="p">;</span> <span class="c1">// your host name</span>
-
-  <span class="kr">public</span> <span class="kr">static</span> <span class="k">void</span> <span class="nx">sendMail</span><span class="p">(</span><span class="nb">String</span> <span class="nx">to</span><span class="p">,</span> <span class="nx">Set</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="nx">cc</span><span class="p">,</span> <span class="nb">String</span> <span class="nx">subject</span><span class="p">,</span>
-      <span class="nb">String</span> <span class="nx">html</span><span class="p">)</span> <span class="p">{</span>
-
-    <span class="nx">Client</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">Client</span><span class="p">.</span><span class="nx">create</span><span class="p">();</span>
-    <span class="nx">client</span><span class="p">.</span><span class="nx">addFilter</span><span class="p">(</span><span class="k">new</span> <span class="nx">HTTPBasicAuthFilter</span><span class="p">(</span><span class="s2">&quot;api&quot;</span><span class="p">,</span> <span class="nx">MAILGUN_API_KEY</span><span class="p">));</span>
-
-    <span class="nx">WebResource</span> <span class="nx">webResource</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">resource</span><span class="p">(</span><span class="s2">&quot;https://api.mailgun.net/v2/&quot;</span>
-        <span class="o">+</span> <span class="nx">MAILGUN_HOST</span> <span class="o">+</span> <span class="s2">&quot;/messages&quot;</span><span class="p">);</span>
-
-    <span class="nx">MultivaluedMapImpl</span> <span class="nx">formData</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MultivaluedMapImpl</span><span class="p">();</span>
-    <span class="nx">formData</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s2">&quot;from&quot;</span><span class="p">,</span> <span class="s2">&quot;Example &lt;hello@example.com&gt;&quot;</span><span class="p">);</span> <span class="c1">// your host email address</span>
-    <span class="nx">formData</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s2">&quot;to&quot;</span><span class="p">,</span> <span class="nx">to</span><span class="p">);</span>
-    <span class="nx">formData</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s2">&quot;subject&quot;</span><span class="p">,</span> <span class="nx">subject</span><span class="p">);</span>
-    <span class="nx">formData</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s2">&quot;html&quot;</span><span class="p">,</span> <span class="nx">html</span><span class="p">);</span>
-
-    <span class="nx">ClientResponse</span> <span class="nx">clientResponse</span> <span class="o">=</span> <span class="nx">webResource</span><span class="p">.</span><span class="nx">type</span><span class="p">(</span>
-        <span class="nx">MediaType</span><span class="p">.</span><span class="nx">APPLICATION_FORM_URLENCODED</span><span class="p">).</span><span class="nx">post</span><span class="p">(</span>
-        <span class="nx">ClientResponse</span><span class="p">.</span><span class="kr">class</span><span class="p">,</span> <span class="nx">formData</span><span class="p">);</span>
-    <span class="kr">int</span> <span class="nx">status</span> <span class="o">=</span> <span class="nx">clientResponse</span><span class="p">.</span><span class="nx">getStatus</span><span class="p">();</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">status</span> <span class="o">&gt;=</span> <span class="mi">400</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">System</span><span class="p">.</span><span class="nx">out</span><span class="p">.</span><span class="nx">println</span><span class="p">(</span><span class="nx">clientResponse</span><span class="p">.</span><span class="nx">getEntity</span><span class="p">(</span><span class="nb">String</span><span class="p">.</span><span class="kr">class</span><span class="p">));</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-</pre></div>
-</code></pre>
-<p>Have a nice day.</p>
-</div>
-      <h4><a href="/blog/posts/Sending-Mail-using-MailGun-in-Google-App-Engine.html#comments">View comments</a></h4>
       <ul class="pagination group">
         <li><a href="/" class="active-page">1</a>
         </li>

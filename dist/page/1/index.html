@@ -19,6 +19,45 @@
       <div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div>
     </nav>
     <div class="content">
+      <div class="post-head group"><a href="/blog/posts/Sending-Mail-using-MailGun-in-Google-App-Engine.html">
+          <h1 class="post-title">Sending Mail using MailGun in Google App Engine</h1></a>
+        <h2 class="post-date">2014 &#183; 12 &#183; 23</h2>
+      </div>
+      <div class="post-body"><p>Google App engine provides an email service to send email.
+Unfortunately it is limited to 100 emails per day.
+So we uses <a href="http://www.mailgun.com/">mailgun</a> to send an email.</p>
+<p>Let me share the code that we used in our Java project to send an email using mailgun.</p>
+<pre><code><div class="highlight"><pre>  <span class="kr">public</span> <span class="kr">static</span> <span class="kr">final</span> <span class="nb">String</span> <span class="nx">MAILGUN_API_KEY</span> <span class="o">=</span> <span class="s2">&quot;YOUR_MAILGUN_API_KEY&quot;</span><span class="p">;</span>
+  <span class="kr">public</span> <span class="kr">static</span> <span class="kr">final</span> <span class="nb">String</span> <span class="nx">MAILGUN_HOST</span> <span class="o">=</span> <span class="s2">&quot;example.com&quot;</span><span class="p">;</span> <span class="c1">// your host name</span>
+
+  <span class="kr">public</span> <span class="kr">static</span> <span class="k">void</span> <span class="nx">sendMail</span><span class="p">(</span><span class="nb">String</span> <span class="nx">to</span><span class="p">,</span> <span class="nx">Set</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="nx">cc</span><span class="p">,</span> <span class="nb">String</span> <span class="nx">subject</span><span class="p">,</span>
+      <span class="nb">String</span> <span class="nx">html</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="nx">Client</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">Client</span><span class="p">.</span><span class="nx">create</span><span class="p">();</span>
+    <span class="nx">client</span><span class="p">.</span><span class="nx">addFilter</span><span class="p">(</span><span class="k">new</span> <span class="nx">HTTPBasicAuthFilter</span><span class="p">(</span><span class="s2">&quot;api&quot;</span><span class="p">,</span> <span class="nx">MAILGUN_API_KEY</span><span class="p">));</span>
+
+    <span class="nx">WebResource</span> <span class="nx">webResource</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">resource</span><span class="p">(</span><span class="s2">&quot;https://api.mailgun.net/v2/&quot;</span>
+        <span class="o">+</span> <span class="nx">MAILGUN_HOST</span> <span class="o">+</span> <span class="s2">&quot;/messages&quot;</span><span class="p">);</span>
+
+    <span class="nx">MultivaluedMapImpl</span> <span class="nx">formData</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MultivaluedMapImpl</span><span class="p">();</span>
+    <span class="nx">formData</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s2">&quot;from&quot;</span><span class="p">,</span> <span class="s2">&quot;Example &lt;hello@example.com&gt;&quot;</span><span class="p">);</span> <span class="c1">// your host email address</span>
+    <span class="nx">formData</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s2">&quot;to&quot;</span><span class="p">,</span> <span class="nx">to</span><span class="p">);</span>
+    <span class="nx">formData</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s2">&quot;subject&quot;</span><span class="p">,</span> <span class="nx">subject</span><span class="p">);</span>
+    <span class="nx">formData</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s2">&quot;html&quot;</span><span class="p">,</span> <span class="nx">html</span><span class="p">);</span>
+
+    <span class="nx">ClientResponse</span> <span class="nx">clientResponse</span> <span class="o">=</span> <span class="nx">webResource</span><span class="p">.</span><span class="nx">type</span><span class="p">(</span>
+        <span class="nx">MediaType</span><span class="p">.</span><span class="nx">APPLICATION_FORM_URLENCODED</span><span class="p">).</span><span class="nx">post</span><span class="p">(</span>
+        <span class="nx">ClientResponse</span><span class="p">.</span><span class="kr">class</span><span class="p">,</span> <span class="nx">formData</span><span class="p">);</span>
+    <span class="kr">int</span> <span class="nx">status</span> <span class="o">=</span> <span class="nx">clientResponse</span><span class="p">.</span><span class="nx">getStatus</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">status</span> <span class="o">&gt;=</span> <span class="mi">400</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">System</span><span class="p">.</span><span class="nx">out</span><span class="p">.</span><span class="nx">println</span><span class="p">(</span><span class="nx">clientResponse</span><span class="p">.</span><span class="nx">getEntity</span><span class="p">(</span><span class="nb">String</span><span class="p">.</span><span class="kr">class</span><span class="p">));</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+</pre></div>
+</code></pre>
+<p>Have a nice day.</p>
+</div>
+      <h4><a href="/blog/posts/Sending-Mail-using-MailGun-in-Google-App-Engine.html#comments">View comments</a></h4>
       <div class="post-head group"><a href="/blog/posts/Social-Sharing-in-Ionic-application.html">
           <h1 class="post-title">Social Sharing in Ionic application</h1></a>
         <h2 class="post-date">2014 &#183; 12 &#183; 8</h2>
@@ -99,47 +138,6 @@ it needs <code>inappbrowser</code> cordova plugin.</p>
 <p>Have a nice day.</p>
 </div>
       <h4><a href="/blog/posts/Rate-this-app-in-Ionic-application.html#comments">View comments</a></h4>
-      <div class="post-head group"><a href="/blog/posts/Showing--No-internet-connection--message-in-Ionic-application.html">
-          <h1 class="post-title">Showing 'No internet connection' message in Ionic application</h1></a>
-        <h2 class="post-date">2014 &#183; 12 &#183; 1</h2>
-      </div>
-      <div class="post-body"><p>There are often times where you need to display <code>No internet connection</code>
-message to your users inside your Ionic Framework Android and iOS application.</p>
-<a name="add-network-information-cordova-plugin" class="anchor" href="#add-network-information-cordova-plugin"><h3>Add Network information cordova plugin</h3>
-</a><p>Inorder to check internet connection, you need to have <code>network information</code>
-cordova plugin.</p>
-<pre><code><div class="highlight"><pre><span class="nx">cordova</span> <span class="nx">plugin</span> <span class="nx">add</span> <span class="nx">org</span><span class="p">.</span><span class="nx">apache</span><span class="p">.</span><span class="nx">cordova</span><span class="p">.</span><span class="nx">network</span><span class="o">-</span><span class="nx">information</span>
-</pre></div>
-</code></pre>
-<a name="check-for-internet-connection-inside-platform-ready" class="anchor" href="#check-for-internet-connection-inside-platform-ready"><h3>Check for internet connection inside Platform ready</h3>
-</a><p>Now, you have to check the internet connection inside platform ready as follows</p>
-<pre><code class="lang-javascript"><div class="highlight"><pre><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;myApp&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;ionic&#39;</span><span class="p">])</span>
-
-<span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$ionicPlatform</span><span class="p">,</span> <span class="nx">$ionicPopup</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">$ionicPlatform</span><span class="p">.</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-
-    <span class="c1">// Check for network connection</span>
-    <span class="k">if</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">Connection</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">if</span><span class="p">(</span><span class="nx">navigator</span><span class="p">.</span><span class="nx">connection</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span> <span class="nx">Connection</span><span class="p">.</span><span class="nx">NONE</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">$ionicPopup</span><span class="p">.</span><span class="nx">confirm</span><span class="p">({</span>
-          <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;No Internet Connection&#39;</span><span class="p">,</span>
-          <span class="nx">content</span><span class="o">:</span> <span class="s1">&#39;Sorry, no Internet connectivity detected. Please reconnect and try again.&#39;</span>
-        <span class="p">})</span>
-        <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-          <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">ionic</span><span class="p">.</span><span class="nx">Platform</span><span class="p">.</span><span class="nx">exitApp</span><span class="p">();</span>
-          <span class="p">}</span>
-        <span class="p">});</span>
-      <span class="p">}</span>
-    <span class="p">}</span>
-
-  <span class="p">});</span>
-<span class="p">})</span>
-</pre></div>
-</code></pre>
-<p>Have a nice day.</p>
-</div>
-      <h4><a href="/blog/posts/Showing--No-internet-connection--message-in-Ionic-application.html#comments">View comments</a></h4>
       <ul class="pagination group">
         <li><a href="/">1</a>
         </li>
