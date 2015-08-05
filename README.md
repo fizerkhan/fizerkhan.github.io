@@ -11,17 +11,9 @@ To run
 
     grunt server
 
-To build
-
-    grunt build
-
-To deploy
-
-    git push
-
-
 To Deploy in Google app engine
 
+    grunt build
     appcfg.py update .
 
 
