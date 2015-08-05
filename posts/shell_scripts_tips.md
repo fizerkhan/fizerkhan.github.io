@@ -1,7 +1,7 @@
-----
-title: What I learned from other's shell scripts
-date:   2013-8-14
-----
+{
+  title: "What I learned from other's shell scripts",
+  date: '2013-8-14'
+}
 
 I am big fan of shell scripts and so love to learn interesting stuff from other's shell scripts. Recently i came across the [authy-ssh](https://github.com/authy/authy-ssh) scripts which eases two-factor authentication for ssh servers. When i walk through scripts, i learned lot of cool things that i am going to share it with you.
 

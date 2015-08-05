@@ -1,7 +1,7 @@
-----
-title: JSON is not Javascript Object
-date:   2013-6-24
-----
+{
+  title: 'JSON is not Javascript Object',
+  date: '2013-6-24'
+}
 
 Many people treat JSON as javascript object. But really it is not.
 JSON is just string representation inspired from Java Script Object structure.

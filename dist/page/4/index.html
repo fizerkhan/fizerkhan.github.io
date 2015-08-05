@@ -1,33 +1,61 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/images/cabin.png">
-    <link href="/styles/main.css" rel="stylesheet">
-    <title>Fizer Khan Blog</title>
-  </head>
-  <body>
-    <nav id="nav">
-      <h1 class="name"><a href="/">Fizer Khan</a></h1>
-      <ul class="nav-links">
-        <li class="menu icon-menu"></li>
-        <li class="text-link"><a href="/about.html">About</a></li>
-        <li class="text-link"><a href="/projects.html">Projects</a></li>
-        <li class="text-link"><a href="/archives.html">Archives</a></li>
-      </ul>
-      <div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div>
-    </nav>
-    <div class="content">
-      <div class="post-head group"><a href="/blog/posts/Download-a-file-without-server-request.html">
-          <h1 class="post-title">Download a file without server request</h1></a>
-        <h2 class="post-date">2014 &#183; 8 &#183; 1</h2>
-      </div>
-      <div class="post-body"><p>We have come across <code>Download file</code> link(button) in lot of sites. Generally, When you click <code>download</code> link or button, it sends <code>GET</code> request to server and server returns the downloadable content(with <code>content-disposition</code> header). Now-a-days we are building lot of Single Page application where we get the <code>JSON</code> payload from the server and render it in the client side.
+<!DOCTYPE html><html><head><meta charset="utf8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/png" href="/images/cabin.png"><link href="/styles/main.css" rel="stylesheet"><title>Fizer Khan Blog</title></head><body><nav id="nav"><h1 class="name"><a href="/">Fizer Khan</a></h1><ul class="nav-links"><li class="menu icon-menu"></li><li class="text-link"><a href="/about.html">About</a></li><li class="text-link"><a href="/projects.html">Projects</a></li><li class="text-link"><a href="/archives.html">Archives</a></li></ul><div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div></nav><div class="content"><div class="post-head group"><a href="/blog/posts/Fix-Shellshock-Bash-Vulnerability-in-OSX-Bash.html"><h1 class="post-title">Fix Shellshock Bash Vulnerability in OSX Bash</h1></a><h2 class="post-date">2014 &#183; 9 &#183; 27</h2></div><div class="post-body"><p>GNU Bash vulnerability, referred to as <strong>Shellshock</strong> or the <strong>Bash Bug</strong>, was found on Sep 24, 2014.
+The <strong>Shellshock</strong> vulnerability is very widespread and even more so than the OpenSSL Heartbleed bug
+ So it is highly recommended that affected systems are properly updated to fix or mitigate the vulnerability as soon as possible.</p>
+<h3><a name="what-is-shellshock" class="anchor" href="#what-is-shellshock"><span class="header-link"></span></a>What is Shellshock</h3><pre><code><div class="highlight"><pre><span class="nx">GNU</span> <span class="nx">Bash</span> <span class="nx">through</span> <span class="mf">4.3</span> <span class="nx">processes</span> <span class="nx">trailing</span> <span class="nx">strings</span> <span class="nx">after</span> <span class="kd">function</span> <span class="nx">definitions</span> <span class="k">in</span> <span class="nx">the</span> <span class="nx">values</span> <span class="nx">of</span> <span class="nx">environment</span> <span class="nx">variables</span><span class="p">,</span> <span class="nx">which</span> <span class="nx">allows</span> <span class="nx">remote</span> <span class="nx">attackers</span> <span class="nx">to</span> <span class="nx">execute</span> <span class="nx">arbitrary</span> <span class="nx">code</span> <span class="nx">via</span> <span class="nx">a</span> <span class="nx">crafted</span> <span class="nx">environment</span><span class="p">,</span> <span class="nx">as</span> <span class="nx">demonstrated</span> <span class="nx">by</span> <span class="nx">vectors</span> <span class="nx">involving</span> <span class="nx">the</span> <span class="nx">ForceCommand</span> <span class="nx">feature</span> <span class="k">in</span> <span class="nx">OpenSSH</span> <span class="nx">sshd</span><span class="p">,</span> <span class="nx">the</span> <span class="nx">mod_cgi</span> <span class="nx">and</span> <span class="nx">mod_cgid</span> <span class="nx">modules</span> <span class="k">in</span> <span class="nx">the</span> <span class="nx">Apache</span> <span class="nx">HTTP</span> <span class="nx">Server</span><span class="p">,</span> <span class="nx">scripts</span> <span class="nx">executed</span> <span class="nx">by</span> <span class="nx">unspecified</span> <span class="nx">DHCP</span> <span class="nx">clients</span><span class="p">,</span> <span class="nx">and</span> <span class="nx">other</span> <span class="nx">situations</span> <span class="k">in</span> <span class="nx">which</span> <span class="nx">setting</span> <span class="nx">the</span> <span class="nx">environment</span> <span class="nx">occurs</span> <span class="nx">across</span> <span class="nx">a</span> <span class="nx">privilege</span> <span class="nx">boundary</span> <span class="nx">from</span> <span class="nx">Bash</span> <span class="nx">execution</span><span class="p">.</span>
+</pre></div>
+
+</code></pre><p>To know more about <strong>Shellshock</strong>, read an amazing <a href="http://www.troyhunt.com/2014/09/everything-you-need-to-know-about.html">article from Troy Hunt</a></p>
+<h3><a name="check-system-vulnerability" class="anchor" href="#check-system-vulnerability"><span class="header-link"></span></a>Check System Vulnerability</h3><p>You can check the system for Shellshock vulnerability by running following command in bash</p>
+<pre><code><div class="highlight"><pre><span class="nx">env</span> <span class="nx">Y</span><span class="o">=</span><span class="s1">&#39;() { :;}; echo I am vulnerable!&#39;</span> <span class="nx">bash</span> <span class="o">-</span><span class="nx">c</span> <span class="s2">&quot;echo This is Bash&quot;</span>
+</pre></div>
+
+</code></pre><p>If your version of Bash is vulnerable, then you will see following output</p>
+<pre><code><div class="highlight"><pre><span class="nx">I</span> <span class="nx">am</span> <span class="nx">vulnerable</span>
+<span class="nx">This</span> <span class="nx">is</span> <span class="nx">Bash</span>
+</pre></div>
+
+</code></pre><p>Instead of <strong>echo I am vulnerable!</strong> portion, attacker can run any command;
+arbitrary code following a function definition within an environment variable assignment.
+If your system don&#39;t have Shellshock vulnerability, then you will see following output</p>
+<pre><code><div class="highlight"><pre><span class="nx">bash</span><span class="o">:</span> <span class="nx">warning</span><span class="o">:</span> <span class="nx">Y</span><span class="o">:</span> <span class="nx">ignoring</span> <span class="kd">function</span> <span class="nx">definition</span> <span class="nx">attempt</span>
+<span class="nx">bash</span><span class="o">:</span> <span class="nx">error</span> <span class="nx">importing</span> <span class="kd">function</span> <span class="nx">definition</span> <span class="k">for</span> <span class="err">`</span><span class="nx">Y</span><span class="err">&#39;</span>
+<span class="nx">This</span> <span class="nx">is</span> <span class="nx">Bash</span>
+</pre></div>
+
+</code></pre><h3><a name="how-to-fix-in-mac-osx" class="anchor" href="#how-to-fix-in-mac-osx"><span class="header-link"></span></a>How to fix in Mac OSX</h3><p>If your bash is vulnerable, then  you can install latest version of bash as follows, provided that you have XCode installed,</p>
+<pre><code><div class="highlight"><pre><span class="nx">$</span> <span class="nx">mkdir</span> <span class="nx">bash</span><span class="o">-</span><span class="nx">fix</span>
+<span class="nx">$</span> <span class="nx">cd</span> <span class="nx">bash</span><span class="o">-</span><span class="nx">fix</span>
+<span class="nx">$</span> <span class="nx">curl</span> <span class="nx">https</span><span class="o">:</span><span class="c1">//opensource.apple.com/tarballs/bash/bash-92.tar.gz | tar zxf -</span>
+<span class="nx">$</span> <span class="nx">cd</span> <span class="nx">bash</span><span class="o">-</span><span class="mi">92</span><span class="o">/</span><span class="nx">bash</span><span class="o">-</span><span class="mf">3.2</span>
+<span class="nx">$</span> <span class="nx">curl</span> <span class="nx">https</span><span class="o">:</span><span class="c1">//ftp.gnu.org/pub/gnu/bash/bash-3.2-patches/bash32-052 | patch -p0</span>
+<span class="nx">$</span> <span class="nx">curl</span> <span class="nx">https</span><span class="o">:</span><span class="c1">//ftp.gnu.org/pub/gnu/bash/bash-3.2-patches/bash32-053 | patch -p0</span>
+<span class="nx">$</span> <span class="nx">cd</span> <span class="p">..</span>
+<span class="nx">$</span> <span class="nx">sudo</span> <span class="nx">xcodebuild</span>
+<span class="nx">$</span> <span class="nx">sudo</span> <span class="nx">cp</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">bash</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">bash</span><span class="p">.</span><span class="nx">old</span>
+<span class="nx">$</span> <span class="nx">sudo</span> <span class="nx">cp</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">sh</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">sh</span><span class="p">.</span><span class="nx">old</span>
+<span class="nx">$</span> <span class="nx">build</span><span class="o">/</span><span class="nx">Release</span><span class="o">/</span><span class="nx">bash</span> <span class="o">--</span><span class="nx">version</span> <span class="err">#</span> <span class="nx">GNU</span> <span class="nx">bash</span><span class="p">,</span> <span class="nx">version</span> <span class="mf">3.2</span><span class="p">.</span><span class="mi">53</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="nx">release</span>
+<span class="nx">$</span> <span class="nx">build</span><span class="o">/</span><span class="nx">Release</span><span class="o">/</span><span class="nx">sh</span> <span class="o">--</span><span class="nx">version</span>   <span class="err">#</span> <span class="nx">GNU</span> <span class="nx">bash</span><span class="p">,</span> <span class="nx">version</span> <span class="mf">3.2</span><span class="p">.</span><span class="mi">53</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="nx">release</span>
+<span class="nx">$</span> <span class="nx">sudo</span> <span class="nx">cp</span> <span class="nx">build</span><span class="o">/</span><span class="nx">Release</span><span class="o">/</span><span class="nx">bash</span> <span class="o">/</span><span class="nx">bin</span>
+<span class="nx">$</span> <span class="nx">sudo</span> <span class="nx">cp</span> <span class="nx">build</span><span class="o">/</span><span class="nx">Release</span><span class="o">/</span><span class="nx">sh</span> <span class="o">/</span><span class="nx">bin</span>
+</pre></div>
+
+</code></pre><p>Once you installed, check your bash version(<code>bash --version</code>), it should be
+<code>GNU bash, version 3.2.53(1)-release</code></p>
+<p>For security reason, you have to remove the executable permission from older bash</p>
+<pre><code><div class="highlight"><pre><span class="nx">$</span> <span class="nx">sudo</span> <span class="nx">chmod</span> <span class="nx">a</span><span class="o">-</span><span class="nx">x</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">bash</span><span class="p">.</span><span class="nx">old</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">sh</span><span class="p">.</span><span class="nx">old</span>
+</pre></div>
+
+</code></pre><p>That&#39;s it. Keep in mind that this fix is temporary.
+We have to wait for real fix until apple releases it.</p>
+<p>If you using Linux distribution, please read <a href="https://www.digitalocean.com/community/tutorials/how-to-protect-your-server-against-the-shellshock-bash-vulnerability">Digital Ocean blog on Shellshock</a></p>
+<h3><a name="kudos" class="anchor" href="#kudos"><span class="header-link"></span></a>Kudos</h3><ul>
+<li><a href="http://apple.stackexchange.com/questions/146849/how-do-i-recompile-bash-to-avoid-shellshock-the-remote-exploit-cve-2014-6271-an">AlBlue at stackexchange</a></li>
+<li><a href="http://www.troyhunt.com/">Troy Hunt</a></li>
+</ul>
+</div><h4><a href="/blog/posts/Fix-Shellshock-Bash-Vulnerability-in-OSX-Bash.html#comments">View comments</a></h4><div class="post-head group"><a href="/blog/posts/Download-a-file-without-server-request.html"><h1 class="post-title">Download a file without server request</h1></a><h2 class="post-date">2014 &#183; 8 &#183; 1</h2></div><div class="post-body"><p>We have come across <code>Download file</code> link(button) in lot of sites. Generally, When you click <code>download</code> link or button, it sends <code>GET</code> request to server and server returns the downloadable content(with <code>content-disposition</code> header). Now-a-days we are building lot of Single Page application where we get the <code>JSON</code> payload from the server and render it in the client side.
 Since we have the data in the client side, we don&#39;t want to sent another request to download the content. So we will see how to download the content from the client side
 without an extra request to server.</p>
-<a name="how-existing-download-from-server-works" class="anchor" href="#how-existing-download-from-server-works"><h3>How existing download from server works</h3>
-</a><p>Whenever you click the <code>download</code> link, it will send <code>GET</code> request. The server will
+<h3><a name="how-existing-download-from-server-works" class="anchor" href="#how-existing-download-from-server-works"><span class="header-link"></span></a>How existing download from server works</h3><p>Whenever you click the <code>download</code> link, it will send <code>GET</code> request. The server will
 set <code>Content-disposition</code> header to <code>attachment; filename=some-filename.csv</code> and set the data in the body.</p>
 <p><strong>Sample code from Node.js to download CSV file</strong></p>
 <pre><code class="lang-javascript"><div class="highlight"><pre><span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
@@ -41,9 +69,9 @@ set <code>Content-disposition</code> header to <code>attachment; filename=some-f
 <span class="p">})</span>
 <span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
 </pre></div>
+
 </code></pre>
-<a name="download-content-without-server-request" class="anchor" href="#download-content-without-server-request"><h3>Download content without server request</h3>
-</a><p>This can be done by two ways.</p>
+<h3><a name="download-content-without-server-request" class="anchor" href="#download-content-without-server-request"><span class="header-link"></span></a>Download content without server request</h3><p>This can be done by two ways.</p>
 <ol>
 <li>Using Data URL</li>
 <li>Using <a href="https://github.com/dcneiner/Downloadify">Downloadify</a> library</li>
@@ -53,6 +81,7 @@ set <code>Content-disposition</code> header to <code>attachment; filename=some-f
 the filename in the <code>download</code> attribute.</p>
 <pre><code class="lang-html"><div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;data:text/plain,this is some text&quot;</span> <span class="na">download=</span><span class="s">&quot;some-filename.txt&quot;</span> <span class="na">target=</span><span class="s">&quot;_blank&quot;</span><span class="nt">&gt;</span>Download<span class="nt">&lt;a&gt;</span>
 </pre></div>
+
 </code></pre>
 <p><strong>Caution:</strong> The data url is not supported across all browser/version combinations.</p>
 <p><strong>Using Downloadify</strong></p>
@@ -65,8 +94,8 @@ It is much better than previous one.</p>
 <span class="c1">// With Jquery</span>
 <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#element&quot;</span><span class="p">).</span><span class="nx">downloadify</span><span class="p">(</span> <span class="nx">options</span> <span class="p">);</span>
 </pre></div>
-</code></pre>
-<p><strong>HTML</strong></p>
+
+</code></pre><p><strong>HTML</strong></p>
 <pre><code class="lang-html"><div class="highlight"><pre><span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;js/swfobject.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
     <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;js/downloadify.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
@@ -83,6 +112,7 @@ It is much better than previous one.</p>
   <span class="nt">&lt;/form&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
 </pre></div>
+
 </code></pre>
 <p><strong>Javascript</strong></p>
 <pre><code class="lang-javascript"><div class="highlight"><pre><span class="kd">function</span> <span class="nx">load</span><span class="p">(){</span>
@@ -105,38 +135,30 @@ It is much better than previous one.</p>
       <span class="p">});</span>
     <span class="p">}</span>
 </pre></div>
+
 </code></pre>
 <p>A <a href="http://pixelgraphics.us/downloadify/test.html">very simple demo is available</a> that lets you supply your own content and filename and test out saving, canceling, and the error functionality when the file is blank.</p>
 <p>Please check <a href="https://github.com/dcneiner/Downloadify">Downloadify</a> Readme for more information.
 Share your thoughts and suggestions in the comment. Have a nice day.</p>
-</div>
-      <h4><a href="/blog/posts/Download-a-file-without-server-request.html#comments">View comments</a></h4>
-      <div class="post-head group"><a href="/blog/posts/Free-Static-Page-Hosting-on-Google-App-Engine-in-a-5-minutes.html">
-          <h1 class="post-title">Free Static Page Hosting on Google App Engine in a 5 minutes</h1></a>
-        <h2 class="post-date">2014 &#183; 2 &#183; 17</h2>
-      </div>
-      <div class="post-body"><p>Now-a-days we have a lot of options to deploy our applications. Some of them are
+</div><h4><a href="/blog/posts/Download-a-file-without-server-request.html#comments">View comments</a></h4><div class="post-head group"><a href="/blog/posts/Free-Static-Page-Hosting-on-Google-App-Engine-in-a-5-minutes.html"><h1 class="post-title">Free Static Page Hosting on Google App Engine in a 5 minutes</h1></a><h2 class="post-date">2014 &#183; 2 &#183; 17</h2></div><div class="post-body"><p>Now-a-days we have a lot of options to deploy our applications. Some of them are
 Google App Engine, Google Compute Cloud, Amazon EC2, Heroku, Nodejitsu and much more.
 All the services have their advantages and disadvantages over others. Generally,
 we do not prefer much complex infrastructure or steps to deploy our static pages.
 Recently, I found that Google App engine has been a best platform for hosting our
 static web pages with decent free plan over other services. In this article,
 we will discuss a steps to host your static pages which can be personal blog, company site or even your client sites.</p>
-<a name="create-an-application-in-google-app-engine" class="anchor" href="#create-an-application-in-google-app-engine"><h3>Create an application in Google App Engine</h3>
-</a><p>Visit <a href="http://appengine.google.com">Google App Engine</a> and then create an application.
+<h3><a name="create-an-application-in-google-app-engine" class="anchor" href="#create-an-application-in-google-app-engine"><span class="header-link"></span></a>Create an application in Google App Engine</h3><p>Visit <a href="http://appengine.google.com">Google App Engine</a> and then create an application.
 When creating App engine application, the application id is very important. Because
 it acts as subdomain for your site. Lets say, application id is <code>coolmoon</code>, the site
 will be in <code>coolmoon.appspot.com</code>.</p>
-<a name="install-app-engine-sdk-for-python" class="anchor" href="#install-app-engine-sdk-for-python"><h3>Install App Engine SDK for python</h3>
-</a><p>Since <code>python</code> has been a best supported language in App Engine, Download and Install
+<h3><a name="install-app-engine-sdk-for-python" class="anchor" href="#install-app-engine-sdk-for-python"><span class="header-link"></span></a>Install App Engine SDK for python</h3><p>Since <code>python</code> has been a best supported language in App Engine, Download and Install
 <a href="https://developers.google.com/appengine/downloads#Google_App_Engine_SDK_for_Python">App Engine SDK for python</a>. <code>Are you not a python developer(like me)?</code> Do not worry, you do not need to write a single piece of python code.</p>
 <p>You will use two commands from the SDK:</p>
 <pre><code><div class="highlight"><pre><span class="nx">dev_appserver</span><span class="p">.</span><span class="nx">py</span>  <span class="o">-</span>  <span class="nx">the</span> <span class="nx">development</span> <span class="nx">web</span> <span class="nx">server</span>
 <span class="nx">appcfg</span><span class="p">.</span><span class="nx">py</span>  <span class="o">-</span>  <span class="k">for</span> <span class="nx">uploading</span> <span class="nx">your</span> <span class="nx">app</span> <span class="nx">to</span> <span class="nx">App</span> <span class="nx">Engine</span>
 </pre></div>
-</code></pre>
-<a name="create-an-application-folder" class="anchor" href="#create-an-application-folder"><h3>Create an application folder</h3>
-</a><p>You have to create an application folder which has static files and configuration file to be deployed.
+
+</code></pre><h3><a name="create-an-application-folder" class="anchor" href="#create-an-application-folder"><span class="header-link"></span></a>Create an application folder</h3><p>You have to create an application folder which has static files and configuration file to be deployed.
 The structure of the folder may be as follows</p>
 <pre><code><div class="highlight"><pre><span class="nx">application_folder</span><span class="o">/</span>
   <span class="o">-</span> <span class="nx">app</span><span class="p">.</span><span class="nx">yaml</span>              <span class="err">#</span> <span class="nx">configuration</span> <span class="nx">file</span><span class="p">.</span> <span class="nx">we</span> <span class="nx">will</span> <span class="nx">see</span> <span class="k">in</span> <span class="nx">next</span> <span class="nx">section</span>
@@ -146,9 +168,8 @@ The structure of the folder may be as follows</p>
     <span class="o">-</span> <span class="nx">css</span><span class="o">/</span>
     <span class="o">-</span> <span class="nx">img</span><span class="o">/</span>
 </pre></div>
-</code></pre>
-<a name="content-of-app-engine-configuration-app.yaml-" class="anchor" href="#content-of-app-engine-configuration-app.yaml-"><h3>Content of App Engine configuration(app.yaml)</h3>
-</a><pre><code><div class="highlight"><pre>  <span class="nx">application</span><span class="o">:</span> <span class="nx">coolmoon</span>
+
+</code></pre><h3><a name="content-of-app-engine-configurationapp-yaml" class="anchor" href="#content-of-app-engine-configurationapp-yaml"><span class="header-link"></span></a>Content of App Engine configuration(app.yaml)</h3><pre><code><div class="highlight"><pre>  <span class="nx">application</span><span class="o">:</span> <span class="nx">coolmoon</span>
   <span class="nx">version</span><span class="o">:</span> <span class="mi">1</span>
   <span class="nx">runtime</span><span class="o">:</span> <span class="nx">python27</span>
   <span class="nx">api_version</span><span class="o">:</span> <span class="mi">1</span>
@@ -185,95 +206,27 @@ The structure of the folder may be as follows</p>
   <span class="o">-</span> <span class="o">^</span><span class="nx">grunt</span><span class="err">\</span><span class="p">.</span><span class="nx">js</span>
   <span class="o">-</span> <span class="o">^</span><span class="nx">node_modules</span><span class="o">/</span><span class="p">(.</span><span class="o">*</span><span class="err">/)?</span>
 </pre></div>
-</code></pre>
-<a name="test-static-pages" class="anchor" href="#test-static-pages"><h3>Test static pages</h3>
-</a><p>You can run development server locally and check your static pages by following command</p>
+
+</code></pre><h3><a name="test-static-pages" class="anchor" href="#test-static-pages"><span class="header-link"></span></a>Test static pages</h3><p>You can run development server locally and check your static pages by following command</p>
 <pre><code><div class="highlight"><pre> <span class="nx">dev_appserver</span><span class="p">.</span><span class="nx">py</span> <span class="p">.</span><span class="o">/</span>
 </pre></div>
-</code></pre>
-<p>Visit <code>http://localhost:8080</code> to test your pages.</p>
-<a name="deploy" class="anchor" href="#deploy"><h3>Deploy</h3>
-</a><p>Everything is perfect and deploy the static pages. The command <code>appcfg.py</code> is used for deploy the application to Google App engine</p>
+
+</code></pre><p>Visit <code>http://localhost:8080</code> to test your pages.</p>
+<h3><a name="deploy" class="anchor" href="#deploy"><span class="header-link"></span></a>Deploy</h3><p>Everything is perfect and deploy the static pages. The command <code>appcfg.py</code> is used for deploy the application to Google App engine</p>
 <pre><code><div class="highlight"><pre><span class="nx">appcfg</span><span class="p">.</span><span class="nx">py</span> <span class="nx">update</span> <span class="p">.</span>
 </pre></div>
-</code></pre>
-<p>It will ask for <code>email</code> and <code>password</code> of your Google account. The password must be
+
+</code></pre><p>It will ask for <code>email</code> and <code>password</code> of your Google account. The password must be
 application specific password. To know how to generate application specific password,
 please refer <a href="https://support.google.com/accounts/answer/185833?hl=en">Application specific password</a>.</p>
-<a name="you-ve-made-it" class="anchor" href="#you-ve-made-it"><h3>You&#39;ve made it</h3>
-</a><p>Finally you got your site hosted in <code>&lt;application-id&gt;.appspot.com</code>.
+<h3><a name="you39ve-made-it" class="anchor" href="#you39ve-made-it"><span class="header-link"></span></a>You&#39;ve made it</h3><p>Finally you got your site hosted in <code>&lt;application-id&gt;.appspot.com</code>.
 Static hosting is super easy with App Engine. Moreover it is faster than other static
 hosting services. Because it runs on Google infrastructure.</p>
 <p>Happy static hosting and Have a nice day.</p>
-</div>
-      <h4><a href="/blog/posts/Free-Static-Page-Hosting-on-Google-App-Engine-in-a-5-minutes.html#comments">View comments</a></h4>
-      <div class="post-head group"><a href="/blog/posts/Things-you-should-consider-for-MongoDB-in-production.html">
-          <h1 class="post-title">Things you should consider for MongoDB in production</h1></a>
-        <h2 class="post-date">2013 &#183; 11 &#183; 4</h2>
-      </div>
-      <div class="post-body"><p>We are using MongoDB for few of our products. We like to share some of the
-recommendations for MongoDB in production.</p>
-<a name="handle-connection-errors" class="anchor" href="#handle-connection-errors"><h3>Handle Connection Errors</h3>
-</a><p>Few weeks before, we faced one weird problem in our NodeJS  application.
-Our customer can view our site and not able to login into the application.
-We tried to figure out the issue and found that MongoDB database connection is
-broken during mid night. After that, our application is not crashed,
-but it is failed to connect MongoDB. We assume that it should auto reconnect if it is failed.
-But it does not happen. Finally we found that we did not handle error of MongoDB
-connection in our code.</p>
-<p>You must handle error of MongoDB connection in you code. It can be even simple console log.</p>
-<pre><code><div class="highlight"><pre> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">connection</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">console</span><span class="p">,</span> <span class="s1">&#39;MongoDB connection error:&#39;</span><span class="p">));</span>
-</pre></div>
-</code></pre>
-<p>If you are using NodeJS, you must handle <code>error</code> and <code>exception</code> in all places.
-It is a best practice.</p>
-<a name="setting-timeout" class="anchor" href="#setting-timeout"><h3>Setting Timeout</h3>
-</a><p>You have to properly set your timeouts. The driver&#39;s default timeouts are very aggressive ranges anywhere from 1 second (e.g. the Node.JS driver in some cases) to 30 seconds (e.g  the Ruby driver), so you really need to think about what the optimal setting is for your use case.</p>
-<p>For connections made through a Platform-as-a-Serivce (PaaS) such as Heroku, you might consider an even higher timeout (e.g. 30 seconds) since your application is likely running in a container that can be “idled” or “passivated” during periods of low activity</p>
-<p>If you use Mongoose and NodeJS, then you can set connection timeout by</p>
-<pre><code><div class="highlight"><pre><span class="c1">// Database connect options</span>
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">replset</span><span class="o">:</span> <span class="p">{</span> <span class="nx">socketOptions</span><span class="o">:</span> <span class="p">{</span> <span class="nx">connectTimeoutMS</span> <span class="o">:</span> <span class="nx">conf</span><span class="p">.</span><span class="nx">dbTimeout</span> <span class="p">}}};</span>
+</div><h4><a href="/blog/posts/Free-Static-Page-Hosting-on-Google-App-Engine-in-a-5-minutes.html#comments">View comments</a></h4><ul class="pagination group"></ul></div><a href="http://www.fizerkhan.com/"><img src="/images/cabin.png" class="cabin"></a><script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script><script src="/scripts/main.js"></script><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-<span class="c1">// Establish Database connection</span>
-<span class="kd">var</span> <span class="nx">conn</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">conf</span><span class="p">.</span><span class="nx">dbURL</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
-</pre></div>
-</code></pre>
-<p><a href="https://mongolab.com/">MongoLab</a> has written very good article on <a href="http://blog.mongolab.com/2013/10/do-you-want-a-timeout/">MongoDB Timeout</a></p>
-<a name="connection-polling" class="anchor" href="#connection-polling"><h3>Connection Polling</h3>
-</a><p>You should consider using connection pooling. It will make for a much faster and
-more stable application. You won&#39;t spend the time on each request to create connections (can be noticeable to the end user) and you aren&#39;t subject to connect errors either.</p>
-<p>The <code>mongoose</code> package for NodeJS handles connection pooling by default. If you use your own
-MongoDB driver, make sure you have implemented connection pooling.</p>
-<p>Thanks to <a href="https://mongolab.com/">MongoLab</a> for sharing amazing tips of MongoDB with us.
-The support of MongoLab is awesome and respond for questions very quickly. I highly recommending for MongoDB database.</p>
-<p>Have a nice day.</p>
-</div>
-      <h4><a href="/blog/posts/Things-you-should-consider-for-MongoDB-in-production.html#comments">View comments</a></h4>
-      <ul class="pagination group">
-        <li><a href="/page/1/">2</a>
-        </li>
-        <li><a href="/page/2/">3</a>
-        </li>
-        <li><a href="/page/3/">4</a>
-        </li>
-        <li><a href="/page/4/" class="active-page">5</a>
-        </li>
-        <li><a href="/page/5/">6</a>
-        </li>
-        <li><a href="/page/6/">7</a>
-        </li>
-      </ul>
-    </div><a href="http://www.fizerkhan.com/"><img src="/images/cabin.png" class="cabin"></a>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-    <script src="/scripts/main.js"></script>
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      
-      ga('create', 'UA-41972683-1', 'fizerkhan.com');
-      ga('send', 'pageview');
-    </script>
-  </body>
-</html>
+ga('create', 'UA-41972683-1', 'fizerkhan.com');
+ga('send', 'pageview');</script></body></html>

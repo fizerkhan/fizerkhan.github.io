@@ -1,7 +1,7 @@
-----
-title: Things you should consider for MongoDB in production
-date:   2013-11-4
-----
+{
+  title: 'Things you should consider for MongoDB in production',
+  date: '2013-11-4'
+}
 
 We are using MongoDB for few of our products. We like to share some of the
 recommendations for MongoDB in production.

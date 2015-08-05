@@ -1,7 +1,7 @@
-----
-title:  Javascript snippets save your time
-date:   2013-10-6
-----
+{
+  title: 'Javascript snippets save your time',
+  date: '2013-10-6'
+}
 
 When i work with web application, i got few JS snippet from different places(Mostly from StackOverflow). I hope, it will save your time.
 

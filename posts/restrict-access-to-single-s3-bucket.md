@@ -1,7 +1,7 @@
-----
-title: Restrict user access to Single S3 Bucket using Amazon IAM
-date:   2014-11-12
-----
+{
+  title: 'Restrict user access to Single S3 Bucket using Amazon IAM',
+  date: '2014-11-12'
+}
 
 S3 becomes de-facto standard for publishing files in the internet.
 When you work with the team, you might want to restrict an access of single S3 bucket to

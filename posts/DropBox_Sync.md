@@ -1,7 +1,7 @@
-----
-title:  Dropbox will save your head
-date:   2013-11-4
-----
+{
+  title: 'Dropbox will save your head',
+  date: '2013-11-04'
+}
 
 Recently My Mac OSX has been crashed and i cannot retrieve some of my data from hard drive.
 Fortunately i have already synced important folders to the `Dropbox` that saves my head.

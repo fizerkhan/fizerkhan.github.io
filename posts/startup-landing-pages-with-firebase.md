@@ -1,7 +1,7 @@
-----
-title: Startup Landing Pages with Firebase
-date:   2014-10-04
-----
+{
+  title: 'Startup Landing Pages with Firebase',
+  date: '2014-10-04'
+}
 
 Now-a-days *Landing Page* has become common and popular among startups and publishers. Every landing page has one important call-to-action, i.e. to sign up early adopters  for their beta version.
 

@@ -1,7 +1,7 @@
-----
-title: Download a file without server request
-date:   2014-8-1
-----
+{
+  title: 'Download a file without server request',
+  date: '2014-8-1'
+}
 
 We have come across `Download file` link(button) in lot of sites. Generally, When you click `download` link or button, it sends `GET` request to server and server returns the downloadable content(with `content-disposition` header). Now-a-days we are building lot of Single Page application where we get the `JSON` payload from the server and render it in the client side.
 Since we have the data in the client side, we don't want to sent another request to download the content. So we will see how to download the content from the client side

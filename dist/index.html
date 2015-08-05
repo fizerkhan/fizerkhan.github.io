@@ -1,29 +1,51 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/images/cabin.png">
-    <link href="/styles/main.css" rel="stylesheet">
-    <title>Fizer Khan Blog</title>
-  </head>
-  <body>
-    <nav id="nav">
-      <h1 class="name"><a href="/">Fizer Khan</a></h1>
-      <ul class="nav-links">
-        <li class="menu icon-menu"></li>
-        <li class="text-link"><a href="/about.html">About</a></li>
-        <li class="text-link"><a href="/projects.html">Projects</a></li>
-        <li class="text-link"><a href="/archives.html">Archives</a></li>
-      </ul>
-      <div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div>
-    </nav>
-    <div class="content">
-      <div class="post-head group"><a href="/blog/posts/GitHub-is-blocked-in-India.html">
-          <h1 class="post-title">GitHub is blocked in India</h1></a>
-        <h2 class="post-date">2014 &#183; 12 &#183; 30</h2>
-      </div>
-      <div class="post-body"><p><a href="https://github.com/">GitHub</a> is blocked in India along with <a href="http://pastebin.com/">pastebin</a> and <a href="http://imgur.com/">imgur</a>.</p>
+<!DOCTYPE html><html><head><meta charset="utf8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/png" href="/images/cabin.png"><link href="/styles/main.css" rel="stylesheet"><title>Fizer Khan Blog</title></head><body><nav id="nav"><h1 class="name"><a href="/">Fizer Khan</a></h1><ul class="nav-links"><li class="menu icon-menu"></li><li class="text-link"><a href="/about.html">About</a></li><li class="text-link"><a href="/projects.html">Projects</a></li><li class="text-link"><a href="/archives.html">Archives</a></li></ul><div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div></nav><div class="content"><div class="post-head group"><a href="/blog/posts/JAWS-The-Javascript-AWS-Stack.html"><h1 class="post-title">JAWS: The Javascript + AWS Stack</h1></a><h2 class="post-date">2015 &#183; 8 &#183; 5</h2></div><div class="post-body"><p>JAWS is a stack from Amazon web services(AWS) to ease the development of
+massive scalable web applications.</p>
+<p>It is trying to solve important problems in scalable web application development.</p>
+<p><strong>1. No Backend servers</strong>: All web and mobile application needs backend server and
+database server. Since the JAWS back-end is comprised entirely of AWS Lambda Functions,
+you don&#39;t need to write your back end server in Node, Ruby, PHP or python.
+A back-end comprised of Lambda functions comes with a ton of concurrency and
+you can easily enable multi-region redundancy. So there is no need for
+scaling/deploying/maintaing/monitoring servers again.</p>
+<p><strong>2. Cheap</strong>: Lambda functions run only when they are called, and you only pay for when they are run.</p>
+<p>You can build your app using following AWS services</p>
+<ul>
+<li><strong><a href="https://aws.amazon.com/lambda/">Lambda</a></strong> - Build worker tasks that you can spawn and scale infinitely.</li>
+<li><strong><a href="https://aws.amazon.com/dynamodb/">DynamoDB</a></strong> - Managed, NOSQL data storage</li>
+<li><strong><a href="http://aws.amazon.com/api-gateway/">API Gateway</a></strong> - Launch an API with urls pointing to your Lambda functions.</li>
+<li><strong><a href="https://aws.amazon.com/s3/">S3</a></strong> - Host static assets for your site.</li>
+</ul>
+<h2><a name="architecture" class="anchor" href="#architecture"><span class="header-link"></span></a>Architecture</h2><p><img src="https://raw.githubusercontent.com/servant-app/JAWS/master/site/public/img/jaws_diagram_javascript_aws.png" alt="Architecture"></p>
+<h3><a name="api" class="anchor" href="#api"><span class="header-link"></span></a>API</h3><p>As we know, there is no backend servers. Everything is written as Lambda functions.
+In normal backend server, we used to write controller to handle the routes. Similarly,
+each of your API URLs points to one of these Lambda functions and they are completely
+isolated from each other enabling you to develop/update/configure/deploy/maintain
+code for specific API urls at any time without affecting other parts.</p>
+<p>You can either use the AWS Management Console&#39;s API Gateway User Interface to create your API, or define your API in the <code>api_swagger.json</code> file and deploy instantly via AWS&#39;s Swagger Import Tool .</p>
+<h3><a name="lib" class="anchor" href="#lib"><span class="header-link"></span></a>Lib</h3><p>The lib folder/module contains re-useable code you can use across all of your Lambda functions, which can be thought of as your <code>Models</code>. It&#39;s an npm module that can be required into your Lambda functions, like any other.</p>
+<p>You can can require in only the code that your Lambda function needs.</p>
+<pre><code class="lang-javascript"><div class="highlight"><pre><span class="c1">// This only loads code needed for the User Model</span>
+<span class="kd">var</span> <span class="nx">ModelUser</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;jaws-lib&#39;</span><span class="p">).</span><span class="nx">models</span><span class="p">.</span><span class="nx">User</span><span class="p">;</span>
+</pre></div>
+
+</code></pre>
+<p> This way, all of the changes in the lib folder will be instantly available in every one of your Lambda functions when you run/test them locally.</p>
+<h3><a name="cli" class="anchor" href="#cli"><span class="header-link"></span></a>CLI</h3><p>The stack comes with command line tool to test locally and deploy.</p>
+<pre><code class="lang-bash"><div class="highlight"><pre><span class="c"># Run A Lambda Function Locally</span>
+jaws run
+
+<span class="c"># Deploy A Lambda Function</span>
+jaws deploy
+
+<span class="c"># Start A Local Server from site folder</span>
+jaws server
+</pre></div>
+
+</code></pre>
+<p>The static assets can be uploaded and served from S3 for super fast response times.
+Definitely JAWS saves lot of development time. You can try and let me know your comments
+and feedbacks.</p>
+</div><h4><a href="/blog/posts/JAWS-The-Javascript-AWS-Stack.html#comments">View comments</a></h4><div class="post-head group"><a href="/blog/posts/GitHub-is-blocked-in-India.html"><h1 class="post-title">GitHub is blocked in India</h1></a><h2 class="post-date">2014 &#183; 12 &#183; 30</h2></div><div class="post-body"><p><a href="https://github.com/">GitHub</a> is blocked in India along with <a href="http://pastebin.com/">pastebin</a> and <a href="http://imgur.com/">imgur</a>.</p>
 <p>Since 17th December Indian ISPs have started blocking the free Git hosting
 repository GitHub. No prior information, no explanations, no notice,
 simple block. The ISPs in India are setting a bad precedent of freedom of speech.
@@ -33,8 +55,7 @@ instructions of competent authority.</p>
 image sharing site <code>imgur</code> and popular paste hosting website, <code>Pastebin</code>.</p>
 <p>It is really a bad news for the fast growing Indian economy.
 Hope, it will be resolved soon. If you are in India, you can use the following solution.</p>
-<a name="add-google-dns-server" class="anchor" href="#add-google-dns-server"><h3>Add Google DNS Server</h3>
-</a><p>This can be solved by adding Google DNS server. If you are a Mac OSX user,
+<h3><a name="add-google-dns-server" class="anchor" href="#add-google-dns-server"><span class="header-link"></span></a>Add Google DNS Server</h3><p>This can be solved by adding Google DNS server. If you are a Mac OSX user,
 following steps will help you</p>
 <ol>
 <li><p>Choose <code>Apple menu &gt; System Preferences</code>, and then click <code>Network</code>.</p>
@@ -52,49 +73,38 @@ following steps will help you</p>
 </ol>
 <p>When you’re finished, click <code>OK</code> and then <code>Apply</code>. Now you can access the blocked sites.</p>
 <p>For Windows user, <a href="http://www.opennicproject.org/configure-your-dns/how-to-change-dns-servers-in-windows-7/">How to change DNS Servers in Windows 7</a></p>
-</div>
-      <h4><a href="/blog/posts/GitHub-is-blocked-in-India.html#comments">View comments</a></h4>
-      <div class="post-head group"><a href="/blog/posts/Security-HTTP-headers.html">
-          <h1 class="post-title">Security HTTP headers</h1></a>
-        <h2 class="post-date">2014 &#183; 12 &#183; 29</h2>
-      </div>
-      <div class="post-body"><p>Security becomes an inevitable feature for every web and mobile application.
+</div><h4><a href="/blog/posts/GitHub-is-blocked-in-India.html#comments">View comments</a></h4><div class="post-head group"><a href="/blog/posts/Security-HTTP-headers.html"><h1 class="post-title">Security HTTP headers</h1></a><h2 class="post-date">2014 &#183; 12 &#183; 29</h2></div><div class="post-body"><p>Security becomes an inevitable feature for every web and mobile application.
 There are many things to consider when securing web applications.</p>
 <p>Now let&#39;s have a look at the headers and how they can improve the security of your website.</p>
-<a name="x-frame-options" class="anchor" href="#x-frame-options"><h3>X-FRAME-OPTIONS</h3>
-</a><p>This header Provides Clickjacking protection.</p>
+<h3><a name="x-frame-options" class="anchor" href="#x-frame-options"><span class="header-link"></span></a>X-FRAME-OPTIONS</h3><p>This header Provides Clickjacking protection.</p>
 <pre><code><div class="highlight"><pre><span class="nx">X</span><span class="o">-</span><span class="nx">FRAME</span><span class="o">-</span><span class="nx">OPTIONS</span><span class="o">:</span> <span class="nx">SAMEORIGIN</span>
 </pre></div>
-</code></pre>
-<p><em>Values:</em></p>
+
+</code></pre><p><em>Values:</em></p>
 <ul>
 <li><strong>DENY</strong> - no rendering within a frame,</li>
 <li><strong>SAMEORIGIN</strong> - no rendering if origin mismatch,</li>
 <li><strong>ALLOW-FROM: DOMAIN</strong> - allow rendering if framed by frame loaded from DOMAIN</li>
 </ul>
-<a name="strict-transport-security" class="anchor" href="#strict-transport-security"><h3>Strict-Transport-Security</h3>
-</a><p>The Strict-Transport-Security header will instruct the browser to do two important things:</p>
+<h3><a name="strict-transport-security" class="anchor" href="#strict-transport-security"><span class="header-link"></span></a>Strict-Transport-Security</h3><p>The Strict-Transport-Security header will instruct the browser to do two important things:</p>
 <ol>
 <li>Load all content from your domain over HTTPS</li>
 <li>Refuse to connect in case of certificate errors and warnings</li>
 </ol>
 <pre><code><div class="highlight"><pre><span class="nx">Strict</span><span class="o">-</span><span class="nx">Transport</span><span class="o">-</span><span class="nx">Security</span><span class="o">:</span><span class="nx">max</span><span class="o">-</span><span class="nx">age</span><span class="o">=</span><span class="mi">15552000</span><span class="p">;</span> <span class="nx">includeSubDomains</span>
 </pre></div>
-</code></pre>
-<p><code>includeSubdomains</code> indicates whether the policy should also be applied to subdomains.</p>
-<a name="x-content-type-options" class="anchor" href="#x-content-type-options"><h3>X-Content-Type-Options</h3>
-</a><p>To disable the MIME-sniffing, add the header:</p>
+
+</code></pre><p><code>includeSubdomains</code> indicates whether the policy should also be applied to subdomains.</p>
+<h3><a name="x-content-type-options" class="anchor" href="#x-content-type-options"><span class="header-link"></span></a>X-Content-Type-Options</h3><p>To disable the MIME-sniffing, add the header:</p>
 <pre><code><div class="highlight"><pre><span class="nx">X</span><span class="o">-</span><span class="nx">Content</span><span class="o">-</span><span class="nx">Type</span><span class="o">-</span><span class="nx">Options</span><span class="o">:</span><span class="nx">nosniff</span>
 </pre></div>
-</code></pre>
-<p>The only defined value, &quot;nosniff&quot;, prevents Internet Explorer and Google Chrome from MIME-sniffing a response away from the declared content-type. This also applies to Google Chrome, when downloading extensions.</p>
-<a name="x-download-options" class="anchor" href="#x-download-options"><h3>X-Download-Options</h3>
-</a><p>This disables the option to open a file directly on download.</p>
+
+</code></pre><p>The only defined value, &quot;nosniff&quot;, prevents Internet Explorer and Google Chrome from MIME-sniffing a response away from the declared content-type. This also applies to Google Chrome, when downloading extensions.</p>
+<h3><a name="x-download-options" class="anchor" href="#x-download-options"><span class="header-link"></span></a>X-Download-Options</h3><p>This disables the option to open a file directly on download.</p>
 <pre><code><div class="highlight"><pre><span class="nx">X</span><span class="o">-</span><span class="nx">Download</span><span class="o">-</span><span class="nx">Options</span><span class="o">:</span><span class="nx">noopen</span>
 </pre></div>
-</code></pre>
-<a name="x-xss-protection" class="anchor" href="#x-xss-protection"><h3>X-XSS-Protection</h3>
-</a><p>The XSS protection was introduced in IE 8 as a security measure designed
+
+</code></pre><h3><a name="x-xss-protection" class="anchor" href="#x-xss-protection"><span class="header-link"></span></a>X-XSS-Protection</h3><p>The XSS protection was introduced in IE 8 as a security measure designed
 to thwart XSS (Cross Site Scripting) attacks. In short, IE tries to detect
 whether there has occurred an XSS attack, if so it will modify the page to block
 the attack and display a warning to the user.</p>
@@ -104,81 +114,18 @@ Here are examples of how you can set the header:</p>
 <pre><code><div class="highlight"><pre><span class="nx">X</span><span class="o">-</span><span class="nx">XSS</span><span class="o">-</span><span class="nx">Protection</span><span class="o">:</span> <span class="mi">0</span>
 <span class="nx">X</span><span class="o">-</span><span class="nx">XSS</span><span class="o">-</span><span class="nx">Protection</span><span class="o">:</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">mode</span><span class="o">=</span><span class="nx">block</span>
 </pre></div>
-</code></pre>
-<a name="content-security-policy" class="anchor" href="#content-security-policy"><h3>Content-Security-Policy</h3>
-</a><p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks.</p>
+
+</code></pre><h3><a name="content-security-policy" class="anchor" href="#content-security-policy"><span class="header-link"></span></a>Content-Security-Policy</h3><p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks.</p>
 <p>If enabled, CSP has significant impact on the way browser renders pages
 (e.g., inline JavaScript disabled by default and must be explicitly allowed in policy).</p>
 <pre><code><div class="highlight"><pre><span class="nx">Content</span><span class="o">-</span><span class="nx">Security</span><span class="o">-</span><span class="nx">Policy</span><span class="o">:</span><span class="k">default</span><span class="o">-</span><span class="nx">src</span> <span class="nx">https</span><span class="o">:</span><span class="p">;</span> <span class="nx">connect</span><span class="o">-</span><span class="nx">src</span> <span class="nx">https</span><span class="o">:</span><span class="p">;</span> <span class="nx">font</span><span class="o">-</span><span class="nx">src</span> <span class="nx">https</span><span class="o">:</span> <span class="nx">data</span><span class="o">:</span><span class="p">;</span> <span class="nx">frame</span><span class="o">-</span><span class="nx">src</span> <span class="nx">https</span><span class="o">:</span> <span class="nx">twitter</span><span class="o">:</span><span class="p">;</span> <span class="nx">img</span><span class="o">-</span><span class="nx">src</span> <span class="nx">https</span><span class="o">:</span> <span class="nx">data</span><span class="o">:</span><span class="p">;</span> <span class="nx">media</span><span class="o">-</span><span class="nx">src</span> <span class="nx">https</span><span class="o">:</span><span class="p">;</span> <span class="nx">object</span><span class="o">-</span><span class="nx">src</span> <span class="nx">https</span><span class="o">:</span><span class="p">;</span> <span class="nx">script</span><span class="o">-</span><span class="nx">src</span> <span class="s1">&#39;unsafe-inline&#39;</span> <span class="s1">&#39;unsafe-eval&#39;</span> <span class="nx">https</span><span class="o">:</span><span class="p">;</span> <span class="nx">style</span><span class="o">-</span><span class="nx">src</span> <span class="s1">&#39;unsafe-inline&#39;</span> <span class="nx">https</span><span class="o">:</span><span class="p">;</span> <span class="nx">report</span><span class="o">-</span><span class="nx">uri</span> <span class="nx">https</span><span class="o">:</span><span class="c1">//twitter.com/i/csp_report?a=NVQWGYLXFVZXO2LGOQ%3D%3D%3D%3D%3D%3D&amp;ro=false;</span>
 </pre></div>
-</code></pre>
-<p>These HTTP headers protect your users from various kinds of attacks.</p>
-</div>
-      <h4><a href="/blog/posts/Security-HTTP-headers.html#comments">View comments</a></h4>
-      <div class="post-head group"><a href="/blog/posts/Sending-SMS-using-Plivo-in-Google-App-Engine.html">
-          <h1 class="post-title">Sending SMS using Plivo in Google App Engine</h1></a>
-        <h2 class="post-date">2014 &#183; 12 &#183; 26</h2>
-      </div>
-      <div class="post-body"><p>Now-a-days, sending a SMS is part of the notification in all web and mobile products.
-We uses <a href="https://www.plivo.com/">Plivo</a> to send SMS notification.</p>
-<p>Let me share the code that we used for sending SMS in Java Google App Engine project.</p>
-<pre><code><div class="highlight"><pre>  <span class="kr">public</span> <span class="kr">static</span> <span class="kr">final</span> <span class="nb">String</span> <span class="nx">PLIVO_VERSION</span> <span class="o">=</span> <span class="s2">&quot;v1&quot;</span><span class="p">;</span>
-  <span class="kr">public</span> <span class="kr">static</span> <span class="kr">final</span> <span class="nb">String</span> <span class="nx">PLIVO_AUTH_ID</span> <span class="o">=</span> <span class="s2">&quot;YOUR_PLIVO_AUTH_ID&quot;</span><span class="p">;</span>
-  <span class="kr">public</span> <span class="kr">static</span> <span class="kr">final</span> <span class="nb">String</span> <span class="nx">PLIVO_AUTH_TOKEN</span> <span class="o">=</span> <span class="s2">&quot;YOUR_PLIVO_AUTH_TOKEN&quot;</span><span class="p">;</span>
-  <span class="kr">public</span> <span class="kr">static</span> <span class="kr">final</span> <span class="nb">String</span> <span class="nx">PLIVO_NUMBER</span> <span class="o">=</span> <span class="s2">&quot;YOUR_PLIVO_NUMBER&quot;</span><span class="p">;</span>
 
-  <span class="kr">public</span> <span class="kr">static</span> <span class="k">void</span> <span class="nx">sendSMS</span><span class="p">(</span><span class="nb">String</span> <span class="nx">dst</span><span class="p">,</span> <span class="nb">String</span> <span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
+</code></pre><p>These HTTP headers protect your users from various kinds of attacks.</p>
+</div><h4><a href="/blog/posts/Security-HTTP-headers.html#comments">View comments</a></h4><ul class="pagination group"></ul></div><a href="http://www.fizerkhan.com/"><img src="/images/cabin.png" class="cabin"></a><script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script><script src="/scripts/main.js"></script><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    <span class="nx">Client</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">Client</span><span class="p">.</span><span class="nx">create</span><span class="p">();</span>
-    <span class="c1">// client.addFilter(new LoggingFilter(System.out));</span>
-    <span class="nx">WebResource</span> <span class="nx">webResource</span> <span class="o">=</span> <span class="nx">client</span>
-        <span class="p">.</span><span class="nx">resource</span><span class="p">(</span><span class="s2">&quot;https://api.plivo.com/v1/Account/&quot;</span> <span class="o">+</span> <span class="nx">PLIVO_AUTH_ID</span>
-            <span class="o">+</span> <span class="s2">&quot;/Message/&quot;</span><span class="p">);</span>
-    <span class="nx">client</span><span class="p">.</span><span class="nx">addFilter</span><span class="p">(</span><span class="k">new</span> <span class="nx">HTTPBasicAuthFilter</span><span class="p">(</span><span class="nx">PLIVO_AUTH_ID</span><span class="p">,</span>
-        <span class="nx">PLIVO_AUTH_TOKEN</span><span class="p">));</span>
-
-    <span class="nx">JSONObject</span> <span class="nx">object</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">JSONObject</span><span class="p">();</span>
-    <span class="nx">object</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s2">&quot;src&quot;</span><span class="p">,</span> <span class="nx">PLIVO_NUMBER</span><span class="p">);</span>
-    <span class="nx">object</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s2">&quot;dst&quot;</span><span class="p">,</span> <span class="nx">dst</span><span class="p">);</span>
-    <span class="nx">object</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="nx">text</span><span class="p">);</span>
-    <span class="nx">object</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="s2">&quot;sms&quot;</span><span class="p">);</span>
-    <span class="nx">ClientResponse</span> <span class="nx">clientResponse</span> <span class="o">=</span> <span class="nx">webResource</span>
-        <span class="p">.</span><span class="nx">type</span><span class="p">(</span><span class="nx">MediaType</span><span class="p">.</span><span class="nx">APPLICATION_JSON</span><span class="p">)</span>
-        <span class="p">.</span><span class="nx">header</span><span class="p">(</span><span class="nx">HTTPChecker</span><span class="p">.</span><span class="nx">USER_AGENT_NAME</span><span class="p">,</span>
-            <span class="nx">HTTPChecker</span><span class="p">.</span><span class="nx">USER_AGENT_VALUE</span><span class="p">)</span>
-        <span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">ClientResponse</span><span class="p">.</span><span class="kr">class</span><span class="p">,</span> <span class="nx">object</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
-
-    <span class="kr">int</span> <span class="nx">status</span> <span class="o">=</span> <span class="nx">clientResponse</span><span class="p">.</span><span class="nx">getStatus</span><span class="p">();</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">status</span> <span class="o">&gt;=</span> <span class="mi">400</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">System</span><span class="p">.</span><span class="nx">out</span><span class="p">.</span><span class="nx">println</span><span class="p">(</span><span class="nx">clientResponse</span><span class="p">.</span><span class="nx">getEntity</span><span class="p">(</span><span class="nb">String</span><span class="p">.</span><span class="kr">class</span><span class="p">));</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-</pre></div>
-</code></pre>
-<p>Here we uses Java Rest client <a href="https://jersey.java.net/">jersey</a> to send a request
-to <code>plivo</code>.</p>
-<p>Hope it helps and Have a nice day.</p>
-</div>
-      <h4><a href="/blog/posts/Sending-SMS-using-Plivo-in-Google-App-Engine.html#comments">View comments</a></h4>
-      <ul class="pagination group">
-        <li><a href="/" class="active-page">1</a>
-        </li>
-        <li><a href="/page/1/">2</a>
-        </li>
-        <li><a href="/page/2/">3</a>
-        </li>
-      </ul>
-    </div><a href="http://www.fizerkhan.com/"><img src="/images/cabin.png" class="cabin"></a>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-    <script src="/scripts/main.js"></script>
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      
-      ga('create', 'UA-41972683-1', 'fizerkhan.com');
-      ga('send', 'pageview');
-    </script>
-  </body>
-</html>
+ga('create', 'UA-41972683-1', 'fizerkhan.com');
+ga('send', 'pageview');</script></body></html>

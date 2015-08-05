@@ -1,7 +1,7 @@
-----
-title: Grunt Live reloading with external server
-date:   2013-6-29
-----
+{
+  title: 'Grunt Live reloading with external server',
+  date: '2013-6-29'
+}
 
 Grunt is amazing task runner for front end application. We are using grunt for our front end project and it works great. But for a while, we don't know how to run grunt live reload with our own Node JS server.
 

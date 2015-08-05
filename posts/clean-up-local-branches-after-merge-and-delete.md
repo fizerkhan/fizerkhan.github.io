@@ -1,7 +1,7 @@
-----
-title: Clean up your local branches after merge and delete in GitHub
-date:   2014-11-23
-----
+{
+  title: 'Clean up your local branches after merge and delete in GitHub',
+  date: '2014-11-23'
+}
 
 If you are a Github user, then you might familiar with Pull Requests. Github
 has an [options](https://github.com/blog/1335-tidying-up-after-pull-requests)

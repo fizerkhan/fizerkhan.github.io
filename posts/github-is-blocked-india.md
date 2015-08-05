@@ -1,7 +1,7 @@
-----
-title: GitHub is blocked in India
-date:   2014-12-30
-----
+{
+  title: 'GitHub is blocked in India',
+  date: '2014-12-30'
+}
 
 [GitHub](https://github.com/) is blocked in India along with [pastebin](http://pastebin.com/) and [imgur](http://imgur.com/).
 

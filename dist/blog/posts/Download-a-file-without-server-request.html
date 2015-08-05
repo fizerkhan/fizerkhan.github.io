@@ -1,33 +1,7 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/images/cabin.png">
-    <link href="/styles/main.css" rel="stylesheet">
-    <title>Download a file without server request</title>
-  </head>
-  <body>
-    <nav id="nav">
-      <h1 class="name"><a href="/">Fizer Khan</a></h1>
-      <ul class="nav-links">
-        <li class="menu icon-menu"></li>
-        <li class="text-link"><a href="/about.html">About</a></li>
-        <li class="text-link"><a href="/projects.html">Projects</a></li>
-        <li class="text-link"><a href="/archives.html">Archives</a></li>
-      </ul>
-      <div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div>
-    </nav>
-    <div class="content">
-      <div class="post-head group"><a href="/blog/posts/Download-a-file-without-server-request.html">
-          <h1 class="post-title">Download a file without server request</h1></a>
-        <h2 class="post-date">2014 &#183; 8 &#183; 1</h2>
-      </div>
-      <div class="post-body"><p>We have come across <code>Download file</code> link(button) in lot of sites. Generally, When you click <code>download</code> link or button, it sends <code>GET</code> request to server and server returns the downloadable content(with <code>content-disposition</code> header). Now-a-days we are building lot of Single Page application where we get the <code>JSON</code> payload from the server and render it in the client side.
+<!DOCTYPE html><html><head><meta charset="utf8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/png" href="/images/cabin.png"><link href="/styles/main.css" rel="stylesheet"><title>Download a file without server request</title></head><body><nav id="nav"><h1 class="name"><a href="/">Fizer Khan</a></h1><ul class="nav-links"><li class="menu icon-menu"></li><li class="text-link"><a href="/about.html">About</a></li><li class="text-link"><a href="/projects.html">Projects</a></li><li class="text-link"><a href="/archives.html">Archives</a></li></ul><div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div></nav><div class="content"><div class="post-head group"><a href="/blog/posts/Download-a-file-without-server-request.html"><h1 class="post-title">Download a file without server request</h1></a><h2 class="post-date">2014 &#183; 8 &#183; 1</h2></div><div class="post-body"><p>We have come across <code>Download file</code> link(button) in lot of sites. Generally, When you click <code>download</code> link or button, it sends <code>GET</code> request to server and server returns the downloadable content(with <code>content-disposition</code> header). Now-a-days we are building lot of Single Page application where we get the <code>JSON</code> payload from the server and render it in the client side.
 Since we have the data in the client side, we don&#39;t want to sent another request to download the content. So we will see how to download the content from the client side
 without an extra request to server.</p>
-<a name="how-existing-download-from-server-works" class="anchor" href="#how-existing-download-from-server-works"><h3>How existing download from server works</h3>
-</a><p>Whenever you click the <code>download</code> link, it will send <code>GET</code> request. The server will
+<h3><a name="how-existing-download-from-server-works" class="anchor" href="#how-existing-download-from-server-works"><span class="header-link"></span></a>How existing download from server works</h3><p>Whenever you click the <code>download</code> link, it will send <code>GET</code> request. The server will
 set <code>Content-disposition</code> header to <code>attachment; filename=some-filename.csv</code> and set the data in the body.</p>
 <p><strong>Sample code from Node.js to download CSV file</strong></p>
 <pre><code class="lang-javascript"><div class="highlight"><pre><span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
@@ -41,9 +15,9 @@ set <code>Content-disposition</code> header to <code>attachment; filename=some-f
 <span class="p">})</span>
 <span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
 </pre></div>
+
 </code></pre>
-<a name="download-content-without-server-request" class="anchor" href="#download-content-without-server-request"><h3>Download content without server request</h3>
-</a><p>This can be done by two ways.</p>
+<h3><a name="download-content-without-server-request" class="anchor" href="#download-content-without-server-request"><span class="header-link"></span></a>Download content without server request</h3><p>This can be done by two ways.</p>
 <ol>
 <li>Using Data URL</li>
 <li>Using <a href="https://github.com/dcneiner/Downloadify">Downloadify</a> library</li>
@@ -53,6 +27,7 @@ set <code>Content-disposition</code> header to <code>attachment; filename=some-f
 the filename in the <code>download</code> attribute.</p>
 <pre><code class="lang-html"><div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;data:text/plain,this is some text&quot;</span> <span class="na">download=</span><span class="s">&quot;some-filename.txt&quot;</span> <span class="na">target=</span><span class="s">&quot;_blank&quot;</span><span class="nt">&gt;</span>Download<span class="nt">&lt;a&gt;</span>
 </pre></div>
+
 </code></pre>
 <p><strong>Caution:</strong> The data url is not supported across all browser/version combinations.</p>
 <p><strong>Using Downloadify</strong></p>
@@ -65,8 +40,8 @@ It is much better than previous one.</p>
 <span class="c1">// With Jquery</span>
 <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#element&quot;</span><span class="p">).</span><span class="nx">downloadify</span><span class="p">(</span> <span class="nx">options</span> <span class="p">);</span>
 </pre></div>
-</code></pre>
-<p><strong>HTML</strong></p>
+
+</code></pre><p><strong>HTML</strong></p>
 <pre><code class="lang-html"><div class="highlight"><pre><span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;js/swfobject.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
     <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;js/downloadify.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
@@ -83,6 +58,7 @@ It is much better than previous one.</p>
   <span class="nt">&lt;/form&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
 </pre></div>
+
 </code></pre>
 <p><strong>Javascript</strong></p>
 <pre><code class="lang-javascript"><div class="highlight"><pre><span class="kd">function</span> <span class="nx">load</span><span class="p">(){</span>
@@ -105,57 +81,32 @@ It is much better than previous one.</p>
       <span class="p">});</span>
     <span class="p">}</span>
 </pre></div>
+
 </code></pre>
 <p>A <a href="http://pixelgraphics.us/downloadify/test.html">very simple demo is available</a> that lets you supply your own content and filename and test out saving, canceling, and the error functionality when the file is blank.</p>
 <p>Please check <a href="https://github.com/dcneiner/Downloadify">Downloadify</a> Readme for more information.
 Share your thoughts and suggestions in the comment. Have a nice day.</p>
-</div>
-      <div class="social"><a href="http://news.ycombinator.com/submit" class="hn-share-button">Vote on HN</a><a href="https://twitter.com/share" data-via="fizerkhan" data-lang="en" class="twitter-share-button">Tweet</a>
-        <div data-action="share" data-annotation="bubble" class="g-plus"></div>
-      </div>
-      <hr class="style-eight">
-      <div id="comments">
-        <div id="disqus_thread"></div>
-      </div>
-      <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'fizerkhan'; // required: replace example with your forum shortname
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-      </script>
-      <noscript>Please enable JavaScript to view the<a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript><a href="http://disqus.com" class="dsq-brlink">comments powered by<span class="logo-disqus">Disqus</span></a>
-      <script>
-        (function(d, t) {
-          var g = d.createElement(t),
-              s = d.getElementsByTagName(t)[0];
-          g.src = '//hnbutton.appspot.com/static/hn.min.js';
-          s.parentNode.insertBefore(g, s);
-        }(document, 'script'));
-      </script>
-      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-      <script>
-        (function() {
-          var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-          po.src = 'https://apis.google.com/js/plusone.js';
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-        })();
-        
-      </script>
-    </div><a href="http://www.fizerkhan.com/"><img src="/images/cabin.png" class="cabin"></a>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-    <script src="/scripts/main.js"></script>
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      
-      ga('create', 'UA-41972683-1', 'fizerkhan.com');
-      ga('send', 'pageview');
-    </script>
-  </body>
-</html>
+</div><div class="social"><a href="http://news.ycombinator.com/submit" class="hn-share-button">Vote on HN</a><a href="https://twitter.com/share" data-via="fizerkhan" data-lang="en" class="twitter-share-button">Tweet</a><div data-action="share" data-annotation="bubble" class="g-plus"></div></div><hr class="style-eight"><div id="comments"><div id="disqus_thread"></div></div><script>/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'fizerkhan'; // required: replace example with your forum shortname
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript><a href="http://disqus.com" class="dsq-brlink">comments powered by<span class="logo-disqus">Disqus</span></a><script>(function(d, t) {
+  var g = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+  g.src = '//hnbutton.appspot.com/static/hn.min.js';
+  s.parentNode.insertBefore(g, s);
+}(document, 'script'));</script><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script><script>(function() {
+  var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+  po.src = 'https://apis.google.com/js/plusone.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+})();
+</script></div><a href="http://www.fizerkhan.com/"><img src="/images/cabin.png" class="cabin"></a><script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script><script src="/scripts/main.js"></script><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-41972683-1', 'fizerkhan.com');
+ga('send', 'pageview');</script></body></html>

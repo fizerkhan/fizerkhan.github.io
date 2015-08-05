@@ -1,7 +1,7 @@
-----
-title: Sending Mail using MailGun in Google App Engine
-date:   2014-12-23
-----
+{
+  title: 'Sending Mail using MailGun in Google App Engine',
+  date: '2014-12-23'
+}
 
 Google App engine provides an email service to send email.
 Unfortunately it is limited to 100 emails per day.

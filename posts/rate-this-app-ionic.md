@@ -1,7 +1,7 @@
-----
-title: Rate this app in Ionic application
-date:   2014-12-4
-----
+{
+  title: 'Rate this app in Ionic application',
+  date: '2014-12-4'
+}
 
 You may need a "Rate this app" link inside your Ionic Framework Android
 and iOS application. When i implemented this features by adding the link to

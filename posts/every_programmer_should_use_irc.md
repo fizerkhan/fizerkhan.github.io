@@ -1,7 +1,7 @@
-----
-title: Every Programmer should use IRC
-date:   2013-11-3
-----
+{
+  title: 'Every Programmer should use IRC',
+  date: '2013-11-3'
+}
 
 I am a very average programmer, but like to learn new things from others. We have lot of medium to learn something new, interesting and useful. As a programmer, i use `Google Search`, `Stack Overflow` and `Github` to get to know new things and the answers for my questions. But most of the time,
 when i see the answers, there are multiple questions and other solutions(Mostly Stupid) come out from my brain. Even though, i can reply or add comment to questions in `Stack Overflow` and `Github issues`, they are not very humanized. I mean, it is not like interacting with real human and have continuous conversation in a moment when we have lot of things going around mind, not like getting reply after two hours and sometimes two days.

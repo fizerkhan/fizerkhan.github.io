@@ -1,7 +1,7 @@
-----
-title: Security HTTP headers
-date:   2014-12-29
-----
+{
+  title: 'Security HTTP headers',
+  date: '2014-12-29'
+}
 
 Security becomes an inevitable feature for every web and mobile application.
 There are many things to consider when securing web applications.

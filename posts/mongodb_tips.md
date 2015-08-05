@@ -1,7 +1,7 @@
-----
-title: MongoDB tips
-date:   2013-7-2
-----
+{
+  title: 'MongoDB tips',
+  date: '2013-7-2'
+}
 
 [MongoDB](http://www.mongodb.org/) becomes more popular among the developers because of its schemaless nature which give more flexibility. We can store any kind of data  without having to worry about the structure of the data.
 

@@ -1,7 +1,7 @@
-----
-title: Sending SMS using Plivo in Google App Engine
-date:   2014-12-26
-----
+{
+  title: 'Sending SMS using Plivo in Google App Engine',
+  date: '2014-12-26'
+}
 
 Now-a-days, sending a SMS is part of the notification in all web and mobile products.
 We uses [Plivo](https://www.plivo.com/) to send SMS notification.

@@ -1,7 +1,7 @@
-----
-title: Commands and Options I Wish I Knew Earlier About Git
-date:   2014-9-29
-----
+{
+  title: 'Commands and Options I Wish I Knew Earlier About Git',
+  date: '2014-9-29'
+}
 
 `Git` becomes de facto of source code management (SCM) system among developers.
 Many developers used to work on git from console. Mostly used commands are

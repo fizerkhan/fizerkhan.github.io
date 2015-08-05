@@ -9,20 +9,25 @@ Hope it is useful.
 
 To run
 
-    $ grunt server
+    grunt server
 
 To build
 
-    $ grunt build
+    grunt build
 
 To deploy
 
-    $ git push
+    git push
 
 
 To Deploy in Google app engine
 
-    $ git push appengine master
+    git push appengine master
+
+
+# Test AppEngine Deploy
+
+    dev_appserver.py --port 12000 .
 
 # Tools
 

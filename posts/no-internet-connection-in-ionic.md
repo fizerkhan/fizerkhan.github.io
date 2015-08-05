@@ -1,7 +1,7 @@
-----
-title: Showing 'No internet connection' message in Ionic application
-date:   2014-12-1
-----
+{
+  title: "Showing 'No internet connection' message in Ionic application",
+  date: '2014-12-1'
+}
 
 There are often times where you need to display `No internet connection`
 message to your users inside your Ionic Framework Android and iOS application.

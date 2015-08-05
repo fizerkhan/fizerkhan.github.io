@@ -32,12 +32,18 @@ module.exports = function (grunt) {
         src: 'posts',
         dest: 'dist',
         layout: 'src/layouts/post.jade',
-        url: 'blog/posts/:title',
+        url: function (post, options) {
+          return 'blog/posts/' + options.formatPostUrl(post.title) + '.html';
+        },
         options: {
           templateEngine: 'jade',
           pagination: {
             postsPerPage: 3,
             listPage: 'src/pages/index.jade'
+          },
+          // Test using a different post url format
+          formatPostUrl: function (urlSegment) {
+            return urlSegment.replace(/[^a-zA-Z0-9]/g, '-').replace(/-+/g, '-');
           }
         }
       }
@@ -47,12 +53,7 @@ module.exports = function (grunt) {
         options: {
           port: 9000,
           hostname: '0.0.0.0',
-          middleware: function (connect) {
-            return [
-              mountFolder(connect, 'dist'),
-              mountFolder(connect, 'src')
-            ];
-          }
+          base: ['dist', 'src'],
         }
       }
     },

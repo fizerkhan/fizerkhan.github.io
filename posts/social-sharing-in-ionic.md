@@ -1,7 +1,7 @@
-----
-title: Social Sharing in Ionic application
-date:   2014-12-8
-----
+{
+  title: 'Social Sharing in Ionic application',
+  date: '2014-12-8'
+}
 
 You may need a social sharing feature inside your Ionic Framework Android and iOS application.
 

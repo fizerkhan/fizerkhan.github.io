@@ -1,32 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/images/cabin.png">
-    <link href="/styles/main.css" rel="stylesheet">
-    <title>Things you should consider for MongoDB in production</title>
-  </head>
-  <body>
-    <nav id="nav">
-      <h1 class="name"><a href="/">Fizer Khan</a></h1>
-      <ul class="nav-links">
-        <li class="menu icon-menu"></li>
-        <li class="text-link"><a href="/about.html">About</a></li>
-        <li class="text-link"><a href="/projects.html">Projects</a></li>
-        <li class="text-link"><a href="/archives.html">Archives</a></li>
-      </ul>
-      <div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div>
-    </nav>
-    <div class="content">
-      <div class="post-head group"><a href="/blog/posts/Things-you-should-consider-for-MongoDB-in-production.html">
-          <h1 class="post-title">Things you should consider for MongoDB in production</h1></a>
-        <h2 class="post-date">2013 &#183; 11 &#183; 4</h2>
-      </div>
-      <div class="post-body"><p>We are using MongoDB for few of our products. We like to share some of the
+<!DOCTYPE html><html><head><meta charset="utf8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/png" href="/images/cabin.png"><link href="/styles/main.css" rel="stylesheet"><title>Things you should consider for MongoDB in production</title></head><body><nav id="nav"><h1 class="name"><a href="/">Fizer Khan</a></h1><ul class="nav-links"><li class="menu icon-menu"></li><li class="text-link"><a href="/about.html">About</a></li><li class="text-link"><a href="/projects.html">Projects</a></li><li class="text-link"><a href="/archives.html">Archives</a></li></ul><div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div></nav><div class="content"><div class="post-head group"><a href="/blog/posts/Things-you-should-consider-for-MongoDB-in-production.html"><h1 class="post-title">Things you should consider for MongoDB in production</h1></a><h2 class="post-date">2013 &#183; 11 &#183; 4</h2></div><div class="post-body"><p>We are using MongoDB for few of our products. We like to share some of the
 recommendations for MongoDB in production.</p>
-<a name="handle-connection-errors" class="anchor" href="#handle-connection-errors"><h3>Handle Connection Errors</h3>
-</a><p>Few weeks before, we faced one weird problem in our NodeJS  application.
+<h3><a name="handle-connection-errors" class="anchor" href="#handle-connection-errors"><span class="header-link"></span></a>Handle Connection Errors</h3><p>Few weeks before, we faced one weird problem in our NodeJS  application.
 Our customer can view our site and not able to login into the application.
 We tried to figure out the issue and found that MongoDB database connection is
 broken during mid night. After that, our application is not crashed,
@@ -36,11 +10,10 @@ connection in our code.</p>
 <p>You must handle error of MongoDB connection in you code. It can be even simple console log.</p>
 <pre><code><div class="highlight"><pre> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">connection</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">console</span><span class="p">,</span> <span class="s1">&#39;MongoDB connection error:&#39;</span><span class="p">));</span>
 </pre></div>
-</code></pre>
-<p>If you are using NodeJS, you must handle <code>error</code> and <code>exception</code> in all places.
+
+</code></pre><p>If you are using NodeJS, you must handle <code>error</code> and <code>exception</code> in all places.
 It is a best practice.</p>
-<a name="setting-timeout" class="anchor" href="#setting-timeout"><h3>Setting Timeout</h3>
-</a><p>You have to properly set your timeouts. The driver&#39;s default timeouts are very aggressive ranges anywhere from 1 second (e.g. the Node.JS driver in some cases) to 30 seconds (e.g  the Ruby driver), so you really need to think about what the optimal setting is for your use case.</p>
+<h3><a name="setting-timeout" class="anchor" href="#setting-timeout"><span class="header-link"></span></a>Setting Timeout</h3><p>You have to properly set your timeouts. The driver&#39;s default timeouts are very aggressive ranges anywhere from 1 second (e.g. the Node.JS driver in some cases) to 30 seconds (e.g  the Ruby driver), so you really need to think about what the optimal setting is for your use case.</p>
 <p>For connections made through a Platform-as-a-Serivce (PaaS) such as Heroku, you might consider an even higher timeout (e.g. 30 seconds) since your application is likely running in a container that can be “idled” or “passivated” during periods of low activity</p>
 <p>If you use Mongoose and NodeJS, then you can set connection timeout by</p>
 <pre><code><div class="highlight"><pre><span class="c1">// Database connect options</span>
@@ -49,63 +22,36 @@ It is a best practice.</p>
 <span class="c1">// Establish Database connection</span>
 <span class="kd">var</span> <span class="nx">conn</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">conf</span><span class="p">.</span><span class="nx">dbURL</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
 </pre></div>
-</code></pre>
-<p><a href="https://mongolab.com/">MongoLab</a> has written very good article on <a href="http://blog.mongolab.com/2013/10/do-you-want-a-timeout/">MongoDB Timeout</a></p>
-<a name="connection-polling" class="anchor" href="#connection-polling"><h3>Connection Polling</h3>
-</a><p>You should consider using connection pooling. It will make for a much faster and
+
+</code></pre><p><a href="https://mongolab.com/">MongoLab</a> has written very good article on <a href="http://blog.mongolab.com/2013/10/do-you-want-a-timeout/">MongoDB Timeout</a></p>
+<h3><a name="connection-polling" class="anchor" href="#connection-polling"><span class="header-link"></span></a>Connection Polling</h3><p>You should consider using connection pooling. It will make for a much faster and
 more stable application. You won&#39;t spend the time on each request to create connections (can be noticeable to the end user) and you aren&#39;t subject to connect errors either.</p>
 <p>The <code>mongoose</code> package for NodeJS handles connection pooling by default. If you use your own
 MongoDB driver, make sure you have implemented connection pooling.</p>
 <p>Thanks to <a href="https://mongolab.com/">MongoLab</a> for sharing amazing tips of MongoDB with us.
 The support of MongoLab is awesome and respond for questions very quickly. I highly recommending for MongoDB database.</p>
 <p>Have a nice day.</p>
-</div>
-      <div class="social"><a href="http://news.ycombinator.com/submit" class="hn-share-button">Vote on HN</a><a href="https://twitter.com/share" data-via="fizerkhan" data-lang="en" class="twitter-share-button">Tweet</a>
-        <div data-action="share" data-annotation="bubble" class="g-plus"></div>
-      </div>
-      <hr class="style-eight">
-      <div id="comments">
-        <div id="disqus_thread"></div>
-      </div>
-      <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'fizerkhan'; // required: replace example with your forum shortname
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-      </script>
-      <noscript>Please enable JavaScript to view the<a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript><a href="http://disqus.com" class="dsq-brlink">comments powered by<span class="logo-disqus">Disqus</span></a>
-      <script>
-        (function(d, t) {
-          var g = d.createElement(t),
-              s = d.getElementsByTagName(t)[0];
-          g.src = '//hnbutton.appspot.com/static/hn.min.js';
-          s.parentNode.insertBefore(g, s);
-        }(document, 'script'));
-      </script>
-      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-      <script>
-        (function() {
-          var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-          po.src = 'https://apis.google.com/js/plusone.js';
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-        })();
-        
-      </script>
-    </div><a href="http://www.fizerkhan.com/"><img src="/images/cabin.png" class="cabin"></a>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-    <script src="/scripts/main.js"></script>
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      
-      ga('create', 'UA-41972683-1', 'fizerkhan.com');
-      ga('send', 'pageview');
-    </script>
-  </body>
-</html>
+</div><div class="social"><a href="http://news.ycombinator.com/submit" class="hn-share-button">Vote on HN</a><a href="https://twitter.com/share" data-via="fizerkhan" data-lang="en" class="twitter-share-button">Tweet</a><div data-action="share" data-annotation="bubble" class="g-plus"></div></div><hr class="style-eight"><div id="comments"><div id="disqus_thread"></div></div><script>/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'fizerkhan'; // required: replace example with your forum shortname
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript><a href="http://disqus.com" class="dsq-brlink">comments powered by<span class="logo-disqus">Disqus</span></a><script>(function(d, t) {
+  var g = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+  g.src = '//hnbutton.appspot.com/static/hn.min.js';
+  s.parentNode.insertBefore(g, s);
+}(document, 'script'));</script><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script><script>(function() {
+  var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+  po.src = 'https://apis.google.com/js/plusone.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+})();
+</script></div><a href="http://www.fizerkhan.com/"><img src="/images/cabin.png" class="cabin"></a><script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script><script src="/scripts/main.js"></script><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-41972683-1', 'fizerkhan.com');
+ga('send', 'pageview');</script></body></html>

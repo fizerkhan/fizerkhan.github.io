@@ -1,7 +1,7 @@
-----
-title: Google App Engine Deployment Tips
-date:   2013-6-26
-----
+{
+  title: 'Google App Engine Deployment Tips',
+  date: '2013-6-26'
+}
 
 I uses Google App Engine for few of my projects. I choose it, because it is **Free** for small application like blog and faster, easy to deploy. This blog is also deployed in the App Engine.
 

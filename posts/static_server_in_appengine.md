@@ -1,7 +1,7 @@
-----
-title: Free Static Page Hosting on Google App Engine in a 5 minutes
-date:   2014-2-17
-----
+{
+  title: 'Free Static Page Hosting on Google App Engine in a 5 minutes',
+  date: '2014-2-17'
+}
 
 Now-a-days we have a lot of options to deploy our applications. Some of them are
 Google App Engine, Google Compute Cloud, Amazon EC2, Heroku, Nodejitsu and much more.

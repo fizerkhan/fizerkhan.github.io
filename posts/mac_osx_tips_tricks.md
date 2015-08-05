@@ -1,7 +1,7 @@
-----
-title: Tips and Tricks of OSX makes you smile
-date:   2013-10-2
-----
+{
+  title: 'Tips and Tricks of OSX makes you smile',
+  date: '2013-10-2'
+}
 
 I love to work with Mac OSX. Few days before, i came across the [Tips and Tricks of OSX in Stack Exchange answers](http://apple.stackexchange.com/questions/400/please-share-your-hidden-os-x-features-or-tips-and-tricks). It is mind blowing and has lot more stuff to learn. I like to share tips and tricks that i like and using regularly.
 

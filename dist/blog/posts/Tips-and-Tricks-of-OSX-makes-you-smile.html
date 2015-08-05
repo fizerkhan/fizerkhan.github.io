@@ -1,156 +1,95 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/images/cabin.png">
-    <link href="/styles/main.css" rel="stylesheet">
-    <title>Tips and Tricks of OSX makes you smile</title>
-  </head>
-  <body>
-    <nav id="nav">
-      <h1 class="name"><a href="/">Fizer Khan</a></h1>
-      <ul class="nav-links">
-        <li class="menu icon-menu"></li>
-        <li class="text-link"><a href="/about.html">About</a></li>
-        <li class="text-link"><a href="/projects.html">Projects</a></li>
-        <li class="text-link"><a href="/archives.html">Archives</a></li>
-      </ul>
-      <div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div>
-    </nav>
-    <div class="content">
-      <div class="post-head group"><a href="/blog/posts/Tips-and-Tricks-of-OSX-makes-you-smile.html">
-          <h1 class="post-title">Tips and Tricks of OSX makes you smile</h1></a>
-        <h2 class="post-date">2013 &#183; 10 &#183; 2</h2>
-      </div>
-      <div class="post-body"><p>I love to work with Mac OSX. Few days before, i came across the <a href="http://apple.stackexchange.com/questions/400/please-share-your-hidden-os-x-features-or-tips-and-tricks">Tips and Tricks of OSX in Stack Exchange answers</a>. It is mind blowing and has lot more stuff to learn. I like to share tips and tricks that i like and using regularly.</p>
-<a name="quick-look-in-finder" class="anchor" href="#quick-look-in-finder"><h3>Quick Look in Finder</h3>
-</a><p>When you are in <code>Finder</code> and wanted to check the content of a file, you typically double click the item.  Instead you can hit the <code>Spacebar</code> to have quick look. It is much faster than opening the file.</p>
-<a name="spotlight-search-and-its-calculator" class="anchor" href="#spotlight-search-and-its-calculator"><h3>Spotlight Search and its Calculator</h3>
-</a><p>Spotlight Search can be opened by hitting <code>⌘ + space</code>.</p>
+<!DOCTYPE html><html><head><meta charset="utf8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/png" href="/images/cabin.png"><link href="/styles/main.css" rel="stylesheet"><title>Tips and Tricks of OSX makes you smile</title></head><body><nav id="nav"><h1 class="name"><a href="/">Fizer Khan</a></h1><ul class="nav-links"><li class="menu icon-menu"></li><li class="text-link"><a href="/about.html">About</a></li><li class="text-link"><a href="/projects.html">Projects</a></li><li class="text-link"><a href="/archives.html">Archives</a></li></ul><div class="social-media"><a href="https://github.com/fizerkhan" class="icon-github"></a><a href="https://twitter.com/fizerkhan" class="icon-twitter"></a><a href="http://facebook.com/fizerface" class="icon-facebook"></a></div></nav><div class="content"><div class="post-head group"><a href="/blog/posts/Tips-and-Tricks-of-OSX-makes-you-smile.html"><h1 class="post-title">Tips and Tricks of OSX makes you smile</h1></a><h2 class="post-date">2013 &#183; 10 &#183; 2</h2></div><div class="post-body"><p>I love to work with Mac OSX. Few days before, i came across the <a href="http://apple.stackexchange.com/questions/400/please-share-your-hidden-os-x-features-or-tips-and-tricks">Tips and Tricks of OSX in Stack Exchange answers</a>. It is mind blowing and has lot more stuff to learn. I like to share tips and tricks that i like and using regularly.</p>
+<h3><a name="quick-look-in-finder" class="anchor" href="#quick-look-in-finder"><span class="header-link"></span></a>Quick Look in Finder</h3><p>When you are in <code>Finder</code> and wanted to check the content of a file, you typically double click the item.  Instead you can hit the <code>Spacebar</code> to have quick look. It is much faster than opening the file.</p>
+<h3><a name="spotlight-search-and-its-calculator" class="anchor" href="#spotlight-search-and-its-calculator"><span class="header-link"></span></a>Spotlight Search and its Calculator</h3><p>Spotlight Search can be opened by hitting <code>⌘ + space</code>.</p>
 <p>The Spotlight search can also handle simple mathematical expressions.
 You can type any simple math expression, it will give you the answer.</p>
-<a name="show-hidden-files-in-finder" class="anchor" href="#show-hidden-files-in-finder"><h3>Show Hidden files in Finder</h3>
-</a><p>By default, The <code>Finder</code> hide the hidden files which starts with .(dot). To set <code>Finder</code> to show hidden files, run following command in the terminal</p>
+<h3><a name="show-hidden-files-in-finder" class="anchor" href="#show-hidden-files-in-finder"><span class="header-link"></span></a>Show Hidden files in Finder</h3><p>By default, The <code>Finder</code> hide the hidden files which starts with .(dot). To set <code>Finder</code> to show hidden files, run following command in the terminal</p>
 <pre><code><div class="highlight"><pre><span class="nx">defaults</span> <span class="nx">write</span> <span class="nx">com</span><span class="p">.</span><span class="nx">apple</span><span class="p">.</span><span class="nx">finder</span> <span class="nx">AppleShowAllFiles</span> <span class="nx">TRUE</span>
 
 <span class="nx">killall</span> <span class="nx">Finder</span>
 </pre></div>
-</code></pre>
-<p>Reopen <code>Finder</code>. Now it will show hidden files.</p>
+
+</code></pre><p>Reopen <code>Finder</code>. Now it will show hidden files.</p>
 <p>You can use <code>⌘ + ⇧ + .</code> that will show hidden files in any file-open dialog box.</p>
-<a name="finder-window-shortcuts" class="anchor" href="#finder-window-shortcuts"><h3>Finder Window Shortcuts</h3>
-</a><p>In Finder window or Open/Save dialog,</p>
+<h3><a name="finder-window-shortcuts" class="anchor" href="#finder-window-shortcuts"><span class="header-link"></span></a>Finder Window Shortcuts</h3><p>In Finder window or Open/Save dialog,</p>
 <pre><code><div class="highlight"><pre><span class="err">⌘</span> <span class="o">+</span> <span class="err">⇧</span> <span class="o">+</span> <span class="nx">G</span> <span class="o">-</span> <span class="nx">Get</span> <span class="nx">a</span> <span class="nx">location</span> <span class="nx">bar</span> <span class="nx">from</span> <span class="nx">which</span> <span class="nx">you</span> <span class="nx">can</span> <span class="nx">type</span>
 <span class="err">⌘</span> <span class="o">+</span> <span class="nx">I</span>     <span class="o">-</span> <span class="nx">Info</span> <span class="nb">window</span> <span class="nx">shows</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">selected</span> <span class="nx">item</span><span class="p">.</span>
 <span class="err">⌘</span> <span class="o">+</span> <span class="nx">F</span>     <span class="o">-</span> <span class="nx">Cursor</span> <span class="nx">jumps</span> <span class="nx">to</span> <span class="nx">the</span> <span class="nx">Find</span> <span class="nx">text</span> <span class="nx">field</span>
 <span class="err">⌘</span> <span class="o">+</span> <span class="nx">R</span>     <span class="o">-</span> <span class="nx">Reveals</span> <span class="nx">the</span> <span class="nx">selected</span> <span class="nx">item</span> <span class="k">in</span> <span class="nx">a</span> <span class="k">new</span> <span class="nx">Finder</span> <span class="nb">window</span><span class="p">.</span>
 </pre></div>
-</code></pre>
-<p>In Open/Save dialog,</p>
+
+</code></pre><p>In Open/Save dialog,</p>
 <pre><code><div class="highlight"><pre><span class="err">⌘</span> <span class="o">+</span> <span class="nx">D</span>     <span class="o">-</span> <span class="nx">Selects</span> <span class="nx">the</span> <span class="nx">Desktop</span> <span class="nx">folder</span> <span class="nx">as</span> <span class="nx">a</span> <span class="nx">destination</span>
 </pre></div>
-</code></pre>
-<a name="show-and-hide-desktop-icons" class="anchor" href="#show-and-hide-desktop-icons"><h3>Show and Hide Desktop Icons</h3>
-</a><p>When you do presentation or in meeting, you do not want others to see your desktop.
+
+</code></pre><h3><a name="show-and-hide-desktop-icons" class="anchor" href="#show-and-hide-desktop-icons"><span class="header-link"></span></a>Show and Hide Desktop Icons</h3><p>When you do presentation or in meeting, you do not want others to see your desktop.
 You can use following commands to hide and show desktop icons.</p>
 <p>To Hide Desktop icons</p>
 <pre><code><div class="highlight"><pre><span class="nx">defaults</span> <span class="nx">write</span> <span class="nx">com</span><span class="p">.</span><span class="nx">apple</span><span class="p">.</span><span class="nx">finder</span> <span class="nx">CreateDesktop</span> <span class="o">-</span><span class="nx">bool</span> <span class="kc">false</span> <span class="o">&amp;&amp;</span> <span class="nx">killall</span> <span class="nx">Finder</span>
 </pre></div>
-</code></pre>
-<p>To Show Desktop icons</p>
+
+</code></pre><p>To Show Desktop icons</p>
 <pre><code><div class="highlight"><pre><span class="nx">defaults</span> <span class="nx">write</span> <span class="nx">com</span><span class="p">.</span><span class="nx">apple</span><span class="p">.</span><span class="nx">finder</span> <span class="nx">CreateDesktop</span> <span class="o">-</span><span class="nx">bool</span> <span class="kc">true</span> <span class="o">&amp;&amp;</span> <span class="nx">killall</span> <span class="nx">Finder</span>
 </pre></div>
-</code></pre>
-<a name="screenshot-shortcuts" class="anchor" href="#screenshot-shortcuts"><h3>Screenshot shortcuts</h3>
-</a><p>You can use following shortcuts to take screenshots. Kudos to <a href="http://oreilly.com/digitalmedia/2006/01/01/mac-os-x-screenshot-secrets.html">screenshot-secret</a></p>
+
+</code></pre><h3><a name="screenshot-shortcuts" class="anchor" href="#screenshot-shortcuts"><span class="header-link"></span></a>Screenshot shortcuts</h3><p>You can use following shortcuts to take screenshots. Kudos to <a href="http://oreilly.com/digitalmedia/2006/01/01/mac-os-x-screenshot-secrets.html">screenshot-secret</a></p>
 <p><code>⌘+⇧+3</code>      -  Capture entire screen and save as a file</p>
 <p><code>⌘+ctrl+⇧+3</code> -  Capture entire screen and copy to the clipboard</p>
 <p><code>⌘+⇧+4</code>      -  Capture dragged area and save as a file</p>
 <p><code>⌘+ctrl+⇧+4</code> -  Capture dragged area and copy to the clipboard</p>
 <p><code>⌘+⇧+4 then space</code>      -  Capture a window, menu, desktop icon, or the menu bar and save as a file</p>
 <p><code>⌘+ctrl+⇧+4 then space</code> -  Capture a window, menu, desktop icon, or the menu bar and copy to the clipboard</p>
-<a name="clipboard-copy-and-paste-from-terminal" class="anchor" href="#clipboard-copy-and-paste-from-terminal"><h3>Clipboard copy and paste from Terminal</h3>
-</a><p>You may want to copy output of some command to clipboard, then use <code>pbcopy</code></p>
+<h3><a name="clipboard-copy-and-paste-from-terminal" class="anchor" href="#clipboard-copy-and-paste-from-terminal"><span class="header-link"></span></a>Clipboard copy and paste from Terminal</h3><p>You may want to copy output of some command to clipboard, then use <code>pbcopy</code></p>
 <pre><code><div class="highlight"><pre><span class="nx">echo</span> <span class="s2">&quot;I am going to clipboard&quot;</span> <span class="o">|</span> <span class="nx">pbcopy</span>
 </pre></div>
-</code></pre>
-<p>Save clipboard contents to file</p>
+
+</code></pre><p>Save clipboard contents to file</p>
 <pre><code><div class="highlight"><pre><span class="nx">pbpaste</span> <span class="o">&gt;</span> <span class="nx">myfile</span><span class="p">.</span><span class="nx">txt</span>
 </pre></div>
-</code></pre>
-<a name="start-quick-web-server" class="anchor" href="#start-quick-web-server"><h3>Start Quick Web server</h3>
-</a><p>Start a quick web server by</p>
+
+</code></pre><h3><a name="start-quick-web-server" class="anchor" href="#start-quick-web-server"><span class="header-link"></span></a>Start Quick Web server</h3><p>Start a quick web server by</p>
 <pre><code><div class="highlight"><pre><span class="nx">python</span> <span class="o">-</span><span class="nx">m</span> <span class="nx">SimpleHTTPServer</span>
 </pre></div>
-</code></pre>
-<p>It will start web server port 8000 and serve files in the current directory.
+
+</code></pre><p>It will start web server port 8000 and serve files in the current directory.
 To start in a specific port</p>
 <pre><code><div class="highlight"><pre><span class="nx">python</span> <span class="o">-</span><span class="nx">m</span> <span class="nx">SimpleHTTPServer</span> <span class="mi">8080</span>
 </pre></div>
-</code></pre>
-<a name="useful-command-on-terminal" class="anchor" href="#useful-command-on-terminal"><h3>Useful command on Terminal</h3>
-</a><p>You can use <code>open</code> command to open any application and any file.</p>
+
+</code></pre><h3><a name="useful-command-on-terminal" class="anchor" href="#useful-command-on-terminal"><span class="header-link"></span></a>Useful command on Terminal</h3><p>You can use <code>open</code> command to open any application and any file.</p>
 <pre><code><div class="highlight"><pre><span class="nx">open</span> <span class="p">.</span>            <span class="err">#</span> <span class="nx">Open</span> <span class="nx">current</span> <span class="nx">folder</span> <span class="k">in</span> <span class="nx">the</span> <span class="nx">Finder</span><span class="p">.</span>
 <span class="nx">open</span> <span class="o">-</span><span class="nx">a</span> <span class="nx">Firefox</span>   <span class="err">#</span> <span class="nx">To</span> <span class="nx">open</span> <span class="nx">application</span><span class="p">.</span> <span class="nx">Use</span> <span class="o">-</span><span class="nx">a</span> <span class="nx">option</span>
 <span class="nx">open</span> <span class="nx">ticket</span><span class="p">.</span><span class="nx">pdf</span>   <span class="err">#</span> <span class="nx">To</span> <span class="nx">open</span> <span class="nx">a</span> <span class="nx">file</span><span class="p">.</span> <span class="nx">It</span> <span class="nx">will</span> <span class="nx">open</span> <span class="nx">PDF</span> <span class="k">in</span> <span class="k">default</span> <span class="nx">application</span><span class="p">.</span>
 </pre></div>
-</code></pre>
-<p>For Non-English speaker like me, it always find difficulties in pronouncing the word :) You can use <code>say</code> to know how to pronounce</p>
+
+</code></pre><p>For Non-English speaker like me, it always find difficulties in pronouncing the word :) You can use <code>say</code> to know how to pronounce</p>
 <pre><code><div class="highlight"><pre><span class="nx">say</span> <span class="nx">Hello</span> <span class="nx">World</span>
 </pre></div>
-</code></pre>
-<a name="view-more-information-on-menu-bar-icons" class="anchor" href="#view-more-information-on-menu-bar-icons"><h3>View More information on Menu bar icons</h3>
-</a><p>Holding <code>⌥</code> while clicking menu bar icon will give you additional menu items.</p>
+
+</code></pre><h3><a name="view-more-information-on-menu-bar-icons" class="anchor" href="#view-more-information-on-menu-bar-icons"><span class="header-link"></span></a>View More information on Menu bar icons</h3><p>Holding <code>⌥</code> while clicking menu bar icon will give you additional menu items.</p>
 <p>Hold <code>Option ⌥</code> + Click Battery Menulet, it will show battery condition.</p>
 <p>Have a nice day.</p>
-</div>
-      <div class="social"><a href="http://news.ycombinator.com/submit" class="hn-share-button">Vote on HN</a><a href="https://twitter.com/share" data-via="fizerkhan" data-lang="en" class="twitter-share-button">Tweet</a>
-        <div data-action="share" data-annotation="bubble" class="g-plus"></div>
-      </div>
-      <hr class="style-eight">
-      <div id="comments">
-        <div id="disqus_thread"></div>
-      </div>
-      <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'fizerkhan'; // required: replace example with your forum shortname
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-      </script>
-      <noscript>Please enable JavaScript to view the<a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript><a href="http://disqus.com" class="dsq-brlink">comments powered by<span class="logo-disqus">Disqus</span></a>
-      <script>
-        (function(d, t) {
-          var g = d.createElement(t),
-              s = d.getElementsByTagName(t)[0];
-          g.src = '//hnbutton.appspot.com/static/hn.min.js';
-          s.parentNode.insertBefore(g, s);
-        }(document, 'script'));
-      </script>
-      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-      <script>
-        (function() {
-          var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-          po.src = 'https://apis.google.com/js/plusone.js';
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-        })();
-        
-      </script>
-    </div><a href="http://www.fizerkhan.com/"><img src="/images/cabin.png" class="cabin"></a>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-    <script src="/scripts/main.js"></script>
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      
-      ga('create', 'UA-41972683-1', 'fizerkhan.com');
-      ga('send', 'pageview');
-    </script>
-  </body>
-</html>
+</div><div class="social"><a href="http://news.ycombinator.com/submit" class="hn-share-button">Vote on HN</a><a href="https://twitter.com/share" data-via="fizerkhan" data-lang="en" class="twitter-share-button">Tweet</a><div data-action="share" data-annotation="bubble" class="g-plus"></div></div><hr class="style-eight"><div id="comments"><div id="disqus_thread"></div></div><script>/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'fizerkhan'; // required: replace example with your forum shortname
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><noscript>Please enable JavaScript to view the<a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript><a href="http://disqus.com" class="dsq-brlink">comments powered by<span class="logo-disqus">Disqus</span></a><script>(function(d, t) {
+  var g = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+  g.src = '//hnbutton.appspot.com/static/hn.min.js';
+  s.parentNode.insertBefore(g, s);
+}(document, 'script'));</script><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script><script>(function() {
+  var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+  po.src = 'https://apis.google.com/js/plusone.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+})();
+</script></div><a href="http://www.fizerkhan.com/"><img src="/images/cabin.png" class="cabin"></a><script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script><script src="/scripts/main.js"></script><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-41972683-1', 'fizerkhan.com');
+ga('send', 'pageview');</script></body></html>

@@ -1,7 +1,7 @@
-----
-title: Social sharing buttons
-date:   2013-6-27
-----
+{
+  title: 'Social sharing buttons',
+  date: '2013-6-27'
+}
 
 Social sharing buttons becomes essential to all pages available on the web.
 If you write blog, then you cannot avoid social buttons on your blog. I like to share the social sharing button snippets which i collected from web. I believe, anything is taken from web must be given back to web.

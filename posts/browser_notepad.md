@@ -1,7 +1,7 @@
-----
-title: Use your browser as Notepad
-date:   2013-7-8
-----
+{
+  title: 'Use your browser as Notepad',
+  date: '2013-7-8'
+}
 
 We all uses notepad or sticky note or some editor to take immediate notes on something like code snippet, ideas, blog content, todo. Recently i came to know that we can use our browser just like notepad. The trick hacks around [Data URI scheme](http://en.wikipedia.org/wiki/Data_URI_scheme) and html [contenteditable](http://www.w3schools.com/tags/att_global_contenteditable.asp) attribute.
 
