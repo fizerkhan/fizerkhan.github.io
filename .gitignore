@@ -12,6 +12,7 @@ temp
 .sass-cache
 npm-debug.log
 .grunt
+dist
 
 # OSX Ignore
 .DS_Store
