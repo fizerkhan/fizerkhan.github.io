@@ -22,7 +22,7 @@ To deploy
 
 To Deploy in Google app engine
 
-    git push appengine master
+    appcfg.py update .
 
 
 # Test AppEngine Deploy
